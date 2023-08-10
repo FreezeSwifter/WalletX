@@ -6,23 +6,23 @@ target 'WalletX' do
   use_frameworks!
  
   # UI
-  pod 'SnapKit', '~> 5.6.0'
-  pod 'MJRefresh'
-  pod 'QMUIKit'
-  pod 'JXSegmentedView'
+  pod 'SnapKit', '5.6.0'
+  pod 'MJRefresh', '3.7.5'
+  pod 'QMUIKit', '4.6.0'
+  pod 'JXSegmentedView', '1.3.0'
 
   # WalletCore
-  pod 'TrustWalletCore'
+  pod 'TrustWalletCore', '2.5.6'
 
   # RX
-  pod 'RxSwift', '6.6.0'
-  pod 'RxCocoa', '6.6.0'
-  pod 'RxDataSources'
-  pod 'Action'
-  pod 'NSObject+Rx'
+  pod 'RxSwift', '6.5.0'
+  pod 'RxCocoa', '6.5.0'
+  pod 'RxDataSources', '5.0.0'
+  pod 'Action', '5.0.0'
+  pod 'NSObject+Rx', '5.2.2'
 
   # Common
   pod 'Then'
-  pod 'IQKeyboardManagerSwift', '6.3.0'
+  pod 'IQKeyboardManager'
   
 end
