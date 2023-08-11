@@ -3,6 +3,9 @@ PODS:
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
   - Differentiator (5.0.0)
+  - IGListDiffKit (4.0.0)
+  - IGListKit (4.0.0):
+    - IGListDiffKit (= 4.0.0)
   - IQKeyboardManager (6.5.12)
   - JXSegmentedView (1.3.0)
   - MJRefresh (3.7.5)
@@ -326,6 +329,7 @@ PODS:
 
 DEPENDENCIES:
   - Action (= 5.0.0)
+  - IGListKit
   - IQKeyboardManager
   - JXSegmentedView (= 1.3.0)
   - MJRefresh (= 3.7.5)
@@ -342,6 +346,8 @@ SPEC REPOS:
   trunk:
     - Action
     - Differentiator
+    - IGListDiffKit
+    - IGListKit
     - IQKeyboardManager
     - JXSegmentedView
     - MJRefresh
@@ -359,6 +365,8 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Action: 47f1825511907b4fcd79dd7a7db9526c20f78018
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
+  IGListDiffKit: 665d6cf43ce726e676013db9c7d6c4294259b6b2
+  IGListKit: fd5a5d21935298f5849fa49d426843cff97b77c7
   IQKeyboardManager: b1fd66ccf7a79095bdcc4a2735231586f744216e
   JXSegmentedView: fec0d335355b6e019c494fe2e030bde8a36d2df6
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
@@ -373,6 +381,6 @@ SPEC CHECKSUMS:
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   TrustWalletCore: 77ed44e6965e5121245d7fafc58c56a03bf13490
 
-PODFILE CHECKSUM: 3333b992b76b71387155fc677d00adec23518685
+PODFILE CHECKSUM: 7d986a977841f42c48ee5202d9b384ce22427cfa
 
 COCOAPODS: 1.11.3

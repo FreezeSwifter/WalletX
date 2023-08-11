@@ -10,6 +10,7 @@ target 'WalletX' do
   pod 'MJRefresh', '3.7.5'
   pod 'QMUIKit', '4.6.0'
   pod 'JXSegmentedView', '1.3.0'
+  pod 'IGListKit', '4.0.0'
 
   # WalletCore
   pod 'TrustWalletCore', '2.5.6'

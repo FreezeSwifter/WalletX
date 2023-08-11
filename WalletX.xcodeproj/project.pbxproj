@@ -12,6 +12,15 @@
 		7A7D4DB92A84A19B0098262F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A7D4DB72A84A19B0098262F /* Main.storyboard */; };
 		7A7D4DBB2A84A19D0098262F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A7D4DBA2A84A19D0098262F /* Assets.xcassets */; };
 		7A7D4DBE2A84A19D0098262F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A7D4DBC2A84A19D0098262F /* LaunchScreen.storyboard */; };
+		7AB377472A8612E1005BD1CB /* QMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377462A8612E1005BD1CB /* QMUIConfigurationTemplate.m */; };
+		7AB377542A862E2B005BD1CB /* FSPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3774B2A862E2B005BD1CB /* FSPagerView.swift */; };
+		7AB377552A862E2B005BD1CB /* FSPageViewTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3774C2A862E2B005BD1CB /* FSPageViewTransformer.swift */; };
+		7AB377562A862E2B005BD1CB /* FSPagerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3774E2A862E2B005BD1CB /* FSPagerViewCell.swift */; };
+		7AB377572A862E2B005BD1CB /* FSPagerViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3774F2A862E2B005BD1CB /* FSPagerViewLayoutAttributes.swift */; };
+		7AB377582A862E2B005BD1CB /* FSPageViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377502A862E2B005BD1CB /* FSPageViewLayout.swift */; };
+		7AB377592A862E2B005BD1CB /* FSPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377512A862E2B005BD1CB /* FSPageControl.swift */; };
+		7AB3775A2A862E2B005BD1CB /* FSPagerViewObjcCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377522A862E2B005BD1CB /* FSPagerViewObjcCompat.m */; };
+		7AB3775B2A862E2B005BD1CB /* FSPagerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377532A862E2B005BD1CB /* FSPagerCollectionView.swift */; };
 		7AF15A132A85022800C48F39 /* GuranteeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A122A85022800C48F39 /* GuranteeViewController.swift */; };
 		7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A142A85023300C48F39 /* MessageViewController.swift */; };
 		7AF15A172A85023C00C48F39 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A162A85023C00C48F39 /* MyViewController.swift */; };
@@ -27,6 +36,19 @@
 		7A7D4DBA2A84A19D0098262F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A7D4DBD2A84A19D0098262F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A7D4DBF2A84A19D0098262F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AB377442A8612E0005BD1CB /* WalletX-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WalletX-Bridging-Header.h"; sourceTree = "<group>"; };
+		7AB377452A8612E1005BD1CB /* QMUIConfigurationTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplate.h; sourceTree = "<group>"; };
+		7AB377462A8612E1005BD1CB /* QMUIConfigurationTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplate.m; sourceTree = "<group>"; };
+		7AB377482A861468005BD1CB /* QDThemeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDThemeProtocol.h; sourceTree = "<group>"; };
+		7AB3774B2A862E2B005BD1CB /* FSPagerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSPagerView.swift; sourceTree = "<group>"; };
+		7AB3774C2A862E2B005BD1CB /* FSPageViewTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSPageViewTransformer.swift; sourceTree = "<group>"; };
+		7AB3774D2A862E2B005BD1CB /* FSPagerViewObjcCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSPagerViewObjcCompat.h; sourceTree = "<group>"; };
+		7AB3774E2A862E2B005BD1CB /* FSPagerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSPagerViewCell.swift; sourceTree = "<group>"; };
+		7AB3774F2A862E2B005BD1CB /* FSPagerViewLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSPagerViewLayoutAttributes.swift; sourceTree = "<group>"; };
+		7AB377502A862E2B005BD1CB /* FSPageViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSPageViewLayout.swift; sourceTree = "<group>"; };
+		7AB377512A862E2B005BD1CB /* FSPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSPageControl.swift; sourceTree = "<group>"; };
+		7AB377522A862E2B005BD1CB /* FSPagerViewObjcCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSPagerViewObjcCompat.m; sourceTree = "<group>"; };
+		7AB377532A862E2B005BD1CB /* FSPagerCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSPagerCollectionView.swift; sourceTree = "<group>"; };
 		7AF15A122A85022800C48F39 /* GuranteeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuranteeViewController.swift; sourceTree = "<group>"; };
 		7AF15A142A85023300C48F39 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		7AF15A162A85023C00C48F39 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +97,8 @@
 		7A7D4DB02A84A19B0098262F /* WalletX */ = {
 			isa = PBXGroup;
 			children = (
+				7AB377492A862E20005BD1CB /* Vendor */,
+				7AB377432A8612C2005BD1CB /* APPConfiguration */,
 				7AF15A0D2A85018F00C48F39 /* ViewControllers */,
 				7A7D4DB12A84A19B0098262F /* AppDelegate.swift */,
 				7A7D4DB72A84A19B0098262F /* Main.storyboard */,
@@ -83,6 +107,41 @@
 				7A7D4DBF2A84A19D0098262F /* Info.plist */,
 			);
 			path = WalletX;
+			sourceTree = "<group>";
+		};
+		7AB377432A8612C2005BD1CB /* APPConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				7AB377482A861468005BD1CB /* QDThemeProtocol.h */,
+				7AB377452A8612E1005BD1CB /* QMUIConfigurationTemplate.h */,
+				7AB377462A8612E1005BD1CB /* QMUIConfigurationTemplate.m */,
+				7AB377442A8612E0005BD1CB /* WalletX-Bridging-Header.h */,
+			);
+			path = APPConfiguration;
+			sourceTree = "<group>";
+		};
+		7AB377492A862E20005BD1CB /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				7AB3774A2A862E2B005BD1CB /* FSPagerView */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		7AB3774A2A862E2B005BD1CB /* FSPagerView */ = {
+			isa = PBXGroup;
+			children = (
+				7AB3774B2A862E2B005BD1CB /* FSPagerView.swift */,
+				7AB3774C2A862E2B005BD1CB /* FSPageViewTransformer.swift */,
+				7AB3774D2A862E2B005BD1CB /* FSPagerViewObjcCompat.h */,
+				7AB377522A862E2B005BD1CB /* FSPagerViewObjcCompat.m */,
+				7AB3774E2A862E2B005BD1CB /* FSPagerViewCell.swift */,
+				7AB3774F2A862E2B005BD1CB /* FSPagerViewLayoutAttributes.swift */,
+				7AB377502A862E2B005BD1CB /* FSPageViewLayout.swift */,
+				7AB377512A862E2B005BD1CB /* FSPageControl.swift */,
+				7AB377532A862E2B005BD1CB /* FSPagerCollectionView.swift */,
+			);
+			path = FSPagerView;
 			sourceTree = "<group>";
 		};
 		7AF15A0D2A85018F00C48F39 /* ViewControllers */ = {
@@ -171,6 +230,7 @@
 				TargetAttributes = {
 					7A7D4DAD2A84A19B0098262F = {
 						CreatedOnToolsVersion = 14.3.1;
+						LastSwiftMigration = 1430;
 					};
 				};
 			};
@@ -253,10 +313,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AF15A132A85022800C48F39 /* GuranteeViewController.swift in Sources */,
+				7AB377592A862E2B005BD1CB /* FSPageControl.swift in Sources */,
+				7AB377582A862E2B005BD1CB /* FSPageViewLayout.swift in Sources */,
+				7AB3775B2A862E2B005BD1CB /* FSPagerCollectionView.swift in Sources */,
 				7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */,
+				7AB377572A862E2B005BD1CB /* FSPagerViewLayoutAttributes.swift in Sources */,
+				7AB377552A862E2B005BD1CB /* FSPageViewTransformer.swift in Sources */,
+				7AB377542A862E2B005BD1CB /* FSPagerView.swift in Sources */,
+				7AB377472A8612E1005BD1CB /* QMUIConfigurationTemplate.m in Sources */,
+				7AB377562A862E2B005BD1CB /* FSPagerViewCell.swift in Sources */,
 				7AF15A172A85023C00C48F39 /* MyViewController.swift in Sources */,
 				7A7D4DB22A84A19B0098262F /* AppDelegate.swift in Sources */,
 				7AF15A192A85024600C48F39 /* WalletViewController.swift in Sources */,
+				7AB3775A2A862E2B005BD1CB /* FSPagerViewObjcCompat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +471,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -418,6 +488,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.j.creator.WalletX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WalletX/APPConfiguration/WalletX-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -429,6 +501,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -445,6 +518,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.j.creator.WalletX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WalletX/APPConfiguration/WalletX-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
