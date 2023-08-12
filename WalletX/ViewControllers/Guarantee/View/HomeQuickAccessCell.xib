@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,11 +16,62 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="460" height="301"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WjV-jC-baX">
+                        <rect key="frame" x="16" y="10" width="428" height="74"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hza-ko-Ejb">
+                                <rect key="frame" x="0.0" y="0.0" width="210" height="74"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guarantee_section_bg2" translatesAutoresizingMaskIntoConstraints="NO" id="abv-YQ-kVJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="210" height="74"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="abv-YQ-kVJ" secondAttribute="trailing" id="1BT-so-BDd"/>
+                                    <constraint firstItem="abv-YQ-kVJ" firstAttribute="leading" secondItem="Hza-ko-Ejb" secondAttribute="leading" id="9oT-el-2q0"/>
+                                    <constraint firstAttribute="bottom" secondItem="abv-YQ-kVJ" secondAttribute="bottom" id="UFy-df-ggU"/>
+                                    <constraint firstItem="abv-YQ-kVJ" firstAttribute="top" secondItem="Hza-ko-Ejb" secondAttribute="top" id="iNi-jk-jhS"/>
+                                    <constraint firstAttribute="height" constant="74" id="tIl-uY-M5g"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Th-T6-zIC">
+                                <rect key="frame" x="218" y="0.0" width="210" height="74"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guarantee_section_bg" translatesAutoresizingMaskIntoConstraints="NO" id="E54-Er-bpX">
+                                        <rect key="frame" x="0.0" y="0.0" width="210" height="74"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="E54-Er-bpX" secondAttribute="trailing" id="I7O-sm-eMs"/>
+                                    <constraint firstItem="E54-Er-bpX" firstAttribute="top" secondItem="6Th-T6-zIC" secondAttribute="top" id="gmk-1Q-dUH"/>
+                                    <constraint firstAttribute="height" constant="74" id="imT-wH-LQL"/>
+                                    <constraint firstItem="E54-Er-bpX" firstAttribute="leading" secondItem="6Th-T6-zIC" secondAttribute="leading" id="syh-8H-xCk"/>
+                                    <constraint firstAttribute="bottom" secondItem="E54-Er-bpX" secondAttribute="bottom" id="uHO-R6-3c5"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                    </stackView>
+                </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="WjV-jC-baX" secondAttribute="trailing" constant="16" id="GiE-WO-r2J"/>
+                <constraint firstItem="WjV-jC-baX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="fe6-VY-RvR"/>
+                <constraint firstItem="WjV-jC-baX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="hFP-ey-qy4"/>
+            </constraints>
             <size key="customSize" width="460" height="301"/>
             <point key="canvasLocation" x="303.81679389312978" y="108.09859154929578"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="guarantee_section_bg" width="54.666667938232422" height="24.666666030883789"/>
+        <image name="guarantee_section_bg2" width="165" height="74"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
