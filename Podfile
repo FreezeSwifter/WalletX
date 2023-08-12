@@ -5,6 +5,9 @@ target 'WalletX' do
   inhibit_all_warnings!
   use_frameworks!
  
+  # Network
+  pod 'HandyJSON'
+  
   # UI
   pod 'SnapKit', '5.6.0'
   pod 'MJRefresh', '3.7.5'
@@ -25,5 +28,6 @@ target 'WalletX' do
   # Common
   pod 'Then'
   pod 'IQKeyboardManager'
+  pod 'SwiftyUtils'
   
 end

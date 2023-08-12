@@ -21,6 +21,14 @@
 		7AB377592A862E2B005BD1CB /* FSPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377512A862E2B005BD1CB /* FSPageControl.swift */; };
 		7AB3775A2A862E2B005BD1CB /* FSPagerViewObjcCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377522A862E2B005BD1CB /* FSPagerViewObjcCompat.m */; };
 		7AB3775B2A862E2B005BD1CB /* FSPagerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377532A862E2B005BD1CB /* FSPagerCollectionView.swift */; };
+		7AB377632A868A5E005BD1CB /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377622A868A5E005BD1CB /* UINavigationController+FDFullscreenPopGesture.m */; };
+		7AB377672A869278005BD1CB /* HomeNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377662A869278005BD1CB /* HomeNavigationBarView.swift */; };
+		7AB377692A869281005BD1CB /* HomeNavigationBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AB377682A869281005BD1CB /* HomeNavigationBarView.xib */; };
+		7AB3776B2A87A324005BD1CB /* XibLoadble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3776A2A87A324005BD1CB /* XibLoadble.swift */; };
+		7AB3776F2A87AA7B005BD1CB /* HomeBannerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3776E2A87AA7B005BD1CB /* HomeBannerSection.swift */; };
+		7AB377712A87AC10005BD1CB /* HomeBannerSectionCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377702A87AC10005BD1CB /* HomeBannerSectionCellCollectionViewCell.swift */; };
+		7AB377742A87B025005BD1CB /* HomeQuickAccessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377722A87B025005BD1CB /* HomeQuickAccessCell.swift */; };
+		7AB377752A87B025005BD1CB /* HomeQuickAccessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AB377732A87B025005BD1CB /* HomeQuickAccessCell.xib */; };
 		7AF15A132A85022800C48F39 /* GuranteeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A122A85022800C48F39 /* GuranteeViewController.swift */; };
 		7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A142A85023300C48F39 /* MessageViewController.swift */; };
 		7AF15A172A85023C00C48F39 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A162A85023C00C48F39 /* MyViewController.swift */; };
@@ -49,6 +57,15 @@
 		7AB377512A862E2B005BD1CB /* FSPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSPageControl.swift; sourceTree = "<group>"; };
 		7AB377522A862E2B005BD1CB /* FSPagerViewObjcCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSPagerViewObjcCompat.m; sourceTree = "<group>"; };
 		7AB377532A862E2B005BD1CB /* FSPagerCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSPagerCollectionView.swift; sourceTree = "<group>"; };
+		7AB377612A868A5E005BD1CB /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
+		7AB377622A868A5E005BD1CB /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
+		7AB377662A869278005BD1CB /* HomeNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationBarView.swift; sourceTree = "<group>"; };
+		7AB377682A869281005BD1CB /* HomeNavigationBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeNavigationBarView.xib; sourceTree = "<group>"; };
+		7AB3776A2A87A324005BD1CB /* XibLoadble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XibLoadble.swift; sourceTree = "<group>"; };
+		7AB3776E2A87AA7B005BD1CB /* HomeBannerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerSection.swift; sourceTree = "<group>"; };
+		7AB377702A87AC10005BD1CB /* HomeBannerSectionCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerSectionCellCollectionViewCell.swift; sourceTree = "<group>"; };
+		7AB377722A87B025005BD1CB /* HomeQuickAccessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeQuickAccessCell.swift; sourceTree = "<group>"; };
+		7AB377732A87B025005BD1CB /* HomeQuickAccessCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeQuickAccessCell.xib; sourceTree = "<group>"; };
 		7AF15A122A85022800C48F39 /* GuranteeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuranteeViewController.swift; sourceTree = "<group>"; };
 		7AF15A142A85023300C48F39 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		7AF15A162A85023C00C48F39 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +133,7 @@
 				7AB377452A8612E1005BD1CB /* QMUIConfigurationTemplate.h */,
 				7AB377462A8612E1005BD1CB /* QMUIConfigurationTemplate.m */,
 				7AB377442A8612E0005BD1CB /* WalletX-Bridging-Header.h */,
+				7AB3776A2A87A324005BD1CB /* XibLoadble.swift */,
 			);
 			path = APPConfiguration;
 			sourceTree = "<group>";
@@ -123,6 +141,7 @@
 		7AB377492A862E20005BD1CB /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				7AB377602A868A5E005BD1CB /* FDFullscreenPopGesture */,
 				7AB3774A2A862E2B005BD1CB /* FSPagerView */,
 			);
 			path = Vendor;
@@ -142,6 +161,35 @@
 				7AB377532A862E2B005BD1CB /* FSPagerCollectionView.swift */,
 			);
 			path = FSPagerView;
+			sourceTree = "<group>";
+		};
+		7AB377602A868A5E005BD1CB /* FDFullscreenPopGesture */ = {
+			isa = PBXGroup;
+			children = (
+				7AB377612A868A5E005BD1CB /* UINavigationController+FDFullscreenPopGesture.h */,
+				7AB377622A868A5E005BD1CB /* UINavigationController+FDFullscreenPopGesture.m */,
+			);
+			path = FDFullscreenPopGesture;
+			sourceTree = "<group>";
+		};
+		7AB3776C2A87A766005BD1CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7AB377662A869278005BD1CB /* HomeNavigationBarView.swift */,
+				7AB377682A869281005BD1CB /* HomeNavigationBarView.xib */,
+				7AB377702A87AC10005BD1CB /* HomeBannerSectionCellCollectionViewCell.swift */,
+				7AB377722A87B025005BD1CB /* HomeQuickAccessCell.swift */,
+				7AB377732A87B025005BD1CB /* HomeQuickAccessCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7AB3776D2A87AA30005BD1CB /* Section */ = {
+			isa = PBXGroup;
+			children = (
+				7AB3776E2A87AA7B005BD1CB /* HomeBannerSection.swift */,
+			);
+			path = Section;
 			sourceTree = "<group>";
 		};
 		7AF15A0D2A85018F00C48F39 /* ViewControllers */ = {
@@ -182,6 +230,8 @@
 		7AF15A112A85020B00C48F39 /* Guarantee */ = {
 			isa = PBXGroup;
 			children = (
+				7AB3776D2A87AA30005BD1CB /* Section */,
+				7AB3776C2A87A766005BD1CB /* View */,
 				7AF15A122A85022800C48F39 /* GuranteeViewController.swift */,
 			);
 			path = Guarantee;
@@ -260,6 +310,8 @@
 				7A7D4DBE2A84A19D0098262F /* LaunchScreen.storyboard in Resources */,
 				7A7D4DBB2A84A19D0098262F /* Assets.xcassets in Resources */,
 				7A7D4DB92A84A19B0098262F /* Main.storyboard in Resources */,
+				7AB377752A87B025005BD1CB /* HomeQuickAccessCell.xib in Resources */,
+				7AB377692A869281005BD1CB /* HomeNavigationBarView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,8 +364,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AB377632A868A5E005BD1CB /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				7AF15A132A85022800C48F39 /* GuranteeViewController.swift in Sources */,
 				7AB377592A862E2B005BD1CB /* FSPageControl.swift in Sources */,
+				7AB377712A87AC10005BD1CB /* HomeBannerSectionCellCollectionViewCell.swift in Sources */,
+				7AB3776B2A87A324005BD1CB /* XibLoadble.swift in Sources */,
 				7AB377582A862E2B005BD1CB /* FSPageViewLayout.swift in Sources */,
 				7AB3775B2A862E2B005BD1CB /* FSPagerCollectionView.swift in Sources */,
 				7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */,
@@ -322,7 +377,10 @@
 				7AB377542A862E2B005BD1CB /* FSPagerView.swift in Sources */,
 				7AB377472A8612E1005BD1CB /* QMUIConfigurationTemplate.m in Sources */,
 				7AB377562A862E2B005BD1CB /* FSPagerViewCell.swift in Sources */,
+				7AB377672A869278005BD1CB /* HomeNavigationBarView.swift in Sources */,
 				7AF15A172A85023C00C48F39 /* MyViewController.swift in Sources */,
+				7AB3776F2A87AA7B005BD1CB /* HomeBannerSection.swift in Sources */,
+				7AB377742A87B025005BD1CB /* HomeQuickAccessCell.swift in Sources */,
 				7A7D4DB22A84A19B0098262F /* AppDelegate.swift in Sources */,
 				7AF15A192A85024600C48F39 /* WalletViewController.swift in Sources */,
 				7AB3775A2A862E2B005BD1CB /* FSPagerViewObjcCompat.m in Sources */,
