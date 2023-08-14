@@ -55,12 +55,14 @@ class HomeQuickAccessCell: UICollectionViewCell {
     @IBOutlet weak var sendLabel: UILabel! {
         didSet {
             sendLabel.textColor = ColorConfiguration.wihteText.toColor()
+            sendLabel.text = "home_newGuaranty".toMultilingualism()
         }
     }
     
     @IBOutlet weak var joinLabel: UILabel! {
         didSet {
             joinLabel.textColor = ColorConfiguration.wihteText.toColor()
+            joinLabel.text = "home_joinGuaranty".toMultilingualism()
         }
     }
     

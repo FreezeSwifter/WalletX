@@ -68,8 +68,13 @@ class ServiceProviderCell: UICollectionViewCell {
         ["东野圭吾", "三体", "爱", "红楼梦", "理智与情感", "读书热榜", "免费榜"].forEach { str in
             let btn = QMUIButton(type: .custom)
             btn.backgroundColor = ColorConfiguration.homeItemBg.toColor()
+            btn.setImage(UIImage(named: "tabbar_gurantee_item"), for: UIControl.State())
+            btn.imagePosition = .left
+            btn.spacingBetweenImageAndTitle = 4
             btn.setTitle(str, for: .normal)
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+            btn.setTitleColor(ColorConfiguration.descriptionText.toColor(), for: .normal)
+            btn.titleLabel?.minimumScaleFactor = 0.8
             layoutView.addSubview(btn)
         }
     }
