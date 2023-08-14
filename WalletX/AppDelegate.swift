@@ -43,25 +43,25 @@ extension AppDelegate {
         let guranteeVC = GuranteeViewController()
         guranteeVC.hidesBottomBarWhenPushed = false
         let guranteeNavi = QMUINavigationController(rootViewController: guranteeVC)
-        guranteeVC.tabBarItem = createTabBarItem(title: "A", image: UIImage(named: "tabbar_gurantee_item")!, selecteColor: UIColor.qmui_color(withHexString: "4162FF")!, tag: 0)
+        guranteeVC.tabBarItem = createTabBarItem(title: "tab_guaranties".toMultilingualism(), image: UIImage(named: "tabbar_gurantee_item")!, selecteColor: ColorConfiguration.primary.toColor(), tag: 0)
         
         // 钱包
         let walletVC = WalletViewController()
         walletVC.hidesBottomBarWhenPushed = false
         let walletNavi = QMUINavigationController(rootViewController: walletVC)
-        walletVC.tabBarItem = createTabBarItem(title: "B", image: UIImage(named: "tabbar_wallet_item")!, selecteColor: UIColor.qmui_color(withHexString: "4162FF")!, tag: 1)
+        walletVC.tabBarItem = createTabBarItem(title: "tab_wallet".toMultilingualism(), image: UIImage(named: "tabbar_wallet_item")!, selecteColor: ColorConfiguration.primary.toColor(), tag: 1)
         
         // 消息
         let messageVC = MessageViewController()
         messageVC.hidesBottomBarWhenPushed = false
         let messageNavi = QMUINavigationController(rootViewController: messageVC)
-        messageVC.tabBarItem = createTabBarItem(title: "c", image: UIImage(named: "tabbar_message_item")!, selecteColor: UIColor.qmui_color(withHexString: "4162FF")!, tag: 2)
+        messageVC.tabBarItem = createTabBarItem(title: "tab_message".toMultilingualism(), image: UIImage(named: "tabbar_message_item")!, selecteColor: ColorConfiguration.primary.toColor(), tag: 2)
         
         // 我的
         let myVC = MyViewController()
         myVC.hidesBottomBarWhenPushed = false
         let myNavi = QMUINavigationController(rootViewController: myVC)
-        myVC.tabBarItem = createTabBarItem(title: "d", image: UIImage(named: "tabbar_my_item")!, selecteColor: UIColor.qmui_color(withHexString: "4162FF")!, tag: 3)
+        myVC.tabBarItem = createTabBarItem(title: "tab_me".toMultilingualism(), image: UIImage(named: "tabbar_my_item")!, selecteColor: ColorConfiguration.primary.toColor(), tag: 3)
      
         tabBarViewController.viewControllers = [guranteeNavi, walletNavi, messageNavi, myNavi];
         window?.rootViewController = tabBarViewController

@@ -45,7 +45,7 @@ final class HomeBannerSection: ListSectionController {
     
     override func cellForItem(at index: Int) -> UICollectionViewCell {
      
-        var cell = collectionContext?.dequeueReusableCell(of: HomeBannerSectionCellCollectionViewCell.self, for: self, at: index) as? HomeBannerSectionCellCollectionViewCell
+        let cell = collectionContext?.dequeueReusableCell(of: HomeBannerSectionCellCollectionViewCell.self, for: self, at: index) as? HomeBannerSectionCellCollectionViewCell
         
         return cell ?? UICollectionViewCell()
     }

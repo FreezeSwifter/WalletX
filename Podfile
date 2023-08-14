@@ -1,9 +1,9 @@
 platform :ios, '11.0'
 
 target 'WalletX' do
-
+  use_modular_headers!
   inhibit_all_warnings!
-  use_frameworks!
+  # use_frameworks!
  
   # Network
   pod 'HandyJSON'
@@ -28,6 +28,5 @@ target 'WalletX' do
   # Common
   pod 'Then'
   pod 'IQKeyboardManager'
-  pod 'SwiftyUtils'
   
 end
