@@ -75,6 +75,7 @@ class ServiceProviderCell: UICollectionViewCell {
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
             btn.setTitleColor(ColorConfiguration.descriptionText.toColor(), for: .normal)
             btn.titleLabel?.minimumScaleFactor = 0.8
+            btn.applyCornerRadius(7)
             layoutView.addSubview(btn)
         }
     }
