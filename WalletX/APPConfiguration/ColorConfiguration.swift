@@ -16,6 +16,8 @@ enum ColorConfiguration {
     case wihteText // 白色文字
     case blodText // 加粗文字
     case lightBlue // 首页淡蓝色
+    case grayBg // 首页按钮正常状态 F4F5F6
+    case homeItemBg // 首页服务item背景 ECF0F5
     
     
     func toColor() -> UIColor {
@@ -37,6 +39,12 @@ enum ColorConfiguration {
             
         case .lightBlue:
             return UIColor.qmui_color(withHexString: "#40BCFC") ?? .blue
+            
+        case .grayBg:
+            return UIColor.qmui_color(withHexString: "#F4F5F6") ?? .gray
+            
+        case .homeItemBg:
+            return UIColor.qmui_color(withHexString: "#ECF0F5") ?? .gray 
         }
         
     }

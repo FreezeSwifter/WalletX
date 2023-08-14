@@ -92,6 +92,11 @@
 		7AD08BEB2A8A083B000B247E /* Occupiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BAE2A8A083B000B247E /* Occupiable.swift */; };
 		7AD08BEC2A8A083B000B247E /* UIElementPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BB12A8A083B000B247E /* UIElementPreview.swift */; };
 		7AD08BEE2A8A0AC3000B247E /* HomeQuickAccessSecion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BED2A8A0AC3000B247E /* HomeQuickAccessSecion.swift */; };
+		7AD08BF12A8A0D64000B247E /* ServiceProviderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BEF2A8A0D64000B247E /* ServiceProviderCell.swift */; };
+		7AD08BF22A8A0D64000B247E /* ServiceProviderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AD08BF02A8A0D64000B247E /* ServiceProviderCell.xib */; };
+		7AD08BF42A8A11D8000B247E /* HomeServiceProviderSecion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BF32A8A11D8000B247E /* HomeServiceProviderSecion.swift */; };
+		7AD08BF82A8A1495000B247E /* UIImage+Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BF72A8A1495000B247E /* UIImage+Tool.swift */; };
+		7AD08BFA2A8A15A9000B247E /* UIButton+Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BF92A8A15A9000B247E /* UIButton+Tool.swift */; };
 		7AF15A132A85022800C48F39 /* GuranteeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A122A85022800C48F39 /* GuranteeViewController.swift */; };
 		7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A142A85023300C48F39 /* MessageViewController.swift */; };
 		7AF15A172A85023C00C48F39 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A162A85023C00C48F39 /* MyViewController.swift */; };
@@ -194,6 +199,11 @@
 		7AD08BAE2A8A083B000B247E /* Occupiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Occupiable.swift; sourceTree = "<group>"; };
 		7AD08BB12A8A083B000B247E /* UIElementPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIElementPreview.swift; sourceTree = "<group>"; };
 		7AD08BED2A8A0AC3000B247E /* HomeQuickAccessSecion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeQuickAccessSecion.swift; sourceTree = "<group>"; };
+		7AD08BEF2A8A0D64000B247E /* ServiceProviderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderCell.swift; sourceTree = "<group>"; };
+		7AD08BF02A8A0D64000B247E /* ServiceProviderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceProviderCell.xib; sourceTree = "<group>"; };
+		7AD08BF32A8A11D8000B247E /* HomeServiceProviderSecion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceProviderSecion.swift; sourceTree = "<group>"; };
+		7AD08BF72A8A1495000B247E /* UIImage+Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Tool.swift"; sourceTree = "<group>"; };
+		7AD08BF92A8A15A9000B247E /* UIButton+Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Tool.swift"; sourceTree = "<group>"; };
 		7AF15A122A85022800C48F39 /* GuranteeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuranteeViewController.swift; sourceTree = "<group>"; };
 		7AF15A142A85023300C48F39 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		7AF15A162A85023C00C48F39 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +275,8 @@
 				7AB3776A2A87A324005BD1CB /* XibLoadble.swift */,
 				7AD08A7A2A89F26C000B247E /* LanguageManager.swift */,
 				7AD08A812A89FAE8000B247E /* ColorConfiguration.swift */,
+				7AD08BF72A8A1495000B247E /* UIImage+Tool.swift */,
+				7AD08BF92A8A15A9000B247E /* UIButton+Tool.swift */,
 			);
 			path = APPConfiguration;
 			sourceTree = "<group>";
@@ -312,6 +324,8 @@
 				7AB377702A87AC10005BD1CB /* HomeBannerSectionCellCollectionViewCell.swift */,
 				7AB377722A87B025005BD1CB /* HomeQuickAccessCell.swift */,
 				7AB377732A87B025005BD1CB /* HomeQuickAccessCell.xib */,
+				7AD08BEF2A8A0D64000B247E /* ServiceProviderCell.swift */,
+				7AD08BF02A8A0D64000B247E /* ServiceProviderCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -321,6 +335,7 @@
 			children = (
 				7AB3776E2A87AA7B005BD1CB /* HomeBannerSection.swift */,
 				7AD08BED2A8A0AC3000B247E /* HomeQuickAccessSecion.swift */,
+				7AD08BF32A8A11D8000B247E /* HomeServiceProviderSecion.swift */,
 			);
 			path = Section;
 			sourceTree = "<group>";
@@ -1015,6 +1030,7 @@
 				7A7D4DBE2A84A19D0098262F /* LaunchScreen.storyboard in Resources */,
 				7A7D4DBB2A84A19D0098262F /* Assets.xcassets in Resources */,
 				7A7D4DB92A84A19B0098262F /* Main.storyboard in Resources */,
+				7AD08BF22A8A0D64000B247E /* ServiceProviderCell.xib in Resources */,
 				7AB377752A87B025005BD1CB /* HomeQuickAccessCell.xib in Resources */,
 				7AB377692A869281005BD1CB /* HomeNavigationBarView.xib in Resources */,
 				7AD08A802A89F456000B247E /* en.json in Resources */,
@@ -1092,6 +1108,7 @@
 				7AD08BEE2A8A0AC3000B247E /* HomeQuickAccessSecion.swift in Sources */,
 				7AD08BCF2A8A083B000B247E /* NSRangeExtension.swift in Sources */,
 				7AD08BB22A8A083B000B247E /* Constants.swift in Sources */,
+				7AD08BF12A8A0D64000B247E /* ServiceProviderCell.swift in Sources */,
 				7AD08BB62A8A083B000B247E /* UnitTesting.swift in Sources */,
 				7AD08BEA2A8A083B000B247E /* AnyOptional.swift in Sources */,
 				7AD08BC42A8A083B000B247E /* UIFontExtension.swift in Sources */,
@@ -1121,7 +1138,10 @@
 				7AD08BE92A8A083B000B247E /* Injectable.swift in Sources */,
 				7AD08BBC2A8A083B000B247E /* UISwitchExtension.swift in Sources */,
 				7AF15A172A85023C00C48F39 /* MyViewController.swift in Sources */,
+				7AD08BF42A8A11D8000B247E /* HomeServiceProviderSecion.swift in Sources */,
+				7AD08BFA2A8A15A9000B247E /* UIButton+Tool.swift in Sources */,
 				7AD08BEB2A8A083B000B247E /* Occupiable.swift in Sources */,
+				7AD08BF82A8A1495000B247E /* UIImage+Tool.swift in Sources */,
 				7AD08BE02A8A083B000B247E /* StringExtension.swift in Sources */,
 				7AD08A7B2A89F26D000B247E /* LanguageManager.swift in Sources */,
 				7AD08BDB2A8A083B000B247E /* ArrayExtension.swift in Sources */,

@@ -48,7 +48,7 @@ class GuranteeViewController: UIViewController {
 extension GuranteeViewController: ListAdapterDataSource {
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        return [HomeBannerSection.Model(), HomeQuickAccessSecion.Model()]
+        return [HomeBannerSection.Model(), HomeQuickAccessSecion.Model(), HomeServiceProviderSecion.Model()]
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
@@ -60,6 +60,9 @@ extension GuranteeViewController: ListAdapterDataSource {
             
         case is HomeQuickAccessSecion.Model:
             return HomeQuickAccessSecion()
+            
+        case is HomeServiceProviderSecion.Model:
+            return HomeServiceProviderSecion()
             
         default:
             return ListSectionController()
