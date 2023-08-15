@@ -18,6 +18,7 @@ enum ColorConfiguration {
     case lightBlue // 首页淡蓝色
     case grayBg // 首页按钮正常状态 F4F5F6
     case homeItemBg // 首页服务item背景 ECF0F5
+    case wihteAlpha80 // 白色 80% 透明度
     
     
     func toColor() -> UIColor {
@@ -44,7 +45,10 @@ enum ColorConfiguration {
             return UIColor.qmui_color(withHexString: "#F4F5F6") ?? .gray
             
         case .homeItemBg:
-            return UIColor.qmui_color(withHexString: "#ECF0F5") ?? .gray 
+            return UIColor.qmui_color(withHexString: "#ECF0F5") ?? .gray
+            
+        case .wihteAlpha80:
+            return (UIColor.qmui_color(withHexString: "#FFFFFF") ?? .gray).qmui_colorWithAlphaAdded(toWhite: 0.8)
         }
         
     }

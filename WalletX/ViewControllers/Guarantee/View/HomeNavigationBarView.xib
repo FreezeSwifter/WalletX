@@ -23,10 +23,19 @@
                     <buttonConfiguration key="configuration" style="plain" image="guarantee_setting"/>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="Pew-B1-j0C">
-                    <rect key="frame" x="259" y="19" width="118" height="22"/>
+                    <rect key="frame" x="211" y="19" width="166" height="22"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jh0-CC-COh">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tTR-ru-ke5">
                             <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="22" id="2io-9L-yvR"/>
+                                <constraint firstAttribute="height" constant="22" id="A5b-YZ-XhX"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="navigation_back_link"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jh0-CC-COh">
+                            <rect key="frame" x="48" y="0.0" width="22" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="22" id="Hqn-AV-aDh"/>
                                 <constraint firstAttribute="width" constant="22" id="Pm9-yW-VTf"/>
@@ -35,7 +44,7 @@
                             <buttonConfiguration key="configuration" style="plain" image="guarantee_share"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R30-v1-Xrz">
-                            <rect key="frame" x="48" y="0.0" width="22" height="22"/>
+                            <rect key="frame" x="96" y="0.0" width="22" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="22" id="UwZ-aP-8Rv"/>
                                 <constraint firstAttribute="width" constant="22" id="tGw-9H-JxS"/>
@@ -44,7 +53,7 @@
                             <buttonConfiguration key="configuration" style="plain" image="guarantee_service"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHH-yV-qBG">
-                            <rect key="frame" x="96" y="0.0" width="22" height="22"/>
+                            <rect key="frame" x="144" y="0.0" width="22" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="22" id="8lB-W8-wea"/>
                                 <constraint firstAttribute="height" constant="22" id="KwB-ec-Vtr"/>
@@ -67,10 +76,12 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="ServerButton" destination="R30-v1-Xrz" id="UkV-FN-tcM"/>
+                <outlet property="linkButton" destination="tTR-ru-ke5" id="UDh-RB-L2b"/>
                 <outlet property="scanButton" destination="XHH-yV-qBG" id="ci0-Nz-Arz"/>
+                <outlet property="serverButton" destination="R30-v1-Xrz" id="Wxs-vt-5QQ"/>
                 <outlet property="settingButton" destination="yeh-xP-3Dd" id="ESl-XN-SdF"/>
                 <outlet property="shareButton" destination="Jh0-CC-COh" id="zuD-2E-bGq"/>
+                <outlet property="stackView" destination="Pew-B1-j0C" id="amS-GD-3Je"/>
             </connections>
             <point key="canvasLocation" x="27" y="21"/>
         </view>
@@ -80,5 +91,6 @@
         <image name="guarantee_service" width="22" height="22"/>
         <image name="guarantee_setting" width="22.333333969116211" height="22"/>
         <image name="guarantee_share" width="22" height="22"/>
+        <image name="navigation_back_link" width="22" height="22"/>
     </resources>
 </document>

@@ -11,5 +11,18 @@
     "home_USDT": "USDT",
     "home_RMB": "RMB",
     "home_more": "More",
+    "wallet_send": "Send",
+    "wallet_receive": "Receive",
+    "wallet_deposit": "Deposit",
+    "wallet_tokens": "Tokens",
+    "wallet_signature": "Signature",
+    "wallet_list_empty_noti": "Your transaction and history will show up here",
+    "wallet_transfer": "Transfer",
+    "wallet_nowallet_title": "blockchain multisig wallet",
+    "wallet_nowallet_des": "Now you can explore blockchain multisig wallet",
+    "wallet_i_have_nowallet": "I don‘t have a wallet",
+    "wallet_i_have_nowallet2": "Creat a new wallet",
+    "wallet_i_have_wallet": "Ialready have a wallet",
+    "wallet_i_have_wallet2": "Import a wallet",
 }
 

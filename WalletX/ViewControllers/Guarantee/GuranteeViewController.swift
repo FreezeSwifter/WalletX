@@ -9,9 +9,8 @@ import UIKit
 import SnapKit
 import IGListKit
 
-class GuranteeViewController: UIViewController {
+class GuranteeViewController: UIViewController, HomeNavigationble {
 
-    private let headerView: HomeNavigationBarView = ViewLoader.Xib.view()
     private var adapter: ListAdapter!
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
@@ -25,12 +24,10 @@ class GuranteeViewController: UIViewController {
     }
     
     private func setupView() {
-        view.addSubview(headerView)
-        headerView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.qmui_navigationBarMaxYInViewCoordinator)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(44)
-        }
+        
+        setupNavigationbar()
+        headerView?.stackView.removeArrangedSubview(headerView!.linkButton)
+        headerView?.linkButton.removeFromSuperview()
         
         adapter = ListAdapter(updater: ListAdapterUpdater(), viewController: self, workingRangeSize: 3)
         view.addSubview(collectionView)
@@ -39,7 +36,7 @@ class GuranteeViewController: UIViewController {
         collectionView.backgroundColor = UIColor.white
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(headerView.snp.bottom)
+            make.top.equalTo(headerView!.snp.bottom)
             make.bottom.leading.trailing.equalToSuperview()
         }
     }

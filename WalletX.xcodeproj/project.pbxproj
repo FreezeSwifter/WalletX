@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A2BE0832A8B4E3C001B2970 /* AssociatedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE0822A8B4E3C001B2970 /* AssociatedManager.swift */; };
+		7A2BE0862A8B773F001B2970 /* WalletHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE0852A8B773F001B2970 /* WalletHeaderView.swift */; };
+		7A2BE0882A8B774A001B2970 /* WalletHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A2BE0872A8B774A001B2970 /* WalletHeaderView.xib */; };
+		7A2BE08E2A8B8D51001B2970 /* WalletTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE08D2A8B8D51001B2970 /* WalletTokenViewController.swift */; };
+		7A2BE0902A8B8D83001B2970 /* WalletSignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE08F2A8B8D83001B2970 /* WalletSignatureViewController.swift */; };
+		7A2BE0922A8B91AF001B2970 /* WalletWithoutWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE0912A8B91AF001B2970 /* WalletWithoutWalletView.swift */; };
+		7A2BE0942A8B91E0001B2970 /* WalletWithoutWalletView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A2BE0932A8B91E0001B2970 /* WalletWithoutWalletView.xib */; };
 		7A7D4DB22A84A19B0098262F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7D4DB12A84A19B0098262F /* AppDelegate.swift */; };
 		7A7D4DB92A84A19B0098262F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A7D4DB72A84A19B0098262F /* Main.storyboard */; };
 		7A7D4DBB2A84A19D0098262F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A7D4DBA2A84A19D0098262F /* Assets.xcassets */; };
@@ -107,6 +114,13 @@
 /* Begin PBXFileReference section */
 		044529E4FB5778B72BDB39C3 /* libPods-WalletX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WalletX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E1FF6B9D44BF6B90AA7FD3B /* Pods-WalletX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalletX.release.xcconfig"; path = "Target Support Files/Pods-WalletX/Pods-WalletX.release.xcconfig"; sourceTree = "<group>"; };
+		7A2BE0822A8B4E3C001B2970 /* AssociatedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociatedManager.swift; sourceTree = "<group>"; };
+		7A2BE0852A8B773F001B2970 /* WalletHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeaderView.swift; sourceTree = "<group>"; };
+		7A2BE0872A8B774A001B2970 /* WalletHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletHeaderView.xib; sourceTree = "<group>"; };
+		7A2BE08D2A8B8D51001B2970 /* WalletTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTokenViewController.swift; sourceTree = "<group>"; };
+		7A2BE08F2A8B8D83001B2970 /* WalletSignatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSignatureViewController.swift; sourceTree = "<group>"; };
+		7A2BE0912A8B91AF001B2970 /* WalletWithoutWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWithoutWalletView.swift; sourceTree = "<group>"; };
+		7A2BE0932A8B91E0001B2970 /* WalletWithoutWalletView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletWithoutWalletView.xib; sourceTree = "<group>"; };
 		7A7D4DAE2A84A19B0098262F /* WalletX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A7D4DB12A84A19B0098262F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A7D4DB82A84A19B0098262F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -231,6 +245,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7A2BE0842A8B7721001B2970 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7A2BE0852A8B773F001B2970 /* WalletHeaderView.swift */,
+				7A2BE0872A8B774A001B2970 /* WalletHeaderView.xib */,
+				7A2BE0912A8B91AF001B2970 /* WalletWithoutWalletView.swift */,
+				7A2BE0932A8B91E0001B2970 /* WalletWithoutWalletView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		7A7D4DA52A84A19B0098262F = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +302,7 @@
 				7AD08A812A89FAE8000B247E /* ColorConfiguration.swift */,
 				7AD08BF72A8A1495000B247E /* UIImage+Tool.swift */,
 				7AD08BF92A8A15A9000B247E /* UIButton+Tool.swift */,
+				7A2BE0822A8B4E3C001B2970 /* AssociatedManager.swift */,
 			);
 			path = APPConfiguration;
 			sourceTree = "<group>";
@@ -941,7 +967,10 @@
 		7AF15A102A85020B00C48F39 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				7A2BE0842A8B7721001B2970 /* View */,
 				7AF15A182A85024600C48F39 /* WalletViewController.swift */,
+				7A2BE08D2A8B8D51001B2970 /* WalletTokenViewController.swift */,
+				7A2BE08F2A8B8D83001B2970 /* WalletSignatureViewController.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -1027,6 +1056,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AD08A7E2A89F380000B247E /* cn.json in Resources */,
+				7A2BE0942A8B91E0001B2970 /* WalletWithoutWalletView.xib in Resources */,
+				7A2BE0882A8B774A001B2970 /* WalletHeaderView.xib in Resources */,
 				7A7D4DBE2A84A19D0098262F /* LaunchScreen.storyboard in Resources */,
 				7A7D4DBB2A84A19D0098262F /* Assets.xcassets in Resources */,
 				7A7D4DB92A84A19B0098262F /* Main.storyboard in Resources */,
@@ -1099,6 +1130,7 @@
 				7AB377592A862E2B005BD1CB /* FSPageControl.swift in Sources */,
 				7AD08BBF2A8A083B000B247E /* UIApplicationExtension.swift in Sources */,
 				7AB377712A87AC10005BD1CB /* HomeBannerSectionCellCollectionViewCell.swift in Sources */,
+				7A2BE08E2A8B8D51001B2970 /* WalletTokenViewController.swift in Sources */,
 				7AD08BB32A8A083B000B247E /* UserDefaultsBacked.swift in Sources */,
 				7AD08BC22A8A083B000B247E /* UIViewExtension.swift in Sources */,
 				7AB3776B2A87A324005BD1CB /* XibLoadble.swift in Sources */,
@@ -1129,9 +1161,12 @@
 				7AB377472A8612E1005BD1CB /* QMUIConfigurationTemplate.m in Sources */,
 				7AD08BDC2A8A083B000B247E /* IntExtension.swift in Sources */,
 				7AD08BCA2A8A083B000B247E /* UITableViewExtension.swift in Sources */,
+				7A2BE0922A8B91AF001B2970 /* WalletWithoutWalletView.swift in Sources */,
 				7AD08BD32A8A083B000B247E /* BundleExtension.swift in Sources */,
+				7A2BE0902A8B8D83001B2970 /* WalletSignatureViewController.swift in Sources */,
 				7AB377562A862E2B005BD1CB /* FSPagerViewCell.swift in Sources */,
 				7AB377672A869278005BD1CB /* HomeNavigationBarView.swift in Sources */,
+				7A2BE0862A8B773F001B2970 /* WalletHeaderView.swift in Sources */,
 				7AD08BC92A8A083B000B247E /* UIViewControllerExtension.swift in Sources */,
 				7AD08BCB2A8A083B000B247E /* UISliderExtension.swift in Sources */,
 				7AD08BD62A8A083B000B247E /* NSLayoutConstraintsExtension.swift in Sources */,
@@ -1150,6 +1185,7 @@
 				7AD08BE52A8A083B000B247E /* NibLoadable.swift in Sources */,
 				7AD08BEC2A8A083B000B247E /* UIElementPreview.swift in Sources */,
 				7AD08BCC2A8A083B000B247E /* UITextFieldExtension.swift in Sources */,
+				7A2BE0832A8B4E3C001B2970 /* AssociatedManager.swift in Sources */,
 				7AB377742A87B025005BD1CB /* HomeQuickAccessCell.swift in Sources */,
 				7A7D4DB22A84A19B0098262F /* AppDelegate.swift in Sources */,
 				7AD08BCD2A8A083B000B247E /* UserDefaultsExtension.swift in Sources */,

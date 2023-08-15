@@ -11,6 +11,18 @@
     "home_USDT": "换U",
     "home_RMB": "收付",
     "home_more": "更多",
-
+    "wallet_send": "发送",
+    "wallet_receive": "接收",
+    "wallet_deposit": "上押",
+    "wallet_tokens": "代币",
+    "wallet_signature": "签名",
+    "wallet_list_empty_noti": "此处将显示交易记录",
+    "wallet_transfer": "转账",
+    "wallet_nowallet_title": "区块链多签钱包",
+    "wallet_nowallet_des": "现在可以探索区块链多签钱包啦",
+    "wallet_i_have_nowallet": "我没有钱包",
+    "wallet_i_have_nowallet2": "创建一个新钱包",
+    "wallet_i_have_wallet": "我已有钱包",
+    "wallet_i_have_wallet2": "导入钱包",
 }
 
