@@ -19,6 +19,7 @@ enum ColorConfiguration {
     case grayBg // 首页按钮正常状态 F4F5F6
     case homeItemBg // 首页服务item背景 ECF0F5
     case wihteAlpha80 // 白色 80% 透明度
+    case garyLine // 808A9D 灰色分割线
     
     
     func toColor() -> UIColor {
@@ -49,6 +50,9 @@ enum ColorConfiguration {
             
         case .wihteAlpha80:
             return (UIColor.qmui_color(withHexString: "#FFFFFF") ?? .gray).qmui_colorWithAlphaAdded(toWhite: 0.8)
+            
+        case .garyLine:
+            return (UIColor.qmui_color(withHexString: "#808A9D") ?? .gray).qmui_colorWithAlphaAdded(toWhite: 0.2)
         }
         
     }
