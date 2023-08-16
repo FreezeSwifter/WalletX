@@ -7,23 +7,29 @@
 
 import UIKit
 
-class MyViewController: UIViewController {
-
+class MyViewController: UIViewController, HomeNavigationble {
+    
+    let infoView: MeInfoView = ViewLoader.Xib.view()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        setupView()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setupView() {
+        setupNavigationbar()
+        
+        if let cgImage = UIImage(named: "me_background")?.cgImage {
+            view.layer.contents = cgImage
+        }
+        
+        view.addSubview(infoView)
+        infoView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(headerView!.snp.bottom).offset(2)
+            make.height.equalTo(124)
+        }
     }
-    */
-
+    
 }

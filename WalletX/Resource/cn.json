@@ -24,5 +24,17 @@
     "wallet_i_have_nowallet2": "创建一个新钱包",
     "wallet_i_have_wallet": "我已有钱包",
     "wallet_i_have_wallet2": "导入钱包",
+    "message_noti": "消息",
+    "me_guaranties": "我的担保",
+    "me_all": "所有",
+    "me_pending": "待加入",
+    "me_depositing": "待上押",
+    "me_guaranteeing": "担保中",
+    "me_releasing": "退押中",
+    "me_released": "已退押",
+    "me_nodata": "暂无订单",
+    "me_walletId": "钱包 ID",
+    "me_noBind": "Unlinked",
+    "me_noCreate": "Not Created",
 }
 

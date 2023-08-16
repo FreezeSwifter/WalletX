@@ -14,6 +14,10 @@
 		7A2BE0902A8B8D83001B2970 /* WalletSignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE08F2A8B8D83001B2970 /* WalletSignatureViewController.swift */; };
 		7A2BE0922A8B91AF001B2970 /* WalletWithoutWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE0912A8B91AF001B2970 /* WalletWithoutWalletView.swift */; };
 		7A2BE0942A8B91E0001B2970 /* WalletWithoutWalletView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A2BE0932A8B91E0001B2970 /* WalletWithoutWalletView.xib */; };
+		7A647F3F2A8C85A800A4A56F /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A647F3D2A8C85A800A4A56F /* MessageListCell.swift */; };
+		7A647F402A8C85A800A4A56F /* MessageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A647F3E2A8C85A800A4A56F /* MessageListCell.xib */; };
+		7A647F432A8C91BE00A4A56F /* MeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A647F422A8C91BE00A4A56F /* MeInfoView.swift */; };
+		7A647F452A8C91F700A4A56F /* MeInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A647F442A8C91F700A4A56F /* MeInfoView.xib */; };
 		7A7D4DB22A84A19B0098262F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7D4DB12A84A19B0098262F /* AppDelegate.swift */; };
 		7A7D4DB92A84A19B0098262F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A7D4DB72A84A19B0098262F /* Main.storyboard */; };
 		7A7D4DBB2A84A19D0098262F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A7D4DBA2A84A19D0098262F /* Assets.xcassets */; };
@@ -121,6 +125,10 @@
 		7A2BE08F2A8B8D83001B2970 /* WalletSignatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSignatureViewController.swift; sourceTree = "<group>"; };
 		7A2BE0912A8B91AF001B2970 /* WalletWithoutWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWithoutWalletView.swift; sourceTree = "<group>"; };
 		7A2BE0932A8B91E0001B2970 /* WalletWithoutWalletView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletWithoutWalletView.xib; sourceTree = "<group>"; };
+		7A647F3D2A8C85A800A4A56F /* MessageListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
+		7A647F3E2A8C85A800A4A56F /* MessageListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageListCell.xib; sourceTree = "<group>"; };
+		7A647F422A8C91BE00A4A56F /* MeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeInfoView.swift; sourceTree = "<group>"; };
+		7A647F442A8C91F700A4A56F /* MeInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeInfoView.xib; sourceTree = "<group>"; };
 		7A7D4DAE2A84A19B0098262F /* WalletX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A7D4DB12A84A19B0098262F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A7D4DB82A84A19B0098262F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -252,6 +260,24 @@
 				7A2BE0872A8B774A001B2970 /* WalletHeaderView.xib */,
 				7A2BE0912A8B91AF001B2970 /* WalletWithoutWalletView.swift */,
 				7A2BE0932A8B91E0001B2970 /* WalletWithoutWalletView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7A647F3C2A8C84AB00A4A56F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7A647F3D2A8C85A800A4A56F /* MessageListCell.swift */,
+				7A647F3E2A8C85A800A4A56F /* MessageListCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7A647F412A8C91A000A4A56F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7A647F422A8C91BE00A4A56F /* MeInfoView.swift */,
+				7A647F442A8C91F700A4A56F /* MeInfoView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -951,6 +977,7 @@
 		7AF15A0E2A85020B00C48F39 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				7A647F412A8C91A000A4A56F /* View */,
 				7AF15A162A85023C00C48F39 /* MyViewController.swift */,
 			);
 			path = My;
@@ -959,6 +986,7 @@
 		7AF15A0F2A85020B00C48F39 /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				7A647F3C2A8C84AB00A4A56F /* View */,
 				7AF15A142A85023300C48F39 /* MessageViewController.swift */,
 			);
 			path = Message;
@@ -1055,6 +1083,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A647F452A8C91F700A4A56F /* MeInfoView.xib in Resources */,
 				7AD08A7E2A89F380000B247E /* cn.json in Resources */,
 				7A2BE0942A8B91E0001B2970 /* WalletWithoutWalletView.xib in Resources */,
 				7A2BE0882A8B774A001B2970 /* WalletHeaderView.xib in Resources */,
@@ -1063,6 +1092,7 @@
 				7A7D4DB92A84A19B0098262F /* Main.storyboard in Resources */,
 				7AD08BF22A8A0D64000B247E /* ServiceProviderCell.xib in Resources */,
 				7AB377752A87B025005BD1CB /* HomeQuickAccessCell.xib in Resources */,
+				7A647F402A8C85A800A4A56F /* MessageListCell.xib in Resources */,
 				7AB377692A869281005BD1CB /* HomeNavigationBarView.xib in Resources */,
 				7AD08A802A89F456000B247E /* en.json in Resources */,
 			);
@@ -1142,11 +1172,13 @@
 				7AD08BB22A8A083B000B247E /* Constants.swift in Sources */,
 				7AD08BF12A8A0D64000B247E /* ServiceProviderCell.swift in Sources */,
 				7AD08BB62A8A083B000B247E /* UnitTesting.swift in Sources */,
+				7A647F3F2A8C85A800A4A56F /* MessageListCell.swift in Sources */,
 				7AD08BEA2A8A083B000B247E /* AnyOptional.swift in Sources */,
 				7AD08BC42A8A083B000B247E /* UIFontExtension.swift in Sources */,
 				7AD08BE12A8A083B000B247E /* SequenceExtension.swift in Sources */,
 				7AD08BC02A8A083B000B247E /* UIButtonExtension.swift in Sources */,
 				7AB3775B2A862E2B005BD1CB /* FSPagerCollectionView.swift in Sources */,
+				7A647F432A8C91BE00A4A56F /* MeInfoView.swift in Sources */,
 				7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */,
 				7AD08BD42A8A083B000B247E /* URLExtension.swift in Sources */,
 				7AD08A822A89FAE8000B247E /* ColorConfiguration.swift in Sources */,

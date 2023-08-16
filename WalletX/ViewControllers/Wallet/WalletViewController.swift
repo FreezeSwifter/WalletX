@@ -43,7 +43,6 @@ class WalletViewController: UIViewController, HomeNavigationble {
         super.viewDidLoad()
 
         view.backgroundColor = ColorConfiguration.homeItemBg.toColor()
-        self.fd_prefersNavigationBarHidden = true
         setupView()
     }
 
@@ -51,9 +50,6 @@ class WalletViewController: UIViewController, HomeNavigationble {
     private func setupView() {
         
         setupNavigationbar()
-        headerView?.stackView.removeArrangedSubview(headerView!.linkButton)
-        headerView?.linkButton.removeFromSuperview()
-        headerView?.backgroundColor = .clear
         
         view.addSubview(topOperatedView)
         topOperatedView.snp.makeConstraints { make in
@@ -99,7 +95,8 @@ class WalletViewController: UIViewController, HomeNavigationble {
         // 判断是否需要展示
         view.addSubview(noWalletView)
         noWalletView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(headerView!.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
         }
         UIView.animate(withDuration: 0.4, delay: 5) {
             self.noWalletView.alpha = 0

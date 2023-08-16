@@ -18,7 +18,6 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        self.fd_prefersNavigationBarHidden = true
         setupView()
         
     }
@@ -26,8 +25,6 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
     private func setupView() {
         
         setupNavigationbar()
-        headerView?.stackView.removeArrangedSubview(headerView!.linkButton)
-        headerView?.linkButton.removeFromSuperview()
         
         adapter = ListAdapter(updater: ListAdapterUpdater(), viewController: self, workingRangeSize: 3)
         view.addSubview(collectionView)

@@ -26,14 +26,19 @@ protocol HomeNavigationble {
 extension HomeNavigationble where Self: UIViewController {
     
     func setupNavigationbar() {
+        self.fd_prefersNavigationBarHidden = true
         let v: HomeNavigationBarView = ViewLoader.Xib.view()
-        self.headerView = v
-        self.view.addSubview(v)
-        self.headerView?.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.qmui_navigationBarMaxYInViewCoordinator)
+        headerView = v
+        view.addSubview(v)
+        headerView?.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(44)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(navigationController?.navigationBar.bounds.height ?? 88)
         }
+        // 暂时不用显示这个按钮
+        headerView?.stackView.removeArrangedSubview(headerView!.linkButton)
+        headerView?.linkButton.removeFromSuperview()
+        headerView?.backgroundColor = .clear
     }
 }
 
@@ -50,6 +55,13 @@ class HomeNavigationBarView: UIView {
     @IBOutlet weak var serverButton: UIButton!
     
     @IBOutlet weak var scanButton: UIButton!
+    
+    @IBOutlet weak var titleLabel: UILabel! {
+        didSet {
+            titleLabel.textColor = ColorConfiguration.blodText.toColor()
+            titleLabel.minimumScaleFactor = 0.8
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
