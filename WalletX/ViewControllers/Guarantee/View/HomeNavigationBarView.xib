@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,8 +20,8 @@
                         <constraint firstAttribute="height" constant="22" id="hRX-9w-wbC"/>
                         <constraint firstAttribute="width" constant="22" id="j0U-6j-HwK"/>
                     </constraints>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" image="guarantee_setting"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Button" image="guarantee_setting"/>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="Pew-B1-j0C">
                     <rect key="frame" x="301" y="20" width="166" height="22"/>
@@ -31,8 +32,8 @@
                                 <constraint firstAttribute="width" constant="22" id="2io-9L-yvR"/>
                                 <constraint firstAttribute="height" constant="22" id="A5b-YZ-XhX"/>
                             </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="navigation_back_link"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Button" image="navigation_back_link"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jh0-CC-COh">
                             <rect key="frame" x="48" y="0.0" width="22" height="22"/>
@@ -40,8 +41,8 @@
                                 <constraint firstAttribute="height" constant="22" id="Hqn-AV-aDh"/>
                                 <constraint firstAttribute="width" constant="22" id="Pm9-yW-VTf"/>
                             </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="guarantee_share"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Button" image="guarantee_share"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R30-v1-Xrz">
                             <rect key="frame" x="96" y="0.0" width="22" height="22"/>
@@ -49,8 +50,8 @@
                                 <constraint firstAttribute="height" constant="22" id="UwZ-aP-8Rv"/>
                                 <constraint firstAttribute="width" constant="22" id="tGw-9H-JxS"/>
                             </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="guarantee_service"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Button" image="guarantee_service"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHH-yV-qBG">
                             <rect key="frame" x="144" y="0.0" width="22" height="22"/>
@@ -58,8 +59,8 @@
                                 <constraint firstAttribute="width" constant="22" id="8lB-W8-wea"/>
                                 <constraint firstAttribute="height" constant="22" id="KwB-ec-Vtr"/>
                             </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="guarantee_scan"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Button" image="guarantee_scan"/>
                         </button>
                     </subviews>
                 </stackView>

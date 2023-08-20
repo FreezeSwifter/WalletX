@@ -39,17 +39,30 @@ class LanguageManager: NSObject {
     }
     
     private func loadLanguageFile() {
-        guard let languageCode = Locale.current.language.languageCode?.identifier else {
-            return
-        }
-        
-        if let path = Bundle.main.path(forResource: languageCode, ofType: "json"),
-           let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path)),
-           let jsonDict = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
-            currentLanguage = languageCode
-            languageDict = jsonDict
+        if #available(iOS 16, *) {
+            guard let languageCode = Locale.current.language.languageCode?.identifier else {
+                return
+            }
+            if let path = Bundle.main.path(forResource: languageCode, ofType: "json"),
+               let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path)),
+               let jsonDict = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
+                currentLanguage = languageCode
+                languageDict = jsonDict
+            } else {
+                assertionFailure("多语言JSON文件出错:\(languageCode)")
+            }
         } else {
-            assertionFailure("多语言JSON文件出错:\(languageCode)")
+            guard let locale = NSLocale.current.languageCode else {
+                return
+            }
+            if let path = Bundle.main.path(forResource: locale, ofType: "json"),
+               let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path)),
+               let jsonDict = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
+                currentLanguage = locale
+                languageDict = jsonDict
+            } else {
+                assertionFailure("多语言JSON文件出错:\(locale)")
+            }
         }
     }
     
