@@ -8,9 +8,9 @@
     "home_orders": "担保笔数",
     "home_amount": "担保金额",
     "home_topService": "推荐服务商",
-    "home_USDT": "换U",
-    "home_RMB": "收付",
-    "home_more": "更多",
+    "home_USDT": " 换U ",
+    "home_RMB": " 收付 ",
+    "home_more": " 更多 ",
     "wallet_send": "发送",
     "wallet_receive": "接收",
     "wallet_deposit": "上押",
@@ -36,5 +36,14 @@
     "me_walletId": "钱包 ID",
     "me_noBind": "Unlinked",
     "me_noCreate": "Not Created",
+    "home_noti_text": "推荐服务商经过我们的甄选，并承诺交易过程中支持使用本担保钱包来保证资金安全。\n如果交易过程中商家不使用担保钱包请不要交易！",
+    "home_item_all": "所有",
+    "home_item_trade": "交易",
+    "home_fee_noti": "担保费用告知",
+    "home_fee_noti_content": "担保费用 = 担保额度 * 0.1% * 担保天数，每天收取担保金额的0.1%作为担保费用；\n担保天数不足1天的部分按照1天计算，担保费用不足1U的部分按照1U计算；",
+    "home_no_noti_again": "下次不再提醒",
+    "home_contact_us": "联系客服",
+    "home_gotit": "我已知晓",
+    
 }
 

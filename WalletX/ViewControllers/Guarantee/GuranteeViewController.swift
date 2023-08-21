@@ -19,7 +19,6 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
 
         view.backgroundColor = .white
         setupView()
-        
     }
     
     private func setupView() {
@@ -36,6 +35,10 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
             make.top.equalTo(headerView!.snp.bottom)
             make.bottom.leading.trailing.equalToSuperview()
         }
+        
+        GuaranteeFeesView.show().subscribe { a in
+            
+        }.disposed(by: rx.disposeBag)
     }
 }
 

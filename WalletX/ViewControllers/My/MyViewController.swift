@@ -114,7 +114,6 @@ class MyViewController: UIViewController, HomeNavigationble {
             make.trailing.leading.bottom.equalToSuperview()
             make.top.equalTo(segmentedContainerView.snp.bottom)
         }
-        listContainerView.backgroundColor = .red
         
         //配置指示器
         let indicator = JXSegmentedIndicatorBackgroundView()

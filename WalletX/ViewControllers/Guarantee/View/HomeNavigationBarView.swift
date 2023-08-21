@@ -40,6 +40,15 @@ extension HomeNavigationble where Self: UIViewController {
         headerView?.linkButton.removeFromSuperview()
         headerView?.backgroundColor = .clear
     }
+    
+    func setupChildVCStyle() {
+        headerView?.stackView.removeArrangedSubview(headerView!.scanButton)
+        headerView?.scanButton.removeFromSuperview()
+        headerView?.stackView.removeArrangedSubview(headerView!.shareButton)
+        headerView?.shareButton.removeFromSuperview()
+        headerView?.settingButton.setImage(UIImage(named: "navigation_back_button"), for: UIControl.State())
+        headerView?.settingButton.tintColor = ColorConfiguration.blodText.toColor()
+    }
 }
 
 class HomeNavigationBarView: UIView {

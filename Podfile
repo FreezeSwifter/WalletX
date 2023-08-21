@@ -7,6 +7,7 @@ target 'WalletX' do
  
   # Network
   pod 'HandyJSON'
+  pod 'MMKV'
   
   # UI
   pod 'SnapKit', '5.6.0'

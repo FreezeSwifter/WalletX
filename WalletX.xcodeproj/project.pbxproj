@@ -41,6 +41,13 @@
 		7AB377752A87B025005BD1CB /* HomeQuickAccessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AB377732A87B025005BD1CB /* HomeQuickAccessCell.xib */; };
 		7AB93E052A8D5F1A0098BF9E /* MeListChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB93E042A8D5F1A0098BF9E /* MeListChildViewController.swift */; };
 		7AB93E072A8D69520098BF9E /* MeListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB93E062A8D69520098BF9E /* MeListEmptyView.swift */; };
+		7AC9E82A2A937961004CC21F /* ServiceProviderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC9E8292A937961004CC21F /* ServiceProviderController.swift */; };
+		7AC9E82C2A9382A6004CC21F /* ServiceProviderNotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC9E82B2A9382A6004CC21F /* ServiceProviderNotiView.swift */; };
+		7AC9E82E2A9382D7004CC21F /* ServiceProviderNotiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AC9E82D2A9382D7004CC21F /* ServiceProviderNotiView.xib */; };
+		7AC9E8302A939729004CC21F /* ServiceProviderChildController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC9E82F2A939729004CC21F /* ServiceProviderChildController.swift */; };
+		7AC9E8332A939F3E004CC21F /* OverlayContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC9E8322A939F3E004CC21F /* OverlayContainerController.swift */; };
+		7AC9E8352A939FDF004CC21F /* GuaranteeFeesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC9E8342A939FDF004CC21F /* GuaranteeFeesView.swift */; };
+		7AC9E8372A93A004004CC21F /* GuaranteeFeesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AC9E8362A93A004004CC21F /* GuaranteeFeesView.xib */; };
 		7AD08A7B2A89F26D000B247E /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08A7A2A89F26C000B247E /* LanguageManager.swift */; };
 		7AD08A7E2A89F380000B247E /* cn.json in Resources */ = {isa = PBXBuildFile; fileRef = 7AD08A7D2A89F380000B247E /* cn.json */; };
 		7AD08A802A89F456000B247E /* en.json in Resources */ = {isa = PBXBuildFile; fileRef = 7AD08A7F2A89F456000B247E /* en.json */; };
@@ -99,7 +106,6 @@
 		7AD08BE52A8A083B000B247E /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BA62A8A083B000B247E /* NibLoadable.swift */; };
 		7AD08BE62A8A083B000B247E /* NibOwnerLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BA72A8A083B000B247E /* NibOwnerLoadable.swift */; };
 		7AD08BE72A8A083B000B247E /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BA92A8A083B000B247E /* Reusable.swift */; };
-		7AD08BE82A8A083B000B247E /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BAB2A8A083B000B247E /* Then.swift */; };
 		7AD08BE92A8A083B000B247E /* Injectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BAC2A8A083B000B247E /* Injectable.swift */; };
 		7AD08BEA2A8A083B000B247E /* AnyOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BAD2A8A083B000B247E /* AnyOptional.swift */; };
 		7AD08BEB2A8A083B000B247E /* Occupiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BAE2A8A083B000B247E /* Occupiable.swift */; };
@@ -161,6 +167,13 @@
 		7AB377732A87B025005BD1CB /* HomeQuickAccessCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeQuickAccessCell.xib; sourceTree = "<group>"; };
 		7AB93E042A8D5F1A0098BF9E /* MeListChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeListChildViewController.swift; sourceTree = "<group>"; };
 		7AB93E062A8D69520098BF9E /* MeListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeListEmptyView.swift; sourceTree = "<group>"; };
+		7AC9E8292A937961004CC21F /* ServiceProviderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderController.swift; sourceTree = "<group>"; };
+		7AC9E82B2A9382A6004CC21F /* ServiceProviderNotiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderNotiView.swift; sourceTree = "<group>"; };
+		7AC9E82D2A9382D7004CC21F /* ServiceProviderNotiView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceProviderNotiView.xib; sourceTree = "<group>"; };
+		7AC9E82F2A939729004CC21F /* ServiceProviderChildController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderChildController.swift; sourceTree = "<group>"; };
+		7AC9E8322A939F3E004CC21F /* OverlayContainerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayContainerController.swift; sourceTree = "<group>"; };
+		7AC9E8342A939FDF004CC21F /* GuaranteeFeesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuaranteeFeesView.swift; sourceTree = "<group>"; };
+		7AC9E8362A93A004004CC21F /* GuaranteeFeesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuaranteeFeesView.xib; sourceTree = "<group>"; };
 		7AD08A7A2A89F26C000B247E /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		7AD08A7D2A89F380000B247E /* cn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cn.json; sourceTree = "<group>"; };
 		7AD08A7F2A89F456000B247E /* en.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = en.json; sourceTree = "<group>"; };
@@ -219,7 +232,6 @@
 		7AD08BA62A8A083B000B247E /* NibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		7AD08BA72A8A083B000B247E /* NibOwnerLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibOwnerLoadable.swift; sourceTree = "<group>"; };
 		7AD08BA92A8A083B000B247E /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
-		7AD08BAB2A8A083B000B247E /* Then.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		7AD08BAC2A8A083B000B247E /* Injectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Injectable.swift; sourceTree = "<group>"; };
 		7AD08BAD2A8A083B000B247E /* AnyOptional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyOptional.swift; sourceTree = "<group>"; };
 		7AD08BAE2A8A083B000B247E /* Occupiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Occupiable.swift; sourceTree = "<group>"; };
@@ -334,6 +346,7 @@
 				7AD08BF72A8A1495000B247E /* UIImage+Tool.swift */,
 				7AD08BF92A8A15A9000B247E /* UIButton+Tool.swift */,
 				7A2BE0822A8B4E3C001B2970 /* AssociatedManager.swift */,
+				7AC9E8322A939F3E004CC21F /* OverlayContainerController.swift */,
 			);
 			path = APPConfiguration;
 			sourceTree = "<group>";
@@ -383,6 +396,10 @@
 				7AB377732A87B025005BD1CB /* HomeQuickAccessCell.xib */,
 				7AD08BEF2A8A0D64000B247E /* ServiceProviderCell.swift */,
 				7AD08BF02A8A0D64000B247E /* ServiceProviderCell.xib */,
+				7AC9E82B2A9382A6004CC21F /* ServiceProviderNotiView.swift */,
+				7AC9E82D2A9382D7004CC21F /* ServiceProviderNotiView.xib */,
+				7AC9E8342A939FDF004CC21F /* GuaranteeFeesView.swift */,
+				7AC9E8362A93A004004CC21F /* GuaranteeFeesView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -944,7 +961,6 @@
 		7AD08BAA2A8A083B000B247E /* Swift */ = {
 			isa = PBXGroup;
 			children = (
-				7AD08BAB2A8A083B000B247E /* Then.swift */,
 				7AD08BAC2A8A083B000B247E /* Injectable.swift */,
 				7AD08BAD2A8A083B000B247E /* AnyOptional.swift */,
 				7AD08BAE2A8A083B000B247E /* Occupiable.swift */,
@@ -1015,6 +1031,8 @@
 				7AB3776D2A87AA30005BD1CB /* Section */,
 				7AB3776C2A87A766005BD1CB /* View */,
 				7AF15A122A85022800C48F39 /* GuranteeViewController.swift */,
+				7AC9E8292A937961004CC21F /* ServiceProviderController.swift */,
+				7AC9E82F2A939729004CC21F /* ServiceProviderChildController.swift */,
 			);
 			path = Guarantee;
 			sourceTree = "<group>";
@@ -1091,9 +1109,11 @@
 			files = (
 				7A647F452A8C91F700A4A56F /* MeInfoView.xib in Resources */,
 				7AD08A7E2A89F380000B247E /* cn.json in Resources */,
+				7AC9E82E2A9382D7004CC21F /* ServiceProviderNotiView.xib in Resources */,
 				7A2BE0942A8B91E0001B2970 /* WalletWithoutWalletView.xib in Resources */,
 				7A2BE0882A8B774A001B2970 /* WalletHeaderView.xib in Resources */,
 				7A7D4DBE2A84A19D0098262F /* LaunchScreen.storyboard in Resources */,
+				7AC9E8372A93A004004CC21F /* GuaranteeFeesView.xib in Resources */,
 				7A7D4DBB2A84A19D0098262F /* Assets.xcassets in Resources */,
 				7A7D4DB92A84A19B0098262F /* Main.storyboard in Resources */,
 				7AD08BF22A8A0D64000B247E /* ServiceProviderCell.xib in Resources */,
@@ -1154,6 +1174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AD08BC72A8A083B000B247E /* UICollectionViewExtension.swift in Sources */,
+				7AC9E8302A939729004CC21F /* ServiceProviderChildController.swift in Sources */,
 				7AB377632A868A5E005BD1CB /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				7AD08BCE2A8A083B000B247E /* NSMutableAttributedStringExtension.swift in Sources */,
 				7AD08BBD2A8A083B000B247E /* UIScreenExtension.swift in Sources */,
@@ -1179,6 +1200,7 @@
 				7AD08BB22A8A083B000B247E /* Constants.swift in Sources */,
 				7AD08BF12A8A0D64000B247E /* ServiceProviderCell.swift in Sources */,
 				7AD08BB62A8A083B000B247E /* UnitTesting.swift in Sources */,
+				7AC9E82A2A937961004CC21F /* ServiceProviderController.swift in Sources */,
 				7A647F3F2A8C85A800A4A56F /* MessageListCell.swift in Sources */,
 				7AD08BEA2A8A083B000B247E /* AnyOptional.swift in Sources */,
 				7AD08BC42A8A083B000B247E /* UIFontExtension.swift in Sources */,
@@ -1203,6 +1225,7 @@
 				7A2BE0922A8B91AF001B2970 /* WalletWithoutWalletView.swift in Sources */,
 				7AD08BD32A8A083B000B247E /* BundleExtension.swift in Sources */,
 				7A2BE0902A8B8D83001B2970 /* WalletSignatureViewController.swift in Sources */,
+				7AC9E8332A939F3E004CC21F /* OverlayContainerController.swift in Sources */,
 				7AB377562A862E2B005BD1CB /* FSPagerViewCell.swift in Sources */,
 				7AB377672A869278005BD1CB /* HomeNavigationBarView.swift in Sources */,
 				7A2BE0862A8B773F001B2970 /* WalletHeaderView.swift in Sources */,
@@ -1218,6 +1241,7 @@
 				7AD08BF82A8A1495000B247E /* UIImage+Tool.swift in Sources */,
 				7AD08BE02A8A083B000B247E /* StringExtension.swift in Sources */,
 				7AD08A7B2A89F26D000B247E /* LanguageManager.swift in Sources */,
+				7AC9E8352A939FDF004CC21F /* GuaranteeFeesView.swift in Sources */,
 				7AD08BDB2A8A083B000B247E /* ArrayExtension.swift in Sources */,
 				7AB3776F2A87AA7B005BD1CB /* HomeBannerSection.swift in Sources */,
 				7AD08BE32A8A083B000B247E /* NSViewExtension.swift in Sources */,
@@ -1227,6 +1251,7 @@
 				7A2BE0832A8B4E3C001B2970 /* AssociatedManager.swift in Sources */,
 				7AB377742A87B025005BD1CB /* HomeQuickAccessCell.swift in Sources */,
 				7A7D4DB22A84A19B0098262F /* AppDelegate.swift in Sources */,
+				7AC9E82C2A9382A6004CC21F /* ServiceProviderNotiView.swift in Sources */,
 				7AD08BCD2A8A083B000B247E /* UserDefaultsExtension.swift in Sources */,
 				7AD08BB72A8A083B000B247E /* CGFloatLiteral.swift in Sources */,
 				7AD08BDF2A8A083B000B247E /* DoubleExtension.swift in Sources */,
@@ -1247,7 +1272,6 @@
 				7AB93E072A8D69520098BF9E /* MeListEmptyView.swift in Sources */,
 				7AD08BD02A8A083B000B247E /* ColorExtension.swift in Sources */,
 				7AD08BBA2A8A083B000B247E /* CGRectExtensions.swift in Sources */,
-				7AD08BE82A8A083B000B247E /* Then.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -57,7 +57,7 @@ class ServiceProviderCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+    
         contentView.addSubview(layoutView)
         layoutView.snp.makeConstraints { make in
             make.top.equalTo(topLabel.snp.bottom).offset(30)
