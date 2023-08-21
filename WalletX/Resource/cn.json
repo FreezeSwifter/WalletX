@@ -44,6 +44,9 @@
     "home_no_noti_again": "下次不再提醒",
     "home_contact_us": "联系客服",
     "home_gotit": "我已知晓",
-    
+    "home_create_wallet_noti_title": "需要先创建或导入钱包才能继续操作！",
+    "home_create_wallet_noti_content": "钱包地址是您在优宝钱包中的唯一用户凭证，请您先创建或者导入一个钱包地址。为便于您的使用，您可以创建或者导入多个钱包地址。",
+    "home_gonow_button": "立即进行",
+    "home_after_button": "稍后进行",
 }
 

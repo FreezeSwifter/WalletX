@@ -41,6 +41,9 @@
 		7AB377752A87B025005BD1CB /* HomeQuickAccessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AB377732A87B025005BD1CB /* HomeQuickAccessCell.xib */; };
 		7AB93E052A8D5F1A0098BF9E /* MeListChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB93E042A8D5F1A0098BF9E /* MeListChildViewController.swift */; };
 		7AB93E072A8D69520098BF9E /* MeListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB93E062A8D69520098BF9E /* MeListEmptyView.swift */; };
+		7ABF24A32A93EE39008D7001 /* APPHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF24A22A93EE39008D7001 /* APPHUD.swift */; };
+		7ABF24A52A93F746008D7001 /* GuaranteeYesNoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF24A42A93F746008D7001 /* GuaranteeYesNoView.swift */; };
+		7ABF24A72A93F765008D7001 /* GuaranteeYesNoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ABF24A62A93F765008D7001 /* GuaranteeYesNoView.xib */; };
 		7AC9E82A2A937961004CC21F /* ServiceProviderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC9E8292A937961004CC21F /* ServiceProviderController.swift */; };
 		7AC9E82C2A9382A6004CC21F /* ServiceProviderNotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC9E82B2A9382A6004CC21F /* ServiceProviderNotiView.swift */; };
 		7AC9E82E2A9382D7004CC21F /* ServiceProviderNotiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AC9E82D2A9382D7004CC21F /* ServiceProviderNotiView.xib */; };
@@ -167,6 +170,9 @@
 		7AB377732A87B025005BD1CB /* HomeQuickAccessCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeQuickAccessCell.xib; sourceTree = "<group>"; };
 		7AB93E042A8D5F1A0098BF9E /* MeListChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeListChildViewController.swift; sourceTree = "<group>"; };
 		7AB93E062A8D69520098BF9E /* MeListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeListEmptyView.swift; sourceTree = "<group>"; };
+		7ABF24A22A93EE39008D7001 /* APPHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APPHUD.swift; sourceTree = "<group>"; };
+		7ABF24A42A93F746008D7001 /* GuaranteeYesNoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuaranteeYesNoView.swift; sourceTree = "<group>"; };
+		7ABF24A62A93F765008D7001 /* GuaranteeYesNoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuaranteeYesNoView.xib; sourceTree = "<group>"; };
 		7AC9E8292A937961004CC21F /* ServiceProviderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderController.swift; sourceTree = "<group>"; };
 		7AC9E82B2A9382A6004CC21F /* ServiceProviderNotiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderNotiView.swift; sourceTree = "<group>"; };
 		7AC9E82D2A9382D7004CC21F /* ServiceProviderNotiView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceProviderNotiView.xib; sourceTree = "<group>"; };
@@ -347,6 +353,7 @@
 				7AD08BF92A8A15A9000B247E /* UIButton+Tool.swift */,
 				7A2BE0822A8B4E3C001B2970 /* AssociatedManager.swift */,
 				7AC9E8322A939F3E004CC21F /* OverlayContainerController.swift */,
+				7ABF24A22A93EE39008D7001 /* APPHUD.swift */,
 			);
 			path = APPConfiguration;
 			sourceTree = "<group>";
@@ -400,6 +407,8 @@
 				7AC9E82D2A9382D7004CC21F /* ServiceProviderNotiView.xib */,
 				7AC9E8342A939FDF004CC21F /* GuaranteeFeesView.swift */,
 				7AC9E8362A93A004004CC21F /* GuaranteeFeesView.xib */,
+				7ABF24A42A93F746008D7001 /* GuaranteeYesNoView.swift */,
+				7ABF24A62A93F765008D7001 /* GuaranteeYesNoView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1107,6 +1116,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ABF24A72A93F765008D7001 /* GuaranteeYesNoView.xib in Resources */,
 				7A647F452A8C91F700A4A56F /* MeInfoView.xib in Resources */,
 				7AD08A7E2A89F380000B247E /* cn.json in Resources */,
 				7AC9E82E2A9382D7004CC21F /* ServiceProviderNotiView.xib in Resources */,
@@ -1218,6 +1228,7 @@
 				7AB377552A862E2B005BD1CB /* FSPageViewTransformer.swift in Sources */,
 				7AB377542A862E2B005BD1CB /* FSPagerView.swift in Sources */,
 				7AD08BE62A8A083B000B247E /* NibOwnerLoadable.swift in Sources */,
+				7ABF24A32A93EE39008D7001 /* APPHUD.swift in Sources */,
 				7AD08BE42A8A083B000B247E /* BindingExtension.swift in Sources */,
 				7AB377472A8612E1005BD1CB /* QMUIConfigurationTemplate.m in Sources */,
 				7AD08BDC2A8A083B000B247E /* IntExtension.swift in Sources */,
@@ -1233,6 +1244,7 @@
 				7AD08BCB2A8A083B000B247E /* UISliderExtension.swift in Sources */,
 				7AD08BD62A8A083B000B247E /* NSLayoutConstraintsExtension.swift in Sources */,
 				7AD08BE92A8A083B000B247E /* Injectable.swift in Sources */,
+				7ABF24A52A93F746008D7001 /* GuaranteeYesNoView.swift in Sources */,
 				7AD08BBC2A8A083B000B247E /* UISwitchExtension.swift in Sources */,
 				7AF15A172A85023C00C48F39 /* MyViewController.swift in Sources */,
 				7AD08BF42A8A11D8000B247E /* HomeServiceProviderSecion.swift in Sources */,

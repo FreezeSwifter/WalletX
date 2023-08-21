@@ -56,12 +56,16 @@ final class HomeServiceProviderSecion: ListSectionController {
             self?.viewController?.navigationController?.pushViewController(provideVC, animated: true)
         }).disposed(by: cell.rx.disposeBag)
         
-        cell.changeButton.rx.tap.subscribe(onNext: {[weak self] _ in
-            self?.viewController?.navigationController?.pushViewController(provideVC, animated: true)
+        cell.changeButton.rx.tap.subscribe(onNext: {[weak cell] _ in
+            cell?.changeButton.isSelected = true
+            cell?.collectButton.isSelected = false
+            
         }).disposed(by: cell.rx.disposeBag)
         
-        cell.collectButton.rx.tap.subscribe(onNext: {[weak self] _ in
-            self?.viewController?.navigationController?.pushViewController(provideVC, animated: true)
+        cell.collectButton.rx.tap.subscribe(onNext: {[weak cell] _ in
+            cell?.changeButton.isSelected = false
+            cell?.collectButton.isSelected = true
+            
         }).disposed(by: cell.rx.disposeBag)
         
         return cell

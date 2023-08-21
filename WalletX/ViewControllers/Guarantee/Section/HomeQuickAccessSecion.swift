@@ -8,6 +8,8 @@
 import Foundation
 import IGListKit
 import IGListDiffKit
+import RxCocoa
+import NSObject_Rx
 
 extension HomeQuickAccessSecion {
     
@@ -45,11 +47,28 @@ final class HomeQuickAccessSecion: ListSectionController {
     
     override func cellForItem(at index: Int) -> UICollectionViewCell {
      
-        let cell = collectionContext?.dequeueReusableCell(withNibName: "HomeQuickAccessCell", bundle: nil, for: self, at: index) as? HomeQuickAccessCell
-        return cell ?? UICollectionViewCell()
+        guard let cell = collectionContext?.dequeueReusableCell(withNibName: "HomeQuickAccessCell", bundle: nil, for: self, at: index) as? HomeQuickAccessCell else {
+            return UICollectionViewCell()
+        }
+        
+        cell.joinBgView.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] in
+
+            APPHUD.flash(text: "加入担保被点击")
+
+        }).disposed(by: cell.rx.disposeBag)
+        
+        cell.sendBgView.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] in
+
+            APPHUD.flash(text: "发起担保被点击")
+
+        }).disposed(by: cell.rx.disposeBag)
+        
+        
+        return cell
     }
     
     override func didUpdate(to object: Any) {
         self.data = object as? Model
     }
+    
 }

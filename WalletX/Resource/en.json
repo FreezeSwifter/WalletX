@@ -44,5 +44,9 @@
     "home_no_noti_again": "Don't remind me any more",
     "home_contact_us": "Contact Us",
     "home_gotit": "Got It",
+    "home_create_wallet_noti_title": "You need create a wallet or import a wallet before continue.",
+    "home_create_wallet_noti_content": "Wallet address is your only identity when you use Uoobal Wallet. Please create or import a wallet account before you start. And for convenience you can create or import more than one wallet account.",
+    "home_gonow_button": "Apply Now",
+    "home_after_button": "Later",
 }
 

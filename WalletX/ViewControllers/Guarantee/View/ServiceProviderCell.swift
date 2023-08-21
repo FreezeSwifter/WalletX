@@ -25,6 +25,7 @@ class ServiceProviderCell: UICollectionViewCell {
             changeButton.setTitleColor(ColorConfiguration.blackText.toColor(), for: .selected)
             changeButton.applyCornerRadius(7)
             changeButton.setTitle("home_USDT".toMultilingualism(), for: UIControl.State())
+            changeButton.isSelected = true
         }
     }
     

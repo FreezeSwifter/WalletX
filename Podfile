@@ -6,8 +6,10 @@ target 'WalletX' do
   # use_frameworks!
  
   # Network
-  pod 'HandyJSON'
-  pod 'MMKV'
+  
+  # DataBase
+  pod 'HandyJSON', '5.0.2'
+  pod 'MMKV', '1.3.1'
   
   # UI
   pod 'SnapKit', '5.6.0'
@@ -15,7 +17,8 @@ target 'WalletX' do
   pod 'QMUIKit', '4.6.0'
   pod 'JXSegmentedView', '1.3.0'
   pod 'IGListKit', '4.0.0'
-
+  pod 'MBProgressHUD'
+  
   # WalletCore
   pod 'TrustWalletCore', '2.5.6'
 

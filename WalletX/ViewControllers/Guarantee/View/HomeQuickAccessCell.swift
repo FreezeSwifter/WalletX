@@ -9,7 +9,7 @@ import UIKit
 
 
 class HomeQuickAccessCell: UICollectionViewCell {
-    
+
     @IBOutlet weak var guranteeDesLabel: UILabel! {
         didSet {
             guranteeDesLabel.text = "home_orders".toMultilingualism()
@@ -38,14 +38,14 @@ class HomeQuickAccessCell: UICollectionViewCell {
         }
     }
     
-    @IBOutlet weak var sendBgView: UIView! {
+    @IBOutlet weak var sendBgView: UIControl! {
         didSet {
             sendBgView.applyCornerRadius(10)
             sendBgView.backgroundColor = ColorConfiguration.primary.toColor()
         }
     }
     
-    @IBOutlet weak var joinBgView: UIView! {
+    @IBOutlet weak var joinBgView: UIControl! {
         didSet {
             joinBgView.applyCornerRadius(10)
             joinBgView.backgroundColor = ColorConfiguration.lightBlue.toColor()
@@ -66,9 +66,11 @@ class HomeQuickAccessCell: UICollectionViewCell {
         }
     }
     
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
-
+    
 }

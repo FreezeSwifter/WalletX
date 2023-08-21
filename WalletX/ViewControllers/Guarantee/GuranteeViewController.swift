@@ -36,9 +36,9 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
             make.bottom.leading.trailing.equalToSuperview()
         }
         
-        GuaranteeFeesView.show().subscribe { a in
+        GuaranteeYesNoView.show().subscribe(onNext: { _ in
             
-        }.disposed(by: rx.disposeBag)
+        }).disposed(by: rx.disposeBag)
     }
 }
 
