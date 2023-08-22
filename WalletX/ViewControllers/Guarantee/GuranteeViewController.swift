@@ -68,6 +68,11 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
             present(faceIdVC, animated: true)
         }
 
+        headerView?.scanButton.rx.tap.subscribe(onNext: {[weak self] in
+            let sancVC: ScanViewController = ViewLoader.Xib.controller()
+            sancVC.hidesBottomBarWhenPushed = true
+            self?.navigationController?.pushViewController(sancVC, animated: true)
+        }).disposed(by: rx.disposeBag)
     }
 }
 

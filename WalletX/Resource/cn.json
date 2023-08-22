@@ -60,5 +60,8 @@
     "home_setting_telegram": "Telegram",
     "home_setting_email": "电子邮箱",
     "home_setting_lock_error": "设备不支持",
+    "scan_title": "扫码识别",
+    "scan_open_light": "打开闪光灯",
+    "scan_open_album": "相册",
 }
 

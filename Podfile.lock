@@ -322,6 +322,7 @@ PODS:
   - RxRelay (6.5.0):
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
+  - SGQRCode (4.1.0)
   - SnapKit (5.6.0)
   - SwiftProtobuf (1.22.1)
   - Then (3.0.0)
@@ -331,6 +332,9 @@ PODS:
     - TrustWalletCore/Types
   - TrustWalletCore/Types (2.5.6):
     - SwiftProtobuf
+  - ZLPhotoBrowser (4.4.3.2):
+    - ZLPhotoBrowser/Core (= 4.4.3.2)
+  - ZLPhotoBrowser/Core (4.4.3.2)
 
 DEPENDENCIES:
   - Action (= 5.0.0)
@@ -346,9 +350,11 @@ DEPENDENCIES:
   - RxCocoa (= 6.5.0)
   - RxDataSources (= 5.0.0)
   - RxSwift (= 6.5.0)
+  - SGQRCode
   - SnapKit (= 5.6.0)
   - Then
   - TrustWalletCore (= 2.5.6)
+  - ZLPhotoBrowser
 
 SPEC REPOS:
   trunk:
@@ -369,10 +375,12 @@ SPEC REPOS:
     - RxDataSources
     - RxRelay
     - RxSwift
+    - SGQRCode
     - SnapKit
     - SwiftProtobuf
     - Then
     - TrustWalletCore
+    - ZLPhotoBrowser
 
 SPEC CHECKSUMS:
   Action: 47f1825511907b4fcd79dd7a7db9526c20f78018
@@ -392,11 +400,13 @@ SPEC CHECKSUMS:
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SGQRCode: 6ad664d63f38f2842503bc5087812c5a3136d924
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftProtobuf: 7773c4e96a99d7b8ab7cda0fc30a883732ff93b1
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   TrustWalletCore: 77ed44e6965e5121245d7fafc58c56a03bf13490
+  ZLPhotoBrowser: 0563c2bfc7b247b65d023d646012f46cba94101b
 
-PODFILE CHECKSUM: 987048f7fd155ba5ec51c63a03faa7b0138d33c1
+PODFILE CHECKSUM: 2be15ac0c5ade89847e2495405c0d9725d0e4f56
 
 COCOAPODS: 1.11.3

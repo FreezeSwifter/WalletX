@@ -53,6 +53,8 @@
 		7AC555292A94B5BB0082A070 /* SettingChildViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AC555272A94B5BB0082A070 /* SettingChildViewController.xib */; };
 		7AC5552C2A94C3E70082A070 /* SettingChildViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC5552A2A94C3E70082A070 /* SettingChildViewController2.swift */; };
 		7AC5552D2A94C3E70082A070 /* SettingChildViewController2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AC5552B2A94C3E70082A070 /* SettingChildViewController2.xib */; };
+		7AC555302A94CAB90082A070 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC5552E2A94CAB90082A070 /* ScanViewController.swift */; };
+		7AC555312A94CAB90082A070 /* ScanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AC5552F2A94CAB90082A070 /* ScanViewController.xib */; };
 		7AC9E82A2A937961004CC21F /* ServiceProviderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC9E8292A937961004CC21F /* ServiceProviderController.swift */; };
 		7AC9E82C2A9382A6004CC21F /* ServiceProviderNotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC9E82B2A9382A6004CC21F /* ServiceProviderNotiView.swift */; };
 		7AC9E82E2A9382D7004CC21F /* ServiceProviderNotiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AC9E82D2A9382D7004CC21F /* ServiceProviderNotiView.xib */; };
@@ -191,6 +193,8 @@
 		7AC555272A94B5BB0082A070 /* SettingChildViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingChildViewController.xib; sourceTree = "<group>"; };
 		7AC5552A2A94C3E70082A070 /* SettingChildViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingChildViewController2.swift; sourceTree = "<group>"; };
 		7AC5552B2A94C3E70082A070 /* SettingChildViewController2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingChildViewController2.xib; sourceTree = "<group>"; };
+		7AC5552E2A94CAB90082A070 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		7AC5552F2A94CAB90082A070 /* ScanViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScanViewController.xib; sourceTree = "<group>"; };
 		7AC9E8292A937961004CC21F /* ServiceProviderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderController.swift; sourceTree = "<group>"; };
 		7AC9E82B2A9382A6004CC21F /* ServiceProviderNotiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderNotiView.swift; sourceTree = "<group>"; };
 		7AC9E82D2A9382D7004CC21F /* ServiceProviderNotiView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceProviderNotiView.xib; sourceTree = "<group>"; };
@@ -1069,6 +1073,8 @@
 				7AC555272A94B5BB0082A070 /* SettingChildViewController.xib */,
 				7AC5552A2A94C3E70082A070 /* SettingChildViewController2.swift */,
 				7AC5552B2A94C3E70082A070 /* SettingChildViewController2.xib */,
+				7AC5552E2A94CAB90082A070 /* ScanViewController.swift */,
+				7AC5552F2A94CAB90082A070 /* ScanViewController.xib */,
 			);
 			path = Guarantee;
 			sourceTree = "<group>";
@@ -1146,6 +1152,7 @@
 				7ABF24A72A93F765008D7001 /* GuaranteeYesNoView.xib in Resources */,
 				7A647F452A8C91F700A4A56F /* MeInfoView.xib in Resources */,
 				7AC555252A94B2270082A070 /* FaceIDViewController.xib in Resources */,
+				7AC555312A94CAB90082A070 /* ScanViewController.xib in Resources */,
 				7AD08A7E2A89F380000B247E /* cn.json in Resources */,
 				7AC9E82E2A9382D7004CC21F /* ServiceProviderNotiView.xib in Resources */,
 				7A2BE0942A8B91E0001B2970 /* WalletWithoutWalletView.xib in Resources */,
@@ -1269,6 +1276,7 @@
 				7A2BE0922A8B91AF001B2970 /* WalletWithoutWalletView.swift in Sources */,
 				7AD08BD32A8A083B000B247E /* BundleExtension.swift in Sources */,
 				7A2BE0902A8B8D83001B2970 /* WalletSignatureViewController.swift in Sources */,
+				7AC555302A94CAB90082A070 /* ScanViewController.swift in Sources */,
 				7AC9E8332A939F3E004CC21F /* OverlayContainerController.swift in Sources */,
 				7AB377562A862E2B005BD1CB /* FSPagerViewCell.swift in Sources */,
 				7AB377672A869278005BD1CB /* HomeNavigationBarView.swift in Sources */,

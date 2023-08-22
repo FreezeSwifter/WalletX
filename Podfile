@@ -5,6 +5,9 @@ target 'WalletX' do
   inhibit_all_warnings!
   # use_frameworks!
  
+  # 二维码
+  pod 'SGQRCode', '4.1.0'
+ 
   # Network
   
   # DataBase
@@ -17,7 +20,8 @@ target 'WalletX' do
   pod 'QMUIKit', '4.6.0'
   pod 'JXSegmentedView', '1.3.0'
   pod 'IGListKit', '4.0.0'
-  pod 'MBProgressHUD'
+  pod 'MBProgressHUD', '1.2.0'
+  pod 'ZLPhotoBrowser', '4.4.3.2'
   
   # WalletCore
   pod 'TrustWalletCore', '2.5.6'
@@ -30,7 +34,7 @@ target 'WalletX' do
   pod 'NSObject+Rx', '5.2.2'
 
   # Common
-  pod 'Then'
-  pod 'IQKeyboardManager'
+  pod 'Then', '3.0.0'
+  pod 'IQKeyboardManager', '6.5.12'
   
 end

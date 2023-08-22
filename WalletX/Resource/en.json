@@ -60,5 +60,8 @@
     "home_setting_telegram": "Telegram",
     "home_setting_email": "Email",
     "home_setting_lock_error": "Not Support",
+    "scan_title": "Scan QR Code",
+    "scan_open_light": "Flash",
+    "scan_open_album": "Album",
 }
 
