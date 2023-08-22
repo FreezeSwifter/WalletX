@@ -51,7 +51,7 @@ final class HomeServiceProviderSecion: ListSectionController {
             return UICollectionViewCell()
         }
         let provideVC = ServiceProviderController()
-        
+        provideVC.hidesBottomBarWhenPushed = true
         cell.moreButton.rx.tap.subscribe(onNext: {[weak self] _ in
             self?.viewController?.navigationController?.pushViewController(provideVC, animated: true)
         }).disposed(by: cell.rx.disposeBag)

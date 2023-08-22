@@ -22,6 +22,7 @@ enum ColorConfiguration {
     case garyLine // 808A9D 灰色分割线
     case originNotiText // #F0A158 橘黄色警告⚠️
     case originNotiBg //
+    case listBg // 列表的背景色 F6F8FE
     
     
     func toColor() -> UIColor {
@@ -61,6 +62,9 @@ enum ColorConfiguration {
             
         case .originNotiBg:
             return (UIColor.qmui_color(withHexString: "#F0A158") ?? .orange).qmui_colorWithAlphaAdded(toWhite: 0.1)
+            
+        case .listBg:
+            return UIColor.qmui_color(withHexString: "#F6F8FE") ?? .orange
         }
         
     }

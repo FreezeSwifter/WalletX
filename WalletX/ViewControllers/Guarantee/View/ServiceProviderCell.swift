@@ -7,7 +7,9 @@
 
 import UIKit
 import QMUIKit
-
+import RxCocoa
+import RxSwift
+import NSObject_Rx
 
 class ServiceProviderCell: UICollectionViewCell {
 
@@ -79,6 +81,26 @@ class ServiceProviderCell: UICollectionViewCell {
             btn.applyCornerRadius(7)
             layoutView.addSubview(btn)
         }
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+
+    private func commonInit() {
+        
+        NotificationCenter.default.rx.notification(.languageChanged).observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
+            self?.topLabel.text = "home_topService".toMultilingualism()
+            self?.changeButton.setTitle("home_USDT".toMultilingualism(), for: UIControl.State())
+            self?.collectButton.setTitle("home_RMB".toMultilingualism(), for: UIControl.State())
+            self?.moreButton.setTitle("home_more".toMultilingualism(), for: UIControl.State())
+        }).disposed(by: rx.disposeBag)
     }
 
 }

@@ -7,6 +7,9 @@
 
 import UIKit
 import SnapKit
+import RxCocoa
+import RxSwift
+import NSObject_Rx
 
 class MessageViewController: UIViewController, HomeNavigationble {
     
@@ -20,15 +23,31 @@ class MessageViewController: UIViewController, HomeNavigationble {
         return tv
     }()
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        NotificationCenter.default.rx.notification(.languageChanged).observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
+            self?.tabBarItem.title = "tab_message".toMultilingualism()
+            self?.headerView?.titleLabel.text = "message_noti".toMultilingualism()
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         setupView()
-        
+        bind()
     }
     
-    func setupView() {
+    private func bind() {
+   
+    }
+    
+    private func setupView() {
         setupNavigationbar()
         headerView?.titleLabel.text = "message_noti".toMultilingualism()
         

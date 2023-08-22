@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+import NSObject_Rx
 
 
 class HomeQuickAccessCell: UICollectionViewCell {
@@ -66,11 +69,27 @@ class HomeQuickAccessCell: UICollectionViewCell {
         }
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
     
+    private func commonInit() {
+        
+        NotificationCenter.default.rx.notification(.languageChanged).observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
+            self?.joinLabel.text = "home_joinGuaranty".toMultilingualism()
+            self?.sendLabel.text = "home_newGuaranty".toMultilingualism()
+            self?.guranteeDesLabel.text = "home_orders".toMultilingualism()
+            self?.marginDesLabel.text = "home_amount".toMultilingualism()
+        }).disposed(by: rx.disposeBag)
+    }
 }

@@ -49,8 +49,8 @@ class HomeBannerSectionCellCollectionViewCell: UICollectionViewCell, FSPagerView
         setupUI()
     }
     
+ 
     private func setupUI() {
-        
         contentView.addSubview(pagerView)
         pagerView.snp.makeConstraints { make in
             make.trailing.leading.equalToSuperview().inset(16)

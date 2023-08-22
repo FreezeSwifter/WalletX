@@ -44,6 +44,15 @@
 		7ABF24A32A93EE39008D7001 /* APPHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF24A22A93EE39008D7001 /* APPHUD.swift */; };
 		7ABF24A52A93F746008D7001 /* GuaranteeYesNoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF24A42A93F746008D7001 /* GuaranteeYesNoView.swift */; };
 		7ABF24A72A93F765008D7001 /* GuaranteeYesNoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ABF24A62A93F765008D7001 /* GuaranteeYesNoView.xib */; };
+		7AC5551E2A94869A0082A070 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC5551C2A9486990082A070 /* SettingViewController.swift */; };
+		7AC5551F2A94869A0082A070 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AC5551D2A94869A0082A070 /* SettingViewController.xib */; };
+		7AC555212A949EB90082A070 /* ArchivedKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC555202A949EB90082A070 /* ArchivedKey.swift */; };
+		7AC555242A94B2270082A070 /* FaceIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC555222A94B2270082A070 /* FaceIDViewController.swift */; };
+		7AC555252A94B2270082A070 /* FaceIDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AC555232A94B2270082A070 /* FaceIDViewController.xib */; };
+		7AC555282A94B5BB0082A070 /* SettingChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC555262A94B5BB0082A070 /* SettingChildViewController.swift */; };
+		7AC555292A94B5BB0082A070 /* SettingChildViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AC555272A94B5BB0082A070 /* SettingChildViewController.xib */; };
+		7AC5552C2A94C3E70082A070 /* SettingChildViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC5552A2A94C3E70082A070 /* SettingChildViewController2.swift */; };
+		7AC5552D2A94C3E70082A070 /* SettingChildViewController2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AC5552B2A94C3E70082A070 /* SettingChildViewController2.xib */; };
 		7AC9E82A2A937961004CC21F /* ServiceProviderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC9E8292A937961004CC21F /* ServiceProviderController.swift */; };
 		7AC9E82C2A9382A6004CC21F /* ServiceProviderNotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC9E82B2A9382A6004CC21F /* ServiceProviderNotiView.swift */; };
 		7AC9E82E2A9382D7004CC21F /* ServiceProviderNotiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AC9E82D2A9382D7004CC21F /* ServiceProviderNotiView.xib */; };
@@ -173,6 +182,15 @@
 		7ABF24A22A93EE39008D7001 /* APPHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APPHUD.swift; sourceTree = "<group>"; };
 		7ABF24A42A93F746008D7001 /* GuaranteeYesNoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuaranteeYesNoView.swift; sourceTree = "<group>"; };
 		7ABF24A62A93F765008D7001 /* GuaranteeYesNoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuaranteeYesNoView.xib; sourceTree = "<group>"; };
+		7AC5551C2A9486990082A070 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		7AC5551D2A94869A0082A070 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		7AC555202A949EB90082A070 /* ArchivedKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedKey.swift; sourceTree = "<group>"; };
+		7AC555222A94B2270082A070 /* FaceIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIDViewController.swift; sourceTree = "<group>"; };
+		7AC555232A94B2270082A070 /* FaceIDViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceIDViewController.xib; sourceTree = "<group>"; };
+		7AC555262A94B5BB0082A070 /* SettingChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingChildViewController.swift; sourceTree = "<group>"; };
+		7AC555272A94B5BB0082A070 /* SettingChildViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingChildViewController.xib; sourceTree = "<group>"; };
+		7AC5552A2A94C3E70082A070 /* SettingChildViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingChildViewController2.swift; sourceTree = "<group>"; };
+		7AC5552B2A94C3E70082A070 /* SettingChildViewController2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingChildViewController2.xib; sourceTree = "<group>"; };
 		7AC9E8292A937961004CC21F /* ServiceProviderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderController.swift; sourceTree = "<group>"; };
 		7AC9E82B2A9382A6004CC21F /* ServiceProviderNotiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderNotiView.swift; sourceTree = "<group>"; };
 		7AC9E82D2A9382D7004CC21F /* ServiceProviderNotiView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceProviderNotiView.xib; sourceTree = "<group>"; };
@@ -354,6 +372,7 @@
 				7A2BE0822A8B4E3C001B2970 /* AssociatedManager.swift */,
 				7AC9E8322A939F3E004CC21F /* OverlayContainerController.swift */,
 				7ABF24A22A93EE39008D7001 /* APPHUD.swift */,
+				7AC555202A949EB90082A070 /* ArchivedKey.swift */,
 			);
 			path = APPConfiguration;
 			sourceTree = "<group>";
@@ -1042,6 +1061,14 @@
 				7AF15A122A85022800C48F39 /* GuranteeViewController.swift */,
 				7AC9E8292A937961004CC21F /* ServiceProviderController.swift */,
 				7AC9E82F2A939729004CC21F /* ServiceProviderChildController.swift */,
+				7AC5551C2A9486990082A070 /* SettingViewController.swift */,
+				7AC5551D2A94869A0082A070 /* SettingViewController.xib */,
+				7AC555222A94B2270082A070 /* FaceIDViewController.swift */,
+				7AC555232A94B2270082A070 /* FaceIDViewController.xib */,
+				7AC555262A94B5BB0082A070 /* SettingChildViewController.swift */,
+				7AC555272A94B5BB0082A070 /* SettingChildViewController.xib */,
+				7AC5552A2A94C3E70082A070 /* SettingChildViewController2.swift */,
+				7AC5552B2A94C3E70082A070 /* SettingChildViewController2.xib */,
 			);
 			path = Guarantee;
 			sourceTree = "<group>";
@@ -1118,18 +1145,22 @@
 			files = (
 				7ABF24A72A93F765008D7001 /* GuaranteeYesNoView.xib in Resources */,
 				7A647F452A8C91F700A4A56F /* MeInfoView.xib in Resources */,
+				7AC555252A94B2270082A070 /* FaceIDViewController.xib in Resources */,
 				7AD08A7E2A89F380000B247E /* cn.json in Resources */,
 				7AC9E82E2A9382D7004CC21F /* ServiceProviderNotiView.xib in Resources */,
 				7A2BE0942A8B91E0001B2970 /* WalletWithoutWalletView.xib in Resources */,
 				7A2BE0882A8B774A001B2970 /* WalletHeaderView.xib in Resources */,
 				7A7D4DBE2A84A19D0098262F /* LaunchScreen.storyboard in Resources */,
+				7AC5551F2A94869A0082A070 /* SettingViewController.xib in Resources */,
 				7AC9E8372A93A004004CC21F /* GuaranteeFeesView.xib in Resources */,
 				7A7D4DBB2A84A19D0098262F /* Assets.xcassets in Resources */,
 				7A7D4DB92A84A19B0098262F /* Main.storyboard in Resources */,
 				7AD08BF22A8A0D64000B247E /* ServiceProviderCell.xib in Resources */,
 				7AB377752A87B025005BD1CB /* HomeQuickAccessCell.xib in Resources */,
 				7A647F402A8C85A800A4A56F /* MessageListCell.xib in Resources */,
+				7AC5552D2A94C3E70082A070 /* SettingChildViewController2.xib in Resources */,
 				7AB377692A869281005BD1CB /* HomeNavigationBarView.xib in Resources */,
+				7AC555292A94B5BB0082A070 /* SettingChildViewController.xib in Resources */,
 				7AD08A802A89F456000B247E /* en.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1188,7 +1219,9 @@
 				7AB377632A868A5E005BD1CB /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				7AD08BCE2A8A083B000B247E /* NSMutableAttributedStringExtension.swift in Sources */,
 				7AD08BBD2A8A083B000B247E /* UIScreenExtension.swift in Sources */,
+				7AC5551E2A94869A0082A070 /* SettingViewController.swift in Sources */,
 				7AD08BC32A8A083B000B247E /* UIStoryboardExtension.swift in Sources */,
+				7AC555282A94B5BB0082A070 /* SettingChildViewController.swift in Sources */,
 				7AD08BD92A8A083B000B247E /* NSAttributedStringExtension.swift in Sources */,
 				7AF15A132A85022800C48F39 /* GuranteeViewController.swift in Sources */,
 				7AD08BDA2A8A083B000B247E /* NSObjectExtension.swift in Sources */,
@@ -1239,6 +1272,7 @@
 				7AC9E8332A939F3E004CC21F /* OverlayContainerController.swift in Sources */,
 				7AB377562A862E2B005BD1CB /* FSPagerViewCell.swift in Sources */,
 				7AB377672A869278005BD1CB /* HomeNavigationBarView.swift in Sources */,
+				7AC555212A949EB90082A070 /* ArchivedKey.swift in Sources */,
 				7A2BE0862A8B773F001B2970 /* WalletHeaderView.swift in Sources */,
 				7AD08BC92A8A083B000B247E /* UIViewControllerExtension.swift in Sources */,
 				7AD08BCB2A8A083B000B247E /* UISliderExtension.swift in Sources */,
@@ -1259,6 +1293,7 @@
 				7AD08BE32A8A083B000B247E /* NSViewExtension.swift in Sources */,
 				7AD08BE52A8A083B000B247E /* NibLoadable.swift in Sources */,
 				7AD08BEC2A8A083B000B247E /* UIElementPreview.swift in Sources */,
+				7AC5552C2A94C3E70082A070 /* SettingChildViewController2.swift in Sources */,
 				7AD08BCC2A8A083B000B247E /* UITextFieldExtension.swift in Sources */,
 				7A2BE0832A8B4E3C001B2970 /* AssociatedManager.swift in Sources */,
 				7AB377742A87B025005BD1CB /* HomeQuickAccessCell.swift in Sources */,
@@ -1269,6 +1304,7 @@
 				7AD08BDF2A8A083B000B247E /* DoubleExtension.swift in Sources */,
 				7AD08BC12A8A083B000B247E /* UIAlertControllerExtension.swift in Sources */,
 				7AF15A192A85024600C48F39 /* WalletViewController.swift in Sources */,
+				7AC555242A94B2270082A070 /* FaceIDViewController.swift in Sources */,
 				7AD08BB42A8A083B000B247E /* SystemUtility.swift in Sources */,
 				7AD08BBE2A8A083B000B247E /* UILabelExtension.swift in Sources */,
 				7AD08BC82A8A083B000B247E /* UICollectionViewCellExtension.swift in Sources */,

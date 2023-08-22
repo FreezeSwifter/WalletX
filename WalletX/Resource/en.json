@@ -48,5 +48,17 @@
     "home_create_wallet_noti_content": "Wallet address is your only identity when you use Uoobal Wallet. Please create or import a wallet account before you start. And for convenience you can create or import more than one wallet account.",
     "home_gonow_button": "Apply Now",
     "home_after_button": "Later",
+    "home_setting": "Settings",
+    "home_setting_security": "Security Settings",
+    "home_setting_ScreenLock": "Screen Lock",
+    "home_setting_OtherSettings": "Other Settings",
+    "home_setting_Language": "Language",
+    "home_setting_Contact": "Contact",
+    "home_setting_Nickname": "Nickname",
+    "home_setting_cn": "Chinese",
+    "home_setting_en": "English",
+    "home_setting_telegram": "Telegram",
+    "home_setting_email": "Email",
+    "home_setting_lock_error": "Not Support",
 }
 

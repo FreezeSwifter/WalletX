@@ -32,8 +32,8 @@ extension HomeNavigationble where Self: UIViewController {
         view.addSubview(v)
         headerView?.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(navigationController?.navigationBar.bounds.height ?? 88)
+            make.top.equalToSuperview()
+            make.height.equalTo((navigationController?.navigationBar.bounds.height ?? 88) + UIApplication.shared.statusBarFrame.size.height)
         }
         // 暂时不用显示这个按钮
         headerView?.stackView.removeArrangedSubview(headerView!.linkButton)
@@ -46,6 +46,8 @@ extension HomeNavigationble where Self: UIViewController {
         headerView?.scanButton.removeFromSuperview()
         headerView?.stackView.removeArrangedSubview(headerView!.shareButton)
         headerView?.shareButton.removeFromSuperview()
+        headerView?.stackView.removeArrangedSubview(headerView!.serverButton)
+        headerView?.serverButton.removeFromSuperview()
         headerView?.settingButton.setImage(UIImage(named: "navigation_back_button"), for: UIControl.State())
         headerView?.settingButton.tintColor = ColorConfiguration.blodText.toColor()
     }

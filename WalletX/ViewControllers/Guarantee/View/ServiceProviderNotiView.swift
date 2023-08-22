@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import QMUIKit
 
 class ServiceProviderNotiView: UIView {
 
@@ -13,6 +14,7 @@ class ServiceProviderNotiView: UIView {
         didSet {
             textLabel.textColor = ColorConfiguration.originNotiText.toColor()
             textLabel.text = "home_noti_text".toMultilingualism()
+            textLabel.qmui_lineHeight = 16
         }
     }
     

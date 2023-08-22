@@ -38,8 +38,8 @@ private
 extension AppDelegate {
     
     func commonInit() {
-        
-        MMKV.initialize(rootDir: nil)
+        MMKV.initialize(rootDir: nil, logLevel: .none)
+        MMKV.enableAutoCleanUp(maxIdleMinutes: 10)
         
         QMUIThemeManagerCenter.defaultThemeManager.themeGenerator = { identifier -> NSObject in
             return QMUIConfigurationTemplate.init()
@@ -77,7 +77,8 @@ extension AppDelegate {
         let myNavi = APPNavigationController(rootViewController: myVC)
         myVC.tabBarItem = createTabBarItem(title: "tab_me".toMultilingualism(), image: UIImage(named: "tabbar_my_item")!, selecteColor: ColorConfiguration.primary.toColor(), tag: 3)
         
-        tabBarViewController.viewControllers = [guranteeNavi, walletNavi, messageNavi, myNavi];
+        let childs = [guranteeNavi, walletNavi, messageNavi, myNavi]
+        tabBarViewController.viewControllers = childs
         window?.rootViewController = tabBarViewController
         window?.backgroundColor = .white
         window?.makeKeyAndVisible()
@@ -92,17 +93,6 @@ extension AppDelegate {
 }
 
 
-final class APPNavigationController: QMUINavigationController {
-    
-    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        super.pushViewController(viewController, animated: animated)
-        switch viewController {
-        case is MessageViewController, is GuranteeViewController, is WalletViewController, is MyViewController:
-            break
-        default:
-            viewController.hidesBottomBarWhenPushed = true
-        }
-    }
-}
+final class APPNavigationController: QMUINavigationController {}
 
 
