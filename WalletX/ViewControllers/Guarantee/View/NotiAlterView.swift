@@ -26,6 +26,7 @@ class NotiAlterView: UIView {
         didSet {
             contentLabel.textColor = ColorConfiguration.descriptionText.toColor()
             contentLabel.minimumScaleFactor = 0.8
+            contentLabel.font = UIFont.systemFont(ofSize: 15)
         }
     }
     
