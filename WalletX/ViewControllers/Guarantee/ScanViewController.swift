@@ -162,8 +162,12 @@ class ScanViewController: UIViewController, HomeNavigationble {
         }
     }
     
-    func generateQRCode(text: String, size: CGFloat) -> UIImage {
-        return SGGenerateQRCode.generateQRCode(withData: text, size: size)
+    static func generateQRCode(text: String, size: CGFloat) async -> UIImage? {
+        return await withCheckedContinuation { continuation in
+            DispatchQueue.global().async {
+                continuation.resume(returning: SGGenerateQRCode.generateQRCode(withData: text, size: size))
+            }
+        }
     }
     
     func scanCompletion(result: @escaping (String?)->Void) {

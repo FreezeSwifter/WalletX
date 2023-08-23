@@ -85,7 +85,24 @@ class MyViewController: UIViewController, HomeNavigationble {
     }
      
     private func bind() {
- 
+        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
+            let settingVC: SettingViewController = ViewLoader.Xib.controller()
+            settingVC.hidesBottomBarWhenPushed = true
+            self?.navigationController?.pushViewController(settingVC, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
+        
+        headerView?.scanButton.rx.tap.subscribe(onNext: {[weak self] in
+            let sancVC: ScanViewController = ViewLoader.Xib.controller()
+            sancVC.hidesBottomBarWhenPushed = true
+            self?.navigationController?.pushViewController(sancVC, animated: true)
+        }).disposed(by: rx.disposeBag)
+        
+        headerView?.shareButton.rx.tap.subscribe(onNext: {[weak self] in
+            let shareVC: ShareViewController = ViewLoader.Xib.controller()
+            shareVC.hidesBottomBarWhenPushed = true
+            self?.navigationController?.pushViewController(shareVC, animated: true)
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {

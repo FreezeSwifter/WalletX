@@ -9,6 +9,8 @@ import UIKit
 import IQKeyboardManager
 import QMUIKit
 import MMKV
+import RxCocoa
+import RxSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -89,6 +91,19 @@ extension AppDelegate {
         let item = UITabBarItem(title: title, image: image, tag: tag)
         item.selectedImage = image.qmui_image(withTintColor: selecteColor)
         return item
+    }
+    
+    func setupObserver() {
+
+        UIApplication.shared.rx.applicationWillEnterForeground.subscribe(onNext: { _ in
+
+            if let isOpenLock = MMKV.default()?.bool(forKey: ArchivedKey.screenLock.rawValue), isOpenLock {
+                let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
+                faceIdVC.modalPresentationStyle = .fullScreen
+                AppDelegate.topViewController()?.present(faceIdVC, animated: true)
+            }
+            
+        }).disposed(by: rx.disposeBag)
     }
 }
 

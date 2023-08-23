@@ -53,13 +53,17 @@ final class HomeQuickAccessSecion: ListSectionController {
         
         cell.joinBgView.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] in
 
-            APPHUD.flash(text: "加入担保被点击")
+            let vc: StartGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
+            vc.hidesBottomBarWhenPushed = true
+            self?.viewController?.navigationController?.pushViewController(vc, animated: true)
 
         }).disposed(by: cell.rx.disposeBag)
         
         cell.sendBgView.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] in
 
-            APPHUD.flash(text: "发起担保被点击")
+            let vc: StartGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
+            vc.hidesBottomBarWhenPushed = true
+            self?.viewController?.navigationController?.pushViewController(vc, animated: true)
 
         }).disposed(by: cell.rx.disposeBag)
         

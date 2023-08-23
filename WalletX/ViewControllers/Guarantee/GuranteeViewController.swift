@@ -62,17 +62,18 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
             
         }).disposed(by: rx.disposeBag)
         
-        if let isOpenLock = MMKV.default()?.bool(forKey: ArchivedKey.screenLock.rawValue), isOpenLock {
-            let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
-            faceIdVC.modalPresentationStyle = .fullScreen
-            present(faceIdVC, animated: true)
-        }
-
         headerView?.scanButton.rx.tap.subscribe(onNext: {[weak self] in
             let sancVC: ScanViewController = ViewLoader.Xib.controller()
             sancVC.hidesBottomBarWhenPushed = true
             self?.navigationController?.pushViewController(sancVC, animated: true)
         }).disposed(by: rx.disposeBag)
+        
+        headerView?.shareButton.rx.tap.subscribe(onNext: {[weak self] in
+            let shareVC: ShareViewController = ViewLoader.Xib.controller()
+            shareVC.hidesBottomBarWhenPushed = true
+            self?.navigationController?.pushViewController(shareVC, animated: true)
+        }).disposed(by: rx.disposeBag)
+        
     }
 }
 

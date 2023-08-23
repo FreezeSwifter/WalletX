@@ -10,13 +10,6 @@ import UIKit
 
 class WalletWithoutWalletView: UIView {
     
-    @IBOutlet weak var topLabel: UILabel! {
-        didSet {
-            topLabel.minimumScaleFactor = 0.8
-            topLabel.textColor = ColorConfiguration.blodText.toColor()
-            topLabel.text = "wallet_nowallet_title".toMultilingualism()
-        }
-    }
     
     @IBOutlet weak var desLabel: UILabel! {
         didSet {

@@ -23,6 +23,7 @@ enum ColorConfiguration {
     case originNotiText // #F0A158 橘黄色警告⚠️
     case originNotiBg //
     case listBg // 列表的背景色 F6F8FE
+    case shareBg // 分享page的背景色 236 240 254
     
     
     func toColor() -> UIColor {
@@ -65,6 +66,9 @@ enum ColorConfiguration {
             
         case .listBg:
             return UIColor.qmui_color(withHexString: "#F6F8FE") ?? .orange
+            
+        case .shareBg:
+            return UIColor.qmui_color(withHexString: "#ECF0FE") ?? .purple
         }
         
     }

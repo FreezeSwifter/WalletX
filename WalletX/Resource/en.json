@@ -63,5 +63,10 @@
     "scan_title": "Scan QR Code",
     "scan_open_light": "Flash",
     "scan_open_album": "Album",
+    "share_friend": "Invite Friends",
+    "share_Download": "Download",
+    "share_Share": "Share",
+    "share_Link": "Link",
+    "share_Copy": "Copy",
 }
 

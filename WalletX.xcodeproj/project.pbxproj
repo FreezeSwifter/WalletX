@@ -134,6 +134,14 @@
 		7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A142A85023300C48F39 /* MessageViewController.swift */; };
 		7AF15A172A85023C00C48F39 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A162A85023C00C48F39 /* MyViewController.swift */; };
 		7AF15A192A85024600C48F39 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A182A85024600C48F39 /* WalletViewController.swift */; };
+		7AFB57A62A95D512003451CB /* UIApplication+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB57A52A95D511003451CB /* UIApplication+Rx.swift */; };
+		7AFB57A82A95D53A003451CB /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB57A72A95D53A003451CB /* UIViewController+Rx.swift */; };
+		7AFB57AB2A95D73F003451CB /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB57A92A95D73F003451CB /* ShareViewController.swift */; };
+		7AFB57AC2A95D73F003451CB /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AFB57AA2A95D73F003451CB /* ShareViewController.xib */; };
+		7AFB57AE2A95F901003451CB /* NotiAlterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB57AD2A95F901003451CB /* NotiAlterView.swift */; };
+		7AFB57B02A95F90E003451CB /* NotiAlterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AFB57AF2A95F90E003451CB /* NotiAlterView.xib */; };
+		7AFB57B32A961B06003451CB /* Guarantee.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFB57B22A961B06003451CB /* Guarantee.storyboard */; };
+		7AFB57B52A961B4B003451CB /* StartGuaranteeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB57B42A961B4B003451CB /* StartGuaranteeController.swift */; };
 		E239E8606F6932F0491753A4 /* libPods-WalletX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 044529E4FB5778B72BDB39C3 /* libPods-WalletX.a */; };
 /* End PBXBuildFile section */
 
@@ -274,6 +282,14 @@
 		7AF15A142A85023300C48F39 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		7AF15A162A85023C00C48F39 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		7AF15A182A85024600C48F39 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
+		7AFB57A52A95D511003451CB /* UIApplication+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Rx.swift"; sourceTree = "<group>"; };
+		7AFB57A72A95D53A003451CB /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		7AFB57A92A95D73F003451CB /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		7AFB57AA2A95D73F003451CB /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
+		7AFB57AD2A95F901003451CB /* NotiAlterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiAlterView.swift; sourceTree = "<group>"; };
+		7AFB57AF2A95F90E003451CB /* NotiAlterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotiAlterView.xib; sourceTree = "<group>"; };
+		7AFB57B22A961B06003451CB /* Guarantee.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Guarantee.storyboard; sourceTree = "<group>"; };
+		7AFB57B42A961B4B003451CB /* StartGuaranteeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGuaranteeController.swift; sourceTree = "<group>"; };
 		F270EBE6D777903F4E9B19F9 /* Pods-WalletX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalletX.debug.xcconfig"; path = "Target Support Files/Pods-WalletX/Pods-WalletX.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -377,6 +393,8 @@
 				7AC9E8322A939F3E004CC21F /* OverlayContainerController.swift */,
 				7ABF24A22A93EE39008D7001 /* APPHUD.swift */,
 				7AC555202A949EB90082A070 /* ArchivedKey.swift */,
+				7AFB57A52A95D511003451CB /* UIApplication+Rx.swift */,
+				7AFB57A72A95D53A003451CB /* UIViewController+Rx.swift */,
 			);
 			path = APPConfiguration;
 			sourceTree = "<group>";
@@ -432,6 +450,8 @@
 				7AC9E8362A93A004004CC21F /* GuaranteeFeesView.xib */,
 				7ABF24A42A93F746008D7001 /* GuaranteeYesNoView.swift */,
 				7ABF24A62A93F765008D7001 /* GuaranteeYesNoView.xib */,
+				7AFB57AD2A95F901003451CB /* NotiAlterView.swift */,
+				7AFB57AF2A95F90E003451CB /* NotiAlterView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1060,6 +1080,7 @@
 		7AF15A112A85020B00C48F39 /* Guarantee */ = {
 			isa = PBXGroup;
 			children = (
+				7AFB57B12A961AFA003451CB /* Storyboard */,
 				7AB3776D2A87AA30005BD1CB /* Section */,
 				7AB3776C2A87A766005BD1CB /* View */,
 				7AF15A122A85022800C48F39 /* GuranteeViewController.swift */,
@@ -1075,8 +1096,19 @@
 				7AC5552B2A94C3E70082A070 /* SettingChildViewController2.xib */,
 				7AC5552E2A94CAB90082A070 /* ScanViewController.swift */,
 				7AC5552F2A94CAB90082A070 /* ScanViewController.xib */,
+				7AFB57A92A95D73F003451CB /* ShareViewController.swift */,
+				7AFB57AA2A95D73F003451CB /* ShareViewController.xib */,
 			);
 			path = Guarantee;
+			sourceTree = "<group>";
+		};
+		7AFB57B12A961AFA003451CB /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				7AFB57B22A961B06003451CB /* Guarantee.storyboard */,
+				7AFB57B42A961B4B003451CB /* StartGuaranteeController.swift */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		B4B3E9EC1497F42F8A582858 /* Pods */ = {
@@ -1150,6 +1182,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ABF24A72A93F765008D7001 /* GuaranteeYesNoView.xib in Resources */,
+				7AFB57B32A961B06003451CB /* Guarantee.storyboard in Resources */,
+				7AFB57AC2A95D73F003451CB /* ShareViewController.xib in Resources */,
 				7A647F452A8C91F700A4A56F /* MeInfoView.xib in Resources */,
 				7AC555252A94B2270082A070 /* FaceIDViewController.xib in Resources */,
 				7AC555312A94CAB90082A070 /* ScanViewController.xib in Resources */,
@@ -1162,6 +1196,7 @@
 				7AC9E8372A93A004004CC21F /* GuaranteeFeesView.xib in Resources */,
 				7A7D4DBB2A84A19D0098262F /* Assets.xcassets in Resources */,
 				7A7D4DB92A84A19B0098262F /* Main.storyboard in Resources */,
+				7AFB57B02A95F90E003451CB /* NotiAlterView.xib in Resources */,
 				7AD08BF22A8A0D64000B247E /* ServiceProviderCell.xib in Resources */,
 				7AB377752A87B025005BD1CB /* HomeQuickAccessCell.xib in Resources */,
 				7A647F402A8C85A800A4A56F /* MessageListCell.xib in Resources */,
@@ -1233,6 +1268,7 @@
 				7AF15A132A85022800C48F39 /* GuranteeViewController.swift in Sources */,
 				7AD08BDA2A8A083B000B247E /* NSObjectExtension.swift in Sources */,
 				7AD08BB92A8A083B000B247E /* CGPointExtension.swift in Sources */,
+				7AFB57AB2A95D73F003451CB /* ShareViewController.swift in Sources */,
 				7AD08BB52A8A083B000B247E /* UITesting.swift in Sources */,
 				7AB377592A862E2B005BD1CB /* FSPageControl.swift in Sources */,
 				7AD08BBF2A8A083B000B247E /* UIApplicationExtension.swift in Sources */,
@@ -1251,6 +1287,7 @@
 				7AD08BF12A8A0D64000B247E /* ServiceProviderCell.swift in Sources */,
 				7AD08BB62A8A083B000B247E /* UnitTesting.swift in Sources */,
 				7AC9E82A2A937961004CC21F /* ServiceProviderController.swift in Sources */,
+				7AFB57AE2A95F901003451CB /* NotiAlterView.swift in Sources */,
 				7A647F3F2A8C85A800A4A56F /* MessageListCell.swift in Sources */,
 				7AD08BEA2A8A083B000B247E /* AnyOptional.swift in Sources */,
 				7AD08BC42A8A083B000B247E /* UIFontExtension.swift in Sources */,
@@ -1261,6 +1298,7 @@
 				7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */,
 				7AD08BD42A8A083B000B247E /* URLExtension.swift in Sources */,
 				7AD08A822A89FAE8000B247E /* ColorConfiguration.swift in Sources */,
+				7AFB57A62A95D512003451CB /* UIApplication+Rx.swift in Sources */,
 				7AD08BDD2A8A083B000B247E /* DictionaryExtension.swift in Sources */,
 				7AD08BC52A8A083B000B247E /* UITextViewExtension.swift in Sources */,
 				7AD08BBB2A8A083B000B247E /* UIImageExtension.swift in Sources */,
@@ -1289,6 +1327,7 @@
 				7ABF24A52A93F746008D7001 /* GuaranteeYesNoView.swift in Sources */,
 				7AD08BBC2A8A083B000B247E /* UISwitchExtension.swift in Sources */,
 				7AF15A172A85023C00C48F39 /* MyViewController.swift in Sources */,
+				7AFB57B52A961B4B003451CB /* StartGuaranteeController.swift in Sources */,
 				7AD08BF42A8A11D8000B247E /* HomeServiceProviderSecion.swift in Sources */,
 				7AD08BFA2A8A15A9000B247E /* UIButton+Tool.swift in Sources */,
 				7AD08BEB2A8A083B000B247E /* Occupiable.swift in Sources */,
@@ -1326,6 +1365,7 @@
 				7AD08BC62A8A083B000B247E /* UIDeviceExtension.swift in Sources */,
 				7AD08BD22A8A083B000B247E /* TimerExtension.swift in Sources */,
 				7AB93E072A8D69520098BF9E /* MeListEmptyView.swift in Sources */,
+				7AFB57A82A95D53A003451CB /* UIViewController+Rx.swift in Sources */,
 				7AD08BD02A8A083B000B247E /* ColorExtension.swift in Sources */,
 				7AD08BBA2A8A083B000B247E /* CGRectExtensions.swift in Sources */,
 			);
