@@ -19,14 +19,14 @@
                     <rect key="frame" x="84" y="35" width="225" height="224"/>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbh-GH-2FI">
-                    <rect key="frame" x="165" y="279" width="63.333333333333343" height="22.333333333333314"/>
+                    <rect key="frame" x="166" y="279" width="61" height="22.333333333333314"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guarantee_bulb" translatesAutoresizingMaskIntoConstraints="NO" id="tZV-5a-Ixl">
                             <rect key="frame" x="0.0" y="0.0" width="22" height="22.333333333333332"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLg-wH-tOd">
-                            <rect key="frame" x="22.000000000000004" y="0.0" width="41.333333333333343" height="22.333333333333332"/>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLg-wH-tOd">
+                            <rect key="frame" x="22" y="0.0" width="39" height="22.333333333333332"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -80,7 +80,9 @@
                 <outlet property="afterButton" destination="ke4-av-1ly" id="CE7-Tn-lm4"/>
                 <outlet property="contentLabel" destination="tyF-9Y-cEL" id="IIc-Q0-p2u"/>
                 <outlet property="goNowButton" destination="Yuk-xU-iq2" id="les-NN-Hb7"/>
+                <outlet property="imageView" destination="X9q-gv-jh1" id="mCt-jb-YK2"/>
                 <outlet property="notiLabel" destination="oLg-wH-tOd" id="ak1-xp-4Qr"/>
+                <outlet property="titleIcon" destination="tZV-5a-Ixl" id="DFy-9H-NMS"/>
             </connections>
             <point key="canvasLocation" x="94" y="-12"/>
         </view>

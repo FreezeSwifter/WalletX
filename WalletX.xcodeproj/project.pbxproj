@@ -14,6 +14,7 @@
 		7A2BE0902A8B8D83001B2970 /* WalletSignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE08F2A8B8D83001B2970 /* WalletSignatureViewController.swift */; };
 		7A2BE0922A8B91AF001B2970 /* WalletWithoutWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE0912A8B91AF001B2970 /* WalletWithoutWalletView.swift */; };
 		7A2BE0942A8B91E0001B2970 /* WalletWithoutWalletView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A2BE0932A8B91E0001B2970 /* WalletWithoutWalletView.xib */; };
+		7A3859D72A97521E0052DAEF /* InviteGuaranteeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3859D62A97521E0052DAEF /* InviteGuaranteeController.swift */; };
 		7A647F3F2A8C85A800A4A56F /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A647F3D2A8C85A800A4A56F /* MessageListCell.swift */; };
 		7A647F402A8C85A800A4A56F /* MessageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A647F3E2A8C85A800A4A56F /* MessageListCell.xib */; };
 		7A647F432A8C91BE00A4A56F /* MeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A647F422A8C91BE00A4A56F /* MeInfoView.swift */; };
@@ -130,6 +131,7 @@
 		7AD08BF42A8A11D8000B247E /* HomeServiceProviderSecion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BF32A8A11D8000B247E /* HomeServiceProviderSecion.swift */; };
 		7AD08BF82A8A1495000B247E /* UIImage+Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BF72A8A1495000B247E /* UIImage+Tool.swift */; };
 		7AD08BFA2A8A15A9000B247E /* UIButton+Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BF92A8A15A9000B247E /* UIButton+Tool.swift */; };
+		7AE94F312A96EB7D00ECEB1D /* StartGuaranteeConfirmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE94F302A96EB7D00ECEB1D /* StartGuaranteeConfirmController.swift */; };
 		7AF15A132A85022800C48F39 /* GuranteeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A122A85022800C48F39 /* GuranteeViewController.swift */; };
 		7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A142A85023300C48F39 /* MessageViewController.swift */; };
 		7AF15A172A85023C00C48F39 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A162A85023C00C48F39 /* MyViewController.swift */; };
@@ -155,6 +157,7 @@
 		7A2BE08F2A8B8D83001B2970 /* WalletSignatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSignatureViewController.swift; sourceTree = "<group>"; };
 		7A2BE0912A8B91AF001B2970 /* WalletWithoutWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWithoutWalletView.swift; sourceTree = "<group>"; };
 		7A2BE0932A8B91E0001B2970 /* WalletWithoutWalletView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletWithoutWalletView.xib; sourceTree = "<group>"; };
+		7A3859D62A97521E0052DAEF /* InviteGuaranteeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteGuaranteeController.swift; sourceTree = "<group>"; };
 		7A647F3D2A8C85A800A4A56F /* MessageListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
 		7A647F3E2A8C85A800A4A56F /* MessageListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageListCell.xib; sourceTree = "<group>"; };
 		7A647F422A8C91BE00A4A56F /* MeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeInfoView.swift; sourceTree = "<group>"; };
@@ -278,6 +281,7 @@
 		7AD08BF32A8A11D8000B247E /* HomeServiceProviderSecion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceProviderSecion.swift; sourceTree = "<group>"; };
 		7AD08BF72A8A1495000B247E /* UIImage+Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Tool.swift"; sourceTree = "<group>"; };
 		7AD08BF92A8A15A9000B247E /* UIButton+Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Tool.swift"; sourceTree = "<group>"; };
+		7AE94F302A96EB7D00ECEB1D /* StartGuaranteeConfirmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGuaranteeConfirmController.swift; sourceTree = "<group>"; };
 		7AF15A122A85022800C48F39 /* GuranteeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuranteeViewController.swift; sourceTree = "<group>"; };
 		7AF15A142A85023300C48F39 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		7AF15A162A85023C00C48F39 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
@@ -1107,6 +1111,8 @@
 			children = (
 				7AFB57B22A961B06003451CB /* Guarantee.storyboard */,
 				7AFB57B42A961B4B003451CB /* StartGuaranteeController.swift */,
+				7AE94F302A96EB7D00ECEB1D /* StartGuaranteeConfirmController.swift */,
+				7A3859D62A97521E0052DAEF /* InviteGuaranteeController.swift */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -1258,6 +1264,7 @@
 			files = (
 				7AD08BC72A8A083B000B247E /* UICollectionViewExtension.swift in Sources */,
 				7AC9E8302A939729004CC21F /* ServiceProviderChildController.swift in Sources */,
+				7AE94F312A96EB7D00ECEB1D /* StartGuaranteeConfirmController.swift in Sources */,
 				7AB377632A868A5E005BD1CB /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				7AD08BCE2A8A083B000B247E /* NSMutableAttributedStringExtension.swift in Sources */,
 				7AD08BBD2A8A083B000B247E /* UIScreenExtension.swift in Sources */,
@@ -1280,6 +1287,7 @@
 				7AD08BE72A8A083B000B247E /* Reusable.swift in Sources */,
 				7AD08BB82A8A083B000B247E /* CGSizeExtension.swift in Sources */,
 				7AB93E052A8D5F1A0098BF9E /* MeListChildViewController.swift in Sources */,
+				7A3859D72A97521E0052DAEF /* InviteGuaranteeController.swift in Sources */,
 				7AB377582A862E2B005BD1CB /* FSPageViewLayout.swift in Sources */,
 				7AD08BEE2A8A0AC3000B247E /* HomeQuickAccessSecion.swift in Sources */,
 				7AD08BCF2A8A083B000B247E /* NSRangeExtension.swift in Sources */,

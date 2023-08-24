@@ -12,7 +12,9 @@ import RxSwift
 import QMUIKit
 
 class GuaranteeYesNoView: UIView {
-
+    
+    weak var ovc: OverlayController?
+    
     @IBOutlet weak var notiLabel: UILabel! {
         didSet {
             notiLabel.text = "home_create_wallet_noti_title".toMultilingualism()
@@ -47,6 +49,10 @@ class GuaranteeYesNoView: UIView {
         }
     }
     
+    @IBOutlet weak var titleIcon: UIImageView!
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -60,20 +66,38 @@ class GuaranteeYesNoView: UIView {
     private func commonInit() {
         backgroundColor = .white
     }
-
     
-    public static func show() -> Observable<Int> {
+    
+    public static func showFromBottom(image: UIImage?, title: String?, titleIcon: UIImage?, content: String?, leftButton: String?, rightButton: String?) -> Observable<Int> {
         
         return Observable.create { o in
             
             guard let topVc = AppDelegate.topViewController() else {
                 return Disposables.create {}
             }
+            var baseHeight: CGFloat = 474
+            let width = topVc.view.bounds.width
+            
+            let calculateHeightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width - 30, height: .greatestFiniteMagnitude))
+            calculateHeightLabel.numberOfLines = 0
+            calculateHeightLabel.lineBreakMode = .byWordWrapping
+            calculateHeightLabel.font = UIFont.systemFont(ofSize: 15)
+            var tempStr = ""
+            if let t = title {
+                tempStr = t
+            }
+            if let c = content {
+                tempStr += "\n\(c)"
+            }
+            calculateHeightLabel.text = tempStr
+            calculateHeightLabel.sizeToFit()
+            baseHeight += calculateHeightLabel.frame.height
             
             let contentView: GuaranteeYesNoView = ViewLoader.Xib.view()
-            contentView.frame = CGRect(x: 0, y: 0, width: topVc.view.bounds.width, height: 520)
-            contentView.applyCornerRadius(10, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
+            contentView.frame = CGRect(x: 0, y: 0, width: topVc.view.bounds.width, height: baseHeight)
+            
             let ovc = OverlayController(view: contentView)
+            contentView.ovc = ovc
             ovc.isDismissOnMaskTouched = false
             ovc.layoutPosition = .bottom
             ovc.presentationStyle = .fromToBottom
@@ -81,20 +105,39 @@ class GuaranteeYesNoView: UIView {
             topVc.view.present(overlay: ovc)
             
             contentView.do { it in
-                it.goNowButton.rx.tap.subscribe(onNext: { _ in
+                it.applyCornerRadius(10, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
+                it.notiLabel.text = title
+                it.contentLabel.text = content
+                it.imageView.image = image
+                it.titleIcon.image = titleIcon
                 
+                if let leftStr = leftButton {
+                    it.afterButton.setTitle(leftStr, for: .normal)
+                } else {
+                    it.afterButton.removeFromSuperview()
+                }
+                
+                if let rightStr = rightButton {
+                    it.goNowButton.setTitle(rightStr, for: .normal)
+                } else {
+                    it.afterButton.removeFromSuperview()
+                }
+                
+                it.goNowButton.rx.tap.subscribe(onNext: { _ in
                     o.onNext(1)
                     o.onCompleted()
-                    topVc.view.dissmiss(overlay: ovc)
+                    if let container = it.ovc {
+                        topVc.view.dissmiss(overlay: container)
+                    }
                 }).disposed(by: ovc.rx.disposeBag)
                 
                 it.afterButton.rx.tap.subscribe(onNext: { _ in
-                
                     o.onNext(0)
                     o.onCompleted()
-                    topVc.view.dissmiss(overlay: ovc)
+                    if let container = it.ovc {
+                        topVc.view.dissmiss(overlay: container)
+                    }
                 }).disposed(by: ovc.rx.disposeBag)
-                
             }
             
             return Disposables.create {}

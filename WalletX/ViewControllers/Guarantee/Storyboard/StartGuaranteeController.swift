@@ -128,6 +128,38 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
         }
     }
     
+    @IBOutlet weak var tagBg1: UIStackView! {
+        didSet {
+            tagBg1.layer.cornerRadius = 10
+            tagBg1.isLayoutMarginsRelativeArrangement = true
+            tagBg1.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        }
+    }
+    
+    @IBOutlet weak var tagBg2: UIStackView! {
+        didSet {
+            tagBg2.layer.cornerRadius = 10
+            tagBg2.isLayoutMarginsRelativeArrangement = true
+            tagBg2.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        }
+    }
+    
+    @IBOutlet weak var tagBg3: UIStackView! {
+        didSet {
+            tagBg3.layer.cornerRadius = 10
+            tagBg3.isLayoutMarginsRelativeArrangement = true
+            tagBg3.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        }
+    }
+    
+    @IBOutlet weak var tagBg4: UIStackView! {
+        didSet {
+            tagBg4.layer.cornerRadius = 10
+            tagBg4.isLayoutMarginsRelativeArrangement = true
+            tagBg4.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -167,6 +199,12 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
             }).disposed(by: self.rx.disposeBag)
             
         }).disposed(by: rx.disposeBag)
+        
+        nextButton.rx.tap.subscribe(onNext: {[weak self] in
+            let vc: StartGuaranteeConfirmController = ViewLoader.Storyboard.controller(from: "Guarantee")
+            self?.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {
@@ -185,7 +223,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
             make.width.equalTo(normalButton.frame.width + 16)
         }
         
-        multipleButton.snp.makeConstraints { make in
+        multipleButton.snp.remakeConstraints { make in
             make.height.equalTo(20)
             make.width.equalTo(200)
         }
