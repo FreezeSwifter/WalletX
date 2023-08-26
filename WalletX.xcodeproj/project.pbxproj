@@ -45,6 +45,8 @@
 		7ABF24A32A93EE39008D7001 /* APPHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF24A22A93EE39008D7001 /* APPHUD.swift */; };
 		7ABF24A52A93F746008D7001 /* GuaranteeYesNoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF24A42A93F746008D7001 /* GuaranteeYesNoView.swift */; };
 		7ABF24A72A93F765008D7001 /* GuaranteeYesNoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ABF24A62A93F765008D7001 /* GuaranteeYesNoView.xib */; };
+		7AC425242A9A0F7F00CBC5C3 /* JoinGuaranteeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC425232A9A0F7F00CBC5C3 /* JoinGuaranteeController.swift */; };
+		7AC425262A9A14DF00CBC5C3 /* JoinGuaranteeStepTwoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC425252A9A14DF00CBC5C3 /* JoinGuaranteeStepTwoController.swift */; };
 		7AC5551E2A94869A0082A070 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC5551C2A9486990082A070 /* SettingViewController.swift */; };
 		7AC5551F2A94869A0082A070 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AC5551D2A94869A0082A070 /* SettingViewController.xib */; };
 		7AC555212A949EB90082A070 /* ArchivedKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC555202A949EB90082A070 /* ArchivedKey.swift */; };
@@ -195,6 +197,8 @@
 		7ABF24A22A93EE39008D7001 /* APPHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APPHUD.swift; sourceTree = "<group>"; };
 		7ABF24A42A93F746008D7001 /* GuaranteeYesNoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuaranteeYesNoView.swift; sourceTree = "<group>"; };
 		7ABF24A62A93F765008D7001 /* GuaranteeYesNoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuaranteeYesNoView.xib; sourceTree = "<group>"; };
+		7AC425232A9A0F7F00CBC5C3 /* JoinGuaranteeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGuaranteeController.swift; sourceTree = "<group>"; };
+		7AC425252A9A14DF00CBC5C3 /* JoinGuaranteeStepTwoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGuaranteeStepTwoController.swift; sourceTree = "<group>"; };
 		7AC5551C2A9486990082A070 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		7AC5551D2A94869A0082A070 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		7AC555202A949EB90082A070 /* ArchivedKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedKey.swift; sourceTree = "<group>"; };
@@ -1113,6 +1117,8 @@
 				7AFB57B42A961B4B003451CB /* StartGuaranteeController.swift */,
 				7AE94F302A96EB7D00ECEB1D /* StartGuaranteeConfirmController.swift */,
 				7A3859D62A97521E0052DAEF /* InviteGuaranteeController.swift */,
+				7AC425232A9A0F7F00CBC5C3 /* JoinGuaranteeController.swift */,
+				7AC425252A9A14DF00CBC5C3 /* JoinGuaranteeStepTwoController.swift */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -1271,6 +1277,7 @@
 				7AC5551E2A94869A0082A070 /* SettingViewController.swift in Sources */,
 				7AD08BC32A8A083B000B247E /* UIStoryboardExtension.swift in Sources */,
 				7AC555282A94B5BB0082A070 /* SettingChildViewController.swift in Sources */,
+				7AC425242A9A0F7F00CBC5C3 /* JoinGuaranteeController.swift in Sources */,
 				7AD08BD92A8A083B000B247E /* NSAttributedStringExtension.swift in Sources */,
 				7AF15A132A85022800C48F39 /* GuranteeViewController.swift in Sources */,
 				7AD08BDA2A8A083B000B247E /* NSObjectExtension.swift in Sources */,
@@ -1286,6 +1293,7 @@
 				7AB3776B2A87A324005BD1CB /* XibLoadble.swift in Sources */,
 				7AD08BE72A8A083B000B247E /* Reusable.swift in Sources */,
 				7AD08BB82A8A083B000B247E /* CGSizeExtension.swift in Sources */,
+				7AC425262A9A14DF00CBC5C3 /* JoinGuaranteeStepTwoController.swift in Sources */,
 				7AB93E052A8D5F1A0098BF9E /* MeListChildViewController.swift in Sources */,
 				7A3859D72A97521E0052DAEF /* InviteGuaranteeController.swift in Sources */,
 				7AB377582A862E2B005BD1CB /* FSPageViewLayout.swift in Sources */,

@@ -53,7 +53,7 @@ final class HomeQuickAccessSecion: ListSectionController {
         
         cell.joinBgView.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] in
 
-            let vc: StartGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
+            let vc: JoinGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
             vc.hidesBottomBarWhenPushed = true
             self?.viewController?.navigationController?.pushViewController(vc, animated: true)
 

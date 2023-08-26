@@ -126,6 +126,7 @@ class LanguageManager: NSObject {
               let path = Bundle.main.path(forResource: languageCode.rawValue, ofType: "json"),
               let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path)),
               let jsonDict = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] else {
+            assertionFailure("多语言JSON文件出错:\(languageCode)")
             return
         }
         currentCode = languageCode

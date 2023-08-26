@@ -132,7 +132,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
         didSet {
             tagBg1.layer.cornerRadius = 10
             tagBg1.isLayoutMarginsRelativeArrangement = true
-            tagBg1.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+            tagBg1.layoutMargins = UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 10)
         }
     }
     
@@ -140,7 +140,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
         didSet {
             tagBg2.layer.cornerRadius = 10
             tagBg2.isLayoutMarginsRelativeArrangement = true
-            tagBg2.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+            tagBg2.layoutMargins = UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 10)
         }
     }
     
@@ -148,7 +148,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
         didSet {
             tagBg3.layer.cornerRadius = 10
             tagBg3.isLayoutMarginsRelativeArrangement = true
-            tagBg3.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+            tagBg3.layoutMargins = UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 10)
         }
     }
     
@@ -156,7 +156,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
         didSet {
             tagBg4.layer.cornerRadius = 10
             tagBg4.isLayoutMarginsRelativeArrangement = true
-            tagBg4.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+            tagBg4.layoutMargins = UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 10)
         }
     }
     
