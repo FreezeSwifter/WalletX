@@ -18,6 +18,8 @@ class MyViewController: UIViewController, HomeNavigationble {
     
     private static let titleData = ["me_all".toMultilingualism(), "me_pending".toMultilingualism(), "me_depositing".toMultilingualism(), "me_guaranteeing".toMultilingualism(), "me_releasing".toMultilingualism(), "me_released".toMultilingualism()]
     
+    private var pagingView: JXPagingView!
+    private var userHeaderContainerView: UIView = UIView()
     private let infoView: MeInfoView = ViewLoader.Xib.view()
     
     private lazy var segmentedContainerView: UIView = {
@@ -56,11 +58,6 @@ class MyViewController: UIViewController, HomeNavigationble {
     }()
     
     private let segmentedView = JXSegmentedView()
-    
-    private lazy var listContainerView: JXSegmentedListContainerView! = {
-        let segContainerView = JXSegmentedListContainerView(dataSource: self, type: .scrollView)
-        return segContainerView
-    }()
     
     private lazy var childVC: [JXSegmentedListContainerViewListDelegate] = MyViewController.titleData.enumerated().map { index, str -> JXSegmentedListContainerViewListDelegate in
         return MeListChildViewController()
@@ -107,78 +104,103 @@ class MyViewController: UIViewController, HomeNavigationble {
     
     private func setupView() {
         setupNavigationbar()
-        
         if let cgImage = UIImage(named: "me_background")?.cgImage {
             view.layer.contents = cgImage
         }
         
-        view.addSubview(infoView)
-        infoView.snp.makeConstraints { make in
+        view.addSubview(userHeaderContainerView)
+        userHeaderContainerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(headerView!.snp.bottom).offset(2)
             make.height.equalTo(124)
         }
-        
-        view.addSubview(segmentedContainerView)
-        segmentedContainerView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(infoView.snp.bottom).offset(2)
-            make.height.equalTo(102)
+        userHeaderContainerView.addSubview(infoView)
+        infoView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
-        
-        segmentedContainerView.addSubview(segmentedContainerTitleLabel)
-        segmentedContainerView.addSubview(segmentedContainerLine)
-        segmentedContainerView.addSubview(segmentedView)
-        segmentedContainerTitleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
-            make.top.equalToSuperview().offset(20)
-        }
-        segmentedView.snp.makeConstraints { make in
-            make.top.equalTo(segmentedContainerTitleLabel.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(30)
-        }
-        segmentedContainerLine.snp.makeConstraints { make in
-            make.leading.bottom.trailing.equalToSuperview()
-            make.height.equalTo(0.5)
-        }
-        
-        segmentedView.dataSource = segmentedDataSource
-        segmentedView.delegate = self
-        segmentedView.listContainer = listContainerView
-        
-        view.addSubview(listContainerView)
-        listContainerView.snp.makeConstraints { make in
-            make.trailing.leading.bottom.equalToSuperview()
-            make.top.equalTo(segmentedContainerView.snp.bottom)
-        }
-        
-        //配置指示器
-        let indicator = JXSegmentedIndicatorBackgroundView()
-        indicator.indicatorCornerRadius = 3
-        indicator.indicatorColor = UIColor.qmui_color(withHexString: "#EBECF0") ?? .gray
-        segmentedView.indicators = [indicator]
+       
+//
+//        view.addSubview(segmentedContainerView)
+//        segmentedContainerView.snp.makeConstraints { make in
+//            make.leading.trailing.equalToSuperview()
+//            make.top.equalTo(userHeaderContainerView.snp.bottom).offset(2)
+//            make.height.equalTo(102)
+//        }
+//
+//        segmentedContainerView.addSubview(segmentedContainerTitleLabel)
+//        segmentedContainerView.addSubview(segmentedContainerLine)
+//        segmentedContainerView.addSubview(segmentedView)
+//        segmentedContainerTitleLabel.snp.makeConstraints { make in
+//            make.leading.equalToSuperview().offset(16)
+//            make.top.equalToSuperview().offset(20)
+//        }
+//        segmentedView.snp.makeConstraints { make in
+//            make.top.equalTo(segmentedContainerTitleLabel.snp.bottom).offset(16)
+//            make.leading.trailing.equalToSuperview()
+//            make.height.equalTo(30)
+//        }
+//        segmentedContainerLine.snp.makeConstraints { make in
+//            make.leading.bottom.trailing.equalToSuperview()
+//            make.height.equalTo(0.5)
+//        }
+//
+//        pagingView = JXPagingView(delegate: self)
+//        segmentedView.dataSource = segmentedDataSource
+//        view.addSubview(pagingView)
+//        segmentedView.listContainer = pagingView.listContainerView
+//
+//        //配置指示器
+//        let indicator = JXSegmentedIndicatorBackgroundView()
+//        indicator.indicatorCornerRadius = 3
+//        indicator.indicatorColor = UIColor.qmui_color(withHexString: "#EBECF0") ?? .gray
+//        segmentedView.indicators = [indicator]
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        pagingView.frame = view.bounds
     }
 }
 
 
-extension MyViewController: JXSegmentedListContainerViewDataSource {
-    
-    func numberOfLists(in listContainerView: JXSegmentedListContainerView) -> Int {
-        
-        return segmentedDataSource.titles.count
+extension MyViewController: JXPagingViewDelegate {
+
+    func tableHeaderViewHeight(in pagingView: JXPagingView) -> Int {
+        return 124
     }
+
+    func tableHeaderView(in pagingView: JXPagingView) -> UIView {
+        return userHeaderContainerView
+    }
+
+    func heightForPinSectionHeader(in pagingView: JXPagingView) -> Int {
+        return 102
+    }
+
+    func viewForPinSectionHeader(in pagingView: JXPagingView) -> UIView {
+        return segmentedView
+    }
+
+    func numberOfLists(in pagingView: JXPagingView) -> Int {
+        return MyViewController.titleData.count
+    }
+
+    func pagingView(_ pagingView: JXPagingView, initListAtIndex index: Int) -> JXPagingViewListViewDelegate {
+        let list = PagingListBaseView()
+        if index == 0 {
+            list.dataSource = ["橡胶火箭", "橡胶火箭炮", "橡胶机关枪", "橡胶子弹", "橡胶攻城炮", "橡胶象枪", "橡胶象枪乱打", "橡胶灰熊铳", "橡胶雷神象枪", "橡胶猿王枪", "橡胶犀·榴弹炮", "橡胶大蛇炮", "橡胶火箭", "橡胶火箭炮", "橡胶机关枪", "橡胶子弹", "橡胶攻城炮", "橡胶象枪", "橡胶象枪乱打", "橡胶灰熊铳", "橡胶雷神象枪", "橡胶猿王枪", "橡胶犀·榴弹炮", "橡胶大蛇炮"]
+        }else if index == 1 {
+            list.dataSource = ["吃烤肉", "吃鸡腿肉", "吃牛肉", "各种肉"]
+        }else {
+            list.dataSource = ["【剑士】罗罗诺亚·索隆", "【航海士】娜美", "【狙击手】乌索普", "【厨师】香吉士", "【船医】托尼托尼·乔巴", "【船匠】 弗兰奇", "【音乐家】布鲁克", "【考古学家】妮可·罗宾"]
+        }
+        list.beginFirstRefresh()
+        return list
+    }
+
+    func mainTableViewDidScroll(_ scrollView: UIScrollView) {
     
-    func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
-        
-        return childVC[index]
     }
 }
 
 
-extension MyViewController: JXSegmentedViewDelegate {
-    
-    func segmentedView(_ segmentedView: JXSegmentedView, didSelectedItemAt index: Int) {
-        
-    }
-}

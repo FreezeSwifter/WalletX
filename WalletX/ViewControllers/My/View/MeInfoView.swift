@@ -8,7 +8,7 @@
 import UIKit
 
 class MeInfoView: UIView {
-    
+        
     @IBOutlet weak var avatarImageView: UIImageView! {
         didSet {
             avatarImageView.applyCornerRadius(avatarImageView.bounds.width / 2)
