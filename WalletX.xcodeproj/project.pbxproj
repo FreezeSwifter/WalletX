@@ -47,15 +47,6 @@
 		7ABF24A72A93F765008D7001 /* GuaranteeYesNoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ABF24A62A93F765008D7001 /* GuaranteeYesNoView.xib */; };
 		7AC425242A9A0F7F00CBC5C3 /* JoinGuaranteeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC425232A9A0F7F00CBC5C3 /* JoinGuaranteeController.swift */; };
 		7AC425262A9A14DF00CBC5C3 /* JoinGuaranteeStepTwoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC425252A9A14DF00CBC5C3 /* JoinGuaranteeStepTwoController.swift */; };
-		7AC4252F2A9A296F00CBC5C3 /* JXPagingMainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC4252A2A9A296F00CBC5C3 /* JXPagingMainTableView.swift */; };
-		7AC425302A9A296F00CBC5C3 /* JXPagingSmoothView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC4252B2A9A296F00CBC5C3 /* JXPagingSmoothView.swift */; };
-		7AC425312A9A296F00CBC5C3 /* JXPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC4252C2A9A296F00CBC5C3 /* JXPagingView.swift */; };
-		7AC425322A9A296F00CBC5C3 /* JXPagingListRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC4252D2A9A296F00CBC5C3 /* JXPagingListRefreshView.swift */; };
-		7AC425332A9A296F00CBC5C3 /* JXPagingListContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC4252E2A9A296F00CBC5C3 /* JXPagingListContainerView.swift */; };
-		7AC425382A9A298E00CBC5C3 /* PagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC425342A9A298E00CBC5C3 /* PagingViewController.swift */; };
-		7AC425392A9A298E00CBC5C3 /* PagingViewTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC425352A9A298E00CBC5C3 /* PagingViewTableHeaderView.swift */; };
-		7AC4253A2A9A298E00CBC5C3 /* PagingListBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC425362A9A298E00CBC5C3 /* PagingListBaseView.swift */; };
-		7AC4253B2A9A298E00CBC5C3 /* PagingListBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC425372A9A298E00CBC5C3 /* PagingListBaseCell.swift */; };
 		7AC5551E2A94869A0082A070 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC5551C2A9486990082A070 /* SettingViewController.swift */; };
 		7AC5551F2A94869A0082A070 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AC5551D2A94869A0082A070 /* SettingViewController.xib */; };
 		7AC555212A949EB90082A070 /* ArchivedKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC555202A949EB90082A070 /* ArchivedKey.swift */; };
@@ -208,15 +199,6 @@
 		7ABF24A62A93F765008D7001 /* GuaranteeYesNoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuaranteeYesNoView.xib; sourceTree = "<group>"; };
 		7AC425232A9A0F7F00CBC5C3 /* JoinGuaranteeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGuaranteeController.swift; sourceTree = "<group>"; };
 		7AC425252A9A14DF00CBC5C3 /* JoinGuaranteeStepTwoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGuaranteeStepTwoController.swift; sourceTree = "<group>"; };
-		7AC4252A2A9A296F00CBC5C3 /* JXPagingMainTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPagingMainTableView.swift; sourceTree = "<group>"; };
-		7AC4252B2A9A296F00CBC5C3 /* JXPagingSmoothView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPagingSmoothView.swift; sourceTree = "<group>"; };
-		7AC4252C2A9A296F00CBC5C3 /* JXPagingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPagingView.swift; sourceTree = "<group>"; };
-		7AC4252D2A9A296F00CBC5C3 /* JXPagingListRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPagingListRefreshView.swift; sourceTree = "<group>"; };
-		7AC4252E2A9A296F00CBC5C3 /* JXPagingListContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPagingListContainerView.swift; sourceTree = "<group>"; };
-		7AC425342A9A298E00CBC5C3 /* PagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingViewController.swift; sourceTree = "<group>"; };
-		7AC425352A9A298E00CBC5C3 /* PagingViewTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingViewTableHeaderView.swift; sourceTree = "<group>"; };
-		7AC425362A9A298E00CBC5C3 /* PagingListBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingListBaseView.swift; sourceTree = "<group>"; };
-		7AC425372A9A298E00CBC5C3 /* PagingListBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingListBaseCell.swift; sourceTree = "<group>"; };
 		7AC5551C2A9486990082A070 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		7AC5551D2A94869A0082A070 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		7AC555202A949EB90082A070 /* ArchivedKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedKey.swift; sourceTree = "<group>"; };
@@ -362,14 +344,9 @@
 		7A647F412A8C91A000A4A56F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7AC425292A9A296F00CBC5C3 /* JXPagingView */,
 				7A647F422A8C91BE00A4A56F /* MeInfoView.swift */,
 				7A647F442A8C91F700A4A56F /* MeInfoView.xib */,
 				7AB93E062A8D69520098BF9E /* MeListEmptyView.swift */,
-				7AC425372A9A298E00CBC5C3 /* PagingListBaseCell.swift */,
-				7AC425362A9A298E00CBC5C3 /* PagingListBaseView.swift */,
-				7AC425342A9A298E00CBC5C3 /* PagingViewController.swift */,
-				7AC425352A9A298E00CBC5C3 /* PagingViewTableHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -495,18 +472,6 @@
 				7AD08BF32A8A11D8000B247E /* HomeServiceProviderSecion.swift */,
 			);
 			path = Section;
-			sourceTree = "<group>";
-		};
-		7AC425292A9A296F00CBC5C3 /* JXPagingView */ = {
-			isa = PBXGroup;
-			children = (
-				7AC4252A2A9A296F00CBC5C3 /* JXPagingMainTableView.swift */,
-				7AC4252B2A9A296F00CBC5C3 /* JXPagingSmoothView.swift */,
-				7AC4252C2A9A296F00CBC5C3 /* JXPagingView.swift */,
-				7AC4252D2A9A296F00CBC5C3 /* JXPagingListRefreshView.swift */,
-				7AC4252E2A9A296F00CBC5C3 /* JXPagingListContainerView.swift */,
-			);
-			path = JXPagingView;
 			sourceTree = "<group>";
 		};
 		7AD08A7C2A89F35C000B247E /* Resource */ = {
@@ -1305,12 +1270,10 @@
 			files = (
 				7AD08BC72A8A083B000B247E /* UICollectionViewExtension.swift in Sources */,
 				7AC9E8302A939729004CC21F /* ServiceProviderChildController.swift in Sources */,
-				7AC425332A9A296F00CBC5C3 /* JXPagingListContainerView.swift in Sources */,
 				7AE94F312A96EB7D00ECEB1D /* StartGuaranteeConfirmController.swift in Sources */,
 				7AB377632A868A5E005BD1CB /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				7AD08BCE2A8A083B000B247E /* NSMutableAttributedStringExtension.swift in Sources */,
 				7AD08BBD2A8A083B000B247E /* UIScreenExtension.swift in Sources */,
-				7AC425392A9A298E00CBC5C3 /* PagingViewTableHeaderView.swift in Sources */,
 				7AC5551E2A94869A0082A070 /* SettingViewController.swift in Sources */,
 				7AD08BC32A8A083B000B247E /* UIStoryboardExtension.swift in Sources */,
 				7AC555282A94B5BB0082A070 /* SettingChildViewController.swift in Sources */,
@@ -1323,7 +1286,6 @@
 				7AD08BB52A8A083B000B247E /* UITesting.swift in Sources */,
 				7AB377592A862E2B005BD1CB /* FSPageControl.swift in Sources */,
 				7AD08BBF2A8A083B000B247E /* UIApplicationExtension.swift in Sources */,
-				7AC425302A9A296F00CBC5C3 /* JXPagingSmoothView.swift in Sources */,
 				7AB377712A87AC10005BD1CB /* HomeBannerSectionCellCollectionViewCell.swift in Sources */,
 				7A2BE08E2A8B8D51001B2970 /* WalletTokenViewController.swift in Sources */,
 				7AD08BB32A8A083B000B247E /* UserDefaultsBacked.swift in Sources */,
@@ -1384,28 +1346,23 @@
 				7AFB57B52A961B4B003451CB /* StartGuaranteeController.swift in Sources */,
 				7AD08BF42A8A11D8000B247E /* HomeServiceProviderSecion.swift in Sources */,
 				7AD08BFA2A8A15A9000B247E /* UIButton+Tool.swift in Sources */,
-				7AC425312A9A296F00CBC5C3 /* JXPagingView.swift in Sources */,
 				7AD08BEB2A8A083B000B247E /* Occupiable.swift in Sources */,
 				7AD08BF82A8A1495000B247E /* UIImage+Tool.swift in Sources */,
 				7AD08BE02A8A083B000B247E /* StringExtension.swift in Sources */,
 				7AD08A7B2A89F26D000B247E /* LanguageManager.swift in Sources */,
 				7AC9E8352A939FDF004CC21F /* GuaranteeFeesView.swift in Sources */,
-				7AC4253A2A9A298E00CBC5C3 /* PagingListBaseView.swift in Sources */,
-				7AC425382A9A298E00CBC5C3 /* PagingViewController.swift in Sources */,
 				7AD08BDB2A8A083B000B247E /* ArrayExtension.swift in Sources */,
 				7AB3776F2A87AA7B005BD1CB /* HomeBannerSection.swift in Sources */,
 				7AD08BE32A8A083B000B247E /* NSViewExtension.swift in Sources */,
 				7AD08BE52A8A083B000B247E /* NibLoadable.swift in Sources */,
 				7AD08BEC2A8A083B000B247E /* UIElementPreview.swift in Sources */,
 				7AC5552C2A94C3E70082A070 /* SettingChildViewController2.swift in Sources */,
-				7AC4252F2A9A296F00CBC5C3 /* JXPagingMainTableView.swift in Sources */,
 				7AD08BCC2A8A083B000B247E /* UITextFieldExtension.swift in Sources */,
 				7A2BE0832A8B4E3C001B2970 /* AssociatedManager.swift in Sources */,
 				7AB377742A87B025005BD1CB /* HomeQuickAccessCell.swift in Sources */,
 				7A7D4DB22A84A19B0098262F /* AppDelegate.swift in Sources */,
 				7AC9E82C2A9382A6004CC21F /* ServiceProviderNotiView.swift in Sources */,
 				7AD08BCD2A8A083B000B247E /* UserDefaultsExtension.swift in Sources */,
-				7AC425322A9A296F00CBC5C3 /* JXPagingListRefreshView.swift in Sources */,
 				7AD08BB72A8A083B000B247E /* CGFloatLiteral.swift in Sources */,
 				7AD08BDF2A8A083B000B247E /* DoubleExtension.swift in Sources */,
 				7AD08BC12A8A083B000B247E /* UIAlertControllerExtension.swift in Sources */,
@@ -1424,7 +1381,6 @@
 				7AD08BC62A8A083B000B247E /* UIDeviceExtension.swift in Sources */,
 				7AD08BD22A8A083B000B247E /* TimerExtension.swift in Sources */,
 				7AB93E072A8D69520098BF9E /* MeListEmptyView.swift in Sources */,
-				7AC4253B2A9A298E00CBC5C3 /* PagingListBaseCell.swift in Sources */,
 				7AFB57A82A95D53A003451CB /* UIViewController+Rx.swift in Sources */,
 				7AD08BD02A8A083B000B247E /* ColorExtension.swift in Sources */,
 				7AD08BBA2A8A083B000B247E /* CGRectExtensions.swift in Sources */,
