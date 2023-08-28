@@ -22,6 +22,8 @@
 		7A3B7D9D2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B7D9C2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib */; };
 		7A3B7D9F2A9CACF00036199F /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B7D9E2A9CACF00036199F /* Me.storyboard */; };
 		7A3B7DA12A9CAD180036199F /* ContactOtherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3B7DA02A9CAD180036199F /* ContactOtherController.swift */; };
+		7A3B7DA32A9CDC980036199F /* DepositingAlterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3B7DA22A9CDC980036199F /* DepositingAlterView.swift */; };
+		7A3B7DA52A9CDCC10036199F /* DepositingAlterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B7DA42A9CDCC10036199F /* DepositingAlterView.xib */; };
 		7A647F3F2A8C85A800A4A56F /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A647F3D2A8C85A800A4A56F /* MessageListCell.swift */; };
 		7A647F402A8C85A800A4A56F /* MessageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A647F3E2A8C85A800A4A56F /* MessageListCell.xib */; };
 		7A647F432A8C91BE00A4A56F /* MeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A647F422A8C91BE00A4A56F /* MeInfoView.swift */; };
@@ -174,6 +176,8 @@
 		7A3B7D9C2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeMoneyAlterVIew.xib; sourceTree = "<group>"; };
 		7A3B7D9E2A9CACF00036199F /* Me.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
 		7A3B7DA02A9CAD180036199F /* ContactOtherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactOtherController.swift; sourceTree = "<group>"; };
+		7A3B7DA22A9CDC980036199F /* DepositingAlterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositingAlterView.swift; sourceTree = "<group>"; };
+		7A3B7DA42A9CDCC10036199F /* DepositingAlterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DepositingAlterView.xib; sourceTree = "<group>"; };
 		7A647F3D2A8C85A800A4A56F /* MessageListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
 		7A647F3E2A8C85A800A4A56F /* MessageListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageListCell.xib; sourceTree = "<group>"; };
 		7A647F422A8C91BE00A4A56F /* MeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeInfoView.swift; sourceTree = "<group>"; };
@@ -373,6 +377,8 @@
 				7A3B7D942A9C70C50036199F /* MeTobeAddedCell.xib */,
 				7A3B7D9A2A9CA38D0036199F /* ChangeMoneyAlterVIew.swift */,
 				7A3B7D9C2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib */,
+				7A3B7DA22A9CDC980036199F /* DepositingAlterView.swift */,
+				7A3B7DA42A9CDCC10036199F /* DepositingAlterView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1223,6 +1229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ABF24A72A93F765008D7001 /* GuaranteeYesNoView.xib in Resources */,
+				7A3B7DA52A9CDCC10036199F /* DepositingAlterView.xib in Resources */,
 				7AFB57B32A961B06003451CB /* Guarantee.storyboard in Resources */,
 				7A3B7D9D2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib in Resources */,
 				7AFB57AC2A95D73F003451CB /* ShareViewController.xib in Resources */,
@@ -1326,6 +1333,7 @@
 				7AB3776B2A87A324005BD1CB /* XibLoadble.swift in Sources */,
 				7AD08BE72A8A083B000B247E /* Reusable.swift in Sources */,
 				7AD08BB82A8A083B000B247E /* CGSizeExtension.swift in Sources */,
+				7A3B7DA32A9CDC980036199F /* DepositingAlterView.swift in Sources */,
 				7AC425262A9A14DF00CBC5C3 /* JoinGuaranteeStepTwoController.swift in Sources */,
 				7AB93E052A8D5F1A0098BF9E /* MeListChildViewController.swift in Sources */,
 				7A3859D72A97521E0052DAEF /* InviteGuaranteeController.swift in Sources */,

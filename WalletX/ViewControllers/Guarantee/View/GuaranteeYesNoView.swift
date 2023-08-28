@@ -24,7 +24,7 @@ class GuaranteeYesNoView: UIView {
     
     @IBOutlet weak var contentLabel: UILabel! {
         didSet {
-            contentLabel.qmui_lineHeight = 16
+            contentLabel.qmui_lineHeight = 22
             contentLabel.textColor = ColorConfiguration.blackText.toColor()
             contentLabel.text = "home_create_wallet_noti_content".toMultilingualism()
         }

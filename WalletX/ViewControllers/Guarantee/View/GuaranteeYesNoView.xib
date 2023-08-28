@@ -31,14 +31,14 @@
                         </label>
                     </subviews>
                 </stackView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyF-9Y-cEL">
-                    <rect key="frame" x="16" y="311.33333333333331" width="361" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyF-9Y-cEL">
+                    <rect key="frame" x="16" y="317.33333333333331" width="361" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="pvR-9a-PZW">
-                    <rect key="frame" x="16" y="359.33333333333331" width="361" height="40"/>
+                    <rect key="frame" x="16" y="365.33333333333331" width="361" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ke4-av-1ly">
                             <rect key="frame" x="0.0" y="0.0" width="173" height="40"/>
@@ -67,7 +67,7 @@
                 <constraint firstItem="X9q-gv-jh1" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="INt-Tg-vy0"/>
                 <constraint firstItem="pvR-9a-PZW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="T2V-fo-kIK"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="tyF-9Y-cEL" secondAttribute="trailing" constant="16" id="Ynj-54-0iJ"/>
-                <constraint firstItem="tyF-9Y-cEL" firstAttribute="top" secondItem="fbh-GH-2FI" secondAttribute="bottom" constant="10" id="cE0-Ct-bLa"/>
+                <constraint firstItem="tyF-9Y-cEL" firstAttribute="top" secondItem="fbh-GH-2FI" secondAttribute="bottom" constant="16" id="cE0-Ct-bLa"/>
                 <constraint firstItem="X9q-gv-jh1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="35" id="kuf-Cn-2fm"/>
                 <constraint firstItem="pvR-9a-PZW" firstAttribute="top" secondItem="tyF-9Y-cEL" secondAttribute="bottom" constant="30" id="qPR-cr-fo2"/>
                 <constraint firstItem="fbh-GH-2FI" firstAttribute="top" secondItem="X9q-gv-jh1" secondAttribute="bottom" constant="20" id="u6L-3Z-ckE"/>

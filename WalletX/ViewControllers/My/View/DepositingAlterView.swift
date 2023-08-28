@@ -1,5 +1,5 @@
 //
-//  ChangeMoneyAlterVIew.swift
+//  DepositingAlterView.swift
 //  WalletX
 //
 //  Created by DZSB-001968 on 28.8.23.
@@ -12,48 +12,30 @@ import QMUIKit
 import Then
 import NSObject_Rx
 
-class ChangeMoneyAlterVIew: UIView {
+class DepositingAlterView: UIView {
     
     weak var oc: OverlayController?
     
-    @IBOutlet weak var moneyDesLabel: UILabel! {
+    @IBOutlet weak var waitingLabel: QMUILabel! {
         didSet {
-            moneyDesLabel.text = "担保金额没有1"
+            waitingLabel.text = "等待创建多签钱包中".toMultilingualism()
+            waitingLabel.contentEdgeInsets = UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 10)
+            waitingLabel.clipsToBounds = true
+            waitingLabel.layer.cornerRadius = 7
         }
     }
     
-    @IBOutlet weak var textFeildBg: UIView! {
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    @IBOutlet weak var contentLabel: UILabel! {
         didSet {
-            textFeildBg.layer.cornerRadius = 10
+            contentLabel.text = "等待多签钱包创建中内容".toMultilingualism()
         }
     }
-    
-    @IBOutlet weak var moneyTextField: UITextField! {
-        didSet {
-            moneyTextField.placeholder = "请输入担保金额".toMultilingualism()
-        }
-    }
-    
-    @IBOutlet weak var protocolDesLabel: UILabel! {
-        didSet {
-            protocolDesLabel.text = "担保协议".toMultilingualism()
-        }
-    }
-    
-    private let textViewPlaceholderLabel = UILabel()
-    
-    @IBOutlet weak var protocolBg: UIView! {
-        didSet {
-            protocolBg.layer.cornerRadius = 10
-        }
-    }
-    
-    @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var countLabel: UILabel!
     
     @IBOutlet weak var leftButton: UIButton! {
         didSet {
-            leftButton.setTitle("联系对方".toMultilingualism(), for: .normal)
+            leftButton.setTitle("home_contact_us".toMultilingualism(), for: .normal)
             leftButton.setTitleColor(ColorConfiguration.primary.toColor(), for: .normal)
             leftButton.layer.cornerRadius = 10
             leftButton.layer.borderWidth = 1
@@ -64,7 +46,7 @@ class ChangeMoneyAlterVIew: UIView {
     
     @IBOutlet weak var rightButton: UIButton! {
         didSet {
-            rightButton.setTitle("返回".toMultilingualism(), for: .normal)
+            rightButton.setTitle("home_gotit".toMultilingualism(), for: .normal)
             rightButton.setTitleColor(ColorConfiguration.wihteText.toColor(), for: .normal)
             rightButton.layer.cornerRadius = 10
             rightButton.backgroundColor = ColorConfiguration.primary.toColor()
@@ -87,34 +69,10 @@ class ChangeMoneyAlterVIew: UIView {
     
     private func commonInit() {
         backgroundColor = .white
-        
-        textViewPlaceholderLabel.text = "担保协议占位".toMultilingualism()
-        textViewPlaceholderLabel.font = textView.font
-        textViewPlaceholderLabel.sizeToFit()
-        textView.addSubview(textViewPlaceholderLabel)
-        textViewPlaceholderLabel.frame.origin = CGPoint(x: 0, y: (textView.font?.pointSize)! / 2)
-        textViewPlaceholderLabel.textColor = ColorConfiguration.descriptionText.toColor()
-        textViewPlaceholderLabel.isHidden = !textView.text.isEmpty
-        textView.delegate = self
-        
-        textView.rx.didChange.subscribe(onNext: {[weak self] in
-            self?.textViewPlaceholderLabel.isHidden = !(self?.textView.text.isEmpty ?? false)
-        }).disposed(by: rx.disposeBag)
-        
-        textView.rx.didEndEditing.subscribe(onNext: {[weak self] in
-            self?.textViewPlaceholderLabel.isHidden = !(self?.textView.text.isEmpty ?? false)
-        }).disposed(by: rx.disposeBag)
-        
-        textView.rx.didBeginEditing.subscribe(onNext: {[weak self] in
-            self?.textViewPlaceholderLabel.isHidden = true
-        }).disposed(by: rx.disposeBag)
-        
-        textView.rx.text.map { "\($0?.count.description ?? "")" + "/1000" }.bind(to: countLabel.rx.text).disposed(by: rx.disposeBag)
     }
     
-    
     static func show() -> Observable<Int> {
-        return Observable<Int>.create { o in
+        return Observable.create { o in
             
             guard let topVc = UIApplication.topViewController() else {
                 return Disposables.create {}
@@ -122,7 +80,7 @@ class ChangeMoneyAlterVIew: UIView {
             
             let baseHeight: CGFloat = 390
             let width = topVc.view.bounds.width - 80
-            let contentView: ChangeMoneyAlterVIew = ViewLoader.Xib.view()
+            let contentView: DepositingAlterView = ViewLoader.Xib.view()
             
             contentView.do { it in
                 it.frame = CGRect(x: 0, y: 0, width: width, height: baseHeight)
@@ -153,12 +111,5 @@ class ChangeMoneyAlterVIew: UIView {
             
             return Disposables.create {}
         }
-    }
-}
-
-extension ChangeMoneyAlterVIew: UITextViewDelegate {
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        return textView.text.count + (text.count - range.length) <= 1000
     }
 }

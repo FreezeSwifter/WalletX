@@ -181,6 +181,27 @@ class MeTobeAddedCell: UITableViewCell {
             UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
             
         }).disposed(by: rx.disposeBag)
+        
+        cancelButton.rx.tap.subscribe(onNext: {[unowned self] _ in
+            
+            GuaranteeYesNoView.showFromBottom(image: UIImage(named: "me_cancel_alter_img"), title: "取消担保弹窗标题".toMultilingualism(), titleIcon: nil, content: "取消担保弹窗内容".toMultilingualism(), leftButton: "立即取消".toMultilingualism(), rightButton: "稍后再说".toMultilingualism()).subscribe(onNext: { _ in
+                
+            }).disposed(by: self.rx.disposeBag)
+            
+        }).disposed(by: rx.disposeBag)
+        
+        inviteButton.rx.tap.subscribe(onNext: {[weak self] in
+            guard let this = self else { return }
+            
+            if this.inviteButton.titleLabel?.text == "我来上押".toMultilingualism() {
+                
+                DepositingAlterView.show().subscribe(onNext: { index in
+                   
+                    
+                }).disposed(by: this.rx.disposeBag)
+            }
+            
+        }).disposed(by: rx.disposeBag)
     }
     
     @objc

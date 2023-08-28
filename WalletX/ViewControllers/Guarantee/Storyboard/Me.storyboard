@@ -160,14 +160,14 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FGH-Wu-GdX">
                                                         <rect key="frame" x="253" y="110" width="124" height="28"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHZ-20-rbY">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrj-Up-9Gu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="54" height="28"/>
                                                                 <color key="backgroundColor" red="1" green="0.34901960780000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="立即对话"/>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrj-Up-9Gu">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHZ-20-rbY">
                                                                 <rect key="frame" x="70" y="0.0" width="54" height="28"/>
                                                                 <color key="backgroundColor" red="1" green="0.34901960780000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -275,6 +275,23 @@
                             <constraint firstItem="gWt-Xe-4Ba" firstAttribute="leading" secondItem="dkl-Tt-bgD" secondAttribute="leading" id="yqA-bC-WKT"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="eamilCopyButton" destination="iVv-s4-j3R" id="0Uf-fe-QhS"/>
+                        <outlet property="emailBg" destination="lo7-6E-SHt" id="XSk-we-MSN"/>
+                        <outlet property="emailLabel" destination="Neg-l4-bo3" id="jhp-8i-nzy"/>
+                        <outlet property="emailTextField" destination="CF2-hs-lHy" id="AYr-WB-96I"/>
+                        <outlet property="gmailButton" destination="zrj-Up-9Gu" id="CMP-CX-KnC"/>
+                        <outlet property="pasteButton" destination="NMx-Ce-48A" id="vRL-VS-b9k"/>
+                        <outlet property="qqButton" destination="qHZ-20-rbY" id="sIv-pM-ReG"/>
+                        <outlet property="recommendBg" destination="ISM-on-wuP" id="snn-MQ-AGf"/>
+                        <outlet property="recommendContentLabel" destination="Uxm-qC-jB1" id="Vag-Wl-zqN"/>
+                        <outlet property="recommendLabel" destination="IAx-Ro-Xwa" id="hZb-6c-oc7"/>
+                        <outlet property="tContactButton" destination="kUN-Xx-zCe" id="hq0-e5-zb4"/>
+                        <outlet property="telegramBg" destination="dTe-jp-FtB" id="08a-QQ-qto"/>
+                        <outlet property="telegramCopyButton" destination="Ai7-en-Els" id="La6-hX-xn0"/>
+                        <outlet property="telegramLabel" destination="qz5-ZH-ze2" id="QpJ-9h-ONH"/>
+                        <outlet property="telegramTextField" destination="Dw1-4N-Rxp" id="Fqm-ED-uyx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jrs-An-HAE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
