@@ -15,6 +15,13 @@
 		7A2BE0922A8B91AF001B2970 /* WalletWithoutWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE0912A8B91AF001B2970 /* WalletWithoutWalletView.swift */; };
 		7A2BE0942A8B91E0001B2970 /* WalletWithoutWalletView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A2BE0932A8B91E0001B2970 /* WalletWithoutWalletView.xib */; };
 		7A3859D72A97521E0052DAEF /* InviteGuaranteeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3859D62A97521E0052DAEF /* InviteGuaranteeController.swift */; };
+		7A3B7D952A9C70C50036199F /* MeTobeAddedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3B7D932A9C70C50036199F /* MeTobeAddedCell.swift */; };
+		7A3B7D962A9C70C50036199F /* MeTobeAddedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B7D942A9C70C50036199F /* MeTobeAddedCell.xib */; };
+		7A3B7D992A9C990E0036199F /* MyListStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3B7D982A9C990E0036199F /* MyListStatus.swift */; };
+		7A3B7D9B2A9CA38D0036199F /* ChangeMoneyAlterVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3B7D9A2A9CA38D0036199F /* ChangeMoneyAlterVIew.swift */; };
+		7A3B7D9D2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B7D9C2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib */; };
+		7A3B7D9F2A9CACF00036199F /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B7D9E2A9CACF00036199F /* Me.storyboard */; };
+		7A3B7DA12A9CAD180036199F /* ContactOtherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3B7DA02A9CAD180036199F /* ContactOtherController.swift */; };
 		7A647F3F2A8C85A800A4A56F /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A647F3D2A8C85A800A4A56F /* MessageListCell.swift */; };
 		7A647F402A8C85A800A4A56F /* MessageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A647F3E2A8C85A800A4A56F /* MessageListCell.xib */; };
 		7A647F432A8C91BE00A4A56F /* MeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A647F422A8C91BE00A4A56F /* MeInfoView.swift */; };
@@ -160,6 +167,13 @@
 		7A2BE0912A8B91AF001B2970 /* WalletWithoutWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWithoutWalletView.swift; sourceTree = "<group>"; };
 		7A2BE0932A8B91E0001B2970 /* WalletWithoutWalletView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletWithoutWalletView.xib; sourceTree = "<group>"; };
 		7A3859D62A97521E0052DAEF /* InviteGuaranteeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteGuaranteeController.swift; sourceTree = "<group>"; };
+		7A3B7D932A9C70C50036199F /* MeTobeAddedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeTobeAddedCell.swift; sourceTree = "<group>"; };
+		7A3B7D942A9C70C50036199F /* MeTobeAddedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeTobeAddedCell.xib; sourceTree = "<group>"; };
+		7A3B7D982A9C990E0036199F /* MyListStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListStatus.swift; sourceTree = "<group>"; };
+		7A3B7D9A2A9CA38D0036199F /* ChangeMoneyAlterVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMoneyAlterVIew.swift; sourceTree = "<group>"; };
+		7A3B7D9C2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeMoneyAlterVIew.xib; sourceTree = "<group>"; };
+		7A3B7D9E2A9CACF00036199F /* Me.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
+		7A3B7DA02A9CAD180036199F /* ContactOtherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactOtherController.swift; sourceTree = "<group>"; };
 		7A647F3D2A8C85A800A4A56F /* MessageListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
 		7A647F3E2A8C85A800A4A56F /* MessageListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageListCell.xib; sourceTree = "<group>"; };
 		7A647F422A8C91BE00A4A56F /* MeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeInfoView.swift; sourceTree = "<group>"; };
@@ -332,6 +346,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7A3B7D972A9C98E00036199F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7A3B7D982A9C990E0036199F /* MyListStatus.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		7A647F3C2A8C84AB00A4A56F /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +369,10 @@
 				7A647F422A8C91BE00A4A56F /* MeInfoView.swift */,
 				7A647F442A8C91F700A4A56F /* MeInfoView.xib */,
 				7AB93E062A8D69520098BF9E /* MeListEmptyView.swift */,
+				7A3B7D932A9C70C50036199F /* MeTobeAddedCell.swift */,
+				7A3B7D942A9C70C50036199F /* MeTobeAddedCell.xib */,
+				7A3B7D9A2A9CA38D0036199F /* ChangeMoneyAlterVIew.swift */,
+				7A3B7D9C2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1058,6 +1084,7 @@
 		7AF15A0E2A85020B00C48F39 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				7A3B7D972A9C98E00036199F /* Model */,
 				7A647F412A8C91A000A4A56F /* View */,
 				7AF15A162A85023C00C48F39 /* MyViewController.swift */,
 				7AB93E042A8D5F1A0098BF9E /* MeListChildViewController.swift */,
@@ -1119,6 +1146,8 @@
 				7A3859D62A97521E0052DAEF /* InviteGuaranteeController.swift */,
 				7AC425232A9A0F7F00CBC5C3 /* JoinGuaranteeController.swift */,
 				7AC425252A9A14DF00CBC5C3 /* JoinGuaranteeStepTwoController.swift */,
+				7A3B7D9E2A9CACF00036199F /* Me.storyboard */,
+				7A3B7DA02A9CAD180036199F /* ContactOtherController.swift */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -1195,6 +1224,7 @@
 			files = (
 				7ABF24A72A93F765008D7001 /* GuaranteeYesNoView.xib in Resources */,
 				7AFB57B32A961B06003451CB /* Guarantee.storyboard in Resources */,
+				7A3B7D9D2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib in Resources */,
 				7AFB57AC2A95D73F003451CB /* ShareViewController.xib in Resources */,
 				7A647F452A8C91F700A4A56F /* MeInfoView.xib in Resources */,
 				7AC555252A94B2270082A070 /* FaceIDViewController.xib in Resources */,
@@ -1203,6 +1233,7 @@
 				7AC9E82E2A9382D7004CC21F /* ServiceProviderNotiView.xib in Resources */,
 				7A2BE0942A8B91E0001B2970 /* WalletWithoutWalletView.xib in Resources */,
 				7A2BE0882A8B774A001B2970 /* WalletHeaderView.xib in Resources */,
+				7A3B7D962A9C70C50036199F /* MeTobeAddedCell.xib in Resources */,
 				7A7D4DBE2A84A19D0098262F /* LaunchScreen.storyboard in Resources */,
 				7AC5551F2A94869A0082A070 /* SettingViewController.xib in Resources */,
 				7AC9E8372A93A004004CC21F /* GuaranteeFeesView.xib in Resources */,
@@ -1215,6 +1246,7 @@
 				7AC5552D2A94C3E70082A070 /* SettingChildViewController2.xib in Resources */,
 				7AB377692A869281005BD1CB /* HomeNavigationBarView.xib in Resources */,
 				7AC555292A94B5BB0082A070 /* SettingChildViewController.xib in Resources */,
+				7A3B7D9F2A9CACF00036199F /* Me.storyboard in Resources */,
 				7AD08A802A89F456000B247E /* en.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1279,6 +1311,7 @@
 				7AC555282A94B5BB0082A070 /* SettingChildViewController.swift in Sources */,
 				7AC425242A9A0F7F00CBC5C3 /* JoinGuaranteeController.swift in Sources */,
 				7AD08BD92A8A083B000B247E /* NSAttributedStringExtension.swift in Sources */,
+				7A3B7D952A9C70C50036199F /* MeTobeAddedCell.swift in Sources */,
 				7AF15A132A85022800C48F39 /* GuranteeViewController.swift in Sources */,
 				7AD08BDA2A8A083B000B247E /* NSObjectExtension.swift in Sources */,
 				7AD08BB92A8A083B000B247E /* CGPointExtension.swift in Sources */,
@@ -1332,6 +1365,7 @@
 				7A2BE0902A8B8D83001B2970 /* WalletSignatureViewController.swift in Sources */,
 				7AC555302A94CAB90082A070 /* ScanViewController.swift in Sources */,
 				7AC9E8332A939F3E004CC21F /* OverlayContainerController.swift in Sources */,
+				7A3B7D992A9C990E0036199F /* MyListStatus.swift in Sources */,
 				7AB377562A862E2B005BD1CB /* FSPagerViewCell.swift in Sources */,
 				7AB377672A869278005BD1CB /* HomeNavigationBarView.swift in Sources */,
 				7AC555212A949EB90082A070 /* ArchivedKey.swift in Sources */,
@@ -1356,6 +1390,7 @@
 				7AD08BE32A8A083B000B247E /* NSViewExtension.swift in Sources */,
 				7AD08BE52A8A083B000B247E /* NibLoadable.swift in Sources */,
 				7AD08BEC2A8A083B000B247E /* UIElementPreview.swift in Sources */,
+				7A3B7D9B2A9CA38D0036199F /* ChangeMoneyAlterVIew.swift in Sources */,
 				7AC5552C2A94C3E70082A070 /* SettingChildViewController2.swift in Sources */,
 				7AD08BCC2A8A083B000B247E /* UITextFieldExtension.swift in Sources */,
 				7A2BE0832A8B4E3C001B2970 /* AssociatedManager.swift in Sources */,
@@ -1378,6 +1413,7 @@
 				7AD08BD82A8A083B000B247E /* FileManagerExtension.swift in Sources */,
 				7AB3775A2A862E2B005BD1CB /* FSPagerViewObjcCompat.m in Sources */,
 				7AD08BD72A8A083B000B247E /* NotificationCenterExtension.swift in Sources */,
+				7A3B7DA12A9CAD180036199F /* ContactOtherController.swift in Sources */,
 				7AD08BC62A8A083B000B247E /* UIDeviceExtension.swift in Sources */,
 				7AD08BD22A8A083B000B247E /* TimerExtension.swift in Sources */,
 				7AB93E072A8D69520098BF9E /* MeListEmptyView.swift in Sources */,

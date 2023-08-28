@@ -117,5 +117,15 @@
     "成功加入担保弹窗内容": "·Now your new surety guarantee is already in 'My Surety Guarantees' list under 'Me'；\n\n·In order to protect your money, please ensure that your counterpart has fulfilled all commitments to you before approving the release of the deposit funds.",
     "提醒对方上押": "Remind Counterpart to Deposit",
     "我来上押": "Let Me Deposit",
+    "发起时间": "Create Date",
+    "担保金额没有1": "Surety Amount",
+    "发起人": "Initiator",
+    "我": "Me",
+    "参与人": "Participant",
+    "协议": "Protocol",
+    "等待加入中": "Waiting Join-in",
+    "取消担保": "Cancel",
+    "修改信息": "Modify",
+    "邀请对方": "Invite",
+    "返回": "Go Back",
 }
-

@@ -205,9 +205,8 @@ extension MyViewController: MeListChildViewDelegate {
         var listY: CGFloat = listOrigniY
         listY -= contentOffsetY
 
-
         if listY <= segmentedContainerOriginY {
-            listY = segmentedContainerOriginY - 20
+            listY = segmentedContainerOriginY - 22
         }
         if listY >= listOrigniY {
             listY = listOrigniY

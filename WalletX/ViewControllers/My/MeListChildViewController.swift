@@ -22,11 +22,11 @@ class MeListChildViewController: UIViewController, JXSegmentedListContainerViewL
     
     private lazy var tableView: UITableView = {
         let tv = UITableView.init(frame: .zero, style: .plain)
-        tv.rowHeight = 216
+        tv.estimatedRowHeight = 220
         tv.delegate = self
         tv.dataSource = self
         tv.backgroundColor = .white
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        tv.register(UINib(nibName: "MeTobeAddedCell", bundle: nil), forCellReuseIdentifier: "MeTobeAddedCell")
         return tv
     }()
     
@@ -79,10 +79,15 @@ extension MeListChildViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-        cell.textLabel?.text = indexPath.row.description
-        cell.backgroundColor = UIColor.qmui_random()
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MeTobeAddedCell", for: indexPath)
+        as? MeTobeAddedCell
+        
+        if indexPath.row == 1 {
+            cell?.switchUI(state: .depositing)
+        } else {
+            cell?.switchUI(state: .pending)
+        }
+        return cell ?? UITableViewCell()
     }
 }
 
