@@ -240,6 +240,26 @@ public extension UIButton {
             setBackgroundImage(colorImage, for: forState)
         }
     }
+    
+    func setupAPPUISolidStyle(title: String? = nil) {
+        backgroundColor = ColorConfiguration.primary.toColor()
+        setTitleColor(ColorConfiguration.wihteText.toColor(), for: .normal)
+        setTitle(title, for: .normal)
+        layer.cornerRadius = 10
+        titleLabel?.minimumScaleFactor = 0.5
+        contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+    }
+    
+    func setupAPPUIHollowStyle(title: String? = nil) {
+        backgroundColor = .clear
+        setTitleColor(ColorConfiguration.primary.toColor(), for: .normal)
+        setTitle(title, for: .normal)
+        layer.cornerRadius = 10
+        titleLabel?.minimumScaleFactor = 0.5
+        contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+        layer.borderColor = ColorConfiguration.primary.toColor().cgColor
+        layer.borderWidth = 1
+    }
 }
 
 #endif

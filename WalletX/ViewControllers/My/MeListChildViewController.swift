@@ -27,6 +27,7 @@ class MeListChildViewController: UIViewController, JXSegmentedListContainerViewL
         tv.dataSource = self
         tv.backgroundColor = .white
         tv.register(UINib(nibName: "MeTobeAddedCell", bundle: nil), forCellReuseIdentifier: "MeTobeAddedCell")
+        tv.register(UINib(nibName: "GuaranteeingCell", bundle: nil), forCellReuseIdentifier: "GuaranteeingCell")
         return tv
     }()
     
@@ -79,15 +80,52 @@ extension MeListChildViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MeTobeAddedCell", for: indexPath)
-        as? MeTobeAddedCell
         
-        if indexPath.row == 1 {
-            cell?.switchUI(state: .depositing)
-        } else {
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MeTobeAddedCell", for: indexPath)
+            as? MeTobeAddedCell
             cell?.switchUI(state: .pending)
+            
+            return cell ?? UITableViewCell()
+            
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MeTobeAddedCell", for: indexPath)
+            as? MeTobeAddedCell
+            cell?.switchUI(state: .depositing)
+            
+            return cell ?? UITableViewCell()
+            
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "GuaranteeingCell", for: indexPath)
+            as? GuaranteeingCell
+            cell?.switchUI(state: .guaranteeing)
+            
+            return cell ?? UITableViewCell()
+ 
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "GuaranteeingCell", for: indexPath)
+            as? GuaranteeingCell
+            cell?.switchUI(state: .releasing)
+            
+            return cell ?? UITableViewCell()
+            
+        case 4:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "GuaranteeingCell", for: indexPath)
+            as? GuaranteeingCell
+            cell?.switchUI(state: .released)
+            
+            return cell ?? UITableViewCell()
+            
+        default:
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MeTobeAddedCell", for: indexPath)
+            as? MeTobeAddedCell
+            cell?.switchUI(state: .pending)
+            
+            return cell ?? UITableViewCell()
         }
-        return cell ?? UITableViewCell()
+
     }
 }
 

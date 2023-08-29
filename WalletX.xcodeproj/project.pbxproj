@@ -147,6 +147,10 @@
 		7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A142A85023300C48F39 /* MessageViewController.swift */; };
 		7AF15A172A85023C00C48F39 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A162A85023C00C48F39 /* MyViewController.swift */; };
 		7AF15A192A85024600C48F39 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A182A85024600C48F39 /* WalletViewController.swift */; };
+		7AF2BCED2A9DB32C0067C8A2 /* DepositingDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF2BCEC2A9DB32C0067C8A2 /* DepositingDetailController.swift */; };
+		7AF2BCF02A9DD2610067C8A2 /* GuaranteeingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF2BCEE2A9DD2610067C8A2 /* GuaranteeingCell.swift */; };
+		7AF2BCF12A9DD2610067C8A2 /* GuaranteeingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AF2BCEF2A9DD2610067C8A2 /* GuaranteeingCell.xib */; };
+		7AF2BCF32A9DEF770067C8A2 /* OrderOperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF2BCF22A9DEF770067C8A2 /* OrderOperationViewController.swift */; };
 		7AFB57A62A95D512003451CB /* UIApplication+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB57A52A95D511003451CB /* UIApplication+Rx.swift */; };
 		7AFB57A82A95D53A003451CB /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB57A72A95D53A003451CB /* UIViewController+Rx.swift */; };
 		7AFB57AB2A95D73F003451CB /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB57A92A95D73F003451CB /* ShareViewController.swift */; };
@@ -308,6 +312,10 @@
 		7AF15A142A85023300C48F39 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		7AF15A162A85023C00C48F39 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		7AF15A182A85024600C48F39 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
+		7AF2BCEC2A9DB32C0067C8A2 /* DepositingDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositingDetailController.swift; sourceTree = "<group>"; };
+		7AF2BCEE2A9DD2610067C8A2 /* GuaranteeingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuaranteeingCell.swift; sourceTree = "<group>"; };
+		7AF2BCEF2A9DD2610067C8A2 /* GuaranteeingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuaranteeingCell.xib; sourceTree = "<group>"; };
+		7AF2BCF22A9DEF770067C8A2 /* OrderOperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderOperationViewController.swift; sourceTree = "<group>"; };
 		7AFB57A52A95D511003451CB /* UIApplication+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Rx.swift"; sourceTree = "<group>"; };
 		7AFB57A72A95D53A003451CB /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		7AFB57A92A95D73F003451CB /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -379,6 +387,8 @@
 				7A3B7D9C2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib */,
 				7A3B7DA22A9CDC980036199F /* DepositingAlterView.swift */,
 				7A3B7DA42A9CDCC10036199F /* DepositingAlterView.xib */,
+				7AF2BCEE2A9DD2610067C8A2 /* GuaranteeingCell.swift */,
+				7AF2BCEF2A9DD2610067C8A2 /* GuaranteeingCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1154,6 +1164,8 @@
 				7AC425252A9A14DF00CBC5C3 /* JoinGuaranteeStepTwoController.swift */,
 				7A3B7D9E2A9CACF00036199F /* Me.storyboard */,
 				7A3B7DA02A9CAD180036199F /* ContactOtherController.swift */,
+				7AF2BCEC2A9DB32C0067C8A2 /* DepositingDetailController.swift */,
+				7AF2BCF22A9DEF770067C8A2 /* OrderOperationViewController.swift */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -1231,6 +1243,7 @@
 				7ABF24A72A93F765008D7001 /* GuaranteeYesNoView.xib in Resources */,
 				7A3B7DA52A9CDCC10036199F /* DepositingAlterView.xib in Resources */,
 				7AFB57B32A961B06003451CB /* Guarantee.storyboard in Resources */,
+				7AF2BCF12A9DD2610067C8A2 /* GuaranteeingCell.xib in Resources */,
 				7A3B7D9D2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib in Resources */,
 				7AFB57AC2A95D73F003451CB /* ShareViewController.xib in Resources */,
 				7A647F452A8C91F700A4A56F /* MeInfoView.xib in Resources */,
@@ -1349,9 +1362,11 @@
 				7AD08BEA2A8A083B000B247E /* AnyOptional.swift in Sources */,
 				7AD08BC42A8A083B000B247E /* UIFontExtension.swift in Sources */,
 				7AD08BE12A8A083B000B247E /* SequenceExtension.swift in Sources */,
+				7AF2BCED2A9DB32C0067C8A2 /* DepositingDetailController.swift in Sources */,
 				7AD08BC02A8A083B000B247E /* UIButtonExtension.swift in Sources */,
 				7AB3775B2A862E2B005BD1CB /* FSPagerCollectionView.swift in Sources */,
 				7A647F432A8C91BE00A4A56F /* MeInfoView.swift in Sources */,
+				7AF2BCF02A9DD2610067C8A2 /* GuaranteeingCell.swift in Sources */,
 				7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */,
 				7AD08BD42A8A083B000B247E /* URLExtension.swift in Sources */,
 				7AD08A822A89FAE8000B247E /* ColorConfiguration.swift in Sources */,
@@ -1362,6 +1377,7 @@
 				7AB377572A862E2B005BD1CB /* FSPagerViewLayoutAttributes.swift in Sources */,
 				7AB377552A862E2B005BD1CB /* FSPageViewTransformer.swift in Sources */,
 				7AB377542A862E2B005BD1CB /* FSPagerView.swift in Sources */,
+				7AF2BCF32A9DEF770067C8A2 /* OrderOperationViewController.swift in Sources */,
 				7AD08BE62A8A083B000B247E /* NibOwnerLoadable.swift in Sources */,
 				7ABF24A32A93EE39008D7001 /* APPHUD.swift in Sources */,
 				7AD08BE42A8A083B000B247E /* BindingExtension.swift in Sources */,

@@ -129,7 +129,7 @@ class ContactOtherController: UIViewController, HomeNavigationble {
         view.backgroundColor = .white
         setupNavigationbar()
         setupChildVCStyle()
-        headerView?.titleLabel.text = "home_joinGuaranty".toMultilingualism()
+        headerView?.titleLabel.text = "联系对方".toMultilingualism()
         headerView?.backgroundColor = .white
         headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
             self?.navigationController?.popViewController(animated: true)

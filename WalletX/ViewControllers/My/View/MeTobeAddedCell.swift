@@ -8,7 +8,7 @@
 import UIKit
 
 class MeTobeAddedCell: UITableViewCell {
-
+    
     @IBOutlet weak var guaranteeIdDesLabel: UILabel! {
         didSet {
             guaranteeIdDesLabel.text = "担保ID".toMultilingualism()
@@ -40,7 +40,7 @@ class MeTobeAddedCell: UITableViewCell {
             meDesLabel.minimumScaleFactor = 0.4
         }
     }
-
+    
     @IBOutlet weak var meIdDesLabel2: UILabel! {
         didSet {
             meIdDesLabel2.text = "参与人".toMultilingualism()
@@ -96,41 +96,25 @@ class MeTobeAddedCell: UITableViewCell {
     
     @IBOutlet weak var contactButton: UIButton! {
         didSet {
-            contactButton.setTitle("联系对方".toMultilingualism(), for: .normal)
-            contactButton.layer.cornerRadius = 10
-            contactButton.layer.borderWidth = 1
-            contactButton.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
-            contactButton.titleLabel?.minimumScaleFactor = 0.5
-            contactButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+            contactButton.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
         }
     }
     
     @IBOutlet weak var cancelButton: UIButton! {
         didSet {
-            cancelButton.setTitle("取消担保".toMultilingualism(), for: .normal)
-            cancelButton.layer.cornerRadius = 10
-            cancelButton.layer.borderWidth = 1
-            cancelButton.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
-            cancelButton.titleLabel?.minimumScaleFactor = 0.5
-            cancelButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+            cancelButton.setupAPPUIHollowStyle(title: "取消担保".toMultilingualism())
         }
     }
     
     @IBOutlet weak var modifyButton: UIButton! {
         didSet {
-            modifyButton.setTitle("修改信息".toMultilingualism(), for: .normal)
-            modifyButton.layer.cornerRadius = 10
-            modifyButton.titleLabel?.minimumScaleFactor = 0.5
-            modifyButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+            modifyButton.setupAPPUISolidStyle(title: "修改信息".toMultilingualism())
         }
     }
     
     @IBOutlet weak var inviteButton: UIButton! {
         didSet {
-            inviteButton.setTitle("邀请对方".toMultilingualism(), for: .normal)
-            inviteButton.layer.cornerRadius = 10
-            inviteButton.titleLabel?.minimumScaleFactor = 0.5
-            inviteButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+            inviteButton.setupAPPUISolidStyle(title: "邀请对方".toMultilingualism())
         }
     }
     
@@ -156,7 +140,7 @@ class MeTobeAddedCell: UITableViewCell {
                     buttonStackView.addArrangedSubview(cancelButton)
                 }
             }
-           
+            
             if modifyButton != nil {
                 if !buttonStackView.arrangedSubviews.contains(modifyButton) {
                     buttonStackView.addArrangedSubview(modifyButton)
@@ -166,10 +150,14 @@ class MeTobeAddedCell: UITableViewCell {
         }
         
         if state == .depositing {
-            buttonStackView.removeArrangedSubview(cancelButton)
-            cancelButton.removeFromSuperview()
-            buttonStackView.removeArrangedSubview(modifyButton)
-            modifyButton.removeFromSuperview()
+            if cancelButton != nil {
+                buttonStackView.removeArrangedSubview(cancelButton)
+                cancelButton.removeFromSuperview()
+            }
+            if modifyButton != nil {
+                buttonStackView.removeArrangedSubview(modifyButton)
+                modifyButton.removeFromSuperview()
+            }
             inviteButton.setTitle("我来上押".toMultilingualism(), for: .normal)
         }
     }
@@ -196,7 +184,12 @@ class MeTobeAddedCell: UITableViewCell {
             if this.inviteButton.titleLabel?.text == "我来上押".toMultilingualism() {
                 
                 DepositingAlterView.show().subscribe(onNext: { index in
-                   
+                    
+                    if index == 1 {
+                        let vc: DepositingDetailController = ViewLoader.Storyboard.controller(from: "Me")
+                        vc.hidesBottomBarWhenPushed = true
+                        UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+                    }
                     
                 }).disposed(by: this.rx.disposeBag)
             }

@@ -138,4 +138,18 @@
     "稍后再说": "Lock Method",
     "等待创建多签钱包中": "Waiting for creating...",
     "等待多签钱包创建中内容": "We are creating multisig wallet for you now, please wait a while.",
+    "上传押金": "Deposit Transfer",
+    "上押小喇叭提示": "Based on blockchain 2/3 multi-sig wallet, keep your deposit funds 100% safe.",
+    "钱包地址": "Address",
+    "站内钱包导入": "Inner-wallet Transfer",
+    "我已完成上押": "Already Deposited",
+    "我知道啦": "Got It",
+    "什么是2-3钱包": "What is blockchain 2/3 multi-sig wallet ?",
+    "什么是2-3钱包内容": "Multi-sig wallet is a cryptocurrency wallet controlled by blockchain smart contract. No one can transfer out the funds in the multi-sig wallet excepting there are already multiple signatures more than the minimum requirement.\n\nThe 2/3 multi-sig wallet we used here is controlled together by three parties (initiator, participant and operator/us). The funds in this multi-sig wallet only can be transferred out if there are at least two of three parties already agreed and signatured.",
+    "您已经完成押金上传了吗": "Did you already transfer all the deposit to us?",
+    "您已经完成押金上传了吗内容": "Please confirm that all depoist already completed before you click 'Finished';\nIt will affect your account's credit score if you click 'Finished' but you didn't transfer enough funds to deposit.",
+    "申请解押": "Request Release",
+    "撤销申请": "Cancel Request",
+    "处理解押": "Process Now",
+    
 }
