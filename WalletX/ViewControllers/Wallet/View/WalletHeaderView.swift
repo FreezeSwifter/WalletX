@@ -90,7 +90,9 @@ class WalletHeaderView: UIView {
         }).disposed(by: rx.disposeBag)
         
         topButton2.rx.tap.subscribe(onNext: { _ in
-            
+            let vc: WalletManagementController = WalletManagementController()
+            vc.hidesBottomBarWhenPushed = true
+            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: rx.disposeBag)
     }
 }

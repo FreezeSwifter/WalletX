@@ -67,7 +67,15 @@ extension SelectedTokenController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    
+        
+        if indexPath.row == 0 {
+            let vc: SendTokenPageOneController = ViewLoader.Storyboard.controller(from: "Wallet")
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        if indexPath.row == 1 {
+            let vc: ReceiveTokenController = ViewLoader.Storyboard.controller(from: "Wallet")
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 

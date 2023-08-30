@@ -10,12 +10,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HomeNavigationBarView" customModule="WalletX" customModuleProvider="target">
+        <view contentMode="scaleToFill" ambiguous="YES" id="iN0-l3-epB" customClass="HomeNavigationBarView" customModule="WalletX" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="483" height="62"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeh-xP-3Dd">
-                    <rect key="frame" x="16" y="20" width="22" height="22"/>
+                    <rect key="frame" x="16" y="-10" width="22" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="hRX-9w-wbC"/>
                         <constraint firstAttribute="width" constant="22" id="j0U-6j-HwK"/>
@@ -23,49 +23,53 @@
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" image="guarantee_setting"/>
                 </button>
-                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="Pew-B1-j0C">
-                    <rect key="frame" x="301" y="20" width="166" height="22"/>
+                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Pew-B1-j0C">
+                    <rect key="frame" x="257" y="-14" width="202" height="30"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tTR-ru-ke5">
-                            <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tTR-ru-ke5">
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="22" id="2io-9L-yvR"/>
-                                <constraint firstAttribute="height" constant="22" id="A5b-YZ-XhX"/>
+                                <constraint firstAttribute="width" constant="40" id="2io-9L-yvR"/>
+                                <constraint firstAttribute="height" constant="30" id="A5b-YZ-XhX"/>
                             </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="Button" image="navigation_back_link"/>
+                            <state key="normal" image="navigation_back_link"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jh0-CC-COh">
-                            <rect key="frame" x="48" y="0.0" width="22" height="22"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jh0-CC-COh">
+                            <rect key="frame" x="60" y="0.0" width="40" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="22" id="Hqn-AV-aDh"/>
-                                <constraint firstAttribute="width" constant="22" id="Pm9-yW-VTf"/>
+                                <constraint firstAttribute="height" constant="30" id="Hqn-AV-aDh"/>
+                                <constraint firstAttribute="width" constant="40" id="Pm9-yW-VTf"/>
                             </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="Button" image="guarantee_share"/>
+                            <state key="normal" image="guarantee_share"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R30-v1-Xrz">
-                            <rect key="frame" x="96" y="0.0" width="22" height="22"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R30-v1-Xrz">
+                            <rect key="frame" x="120" y="0.0" width="40" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="22" id="UwZ-aP-8Rv"/>
-                                <constraint firstAttribute="width" constant="22" id="tGw-9H-JxS"/>
+                                <constraint firstAttribute="height" constant="30" id="UwZ-aP-8Rv"/>
+                                <constraint firstAttribute="width" constant="40" id="tGw-9H-JxS"/>
                             </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="Button" image="guarantee_service"/>
+                            <state key="normal" image="guarantee_service"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHH-yV-qBG">
-                            <rect key="frame" x="144" y="0.0" width="22" height="22"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHH-yV-qBG">
+                            <rect key="frame" x="180" y="0.0" width="22" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="22" id="8lB-W8-wea"/>
-                                <constraint firstAttribute="height" constant="22" id="KwB-ec-Vtr"/>
+                                <constraint firstAttribute="width" constant="40" id="8lB-W8-wea"/>
+                                <constraint firstAttribute="height" constant="30" id="KwB-ec-Vtr"/>
                             </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="Button" image="guarantee_scan"/>
+                            <state key="normal" image="guarantee_scan"/>
                         </button>
                     </subviews>
                 </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fyx-Gi-F69">
-                    <rect key="frame" x="241.66666666666666" y="31" width="0.0" height="0.0"/>
+                    <rect key="frame" x="241.66666666666666" y="1" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
