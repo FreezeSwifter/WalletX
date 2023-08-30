@@ -16,16 +16,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsd-Ny-jTv">
-                    <rect key="frame" x="20" y="58.333333333333343" width="353" height="17"/>
+                    <rect key="frame" x="20" y="59" width="353" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet_without_wallet" translatesAutoresizingMaskIntoConstraints="NO" id="a3Q-m8-FfG">
-                    <rect key="frame" x="77.333333333333329" y="85.333333333333329" width="238.33333333333337" height="242.33333333333337"/>
+                    <rect key="frame" x="77.333333333333329" y="86.000000000000014" width="238.33333333333337" height="242.33333333333337"/>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CUs-5A-TbN">
-                    <rect key="frame" x="20" y="327.66666666666669" width="353" height="90"/>
+                    <rect key="frame" x="20" y="328.33333333333331" width="353" height="90"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPc-ac-tQr">
                             <rect key="frame" x="154.66666666666666" y="0.0" width="43.666666666666657" height="50.333333333333336"/>
@@ -34,7 +34,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ax-br-iTP">
-                            <rect key="frame" x="159" y="50.333333333333314" width="35.333333333333343" height="39.666666666666657"/>
+                            <rect key="frame" x="159" y="50.333333333333371" width="35.333333333333343" height="39.666666666666657"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                     </constraints>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kHa-fX-ine">
-                    <rect key="frame" x="20" y="432.66666666666669" width="353" height="90.000000000000057"/>
+                    <rect key="frame" x="20" y="433.33333333333331" width="353" height="89.999999999999943"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVh-du-Kyu">
                             <rect key="frame" x="154.66666666666666" y="0.0" width="43.666666666666657" height="50.333333333333336"/>
@@ -55,7 +55,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHc-rb-l6P">
-                            <rect key="frame" x="159" y="50.333333333333314" width="35.333333333333343" height="39.666666666666657"/>
+                            <rect key="frame" x="159" y="50.333333333333371" width="35.333333333333343" height="39.666666666666657"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -66,8 +66,8 @@
                         <constraint firstAttribute="height" constant="90" id="Z8B-d3-nzq"/>
                     </constraints>
                 </stackView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet_logo" translatesAutoresizingMaskIntoConstraints="NO" id="bCK-ez-BPs">
-                    <rect key="frame" x="20" y="20" width="353" height="28.333333333333329"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet_log_cn" translatesAutoresizingMaskIntoConstraints="NO" id="Ty1-B7-U6i">
+                    <rect key="frame" x="20" y="20" width="353" height="29"/>
                 </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -76,17 +76,17 @@
                 <constraint firstItem="zsd-Ny-jTv" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="4z2-Ff-vHp"/>
                 <constraint firstItem="kHa-fX-ine" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="8Xk-gp-PKj"/>
                 <constraint firstItem="kHa-fX-ine" firstAttribute="top" secondItem="CUs-5A-TbN" secondAttribute="bottom" constant="15" id="Lm4-ir-dlD"/>
+                <constraint firstItem="Ty1-B7-U6i" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="NM7-c0-281"/>
                 <constraint firstItem="a3Q-m8-FfG" firstAttribute="top" secondItem="zsd-Ny-jTv" secondAttribute="bottom" constant="10" id="OOm-6n-yJq"/>
                 <constraint firstItem="a3Q-m8-FfG" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="SeB-t1-Jr2"/>
-                <constraint firstItem="bCK-ez-BPs" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="cwM-h5-22P"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zsd-Ny-jTv" secondAttribute="trailing" constant="20" id="d8i-ph-GbK"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="kHa-fX-ine" secondAttribute="trailing" constant="20" id="flo-3F-wHp"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="CUs-5A-TbN" secondAttribute="trailing" constant="20" id="hG1-av-hjs"/>
-                <constraint firstItem="bCK-ez-BPs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="lZ1-Zx-NV3"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bCK-ez-BPs" secondAttribute="trailing" constant="20" id="mso-6N-Bw3"/>
+                <constraint firstItem="zsd-Ny-jTv" firstAttribute="top" secondItem="Ty1-B7-U6i" secondAttribute="bottom" constant="10" id="nac-op-cpE"/>
                 <constraint firstItem="CUs-5A-TbN" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="pJ1-Jy-77Q"/>
-                <constraint firstItem="zsd-Ny-jTv" firstAttribute="top" secondItem="bCK-ez-BPs" secondAttribute="bottom" constant="10" id="rdl-JI-Kvn"/>
+                <constraint firstItem="Ty1-B7-U6i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="rii-Zf-1eA"/>
                 <constraint firstItem="CUs-5A-TbN" firstAttribute="top" secondItem="a3Q-m8-FfG" secondAttribute="bottom" id="typ-C9-JSe"/>
+                <constraint firstAttribute="trailing" secondItem="Ty1-B7-U6i" secondAttribute="trailing" constant="20" id="wxS-e5-VGn"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -96,6 +96,7 @@
                 <outlet property="hasWalletLabel1" destination="YVh-du-Kyu" id="VuW-uR-Gij"/>
                 <outlet property="hasWalletLabel2" destination="vHc-rb-l6P" id="KdC-o5-Tzu"/>
                 <outlet property="hasWalletStack" destination="kHa-fX-ine" id="HJD-jg-KaC"/>
+                <outlet property="logImageView" destination="Ty1-B7-U6i" id="8lg-cP-4Qn"/>
                 <outlet property="noWaleetStack" destination="CUs-5A-TbN" id="eqA-Kr-DbI"/>
                 <outlet property="noWalletLabel1" destination="YPc-ac-tQr" id="k5F-gg-f2x"/>
                 <outlet property="noWalletLabel2" destination="2ax-br-iTP" id="QYZ-Yh-bef"/>
@@ -104,7 +105,7 @@
         </view>
     </objects>
     <resources>
-        <image name="wallet_logo" width="335.66665649414062" height="28.333333969116211"/>
+        <image name="wallet_log_cn" width="217.33332824707031" height="29"/>
         <image name="wallet_without_wallet" width="238.33332824707031" height="242.33332824707031"/>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

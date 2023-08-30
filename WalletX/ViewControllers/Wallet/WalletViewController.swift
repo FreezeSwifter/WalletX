@@ -13,9 +13,12 @@ import RxSwift
 import NSObject_Rx
 
 class WalletViewController: UIViewController, HomeNavigationble {
-
+    
     private let topOperatedView: WalletHeaderView = ViewLoader.Xib.view()
-    private let titleData: [String] = ["wallet_tokens".toMultilingualism(), "wallet_signature".toMultilingualism()]
+    
+    private var titleData: [String] {
+        return  ["wallet_tokens".toMultilingualism(), "wallet_signature".toMultilingualism()]
+    }
     
     private lazy var segmentedDataSource: JXSegmentedTitleDataSource = {
         let ds = JXSegmentedTitleDataSource()
@@ -78,6 +81,12 @@ class WalletViewController: UIViewController, HomeNavigationble {
             shareVC.hidesBottomBarWhenPushed = true
             self?.navigationController?.pushViewController(shareVC, animated: true)
         }).disposed(by: rx.disposeBag)
+        
+        
+        LanguageManager.shared().languageDidChanged.subscribe(onNext: {[weak self] _ in
+            self?.segmentedDataSource.titles = self?.titleData ?? []
+            self?.segmentedView.reloadData()
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {
@@ -125,14 +134,14 @@ class WalletViewController: UIViewController, HomeNavigationble {
         segmentedView.backgroundColor = .white
         
         // 判断是否需要展示
-        view.addSubview(noWalletView)
-        noWalletView.snp.makeConstraints { make in
-            make.top.equalTo(headerView!.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview()
-        }
-        UIView.animate(withDuration: 0.4, delay: 5) {
-            self.noWalletView.alpha = 0
-        }
+//        view.addSubview(noWalletView)
+//        noWalletView.snp.makeConstraints { make in
+//            make.top.equalTo(headerView!.snp.bottom)
+//            make.leading.trailing.bottom.equalToSuperview()
+//        }
+//        UIView.animate(withDuration: 0.4, delay: 5) {
+//            self.noWalletView.alpha = 0
+//        }
        
     }
 

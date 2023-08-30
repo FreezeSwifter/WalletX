@@ -6,10 +6,24 @@
 //
 
 import UIKit
-
+import SnapKit
+import JXSegmentedView
+import RxCocoa
+import RxSwift
+import NSObject_Rx
 
 class WalletWithoutWalletView: UIView {
     
+    @IBOutlet weak var logImageView: UIImageView! {
+        didSet {
+            switch LanguageManager.shared().currentCode {
+            case .cn:
+                logImageView.image = UIImage(named: "wallet_log_cn")
+            case .en:
+                logImageView.image = UIImage(named: "wallet_log_en")
+            }
+        }
+    }
     
     @IBOutlet weak var desLabel: UILabel! {
         didSet {
@@ -22,12 +36,16 @@ class WalletWithoutWalletView: UIView {
     @IBOutlet weak var noWaleetStack: UIStackView! {
         didSet {
             noWaleetStack.applyCornerRadius(10)
+            noWaleetStack.isUserInteractionEnabled = true
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(WalletWithoutWalletView.createWalletTap))
+            noWaleetStack.addGestureRecognizer(gesture)
         }
     }
     
     @IBOutlet weak var hasWalletStack: UIStackView! {
         didSet {
             hasWalletStack.applyCornerRadius(10)
+            hasWalletStack.isUserInteractionEnabled = true
         }
     }
     
@@ -72,6 +90,37 @@ class WalletWithoutWalletView: UIView {
     
     private func commonInit() {
         backgroundColor = ColorConfiguration.grayBg.toColor()
+        bind()
     }
     
+    private func bind() {
+        
+        LanguageManager.shared().languageDidChanged.subscribe(onNext: {[weak self] code in
+            switch code {
+            case .cn:
+                self?.logImageView.image = UIImage(named: "wallet_log_cn")
+            case .en:
+                self?.logImageView.image = UIImage(named: "wallet_log_en")
+            case .none:
+                break
+            }
+            self?.desLabel.text = "wallet_nowallet_des".toMultilingualism()
+            self?.noWalletLabel1.text = "wallet_i_have_nowallet".toMultilingualism()
+            self?.noWalletLabel2.text = "wallet_i_have_nowallet2".toMultilingualism()
+            self?.hasWalletLabel1.text = "wallet_i_have_wallet".toMultilingualism()
+            self?.hasWalletLabel2.text = "wallet_i_have_wallet2".toMultilingualism()
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    @objc
+    private func createWalletTap() {
+        let vc: CreateWalletStepOneController = ViewLoader.Storyboard.controller(from: "Wallet")
+        vc.hidesBottomBarWhenPushed = true
+        UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+    }
+   
+    @objc
+    private func importWalletTap() {
+        
+    }
 }

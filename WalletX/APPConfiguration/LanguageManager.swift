@@ -7,6 +7,9 @@
 
 import Foundation
 import MMKV
+import RxCocoa
+import RxSwift
+import NSObject_Rx
 
 enum LanguageCode: String {
     
@@ -40,9 +43,16 @@ extension String {
 @objcMembers
 class LanguageManager: NSObject {
     
+    var languageDidChanged: Observable<LanguageCode?> {
+        return languageChangedSubject.asObservable().skip { item in
+            return item == nil
+        }.observe(on: MainScheduler.instance)
+    }
+    
     private(set) var currentCode: LanguageCode = .en
     private static let instance = LanguageManager()
     private var languageDict: [String: Any] = [:]
+    private let languageChangedSubject: BehaviorSubject<LanguageCode?> = BehaviorSubject(value: nil)
     
     private override init() {
         if let loaclSave = MMKV.default()?.string(forKey: ArchivedKey.language.rawValue) as? String, let language = LanguageCode(rawValue: loaclSave){
@@ -117,7 +127,6 @@ class LanguageManager: NSObject {
         if let localizedString = languageDict[key] as? String {
             return localizedString
         }
-        
         return key
     }
     
@@ -134,6 +143,7 @@ class LanguageManager: NSObject {
         
         MMKV.default()?.set(languageCode.rawValue, forKey: ArchivedKey.language.rawValue)
         NotificationCenter.default.post(name: .languageChanged, object: nil)
+        languageChangedSubject.onNext(currentCode)
     }
 }
 

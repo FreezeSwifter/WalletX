@@ -760,8 +760,8 @@
                                                             </stackView>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="U3b-I4-Epz">
-                                                        <rect key="frame" x="353.66666666666669" y="22" width="39.333333333333314" height="14.333333333333336"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="U3b-I4-Epz">
+                                                        <rect key="frame" x="353.66666666666669" y="21.333333333333343" width="39.333333333333314" height="14.333333333333336"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_contract" translatesAutoresizingMaskIntoConstraints="NO" id="Fkv-TP-5d7">
                                                                 <rect key="frame" x="0.0" y="0.0" width="11.666666666666666" height="14.333333333333334"/>
@@ -840,6 +840,7 @@
                                                     <constraint firstItem="OaN-VA-13K" firstAttribute="leading" secondItem="NoO-TC-WOK" secondAttribute="trailing" constant="15" id="h4f-nq-vhb"/>
                                                     <constraint firstItem="aQm-QG-m6T" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Zns-9l-CQL" secondAttribute="trailing" constant="8" id="hcX-up-rB4"/>
                                                     <constraint firstItem="Ygb-cD-yRC" firstAttribute="centerY" secondItem="sWJ-eK-ViG" secondAttribute="centerY" id="mpG-RO-Gsu"/>
+                                                    <constraint firstItem="U3b-I4-Epz" firstAttribute="centerY" secondItem="sWJ-eK-ViG" secondAttribute="centerY" id="nW2-MN-eIQ"/>
                                                     <constraint firstItem="NoO-TC-WOK" firstAttribute="top" secondItem="GFN-eY-Tnf" secondAttribute="top" constant="20" id="sHj-GF-ruZ"/>
                                                     <constraint firstAttribute="height" constant="170" id="tM4-NL-qfD"/>
                                                     <constraint firstItem="Uvz-FA-ahh" firstAttribute="leading" secondItem="NoO-TC-WOK" secondAttribute="trailing" constant="15" id="tZF-JN-uS0"/>
@@ -910,7 +911,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-Ga-yb3">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-Ga-yb3" customClass="QMUIButton">
                                                         <rect key="frame" x="204.33333333333334" y="21" width="40.333333333333343" height="15"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="tintColor" red="0.25490196078431371" green="0.38431372549019605" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -922,7 +923,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="KAY-Tc-fdb">
                                                         <rect key="frame" x="88.333333333333314" y="106.66666666666669" width="80" height="18"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LvC-9Y-PuN">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LvC-9Y-PuN" customClass="QMUIButton">
                                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="18"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -930,7 +931,7 @@
                                                                     <color key="titleColor" systemColor="labelColor"/>
                                                                 </state>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RhU-Xz-3Lm">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RhU-Xz-3Lm" customClass="QMUIButton">
                                                                 <rect key="frame" x="55.000000000000014" y="0.0" width="25" height="18"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -940,7 +941,7 @@
                                                             </button>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pin-Ew-mQz">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pin-Ew-mQz" customClass="QMUIButton">
                                                         <rect key="frame" x="88.333333333333329" y="135.66666666666669" width="25" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -986,7 +987,7 @@
                                                             <constraint firstAttribute="height" constant="50" id="pKx-Zn-ENt"/>
                                                         </constraints>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hcy-1y-LNA">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hcy-1y-LNA" customClass="QMUIButton">
                                                         <rect key="frame" x="88.333333333333329" y="223.66666666666663" width="25" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -1209,6 +1210,47 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="accountButton1" destination="Pin-Ew-mQz" id="uV3-R1-Y3Q"/>
+                        <outlet property="accountButton2" destination="Hcy-1y-LNA" id="5Zc-Kx-HmQ"/>
+                        <outlet property="addressCopyButton" destination="Ugi-eW-lkF" id="oTD-8S-4R7"/>
+                        <outlet property="bottomRightButton" destination="zeD-wU-hPU" id="vt2-dq-piu"/>
+                        <outlet property="buttonLeftButton" destination="p1S-nW-1ab" id="jL7-Yb-9i1"/>
+                        <outlet property="desLabel1" destination="eRa-tP-pse" id="IXW-Re-QJN"/>
+                        <outlet property="desLabel10" destination="nFm-YB-Doa" id="rbc-mv-PeR"/>
+                        <outlet property="desLabel2" destination="aBd-k7-JGo" id="lJI-1e-ggF"/>
+                        <outlet property="desLabel3" destination="N6o-9K-1ua" id="uA8-bw-KNH"/>
+                        <outlet property="desLabel4" destination="R7m-hd-TRB" id="Y2f-px-umL"/>
+                        <outlet property="desLabel5" destination="fa6-De-Xnx" id="QcX-uT-dBZ"/>
+                        <outlet property="desLabel5Me" destination="FYH-i6-SIo" id="cjN-j5-dTE"/>
+                        <outlet property="desLabel6" destination="T0k-lE-7cY" id="oPq-L1-5rD"/>
+                        <outlet property="desLabel7" destination="5Yj-0c-pGX" id="4ac-f2-Yzx"/>
+                        <outlet property="desLabel8" destination="wAX-gw-HwF" id="2Gq-Vc-cON"/>
+                        <outlet property="desLabel9" destination="ORf-Cr-oYU" id="Wdo-EJ-cq4"/>
+                        <outlet property="explainButton" destination="hwc-Ga-yb3" id="REx-9I-ImX"/>
+                        <outlet property="protocolBg" destination="U3b-I4-Epz" id="mGq-RV-lbZ"/>
+                        <outlet property="protocolLabel" destination="h7o-SD-xlQ" id="7qx-V0-d7b"/>
+                        <outlet property="textField1" destination="kPo-Di-lZt" id="Xxz-dF-WiA"/>
+                        <outlet property="textField2" destination="Uju-cR-hU6" id="vmL-G2-c72"/>
+                        <outlet property="textFieldBg1" destination="JQs-Wq-Rax" id="hRR-S5-Cy8"/>
+                        <outlet property="textFieldBg2" destination="bR6-eB-XAV" id="ANe-KY-9sq"/>
+                        <outlet property="tradeCancelButton" destination="RhU-Xz-3Lm" id="Y7k-eR-0Af"/>
+                        <outlet property="tradeCompletedButton" destination="LvC-9Y-PuN" id="Lc4-ky-9aW"/>
+                        <outlet property="valueLabel1" destination="sWJ-eK-ViG" id="HYt-2j-py2"/>
+                        <outlet property="valueLabel1State" destination="Ygb-cD-yRC" id="Gl0-sw-kqD"/>
+                        <outlet property="valueLabel2" destination="m7R-34-VA5" id="I26-qZ-qXQ"/>
+                        <outlet property="valueLabel3" destination="OaN-VA-13K" id="H2Q-Q0-gPy"/>
+                        <outlet property="valueLabel4" destination="Uvz-FA-ahh" id="DqB-Vh-fU5"/>
+                        <outlet property="valueLabel4Sub" destination="CxP-Px-pJT" id="Udr-6l-gVK"/>
+                        <outlet property="valueLabel5" destination="Zns-9l-CQL" id="vS1-Hl-B3U"/>
+                        <outlet property="valueLabel5Sub" destination="aQm-QG-m6T" id="d5t-yG-OT5"/>
+                        <outlet property="valueLabel6" destination="Zbd-mG-RWp" id="buL-9e-h2W"/>
+                        <outlet property="valueLabel7" destination="lXb-FN-4fa" id="GX9-FT-elH"/>
+                        <outlet property="valueLabel8" destination="vT1-9q-R7Y" id="dP5-8R-AS9"/>
+                        <outlet property="walletBg" destination="97f-Wa-3Ub" id="Lp5-fD-pSZ"/>
+                        <outlet property="walletDesLabel" destination="9yg-4a-Cqs" id="g4C-DO-ain"/>
+                        <outlet property="walletTextField" destination="5Jj-pd-h1d" id="P5x-YF-jNF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iyF-Uz-gKO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

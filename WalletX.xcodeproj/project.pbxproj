@@ -32,6 +32,18 @@
 		7A7D4DB92A84A19B0098262F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A7D4DB72A84A19B0098262F /* Main.storyboard */; };
 		7A7D4DBB2A84A19D0098262F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A7D4DBA2A84A19D0098262F /* Assets.xcassets */; };
 		7A7D4DBE2A84A19D0098262F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A7D4DBC2A84A19D0098262F /* LaunchScreen.storyboard */; };
+		7A831C502A9F368F0086B540 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A831C4F2A9F368F0086B540 /* MessageDetailViewController.swift */; };
+		7A831C532A9F38DB0086B540 /* MessageDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A831C512A9F38DB0086B540 /* MessageDetailCell.swift */; };
+		7A831C542A9F38DB0086B540 /* MessageDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A831C522A9F38DB0086B540 /* MessageDetailCell.xib */; };
+		7A831C562A9F498E0086B540 /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A831C552A9F498E0086B540 /* Wallet.storyboard */; };
+		7A831C582A9F49C70086B540 /* CreateWalletStepOneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A831C572A9F49C70086B540 /* CreateWalletStepOneController.swift */; };
+		7A831C5A2A9F57870086B540 /* CreateWalletStepTwoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A831C592A9F57870086B540 /* CreateWalletStepTwoController.swift */; };
+		7A831C5C2A9F61000086B540 /* VerifyPhraseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A831C5B2A9F61000086B540 /* VerifyPhraseController.swift */; };
+		7A831C5F2A9F666A0086B540 /* WalletTokenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A831C5D2A9F666A0086B540 /* WalletTokenCell.swift */; };
+		7A831C602A9F666A0086B540 /* WalletTokenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A831C5E2A9F666A0086B540 /* WalletTokenCell.xib */; };
+		7A831C632A9F6B1D0086B540 /* WalletSignatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A831C612A9F6B1D0086B540 /* WalletSignatureCell.swift */; };
+		7A831C642A9F6B1D0086B540 /* WalletSignatureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A831C622A9F6B1D0086B540 /* WalletSignatureCell.xib */; };
+		7A831C662A9F6FEA0086B540 /* SelectedTokenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A831C652A9F6FEA0086B540 /* SelectedTokenController.swift */; };
 		7AB377472A8612E1005BD1CB /* QMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377462A8612E1005BD1CB /* QMUIConfigurationTemplate.m */; };
 		7AB377542A862E2B005BD1CB /* FSPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3774B2A862E2B005BD1CB /* FSPagerView.swift */; };
 		7AB377552A862E2B005BD1CB /* FSPageViewTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3774C2A862E2B005BD1CB /* FSPageViewTransformer.swift */; };
@@ -192,6 +204,18 @@
 		7A7D4DBA2A84A19D0098262F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A7D4DBD2A84A19D0098262F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A7D4DBF2A84A19D0098262F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A831C4F2A9F368F0086B540 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; };
+		7A831C512A9F38DB0086B540 /* MessageDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailCell.swift; sourceTree = "<group>"; };
+		7A831C522A9F38DB0086B540 /* MessageDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageDetailCell.xib; sourceTree = "<group>"; };
+		7A831C552A9F498E0086B540 /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
+		7A831C572A9F49C70086B540 /* CreateWalletStepOneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletStepOneController.swift; sourceTree = "<group>"; };
+		7A831C592A9F57870086B540 /* CreateWalletStepTwoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletStepTwoController.swift; sourceTree = "<group>"; };
+		7A831C5B2A9F61000086B540 /* VerifyPhraseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhraseController.swift; sourceTree = "<group>"; };
+		7A831C5D2A9F666A0086B540 /* WalletTokenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTokenCell.swift; sourceTree = "<group>"; };
+		7A831C5E2A9F666A0086B540 /* WalletTokenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletTokenCell.xib; sourceTree = "<group>"; };
+		7A831C612A9F6B1D0086B540 /* WalletSignatureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSignatureCell.swift; sourceTree = "<group>"; };
+		7A831C622A9F6B1D0086B540 /* WalletSignatureCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletSignatureCell.xib; sourceTree = "<group>"; };
+		7A831C652A9F6FEA0086B540 /* SelectedTokenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedTokenController.swift; sourceTree = "<group>"; };
 		7AB377442A8612E0005BD1CB /* WalletX-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WalletX-Bridging-Header.h"; sourceTree = "<group>"; };
 		7AB377452A8612E1005BD1CB /* QMUIConfigurationTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplate.h; sourceTree = "<group>"; };
 		7AB377462A8612E1005BD1CB /* QMUIConfigurationTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplate.m; sourceTree = "<group>"; };
@@ -354,6 +378,10 @@
 				7A2BE0872A8B774A001B2970 /* WalletHeaderView.xib */,
 				7A2BE0912A8B91AF001B2970 /* WalletWithoutWalletView.swift */,
 				7A2BE0932A8B91E0001B2970 /* WalletWithoutWalletView.xib */,
+				7A831C5D2A9F666A0086B540 /* WalletTokenCell.swift */,
+				7A831C5E2A9F666A0086B540 /* WalletTokenCell.xib */,
+				7A831C612A9F6B1D0086B540 /* WalletSignatureCell.swift */,
+				7A831C622A9F6B1D0086B540 /* WalletSignatureCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -371,6 +399,8 @@
 			children = (
 				7A647F3D2A8C85A800A4A56F /* MessageListCell.swift */,
 				7A647F3E2A8C85A800A4A56F /* MessageListCell.xib */,
+				7A831C512A9F38DB0086B540 /* MessageDetailCell.swift */,
+				7A831C522A9F38DB0086B540 /* MessageDetailCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1113,6 +1143,7 @@
 			children = (
 				7A647F3C2A8C84AB00A4A56F /* View */,
 				7AF15A142A85023300C48F39 /* MessageViewController.swift */,
+				7A831C4F2A9F368F0086B540 /* MessageDetailViewController.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -1166,6 +1197,11 @@
 				7A3B7DA02A9CAD180036199F /* ContactOtherController.swift */,
 				7AF2BCEC2A9DB32C0067C8A2 /* DepositingDetailController.swift */,
 				7AF2BCF22A9DEF770067C8A2 /* OrderOperationViewController.swift */,
+				7A831C552A9F498E0086B540 /* Wallet.storyboard */,
+				7A831C572A9F49C70086B540 /* CreateWalletStepOneController.swift */,
+				7A831C592A9F57870086B540 /* CreateWalletStepTwoController.swift */,
+				7A831C5B2A9F61000086B540 /* VerifyPhraseController.swift */,
+				7A831C652A9F6FEA0086B540 /* SelectedTokenController.swift */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -1242,6 +1278,8 @@
 			files = (
 				7ABF24A72A93F765008D7001 /* GuaranteeYesNoView.xib in Resources */,
 				7A3B7DA52A9CDCC10036199F /* DepositingAlterView.xib in Resources */,
+				7A831C602A9F666A0086B540 /* WalletTokenCell.xib in Resources */,
+				7A831C642A9F6B1D0086B540 /* WalletSignatureCell.xib in Resources */,
 				7AFB57B32A961B06003451CB /* Guarantee.storyboard in Resources */,
 				7AF2BCF12A9DD2610067C8A2 /* GuaranteeingCell.xib in Resources */,
 				7A3B7D9D2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib in Resources */,
@@ -1251,7 +1289,9 @@
 				7AC555312A94CAB90082A070 /* ScanViewController.xib in Resources */,
 				7AD08A7E2A89F380000B247E /* cn.json in Resources */,
 				7AC9E82E2A9382D7004CC21F /* ServiceProviderNotiView.xib in Resources */,
+				7A831C562A9F498E0086B540 /* Wallet.storyboard in Resources */,
 				7A2BE0942A8B91E0001B2970 /* WalletWithoutWalletView.xib in Resources */,
+				7A831C542A9F38DB0086B540 /* MessageDetailCell.xib in Resources */,
 				7A2BE0882A8B774A001B2970 /* WalletHeaderView.xib in Resources */,
 				7A3B7D962A9C70C50036199F /* MeTobeAddedCell.xib in Resources */,
 				7A7D4DBE2A84A19D0098262F /* LaunchScreen.storyboard in Resources */,
@@ -1354,12 +1394,14 @@
 				7AD08BEE2A8A0AC3000B247E /* HomeQuickAccessSecion.swift in Sources */,
 				7AD08BCF2A8A083B000B247E /* NSRangeExtension.swift in Sources */,
 				7AD08BB22A8A083B000B247E /* Constants.swift in Sources */,
+				7A831C532A9F38DB0086B540 /* MessageDetailCell.swift in Sources */,
 				7AD08BF12A8A0D64000B247E /* ServiceProviderCell.swift in Sources */,
 				7AD08BB62A8A083B000B247E /* UnitTesting.swift in Sources */,
 				7AC9E82A2A937961004CC21F /* ServiceProviderController.swift in Sources */,
 				7AFB57AE2A95F901003451CB /* NotiAlterView.swift in Sources */,
 				7A647F3F2A8C85A800A4A56F /* MessageListCell.swift in Sources */,
 				7AD08BEA2A8A083B000B247E /* AnyOptional.swift in Sources */,
+				7A831C5C2A9F61000086B540 /* VerifyPhraseController.swift in Sources */,
 				7AD08BC42A8A083B000B247E /* UIFontExtension.swift in Sources */,
 				7AD08BE12A8A083B000B247E /* SequenceExtension.swift in Sources */,
 				7AF2BCED2A9DB32C0067C8A2 /* DepositingDetailController.swift in Sources */,
@@ -1371,6 +1413,7 @@
 				7AD08BD42A8A083B000B247E /* URLExtension.swift in Sources */,
 				7AD08A822A89FAE8000B247E /* ColorConfiguration.swift in Sources */,
 				7AFB57A62A95D512003451CB /* UIApplication+Rx.swift in Sources */,
+				7A831C632A9F6B1D0086B540 /* WalletSignatureCell.swift in Sources */,
 				7AD08BDD2A8A083B000B247E /* DictionaryExtension.swift in Sources */,
 				7AD08BC52A8A083B000B247E /* UITextViewExtension.swift in Sources */,
 				7AD08BBB2A8A083B000B247E /* UIImageExtension.swift in Sources */,
@@ -1379,6 +1422,7 @@
 				7AB377542A862E2B005BD1CB /* FSPagerView.swift in Sources */,
 				7AF2BCF32A9DEF770067C8A2 /* OrderOperationViewController.swift in Sources */,
 				7AD08BE62A8A083B000B247E /* NibOwnerLoadable.swift in Sources */,
+				7A831C582A9F49C70086B540 /* CreateWalletStepOneController.swift in Sources */,
 				7ABF24A32A93EE39008D7001 /* APPHUD.swift in Sources */,
 				7AD08BE42A8A083B000B247E /* BindingExtension.swift in Sources */,
 				7AB377472A8612E1005BD1CB /* QMUIConfigurationTemplate.m in Sources */,
@@ -1393,6 +1437,7 @@
 				7AB377562A862E2B005BD1CB /* FSPagerViewCell.swift in Sources */,
 				7AB377672A869278005BD1CB /* HomeNavigationBarView.swift in Sources */,
 				7AC555212A949EB90082A070 /* ArchivedKey.swift in Sources */,
+				7A831C5F2A9F666A0086B540 /* WalletTokenCell.swift in Sources */,
 				7A2BE0862A8B773F001B2970 /* WalletHeaderView.swift in Sources */,
 				7AD08BC92A8A083B000B247E /* UIViewControllerExtension.swift in Sources */,
 				7AD08BCB2A8A083B000B247E /* UISliderExtension.swift in Sources */,
@@ -1411,6 +1456,7 @@
 				7AC9E8352A939FDF004CC21F /* GuaranteeFeesView.swift in Sources */,
 				7AD08BDB2A8A083B000B247E /* ArrayExtension.swift in Sources */,
 				7AB3776F2A87AA7B005BD1CB /* HomeBannerSection.swift in Sources */,
+				7A831C5A2A9F57870086B540 /* CreateWalletStepTwoController.swift in Sources */,
 				7AD08BE32A8A083B000B247E /* NSViewExtension.swift in Sources */,
 				7AD08BE52A8A083B000B247E /* NibLoadable.swift in Sources */,
 				7AD08BEC2A8A083B000B247E /* UIElementPreview.swift in Sources */,
@@ -1420,6 +1466,7 @@
 				7A2BE0832A8B4E3C001B2970 /* AssociatedManager.swift in Sources */,
 				7AB377742A87B025005BD1CB /* HomeQuickAccessCell.swift in Sources */,
 				7A7D4DB22A84A19B0098262F /* AppDelegate.swift in Sources */,
+				7A831C662A9F6FEA0086B540 /* SelectedTokenController.swift in Sources */,
 				7AC9E82C2A9382A6004CC21F /* ServiceProviderNotiView.swift in Sources */,
 				7AD08BCD2A8A083B000B247E /* UserDefaultsExtension.swift in Sources */,
 				7AD08BB72A8A083B000B247E /* CGFloatLiteral.swift in Sources */,
@@ -1427,6 +1474,7 @@
 				7AD08BC12A8A083B000B247E /* UIAlertControllerExtension.swift in Sources */,
 				7AF15A192A85024600C48F39 /* WalletViewController.swift in Sources */,
 				7AC555242A94B2270082A070 /* FaceIDViewController.swift in Sources */,
+				7A831C502A9F368F0086B540 /* MessageDetailViewController.swift in Sources */,
 				7AD08BB42A8A083B000B247E /* SystemUtility.swift in Sources */,
 				7AD08BBE2A8A083B000B247E /* UILabelExtension.swift in Sources */,
 				7AD08BC82A8A083B000B247E /* UICollectionViewCellExtension.swift in Sources */,

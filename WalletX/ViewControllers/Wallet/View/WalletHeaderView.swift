@@ -64,5 +64,33 @@ class WalletHeaderView: UIView {
     
     private func commonInit() {
         backgroundColor = .clear
+        
+        LanguageManager.shared().languageDidChanged.subscribe(onNext: {[weak self] _ in
+            self?.sendDesLabel.text = "wallet_send".toMultilingualism()
+            self?.receiveDesLabel.text = "wallet_receive".toMultilingualism()
+            self?.walletDesLabel.text = "wallet_deposit".toMultilingualism()
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        sendButton.rx.tap.subscribe(onNext: { _ in
+            let vc: SelectedTokenController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.hidesBottomBarWhenPushed = true
+            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
+        
+        receiveButton.rx.tap.subscribe(onNext: { _ in
+            let vc: SelectedTokenController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.hidesBottomBarWhenPushed = true
+            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
+        
+        topButton2.rx.tap.subscribe(onNext: { _ in
+            
+        }).disposed(by: rx.disposeBag)
     }
 }
