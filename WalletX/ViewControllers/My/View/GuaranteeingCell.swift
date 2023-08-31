@@ -42,7 +42,8 @@ class GuaranteeingCell: UITableViewCell {
         didSet {
             desLabel5Me.text = "我".toMultilingualism()
             desLabel5Me.layoutMargins = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-            desLabel5Me.minimumScaleFactor = 0.4
+            desLabel5Me.minimumScaleFactor = 0.5
+            desLabel5Me.adjustsFontSizeToFitWidth = true
         }
     }
     

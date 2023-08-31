@@ -91,6 +91,10 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
     
     private func bind() {
   
+        nextButton.rx.tap.subscribe(onNext: {[weak self] _ in
+            let vc: SendTokenPageTwoController = ViewLoader.Storyboard.controller(from: "Wallet")
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {

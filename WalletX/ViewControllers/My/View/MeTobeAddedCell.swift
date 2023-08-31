@@ -37,7 +37,8 @@ class MeTobeAddedCell: UITableViewCell {
         didSet {
             meDesLabel.text = "我".toMultilingualism()
             meDesLabel.layoutMargins = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-            meDesLabel.minimumScaleFactor = 0.4
+            meDesLabel.minimumScaleFactor = 0.5
+            meDesLabel.adjustsFontSizeToFitWidth = true
         }
     }
     
@@ -89,6 +90,7 @@ class MeTobeAddedCell: UITableViewCell {
         didSet {
             waitingDesLabel.text = "等待加入中".toMultilingualism()
             waitingDesLabel.minimumScaleFactor = 0.5
+            waitingDesLabel.adjustsFontSizeToFitWidth = true
         }
     }
     

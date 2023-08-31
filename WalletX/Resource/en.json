@@ -183,4 +183,13 @@
     "接收Token警告": "Send only {} to this address, or you might lose your funds.",
     "复制地址": "Copy",
     "下载": "Download",
+    "资产": "Asset",
+    "网络费用": "Network Fee",
+    "最大总计": "Max Total",
+    "确定": "OK",
+    "转账": "Transfer",
+    "日期": "Date",
+    "状态": "Status",
+    "接收者": "Recipient",
+    "在区块浏览器上查看": "View on block browser",
 }

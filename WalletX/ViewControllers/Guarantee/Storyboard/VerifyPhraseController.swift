@@ -52,7 +52,8 @@ class VerifyPhraseController: UIViewController, HomeNavigationble {
             btn.setTitle("\(i.description)  \(str)", for: .normal)
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
             btn.setTitleColor(ColorConfiguration.descriptionText.toColor(), for: .normal)
-            btn.titleLabel?.minimumScaleFactor = 0.8
+            btn.titleLabel?.minimumScaleFactor = 0.5
+            btn.titleLabel?.adjustsFontSizeToFitWidth = true
             btn.applyCornerRadius(7)
             btn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15)
             selectedLayoutView.addSubview(btn)

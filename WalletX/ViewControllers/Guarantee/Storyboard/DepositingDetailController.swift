@@ -43,7 +43,8 @@ class DepositingDetailController: UIViewController, HomeNavigationble {
         didSet {
             desLabel5Me.text = "我".toMultilingualism()
             desLabel5Me.layoutMargins = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-            desLabel5Me.minimumScaleFactor = 0.4
+            desLabel5Me.minimumScaleFactor = 0.5
+            desLabel5Me.adjustsFontSizeToFitWidth = true
         }
     }
     
@@ -82,6 +83,7 @@ class DepositingDetailController: UIViewController, HomeNavigationble {
         didSet {
             notiLabel.text = "上押小喇叭提示".toMultilingualism()
             notiLabel.minimumScaleFactor = 0.5
+            notiLabel.adjustsFontSizeToFitWidth = true
         }
     }
     

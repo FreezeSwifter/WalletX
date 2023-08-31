@@ -27,7 +27,8 @@ class WalletWithoutWalletView: UIView {
     
     @IBOutlet weak var desLabel: UILabel! {
         didSet {
-            desLabel.minimumScaleFactor = 0.8
+            desLabel.minimumScaleFactor = 0.5
+            desLabel.adjustsFontSizeToFitWidth = true
             desLabel.textColor = ColorConfiguration.descriptionText.toColor()
             desLabel.text = "wallet_nowallet_des".toMultilingualism()
         }

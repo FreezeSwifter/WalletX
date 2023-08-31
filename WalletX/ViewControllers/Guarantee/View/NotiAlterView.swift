@@ -18,14 +18,16 @@ class NotiAlterView: UIView {
     @IBOutlet weak var topLabel: UILabel! {
         didSet {
             topLabel.textColor = ColorConfiguration.blodText.toColor()
-            topLabel.minimumScaleFactor = 0.8
+            topLabel.minimumScaleFactor = 0.5
+            topLabel.adjustsFontSizeToFitWidth = true
         }
     }
     
     @IBOutlet weak var contentLabel: UILabel! {
         didSet {
             contentLabel.textColor = ColorConfiguration.blackText.toColor()
-            contentLabel.minimumScaleFactor = 0.8
+            contentLabel.minimumScaleFactor = 0.5
+            contentLabel.adjustsFontSizeToFitWidth = true
             contentLabel.font = UIFont.systemFont(ofSize: 15)
         }
     }

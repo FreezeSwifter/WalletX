@@ -76,6 +76,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
             agreeButton.setImage(UIImage(named: "guarantee_check_box2"), for: .selected)
             agreeButton.setTitleColor(ColorConfiguration.descriptionText.toColor(), for: .normal)
             agreeButton.titleLabel?.minimumScaleFactor = 0.8
+            agreeButton.titleLabel?.adjustsFontSizeToFitWidth = true
             agreeButton.centerTextAndImage(spacing: 8)
         }
     }

@@ -70,7 +70,8 @@ class HomeNavigationBarView: UIView {
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
             titleLabel.textColor = ColorConfiguration.blodText.toColor()
-            titleLabel.minimumScaleFactor = 0.8
+            titleLabel.minimumScaleFactor = 0.5
+            titleLabel.adjustsFontSizeToFitWidth = true
         }
     }
     

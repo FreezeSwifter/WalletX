@@ -169,6 +169,11 @@
 		7AF2BCF02A9DD2610067C8A2 /* GuaranteeingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF2BCEE2A9DD2610067C8A2 /* GuaranteeingCell.swift */; };
 		7AF2BCF12A9DD2610067C8A2 /* GuaranteeingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AF2BCEF2A9DD2610067C8A2 /* GuaranteeingCell.xib */; };
 		7AF2BCF32A9DEF770067C8A2 /* OrderOperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF2BCF22A9DEF770067C8A2 /* OrderOperationViewController.swift */; };
+		7AF8F23A2AA0458E00852F5B /* SendTokenPageTwoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF8F2392AA0458E00852F5B /* SendTokenPageTwoController.swift */; };
+		7AF8F23E2AA0531E00852F5B /* TokenDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF8F23D2AA0531E00852F5B /* TokenDetailController.swift */; };
+		7AF8F2412AA0548D00852F5B /* TokenDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF8F23F2AA0548D00852F5B /* TokenDetailCell.swift */; };
+		7AF8F2422AA0548D00852F5B /* TokenDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AF8F2402AA0548D00852F5B /* TokenDetailCell.xib */; };
+		7AF8F2442AA057E700852F5B /* TokenTransferDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF8F2432AA057E700852F5B /* TokenTransferDetailController.swift */; };
 		7AFB57A62A95D512003451CB /* UIApplication+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB57A52A95D511003451CB /* UIApplication+Rx.swift */; };
 		7AFB57A82A95D53A003451CB /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB57A72A95D53A003451CB /* UIViewController+Rx.swift */; };
 		7AFB57AB2A95D73F003451CB /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB57A92A95D73F003451CB /* ShareViewController.swift */; };
@@ -352,6 +357,11 @@
 		7AF2BCEE2A9DD2610067C8A2 /* GuaranteeingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuaranteeingCell.swift; sourceTree = "<group>"; };
 		7AF2BCEF2A9DD2610067C8A2 /* GuaranteeingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuaranteeingCell.xib; sourceTree = "<group>"; };
 		7AF2BCF22A9DEF770067C8A2 /* OrderOperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderOperationViewController.swift; sourceTree = "<group>"; };
+		7AF8F2392AA0458E00852F5B /* SendTokenPageTwoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTokenPageTwoController.swift; sourceTree = "<group>"; };
+		7AF8F23D2AA0531E00852F5B /* TokenDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDetailController.swift; sourceTree = "<group>"; };
+		7AF8F23F2AA0548D00852F5B /* TokenDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDetailCell.swift; sourceTree = "<group>"; };
+		7AF8F2402AA0548D00852F5B /* TokenDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenDetailCell.xib; sourceTree = "<group>"; };
+		7AF8F2432AA057E700852F5B /* TokenTransferDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenTransferDetailController.swift; sourceTree = "<group>"; };
 		7AFB57A52A95D511003451CB /* UIApplication+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Rx.swift"; sourceTree = "<group>"; };
 		7AFB57A72A95D53A003451CB /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		7AFB57A92A95D73F003451CB /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -396,6 +406,8 @@
 				7A831C622A9F6B1D0086B540 /* WalletSignatureCell.xib */,
 				7A831C692A9F76C90086B540 /* WalletManagementCell.swift */,
 				7A831C6A2A9F76C90086B540 /* WalletManagementCell.xib */,
+				7AF8F23F2AA0548D00852F5B /* TokenDetailCell.swift */,
+				7AF8F2402AA0548D00852F5B /* TokenDetailCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1170,6 +1182,7 @@
 				7A2BE08D2A8B8D51001B2970 /* WalletTokenViewController.swift */,
 				7A2BE08F2A8B8D83001B2970 /* WalletSignatureViewController.swift */,
 				7A831C672A9F75D40086B540 /* WalletManagementController.swift */,
+				7AF8F23D2AA0531E00852F5B /* TokenDetailController.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -1219,7 +1232,9 @@
 				7A831C652A9F6FEA0086B540 /* SelectedTokenController.swift */,
 				7A5866BC2A9F82C100925EEC /* ChangeNameController.swift */,
 				7A5866BE2A9FA3CA00925EEC /* SendTokenPageOneController.swift */,
+				7AF8F2392AA0458E00852F5B /* SendTokenPageTwoController.swift */,
 				7A5866C02A9FACDA00925EEC /* ReceiveTokenController.swift */,
+				7AF8F2432AA057E700852F5B /* TokenTransferDetailController.swift */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -1300,6 +1315,7 @@
 				7A831C602A9F666A0086B540 /* WalletTokenCell.xib in Resources */,
 				7A831C642A9F6B1D0086B540 /* WalletSignatureCell.xib in Resources */,
 				7AFB57B32A961B06003451CB /* Guarantee.storyboard in Resources */,
+				7AF8F2422AA0548D00852F5B /* TokenDetailCell.xib in Resources */,
 				7AF2BCF12A9DD2610067C8A2 /* GuaranteeingCell.xib in Resources */,
 				7A3B7D9D2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib in Resources */,
 				7AFB57AC2A95D73F003451CB /* ShareViewController.xib in Resources */,
@@ -1450,6 +1466,7 @@
 				7AD08BDC2A8A083B000B247E /* IntExtension.swift in Sources */,
 				7AD08BCA2A8A083B000B247E /* UITableViewExtension.swift in Sources */,
 				7A2BE0922A8B91AF001B2970 /* WalletWithoutWalletView.swift in Sources */,
+				7AF8F2442AA057E700852F5B /* TokenTransferDetailController.swift in Sources */,
 				7AD08BD32A8A083B000B247E /* BundleExtension.swift in Sources */,
 				7A2BE0902A8B8D83001B2970 /* WalletSignatureViewController.swift in Sources */,
 				7AC555302A94CAB90082A070 /* ScanViewController.swift in Sources */,
@@ -1491,6 +1508,7 @@
 				7A7D4DB22A84A19B0098262F /* AppDelegate.swift in Sources */,
 				7A831C662A9F6FEA0086B540 /* SelectedTokenController.swift in Sources */,
 				7AC9E82C2A9382A6004CC21F /* ServiceProviderNotiView.swift in Sources */,
+				7AF8F2412AA0548D00852F5B /* TokenDetailCell.swift in Sources */,
 				7AD08BCD2A8A083B000B247E /* UserDefaultsExtension.swift in Sources */,
 				7AD08BB72A8A083B000B247E /* CGFloatLiteral.swift in Sources */,
 				7AD08BDF2A8A083B000B247E /* DoubleExtension.swift in Sources */,
@@ -1503,6 +1521,7 @@
 				7AD08BC82A8A083B000B247E /* UICollectionViewCellExtension.swift in Sources */,
 				7AD08BD52A8A083B000B247E /* ReusableFormatters.swift in Sources */,
 				7AD08BE22A8A083B000B247E /* DataExtension.swift in Sources */,
+				7AF8F23E2AA0531E00852F5B /* TokenDetailController.swift in Sources */,
 				7AD08BD12A8A083B000B247E /* DateExtension.swift in Sources */,
 				7AD08BDE2A8A083B000B247E /* MutableCollectionExtension.swift in Sources */,
 				7AD08BD82A8A083B000B247E /* FileManagerExtension.swift in Sources */,
@@ -1515,6 +1534,7 @@
 				7AB93E072A8D69520098BF9E /* MeListEmptyView.swift in Sources */,
 				7AFB57A82A95D53A003451CB /* UIViewController+Rx.swift in Sources */,
 				7AD08BD02A8A083B000B247E /* ColorExtension.swift in Sources */,
+				7AF8F23A2AA0458E00852F5B /* SendTokenPageTwoController.swift in Sources */,
 				7AD08BBA2A8A083B000B247E /* CGRectExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

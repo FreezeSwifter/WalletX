@@ -61,7 +61,7 @@ class WalletViewController: UIViewController, HomeNavigationble {
         setupView()
         bind()
     }
-
+    
     private func bind() {
         headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
             let settingVC: SettingViewController = ViewLoader.Xib.controller()
@@ -82,6 +82,25 @@ class WalletViewController: UIViewController, HomeNavigationble {
             self?.navigationController?.pushViewController(shareVC, animated: true)
         }).disposed(by: rx.disposeBag)
         
+        topOperatedView.sendButton.rx.tap.subscribe(onNext: { _ in
+            let vc: SelectedTokenController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.hidesBottomBarWhenPushed = true
+            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
+        
+        topOperatedView.receiveButton.rx.tap.subscribe(onNext: { _ in
+            let vc: SelectedTokenController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.hidesBottomBarWhenPushed = true
+            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
+        
+        topOperatedView.topButton2.rx.tap.subscribe(onNext: { _ in
+            let vc: WalletManagementController = WalletManagementController()
+            vc.hidesBottomBarWhenPushed = true
+            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+        }).disposed(by: rx.disposeBag)
         
         LanguageManager.shared().languageDidChanged.subscribe(onNext: {[weak self] _ in
             self?.segmentedDataSource.titles = self?.titleData ?? []
@@ -98,10 +117,11 @@ class WalletViewController: UIViewController, HomeNavigationble {
             make.trailing.leading.equalToSuperview().inset(42)
             make.height.equalTo(220)
         }
-    
+        
         topOperatedView.topButton1.setTitle("$0.00", for: UIControl.State())
         topOperatedView.topButton1.titleLabel?.font = UIFont.systemFont(ofSize: 40, weight: .bold)
-        topOperatedView.topButton1.titleLabel?.minimumScaleFactor = 0.8
+        topOperatedView.topButton1.titleLabel?.minimumScaleFactor = 0.5
+        topOperatedView.topButton1.titleLabel?.adjustsFontSizeToFitWidth = true
         topOperatedView.topButton1.setTitleColor(ColorConfiguration.blodText.toColor(), for: UIControl.State())
         
         topOperatedView.topButton2.setTitle("Wallet Address  ", for: UIControl.State())
@@ -134,17 +154,17 @@ class WalletViewController: UIViewController, HomeNavigationble {
         segmentedView.backgroundColor = .white
         
         // 判断是否需要展示
-//        view.addSubview(noWalletView)
-//        noWalletView.snp.makeConstraints { make in
-//            make.top.equalTo(headerView!.snp.bottom)
-//            make.leading.trailing.bottom.equalToSuperview()
-//        }
-//        UIView.animate(withDuration: 0.4, delay: 5) {
-//            self.noWalletView.alpha = 0
-//        }
-       
+        //        view.addSubview(noWalletView)
+        //        noWalletView.snp.makeConstraints { make in
+        //            make.top.equalTo(headerView!.snp.bottom)
+        //            make.leading.trailing.bottom.equalToSuperview()
+        //        }
+        //        UIView.animate(withDuration: 0.4, delay: 5) {
+        //            self.noWalletView.alpha = 0
+        //        }
+        
     }
-
+    
 }
 
 
@@ -165,6 +185,6 @@ extension WalletViewController: JXSegmentedListContainerViewDataSource {
 extension WalletViewController: JXSegmentedViewDelegate {
     
     func segmentedView(_ segmentedView: JXSegmentedView, didSelectedItemAt index: Int) {
-
+        
     }
 }

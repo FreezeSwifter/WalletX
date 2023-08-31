@@ -66,7 +66,8 @@ class CreateWalletStepTwoController: UIViewController, HomeNavigationble {
             btn.setTitle("\(i.description)  \(str)", for: .normal)
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
             btn.setTitleColor(ColorConfiguration.descriptionText.toColor(), for: .normal)
-            btn.titleLabel?.minimumScaleFactor = 0.8
+            btn.titleLabel?.minimumScaleFactor = 0.5
+            btn.titleLabel?.adjustsFontSizeToFitWidth = true
             btn.applyCornerRadius(7)
             layoutView.addSubview(btn)
         }

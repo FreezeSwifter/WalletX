@@ -74,25 +74,5 @@ class WalletHeaderView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        sendButton.rx.tap.subscribe(onNext: { _ in
-            let vc: SelectedTokenController = ViewLoader.Storyboard.controller(from: "Wallet")
-            vc.hidesBottomBarWhenPushed = true
-            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
-            
-        }).disposed(by: rx.disposeBag)
-        
-        receiveButton.rx.tap.subscribe(onNext: { _ in
-            let vc: SelectedTokenController = ViewLoader.Storyboard.controller(from: "Wallet")
-            vc.hidesBottomBarWhenPushed = true
-            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
-            
-        }).disposed(by: rx.disposeBag)
-        
-        topButton2.rx.tap.subscribe(onNext: { _ in
-            let vc: WalletManagementController = WalletManagementController()
-            vc.hidesBottomBarWhenPushed = true
-            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
-        }).disposed(by: rx.disposeBag)
     }
 }
