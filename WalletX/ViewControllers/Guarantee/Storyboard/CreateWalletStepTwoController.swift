@@ -14,7 +14,7 @@ import NSObject_Rx
 
 
 class CreateWalletStepTwoController: UIViewController, HomeNavigationble {
-
+    
     @IBOutlet weak var notiLabel: UILabel! {
         didSet {
             notiLabel.text = "创建钱包第二步提醒".toMultilingualism()
@@ -51,16 +51,20 @@ class CreateWalletStepTwoController: UIViewController, HomeNavigationble {
         }
     }
     
+    private var mnemoic: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupView()
         bind()
     }
-
+    
     private func bind() {
-  
-        ["东野圭吾", "三体", "爱", "红楼梦", "理智与情感", "读书热榜", "免费榜","爱", "红楼梦", "理智与情感", "读书热榜", "免费榜"].enumerated().forEach { i, str in
+        mnemoic = LocaleWalletManager.shared().createWallet()
+        let items = mnemoic?.components(separatedBy: " ")
+        
+        items?.enumerated().forEach { i, str in
             let btn = QMUIButton(type: .custom)
             btn.backgroundColor = ColorConfiguration.homeItemBg.toColor()
             btn.setTitle("\(i.description)  \(str)", for: .normal)
@@ -74,7 +78,15 @@ class CreateWalletStepTwoController: UIViewController, HomeNavigationble {
         
         bottomButton.rx.tap.subscribe(onNext: {[weak self] _ in
             let vc: VerifyPhraseController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.mnemoicList = items ?? []
             self?.navigationController?.pushViewController(vc, animated: true)
+        }).disposed(by: rx.disposeBag)
+        
+        copyButton.rx.tap.subscribe(onNext: {[weak self] _ in
+            if let copyStr = self?.mnemoic {
+                UIPasteboard.general.string = copyStr
+                APPHUD.flash(text: "已完成".toMultilingualism())
+            }
         }).disposed(by: rx.disposeBag)
     }
     
@@ -88,7 +100,7 @@ class CreateWalletStepTwoController: UIViewController, HomeNavigationble {
         headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
             self?.navigationController?.popViewController(animated: true)
         }).disposed(by: rx.disposeBag)
-    
+        
     }
-
+    
 }

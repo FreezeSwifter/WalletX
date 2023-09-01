@@ -11,6 +11,7 @@ import RxSwift
 import QMUIKit
 import Then
 import NSObject_Rx
+import WalletCore
 
 class WalletManagementController: UIViewController, HomeNavigationble {
     
@@ -25,6 +26,8 @@ class WalletManagementController: UIViewController, HomeNavigationble {
         return tv
     }()
     
+    var datasouce: [WalletModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +36,12 @@ class WalletManagementController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
+        datasouce = LocaleWalletManager.shared().fetchLocalWalletList() ?? []
         
+        LocaleWalletManager.shared().walletDidChanged.subscribe(onNext: {[weak self] _ in
+            self?.datasouce = LocaleWalletManager.shared().fetchLocalWalletList() ?? []
+            self?.tableView.reloadData()
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {
@@ -55,9 +63,56 @@ class WalletManagementController: UIViewController, HomeNavigationble {
         
         headerView?.stackView.addArrangedSubview(headerView!.linkButton)
         headerView?.linkButton.setImage(UIImage(named: "wallet_add_new"), for: .normal)
-        headerView?.linkButton.rx.tap.subscribe(onNext: {[weak self] _ in
-            let vc: ChangeNameController = ViewLoader.Storyboard.controller(from: "Wallet")
-            self?.navigationController?.pushViewController(vc, animated: true)
+        headerView?.linkButton.rx.tap.subscribe(onNext: { _ in
+      
+            guard let topVc = AppDelegate.topViewController() else {
+                return
+            }
+            let baseHeight: CGFloat = 600
+            let width = topVc.view.bounds.width
+            let contentView: WalletWithoutWalletView = ViewLoader.Xib.view()
+            contentView.frame = CGRect(x: 0, y: 0, width: width, height: baseHeight)
+            contentView.applyCornerRadius(10, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
+            
+            let ovc = OverlayController(view: contentView)
+            contentView.ovc = ovc
+            ovc.isDismissOnMaskTouched = false
+            ovc.layoutPosition = .bottom
+            ovc.presentationStyle = .fromToBottom
+            ovc.maskStyle = .black(opacity: 0.5)
+            topVc.view.present(overlay: ovc)
+            
+            contentView.do { it in
+            
+                let tap1 = UIButton(frame: CGRect(x: 0, y: 0, width: width, height: 60))
+                it.noWaleetStack.gestureRecognizers?.forEach({ ges in
+                    it.noWaleetStack.removeGestureRecognizer(ges)
+                })
+                it.noWaleetStack.addSubview(tap1)
+                
+                tap1.rx.tap.subscribe(onNext: { _ in
+                    if let container = it.ovc {
+                        topVc.view.dissmiss(overlay: container)
+                    }
+                    let vc: CreateWalletStepOneController = ViewLoader.Storyboard.controller(from: "Wallet")
+                    UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+                }).disposed(by: ovc.rx.disposeBag)
+                
+                let tap2 = UIButton(frame: CGRect(x: 0, y: 0, width: width, height: 60))
+                it.hasWalletStack.gestureRecognizers?.forEach({ ges in
+                    it.hasWalletStack.removeGestureRecognizer(ges)
+                })
+                it.hasWalletStack.addSubview(tap2)
+                
+                tap2.rx.tap.subscribe(onNext: { _ in
+                    if let container = it.ovc {
+                        topVc.view.dissmiss(overlay: container)
+                    }
+                    let vc: ImportWalletController = ViewLoader.Storyboard.controller(from: "Wallet")
+                    UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+                }).disposed(by: ovc.rx.disposeBag)
+            }
+        
         }).disposed(by: rx.disposeBag)
         
     }
@@ -67,29 +122,42 @@ class WalletManagementController: UIViewController, HomeNavigationble {
 extension WalletManagementController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return datasouce.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WalletManagementCell", for: indexPath) as? WalletManagementCell
-        
+        let item = datasouce[indexPath.row]
+        cell?.nameLabel.text = item.name
         return cell ?? UITableViewCell()
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        let item = datasouce[indexPath.row]
+        let vc: ChangeNameController = ViewLoader.Storyboard.controller(from: "Wallet")
+        vc.changeWalletModel = item
+        vc.didSaveBlock = { m in
+            if let m1 = m {
+                LocaleWalletManager.shared().updateWalletModel(model: m1)
+            }
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let deleteAction = UIContextualAction(style: .normal, title: "删除".toMultilingualism()) { [weak self] (action, view, resultClosure) in
-            guard self != nil else {
+            guard let this = self else {
                 return
             }
             
+            let deleteItem = this.datasouce[indexPath.row]
+            this.datasouce.remove(at: indexPath.row)
+            this.tableView.reloadData()
+            LocaleWalletManager.shared().deleteWalletModel(by: deleteItem)
         }
         deleteAction.backgroundColor = UIColor(hex: "#FF5966")
         let actions = UISwipeActionsConfiguration(actions: [deleteAction])

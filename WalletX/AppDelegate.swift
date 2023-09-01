@@ -8,7 +8,6 @@
 import UIKit
 import IQKeyboardManager
 import QMUIKit
-import MMKV
 import RxCocoa
 import RxSwift
 
@@ -40,8 +39,6 @@ private
 extension AppDelegate {
     
     func commonInit() {
-        MMKV.initialize(rootDir: nil, logLevel: .none)
-        MMKV.enableAutoCleanUp(maxIdleMinutes: 10)
         
         QMUIThemeManagerCenter.defaultThemeManager.themeGenerator = { identifier -> NSObject in
             return QMUIConfigurationTemplate.init()
@@ -85,6 +82,8 @@ extension AppDelegate {
         window?.backgroundColor = .white
         window?.makeKeyAndVisible()
         
+        LocaleWalletManager.shared()
+        
     }
     
     func createTabBarItem(title: String, image: UIImage, selecteColor: UIColor, tag: Int) -> UITabBarItem {
@@ -97,7 +96,7 @@ extension AppDelegate {
 
         UIApplication.shared.rx.applicationWillEnterForeground.subscribe(onNext: { _ in
 
-            if let isOpenLock = MMKV.default()?.bool(forKey: ArchivedKey.screenLock.rawValue), isOpenLock {
+            if let isOpenLock = AppArchiveder.shared().mmkv?.bool(forKey: ArchivedKey.screenLock.rawValue), isOpenLock {
                 let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
                 faceIdVC.modalPresentationStyle = .fullScreen
                 AppDelegate.topViewController()?.present(faceIdVC, animated: true)

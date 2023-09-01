@@ -7,6 +7,7 @@
 
 import UIKit
 import Then
+import Kingfisher
 
 class HomeBannerSectionCellCollectionViewCell: UICollectionViewCell, FSPagerViewDataSource, FSPagerViewDelegate {
     
@@ -21,6 +22,8 @@ class HomeBannerSectionCellCollectionViewCell: UICollectionViewCell, FSPagerView
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
         cell.imageView?.image = UIImage.init(named: "guarantee_service")
+        let url = URL(string: "https://img2.baidu.com/it/u=1041327415,728509871&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281")
+        cell.imageView?.kf.setImage(with: url)
         return cell
     }
     

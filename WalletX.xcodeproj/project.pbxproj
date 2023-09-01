@@ -50,6 +50,7 @@
 		7A831C682A9F75D40086B540 /* WalletManagementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A831C672A9F75D40086B540 /* WalletManagementController.swift */; };
 		7A831C6B2A9F76C90086B540 /* WalletManagementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A831C692A9F76C90086B540 /* WalletManagementCell.swift */; };
 		7A831C6C2A9F76C90086B540 /* WalletManagementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A831C6A2A9F76C90086B540 /* WalletManagementCell.xib */; };
+		7AA505B02AA143C400BCE403 /* LocaleWalletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA505AF2AA143C400BCE403 /* LocaleWalletManager.swift */; };
 		7AB377472A8612E1005BD1CB /* QMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377462A8612E1005BD1CB /* QMUIConfigurationTemplate.m */; };
 		7AB377542A862E2B005BD1CB /* FSPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3774B2A862E2B005BD1CB /* FSPagerView.swift */; };
 		7AB377552A862E2B005BD1CB /* FSPageViewTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3774C2A862E2B005BD1CB /* FSPageViewTransformer.swift */; };
@@ -160,6 +161,7 @@
 		7AD08BF42A8A11D8000B247E /* HomeServiceProviderSecion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BF32A8A11D8000B247E /* HomeServiceProviderSecion.swift */; };
 		7AD08BF82A8A1495000B247E /* UIImage+Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BF72A8A1495000B247E /* UIImage+Tool.swift */; };
 		7AD08BFA2A8A15A9000B247E /* UIButton+Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BF92A8A15A9000B247E /* UIButton+Tool.swift */; };
+		7AD0C10B2AA1F49E003FCBF2 /* ImportWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD0C10A2AA1F49E003FCBF2 /* ImportWalletController.swift */; };
 		7AE94F312A96EB7D00ECEB1D /* StartGuaranteeConfirmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE94F302A96EB7D00ECEB1D /* StartGuaranteeConfirmController.swift */; };
 		7AF15A132A85022800C48F39 /* GuranteeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A122A85022800C48F39 /* GuranteeViewController.swift */; };
 		7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A142A85023300C48F39 /* MessageViewController.swift */; };
@@ -233,6 +235,7 @@
 		7A831C672A9F75D40086B540 /* WalletManagementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManagementController.swift; sourceTree = "<group>"; };
 		7A831C692A9F76C90086B540 /* WalletManagementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManagementCell.swift; sourceTree = "<group>"; };
 		7A831C6A2A9F76C90086B540 /* WalletManagementCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletManagementCell.xib; sourceTree = "<group>"; };
+		7AA505AF2AA143C400BCE403 /* LocaleWalletManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleWalletManager.swift; sourceTree = "<group>"; };
 		7AB377442A8612E0005BD1CB /* WalletX-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WalletX-Bridging-Header.h"; sourceTree = "<group>"; };
 		7AB377452A8612E1005BD1CB /* QMUIConfigurationTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplate.h; sourceTree = "<group>"; };
 		7AB377462A8612E1005BD1CB /* QMUIConfigurationTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplate.m; sourceTree = "<group>"; };
@@ -348,6 +351,7 @@
 		7AD08BF32A8A11D8000B247E /* HomeServiceProviderSecion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceProviderSecion.swift; sourceTree = "<group>"; };
 		7AD08BF72A8A1495000B247E /* UIImage+Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Tool.swift"; sourceTree = "<group>"; };
 		7AD08BF92A8A15A9000B247E /* UIButton+Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Tool.swift"; sourceTree = "<group>"; };
+		7AD0C10A2AA1F49E003FCBF2 /* ImportWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWalletController.swift; sourceTree = "<group>"; };
 		7AE94F302A96EB7D00ECEB1D /* StartGuaranteeConfirmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGuaranteeConfirmController.swift; sourceTree = "<group>"; };
 		7AF15A122A85022800C48F39 /* GuranteeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuranteeViewController.swift; sourceTree = "<group>"; };
 		7AF15A142A85023300C48F39 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -498,9 +502,10 @@
 				7A2BE0822A8B4E3C001B2970 /* AssociatedManager.swift */,
 				7AC9E8322A939F3E004CC21F /* OverlayContainerController.swift */,
 				7ABF24A22A93EE39008D7001 /* APPHUD.swift */,
-				7AC555202A949EB90082A070 /* ArchivedKey.swift */,
 				7AFB57A52A95D511003451CB /* UIApplication+Rx.swift */,
 				7AFB57A72A95D53A003451CB /* UIViewController+Rx.swift */,
+				7AC555202A949EB90082A070 /* ArchivedKey.swift */,
+				7AA505AF2AA143C400BCE403 /* LocaleWalletManager.swift */,
 			);
 			path = APPConfiguration;
 			sourceTree = "<group>";
@@ -1235,6 +1240,7 @@
 				7AF8F2392AA0458E00852F5B /* SendTokenPageTwoController.swift */,
 				7A5866C02A9FACDA00925EEC /* ReceiveTokenController.swift */,
 				7AF8F2432AA057E700852F5B /* TokenTransferDetailController.swift */,
+				7AD0C10A2AA1F49E003FCBF2 /* ImportWalletController.swift */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -1470,6 +1476,7 @@
 				7AD08BD32A8A083B000B247E /* BundleExtension.swift in Sources */,
 				7A2BE0902A8B8D83001B2970 /* WalletSignatureViewController.swift in Sources */,
 				7AC555302A94CAB90082A070 /* ScanViewController.swift in Sources */,
+				7AD0C10B2AA1F49E003FCBF2 /* ImportWalletController.swift in Sources */,
 				7AC9E8332A939F3E004CC21F /* OverlayContainerController.swift in Sources */,
 				7A3B7D992A9C990E0036199F /* MyListStatus.swift in Sources */,
 				7AB377562A862E2B005BD1CB /* FSPagerViewCell.swift in Sources */,
@@ -1533,6 +1540,7 @@
 				7AD08BD22A8A083B000B247E /* TimerExtension.swift in Sources */,
 				7AB93E072A8D69520098BF9E /* MeListEmptyView.swift in Sources */,
 				7AFB57A82A95D53A003451CB /* UIViewController+Rx.swift in Sources */,
+				7AA505B02AA143C400BCE403 /* LocaleWalletManager.swift in Sources */,
 				7AD08BD02A8A083B000B247E /* ColorExtension.swift in Sources */,
 				7AF8F23A2AA0458E00852F5B /* SendTokenPageTwoController.swift in Sources */,
 				7AD08BBA2A8A083B000B247E /* CGRectExtensions.swift in Sources */,

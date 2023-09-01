@@ -81,7 +81,7 @@ class SettingViewController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var lockSwitch: UISwitch! {
         didSet {
-            if let isOpen = MMKV.default()?.bool(forKey: ArchivedKey.screenLock.rawValue) {
+            if let isOpen = AppArchiveder.shared().mmkv?.bool(forKey: ArchivedKey.screenLock.rawValue) {
                 lockSwitch.isOn = isOpen
             }
         }
@@ -135,7 +135,7 @@ class SettingViewController: UIViewController, HomeNavigationble {
                     } else {
                         // error
                     }
-                    MMKV.default()?.set(sender.isOn, forKey: ArchivedKey.screenLock.rawValue)
+                    AppArchiveder.shared().mmkv?.set(sender.isOn, forKey: ArchivedKey.screenLock.rawValue)
                 }
             }
         } else {

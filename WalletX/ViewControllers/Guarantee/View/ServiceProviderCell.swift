@@ -68,7 +68,7 @@ class ServiceProviderCell: UICollectionViewCell {
             make.bottom.equalToSuperview()
         }
         
-        ["东野圭吾", "三体", "爱", "红楼梦", "理智与情感", "读书热榜", "免费榜"].forEach { str in
+        ["Sfodmge", "Christina", "Ashcryin", "Kyistine", "Sfodmge", "Kyistine", "Rathera", "Britishy", "Machiel"].forEach { str in
             let btn = QMUIButton(type: .custom)
             btn.backgroundColor = ColorConfiguration.homeItemBg.toColor()
             btn.setImage(UIImage(named: "tabbar_gurantee_item"), for: UIControl.State())

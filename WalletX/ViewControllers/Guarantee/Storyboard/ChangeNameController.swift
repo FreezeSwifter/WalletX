@@ -25,6 +25,8 @@ class ChangeNameController: UIViewController, HomeNavigationble {
             textField.placeholder = "请输入".toMultilingualism()
         }
     }
+    var changeWalletModel: WalletModel?
+    var didSaveBlock: ((WalletModel?) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +55,11 @@ class ChangeNameController: UIViewController, HomeNavigationble {
         headerView?.linkButton.setTitle("保存".toMultilingualism(), for: .normal)
         headerView?.linkButton.setTitleColor(ColorConfiguration.blackText.toColor(), for: .normal)
         headerView?.linkButton.rx.tap.subscribe(onNext: {[weak self] _ in
-            
+            if let str = self?.textField.text {
+                self?.changeWalletModel?.name = str
+                self?.didSaveBlock?(self?.changeWalletModel)
+                self?.navigationController?.popViewController(animated: true)
+            }
         }).disposed(by: rx.disposeBag)
     }
     

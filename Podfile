@@ -9,6 +9,8 @@ target 'WalletX' do
   pod 'SGQRCode', '4.1.0'
  
   # Network
+  pod 'Alamofire', '5.8.0'
+  pod 'Kingfisher', '6.3.1'
   
   # DataBase
   pod 'HandyJSON', '5.0.2'

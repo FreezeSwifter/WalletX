@@ -14,6 +14,8 @@ import NSObject_Rx
 
 class WalletWithoutWalletView: UIView {
     
+    weak var ovc: OverlayController?
+    
     @IBOutlet weak var logImageView: UIImageView! {
         didSet {
             switch LanguageManager.shared().currentCode {
@@ -47,6 +49,8 @@ class WalletWithoutWalletView: UIView {
         didSet {
             hasWalletStack.applyCornerRadius(10)
             hasWalletStack.isUserInteractionEnabled = true
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(WalletWithoutWalletView.importWalletTap))
+            hasWalletStack.addGestureRecognizer(gesture)
         }
     }
     
@@ -122,6 +126,8 @@ class WalletWithoutWalletView: UIView {
    
     @objc
     private func importWalletTap() {
-        
+        let vc: ImportWalletController = ViewLoader.Storyboard.controller(from: "Wallet")
+        vc.hidesBottomBarWhenPushed = true
+        UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
     }
 }

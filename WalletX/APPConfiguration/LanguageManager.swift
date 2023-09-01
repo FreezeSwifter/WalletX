@@ -55,8 +55,7 @@ class LanguageManager: NSObject {
     private let languageChangedSubject: BehaviorSubject<LanguageCode?> = BehaviorSubject(value: nil)
     
     private override init() {
-        if let loaclSave = MMKV.default()?.string(forKey: ArchivedKey.language.rawValue) as? String, let language = LanguageCode(rawValue: loaclSave){
-            
+        if let loaclSave = AppArchiveder.shared().mmkv?.string(forKey: ArchivedKey.language.rawValue) as? String, let language = LanguageCode(rawValue: loaclSave) {
             self.currentCode = language
         }
         
@@ -80,7 +79,7 @@ class LanguageManager: NSObject {
                 currentCode = .en
             }
             
-            if let localSave = MMKV.default()?.string(forKey: ArchivedKey.language.rawValue), let v = LanguageCode(rawValue: localSave) {
+            if let localSave = AppArchiveder.shared().mmkv?.string(forKey: ArchivedKey.language.rawValue), let v = LanguageCode(rawValue: localSave) {
                 currentCode = v
             }
             
@@ -101,7 +100,7 @@ class LanguageManager: NSObject {
                 currentCode = .en
             }
             
-            if let localSave = MMKV.default()?.string(forKey: ArchivedKey.language.rawValue), let v = LanguageCode(rawValue: localSave) {
+            if let localSave = AppArchiveder.shared().mmkv?.string(forKey: ArchivedKey.language.rawValue), let v = LanguageCode(rawValue: localSave) {
                 currentCode = v
             }
             if let path = Bundle.main.path(forResource: currentCode.rawValue, ofType: "json"),
@@ -141,7 +140,7 @@ class LanguageManager: NSObject {
         currentCode = languageCode
         languageDict = jsonDict
         
-        MMKV.default()?.set(languageCode.rawValue, forKey: ArchivedKey.language.rawValue)
+        AppArchiveder.shared().mmkv?.set(languageCode.rawValue, forKey: ArchivedKey.language.rawValue)
         NotificationCenter.default.post(name: .languageChanged, object: nil)
         languageChangedSubject.onNext(currentCode)
     }

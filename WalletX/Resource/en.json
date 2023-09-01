@@ -192,4 +192,13 @@
     "状态": "Status",
     "接收者": "Recipient",
     "在区块浏览器上查看": "View on block browser",
+    "验证助记词顶部提示": "Tap the words to put them next to each other in the correct order.",
+    "验证助记词错误提示": "Invalid order. Try again!",
+    "创建钱包成功": "Congratulations! Your wallet is ready!",
+    "创建钱包成功子标题": "Now you can explore Uoobal Wallet",
+    "立即体验": "Explore Now",
+    "名称": "Name",
+    "导入说明": "Typically 12(sometimes 18, 24) words separated by single spaces",
+    "导入": "Import",
+    "请输入助记词": "Please input the secret phrase",
 }

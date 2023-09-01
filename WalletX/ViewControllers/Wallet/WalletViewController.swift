@@ -106,6 +106,19 @@ class WalletViewController: UIViewController, HomeNavigationble {
             self?.segmentedDataSource.titles = self?.titleData ?? []
             self?.segmentedView.reloadData()
         }).disposed(by: rx.disposeBag)
+        
+        LocaleWalletManager.shared().walletDidChanged.observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
+            
+            if LocaleWalletManager.shared().hasWallet {
+                self?.noWalletView.alpha = 0
+            } else {
+                self?.noWalletView.alpha = 1
+            }
+            self?.topOperatedView.topButton2.setTitle(LocaleWalletManager.shared().currentWalletModel?.name ?? "Wallet Name", for: .normal)
+            self?.updateBalance()
+            
+        }).disposed(by: rx.disposeBag)
+        
     }
     
     private func setupView() {
@@ -124,7 +137,7 @@ class WalletViewController: UIViewController, HomeNavigationble {
         topOperatedView.topButton1.titleLabel?.adjustsFontSizeToFitWidth = true
         topOperatedView.topButton1.setTitleColor(ColorConfiguration.blodText.toColor(), for: UIControl.State())
         
-        topOperatedView.topButton2.setTitle("Wallet Address  ", for: UIControl.State())
+        topOperatedView.topButton2.setTitle("Wallet Name", for: UIControl.State())
         topOperatedView.topButton2.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         topOperatedView.topButton2.setTitleColor(ColorConfiguration.descriptionText.toColor(), for: UIControl.State())
         topOperatedView.topButton2.setImage(UIImage(named: "wallet_down_arrow"), for: UIControl.State())
@@ -153,18 +166,23 @@ class WalletViewController: UIViewController, HomeNavigationble {
         }
         segmentedView.backgroundColor = .white
         
-        // 判断是否需要展示
-        //        view.addSubview(noWalletView)
-        //        noWalletView.snp.makeConstraints { make in
-        //            make.top.equalTo(headerView!.snp.bottom)
-        //            make.leading.trailing.bottom.equalToSuperview()
-        //        }
-        //        UIView.animate(withDuration: 0.4, delay: 5) {
-        //            self.noWalletView.alpha = 0
-        //        }
-        
+        if !LocaleWalletManager.shared().hasWallet {
+            view.addSubview(noWalletView)
+            noWalletView.snp.makeConstraints { make in
+                make.top.equalTo(headerView!.snp.bottom)
+                make.leading.trailing.bottom.equalToSuperview()
+            }
+        }
     }
     
+    private func updateBalance() {
+        Task {
+            let json = try? await LocaleWalletManager.shared().getTRONAccount()
+            let tokenBalance = json?["balance"] as? Int64
+            let formattedBalance = Double(tokenBalance ?? 0)
+            topOperatedView.topButton1.setTitle("TRX \(String(format: "%.2f", formattedBalance))", for: .normal)
+        }
+    }
 }
 
 
