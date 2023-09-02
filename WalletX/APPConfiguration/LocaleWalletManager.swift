@@ -11,7 +11,6 @@ import RxCocoa
 import RxSwift
 import Alamofire
 
-
 final class LocaleWalletManager {
     
     @discardableResult
@@ -57,14 +56,21 @@ final class LocaleWalletManager {
         }
         
         TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
-        if let tron = TRON?.address {
-            USDT = .usdt("\(usdtContractAddress)-\(tron)")
-        }
+        USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
         //        let derivationPath = DerivationPath(purpose: .bip44, coin: CoinType.tron.rawValue, account: 0, change: 0, address: 0)
         //        let trxPrivateKey = currentWallet?.getKey(coin: .tron, derivationPath: derivationPath.description)
         //        let tronPublicKey = trxPrivateKey!.getPublicKeySecp256k1(compressed: true)
         //        let usdtAddress = AnyAddress(publicKey: publicKey, coin: .tron)
-        
+//        TronTransferTRC20Contract
+//        let ss = currentWallet?.getKeyForCoin(coin: .tron)
+//        ss?.data
+//        let signingInput = TronSigningInput.with {
+//            $0.privateKey = ss?.data ?? Data()
+//            $0.toAddress = "toAddress"
+//            $0.contractAddress = usdtContractAddress
+//            $0.transaction
+//        }
+
     }
     
     func importWallet(mnemonic: String, walletName: String) -> Bool {
@@ -94,18 +100,21 @@ final class LocaleWalletManager {
         
         currentWallet = wallet
         TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
-        if let tron = TRON?.address {
-            USDT = .usdt("\(usdtContractAddress)-\(tron)")
-        }
+        USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
+    
         return newMnemoic
     }
     
     
-    func save() {
+    func save(isNotActiveAccount: Bool = false) {
         if let jsonData = try? JSONEncoder().encode(wallets) {
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 AppArchiveder.shared().mmkv?.set(jsonString, forKey: ArchivedKey.walletList.rawValue)
                 walletDidChangedSubject.onNext(())
+                
+                if isNotActiveAccount {
+                    activationAccount()
+                }
             }
         }
     }
@@ -161,16 +170,17 @@ final class LocaleWalletManager {
         wallets = []
     }
     
-    func updateWalletModel(model: WalletModel) {
+    func updateWalletModel(model: WalletModel, isNotActiveAccount: Bool = false) {
         if let updateIndex = wallets.firstIndex(where: { item in
             return model.mnemoic == item.mnemoic
         }) {
             wallets[updateIndex] = model
-            save()
+            save(isNotActiveAccount: isNotActiveAccount)
         }
     }
     
-    func getAccount(walletToken: WalletToken) async throws -> [String: Any]? {
+    // 获取trx数量
+    func getTRONBalance() async throws -> Double? {
         let tronURL = "https://api.shasta.trongrid.io/wallet/getaccount"
         let headers: HTTPHeaders = [
             "content-type": "application/json",
@@ -179,10 +189,10 @@ final class LocaleWalletManager {
         var parameters: [String: Any] = [
             "visible": true
         ]
-        guard let tron = walletToken.address else {
+        guard let address = TRON?.address else {
             return nil
         }
-        parameters.updateValue("TZ4UXDV5ZhNW7fb2AMSbgfAEZ7hWsnYS2g", forKey: "address")
+        parameters.updateValue(address, forKey: "address")
         
         return try await withCheckedThrowingContinuation { continuation in
             
@@ -191,7 +201,10 @@ final class LocaleWalletManager {
                 switch response.result {
                 case .success:
                     if let data = try? JSONSerialization.jsonObject(with: response.data ?? Data(), options: []) as? [String: Any] {
-                        continuation.resume(returning: data)
+                        
+                        let tokenBalance = data["balance"] as? Int64
+                        let formattedBalance = Double(tokenBalance ?? 0)
+                        continuation.resume(returning: formattedBalance)
                     } else {
                         let error = NSError(domain: "ResponseError", code: -113, userInfo: nil)
                         continuation.resume(throwing: error)
@@ -202,6 +215,79 @@ final class LocaleWalletManager {
                 }
             }
         }
+    }
+    
+    
+    func getUSDTBalance() async throws -> Double? {
+        
+        guard let address = USDT?.address else {
+            return nil
+        }
+        
+        let url = "https://api.shasta.trongrid.io/accounts/\(address)"
+        let headers: HTTPHeaders = [
+            "content-type": "application/json",
+            "accept": "application/json"
+        ]
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            
+            AF.request(url, method: .get, headers: headers).responseDecodable(of: Empty.self) { response in
+                
+                switch response.result {
+                case .success:
+                    if let data = try? JSONSerialization.jsonObject(with: response.data ?? Data(), options: []) as? [String: Any] {
+                        
+                      
+                        continuation.resume(returning: 0.00)
+                    } else {
+                        let error = NSError(domain: "ResponseError", code: -113, userInfo: nil)
+                        continuation.resume(throwing: error)
+                    }
+                    
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+    
+    private func activationAccount() {
+        
+        guard let address = TRON?.address else {
+            return
+        }
+        
+        let headers = [
+          "accept": "application/json",
+          "content-type": "application/json"
+        ]
+        let parameters = [
+          "owner_address": "TZ4UXDV5ZhNW7fb2AMSbgfAEZ7hWsnYS2g",
+          "account_address": address,
+          "visible": true
+        ] as [String : Any]
+
+        let postData = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.shasta.trongrid.io/wallet/createaccount")! as URL,
+                                                cachePolicy: .useProtocolCachePolicy,
+                                            timeoutInterval: 10.0)
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = headers
+        request.httpBody = postData ?? Data()
+
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+          if (error != nil) {
+            print(error as Any)
+          } else {
+              if let data = try? JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any] {
+                 print(data)
+              }
+          }
+        })
+        dataTask.resume()
     }
 }
 

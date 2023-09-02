@@ -187,10 +187,8 @@ class WalletViewController: UIViewController, HomeNavigationble {
     
     private func updateBalance() {
         Task {
-            let json = try? await LocaleWalletManager.shared().getAccount(walletToken: .tron(LocaleWalletManager.shared().TRON?.address))
-            let tokenBalance = json?["balance"] as? Int64
-            let formattedBalance = Double(tokenBalance ?? 0)
-            topOperatedView.topButton1.setTitle("TRX \(String(format: "%.2f", formattedBalance))", for: .normal)
+            let formattedBalance = try? await LocaleWalletManager.shared().getTRONBalance()
+            topOperatedView.topButton1.setTitle("TRX \(String(format: "%.2f", formattedBalance ?? 0.00))", for: .normal)
         }
     }
 }

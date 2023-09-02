@@ -86,7 +86,7 @@ class VerifyPhraseController: UIViewController, HomeNavigationble {
                 
                 GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: "创建钱包成功".toMultilingualism(), titleIcon: nil, content: "创建钱包成功子标题".toMultilingualism(), leftButton: nil,rightButton: "立即体验".toMultilingualism()).subscribe(onNext: { index in
                
-                    LocaleWalletManager.shared().save()
+                    LocaleWalletManager.shared().save(isNotActiveAccount: true)
                     this.navigationController?.popToRootViewController(animated: true)
                     
                 }).disposed(by: this.rx.disposeBag)

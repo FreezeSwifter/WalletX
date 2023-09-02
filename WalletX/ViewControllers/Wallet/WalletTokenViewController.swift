@@ -46,7 +46,7 @@ class WalletTokenViewController: UIViewController, JXSegmentedListContainerViewL
     
     private func bind() {
         LocaleWalletManager.shared().walletDidChanged.observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
-            
+            self?.datasource.removeAll()
             if !LocaleWalletManager.shared().hasWallet { return }
             if let usdt = LocaleWalletManager.shared().USDT {
                 self?.datasource.append(usdt)
@@ -84,14 +84,12 @@ extension WalletTokenViewController: UITableViewDataSource {
         cell?.iconImageView.image = item.iconImage
         cell?.tokenLabel.text = item.tokenName
         Task {
-            let json = try? await LocaleWalletManager.shared().getAccount(walletToken: .tron(LocaleWalletManager.shared().TRON?.address))
-            let tokenBalance = json?["balance"] as? Int64
-            let formattedBalance = Double(tokenBalance ?? 0)
+            let formattedBalance = try? await LocaleWalletManager.shared().getTRONBalance()
             switch item {
             case .tron:
-                cell?.countLabel.text = String(format: "%.2f", formattedBalance)
+                cell?.countLabel.text = String(format: "%.2f", formattedBalance ?? 0.00)
             case .usdt:
-                cell?.countLabel.text = "0"
+                cell?.countLabel.text = "0.00"
             }
         }
         cell?.priceLabel.text = nil

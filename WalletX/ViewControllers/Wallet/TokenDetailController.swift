@@ -38,11 +38,9 @@ class TokenDetailController: UIViewController, HomeNavigationble {
     
     private func bind() {
         Task {
-            guard let model = item else { return }
-            let json = try? await LocaleWalletManager.shared().getAccount(walletToken: model)
-            let tokenBalance = json?["balance"] as? Int64
-            let formattedBalance = Double(tokenBalance ?? 0)
-            topOperatedView.topButton2.setTitle("TRX \(String(format: "%.2f", formattedBalance))", for: .normal)
+            guard item != nil else { return }
+            let formattedBalance = try? await LocaleWalletManager.shared().getTRONBalance()
+            topOperatedView.topButton2.setTitle("TRX \(String(format: "%.2f", formattedBalance ?? 0.00))", for: .normal)
         }
         
         topOperatedView.receiveButton.rx.tap.subscribe(onNext: {[weak self] _ in
