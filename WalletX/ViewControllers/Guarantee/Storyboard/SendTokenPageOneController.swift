@@ -14,6 +14,8 @@ import NSObject_Rx
 
 class SendTokenPageOneController: UIViewController, HomeNavigationble {
 
+    var model: WalletToken?
+    
     @IBOutlet weak var desLabel1: UILabel! {
         didSet {
             desLabel1.text = "收款地址".toMultilingualism()

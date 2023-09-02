@@ -84,6 +84,7 @@ class WalletViewController: UIViewController, HomeNavigationble {
         
         topOperatedView.sendButton.rx.tap.subscribe(onNext: { _ in
             let vc: SelectedTokenController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.operationType = .send
             vc.hidesBottomBarWhenPushed = true
             UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
             
@@ -91,6 +92,7 @@ class WalletViewController: UIViewController, HomeNavigationble {
         
         topOperatedView.receiveButton.rx.tap.subscribe(onNext: { _ in
             let vc: SelectedTokenController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.operationType = .receive
             vc.hidesBottomBarWhenPushed = true
             UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
             
@@ -108,14 +110,16 @@ class WalletViewController: UIViewController, HomeNavigationble {
         }).disposed(by: rx.disposeBag)
         
         LocaleWalletManager.shared().walletDidChanged.observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
-            
+            guard let this = self else { return }
             if LocaleWalletManager.shared().hasWallet {
-                self?.noWalletView.alpha = 0
+                this.view.sendSubviewToBack(this.noWalletView)
+                this.noWalletView.alpha = 0
             } else {
-                self?.noWalletView.alpha = 1
+                this.view.bringSubviewToFront(this.noWalletView)
+                this.noWalletView.alpha = 1
             }
-            self?.topOperatedView.topButton2.setTitle(LocaleWalletManager.shared().currentWalletModel?.name ?? "Wallet Name", for: .normal)
-            self?.updateBalance()
+            this.topOperatedView.topButton2.setTitle(LocaleWalletManager.shared().currentWalletModel?.name ?? "Wallet", for: .normal)
+            this.updateBalance()
             
         }).disposed(by: rx.disposeBag)
         
@@ -166,18 +170,24 @@ class WalletViewController: UIViewController, HomeNavigationble {
         }
         segmentedView.backgroundColor = .white
         
-        if !LocaleWalletManager.shared().hasWallet {
-            view.addSubview(noWalletView)
-            noWalletView.snp.makeConstraints { make in
-                make.top.equalTo(headerView!.snp.bottom)
-                make.leading.trailing.bottom.equalToSuperview()
-            }
+        view.addSubview(noWalletView)
+        noWalletView.snp.makeConstraints { make in
+            make.top.equalTo(headerView!.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        if LocaleWalletManager.shared().hasWallet {
+            view.sendSubviewToBack(noWalletView)
+            noWalletView.alpha = 0
+        } else {
+            view.bringSubviewToFront(noWalletView)
+            noWalletView.alpha = 1
         }
     }
     
     private func updateBalance() {
         Task {
-            let json = try? await LocaleWalletManager.shared().getTRONAccount()
+            let json = try? await LocaleWalletManager.shared().getAccount(walletToken: .tron(LocaleWalletManager.shared().TRON?.address))
             let tokenBalance = json?["balance"] as? Int64
             let formattedBalance = Double(tokenBalance ?? 0)
             topOperatedView.topButton1.setTitle("TRX \(String(format: "%.2f", formattedBalance))", for: .normal)

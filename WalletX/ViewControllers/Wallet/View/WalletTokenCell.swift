@@ -22,6 +22,7 @@ class WalletTokenCell: UITableViewCell {
     @IBOutlet weak var countLabel: UILabel!
     
     @IBOutlet weak var countPriceLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none

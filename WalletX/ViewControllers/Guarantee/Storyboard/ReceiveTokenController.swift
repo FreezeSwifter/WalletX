@@ -11,8 +11,12 @@ import RxSwift
 import QMUIKit
 import Then
 import NSObject_Rx
+import Photos
+
 
 class ReceiveTokenController: UIViewController, HomeNavigationble {
+    
+    var model: WalletToken?
     
     @IBOutlet weak var bgView: UIView! {
         didSet {
@@ -77,6 +81,9 @@ class ReceiveTokenController: UIViewController, HomeNavigationble {
             button2Label.text = "下载".toMultilingualism()
         }
     }
+    
+    @IBOutlet weak var addressLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -85,18 +92,67 @@ class ReceiveTokenController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
+        guard let address = model?.address else { return }
+        addressLabel.text = address
         
+        Task {
+            let image = await ScanViewController.generateQRCode(text: address, size: 700)
+            qrImageView.image = image
+        }
+        
+        button2.rx.tap.subscribe(onNext: {[weak self] _ in
+            guard let this = self, let _ = this.qrImageView.image else { return }
+            this.saveScreenshotToAlbum()
+        }).disposed(by: rx.disposeBag)
+        
+        button1.rx.tap.subscribe(onNext: { _ in
+            UIPasteboard.general.string = address
+            APPHUD.flash(text: "完成".toMultilingualism())
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {
         view.layoutIfNeeded()
         setupNavigationbar()
         setupChildVCStyle()
-        headerView?.titleLabel.text = "Token Name".toMultilingualism()
+        headerView?.titleLabel.text = model?.tokenName
         headerView?.backgroundColor = .white
         headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
             self?.navigationController?.popViewController(animated: true)
         }).disposed(by: rx.disposeBag)
     }
     
+    private func saveImageToAlbum(image: UIImage) {
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: image)
+        }) { (success, error) in
+            if success {
+                print("图片保存成功")
+            } else {
+                print("图片保存失败: \(error?.localizedDescription ?? "")")
+            }
+        }
+    }
+    
+    func saveScreenshotToAlbum() {
+        UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, false, 0.0)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
+        UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.layer.render(in: context)
+        guard let screenshot = UIGraphicsGetImageFromCurrentImageContext() else {
+            return
+        }
+        UIGraphicsEndImageContext()
+
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: screenshot)
+        }) { (success, error) in
+            if success {
+                print("截图保存成功")
+            } else {
+                print("截图保存失败: \(error?.localizedDescription ?? "")")
+            }
+        }
+    }
 }

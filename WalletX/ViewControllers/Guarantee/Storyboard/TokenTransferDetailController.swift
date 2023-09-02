@@ -13,7 +13,8 @@ import Then
 import NSObject_Rx
 
 class TokenTransferDetailController: UIViewController, HomeNavigationble {
-
+    
+    var item: WalletToken?
     
     @IBOutlet weak var topLabel: UILabel!
     

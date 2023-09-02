@@ -109,7 +109,7 @@ class CreateWalletStepOneController: UIViewController, HomeNavigationble {
     }
 
     deinit {
-        LocaleWalletManager.shared().cleanNotFinishedProcess()
+        
     }
     
     override func viewDidLoad() {

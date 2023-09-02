@@ -24,23 +24,28 @@ final class LocaleWalletManager {
     }
     
     var walletDidChanged: Observable<Void?> {
-        return walletDidChangedSubject.asObservable().skip { o in
-            return o == nil
+        return walletDidChangedSubject.asObservable().skip { entity in
+            return entity == nil
+        }
+    }
+    
+    var currentWalletModel: WalletModel? {
+        let currentIndex = AppArchiveder.shared().mmkv?.int32(forKey: ArchivedKey.currentWalletIndex.rawValue) ?? 0
+        if wallets.isEmpty {
+            return nil
+        } else {
+            return wallets[Int(currentIndex)]
         }
     }
     
     private static let instance = LocaleWalletManager()
     private(set) var currentWallet: HDWallet?
-    private(set) var addressTRON: String?
-    private(set) var addressUSDT: String?
+    private(set) var TRON: WalletToken? = .tron(nil)
+    private(set) var USDT: WalletToken? = .usdt(nil)
     private let usdtContractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
     private let walletDidChangedSubject: BehaviorSubject<Void?> = BehaviorSubject(value: nil)
     private var wallets: [WalletModel] = []
-    var currentWalletModel: WalletModel? {
-        let currentIndex = AppArchiveder.shared().mmkv?.int32(forKey: ArchivedKey.currentWalletIndex.rawValue) ?? 0
-        return wallets[Int(currentIndex)]
-    }
-    
+  
     private init() {
         
         if let walletList = fetchLocalWalletList() {
@@ -51,9 +56,9 @@ final class LocaleWalletManager {
             wallets = walletList
         }
         
-        addressTRON = currentWallet?.getAddressForCoin(coin: .tron)
-        if let tron = addressTRON {
-            addressUSDT = "\(usdtContractAddress)-\(tron)"
+        TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
+        if let tron = TRON?.address {
+            USDT = .usdt("\(usdtContractAddress)-\(tron)")
         }
         //        let derivationPath = DerivationPath(purpose: .bip44, coin: CoinType.tron.rawValue, account: 0, change: 0, address: 0)
         //        let trxPrivateKey = currentWallet?.getKey(coin: .tron, derivationPath: derivationPath.description)
@@ -83,14 +88,14 @@ final class LocaleWalletManager {
             wallets = originalArray
             
         } else {
-            let array = [WalletModel(name: "Wallet0", mnemoic: newMnemoic)]
+            let array = [WalletModel(name: "Wallet", mnemoic: newMnemoic)]
             wallets = array
         }
         
         currentWallet = wallet
-        addressTRON = currentWallet?.getAddressForCoin(coin: .tron)
-        if let tron = addressTRON {
-            addressUSDT = "\(usdtContractAddress)-\(tron)"
+        TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
+        if let tron = TRON?.address {
+            USDT = .usdt("\(usdtContractAddress)-\(tron)")
         }
         return newMnemoic
     }
@@ -137,6 +142,7 @@ final class LocaleWalletManager {
             AppArchiveder.shared().mmkv?.removeValue(forKey: ArchivedKey.walletList.rawValue)
             AppArchiveder.shared().mmkv?.removeValue(forKey: ArchivedKey.currentWalletIndex.rawValue)
             cleanNotFinishedProcess()
+            walletDidChangedSubject.onNext(())
         } else {
             
             if let jsonData = try? JSONEncoder().encode(list) {
@@ -150,8 +156,8 @@ final class LocaleWalletManager {
     
     func cleanNotFinishedProcess() {
         currentWallet = nil
-        addressTRON = nil
-        addressUSDT = nil
+        TRON = nil
+        USDT = nil
         wallets = []
     }
     
@@ -164,17 +170,20 @@ final class LocaleWalletManager {
         }
     }
     
-    func getTRONAccount() async throws -> [String: Any]? {
-        let tronAddress = addressTRON ?? ""
+    func getAccount(walletToken: WalletToken) async throws -> [String: Any]? {
         let tronURL = "https://api.shasta.trongrid.io/wallet/getaccount"
         let headers: HTTPHeaders = [
             "content-type": "application/json",
             "accept": "application/json"
         ]
-        let parameters: [String: Any] = [
-            "address": "TZ4UXDV5ZhNW7fb2AMSbgfAEZ7hWsnYS2g",
+        var parameters: [String: Any] = [
             "visible": true
         ]
+        guard let tron = walletToken.address else {
+            return nil
+        }
+        parameters.updateValue("TZ4UXDV5ZhNW7fb2AMSbgfAEZ7hWsnYS2g", forKey: "address")
+        
         return try await withCheckedThrowingContinuation { continuation in
             
             AF.request(tronURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: Empty.self) { response in
@@ -184,7 +193,7 @@ final class LocaleWalletManager {
                     if let data = try? JSONSerialization.jsonObject(with: response.data ?? Data(), options: []) as? [String: Any] {
                         continuation.resume(returning: data)
                     } else {
-                        let error = NSError(domain: "ResponseError", code: 0, userInfo: nil)
+                        let error = NSError(domain: "ResponseError", code: -113, userInfo: nil)
                         continuation.resume(throwing: error)
                     }
                     
@@ -200,4 +209,36 @@ final class LocaleWalletManager {
 struct WalletModel: Codable {
     var name: String
     let mnemoic: String
+}
+
+enum WalletToken: Equatable {
+    case tron(String?)
+    case usdt(String?)
+    
+    var tokenName: String {
+        switch self {
+        case .tron:
+            return "TRX"
+        case .usdt:
+            return "USDT"
+        }
+    }
+    
+    var address: String? {
+        switch self {
+        case .tron(let string):
+            return string
+        case .usdt(let string):
+            return string
+        }
+    }
+    
+    var iconImage: UIImage? {
+        switch self {
+        case .tron:
+            return UIImage(named: "wallet_tron_icon")
+        case .usdt:
+            return UIImage(named: "wallet_usdt_icon")
+        }
+    }
 }

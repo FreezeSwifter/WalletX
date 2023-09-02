@@ -24,6 +24,7 @@ class HomeBannerSectionCellCollectionViewCell: UICollectionViewCell, FSPagerView
         cell.imageView?.image = UIImage.init(named: "guarantee_service")
         let url = URL(string: "https://img2.baidu.com/it/u=1041327415,728509871&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281")
         cell.imageView?.kf.setImage(with: url)
+        cell.applyCornerRadius(7)
         return cell
     }
     

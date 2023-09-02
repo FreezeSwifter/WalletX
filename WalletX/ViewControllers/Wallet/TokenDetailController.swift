@@ -14,6 +14,8 @@ import NSObject_Rx
 
 class TokenDetailController: UIViewController, HomeNavigationble {
     
+    var item: WalletToken?
+    
     private let topOperatedView: WalletHeaderView = ViewLoader.Xib.view()
     
     private lazy var tableView: UITableView = {
@@ -35,7 +37,27 @@ class TokenDetailController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
+        Task {
+            guard let model = item else { return }
+            let json = try? await LocaleWalletManager.shared().getAccount(walletToken: model)
+            let tokenBalance = json?["balance"] as? Int64
+            let formattedBalance = Double(tokenBalance ?? 0)
+            topOperatedView.topButton2.setTitle("TRX \(String(format: "%.2f", formattedBalance))", for: .normal)
+        }
         
+        topOperatedView.receiveButton.rx.tap.subscribe(onNext: {[weak self] _ in
+            let vc: ReceiveTokenController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.model = self?.item
+            self?.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
+        
+        topOperatedView.sendButton.rx.tap.subscribe(onNext: {[weak self] _ in
+            let vc: SendTokenPageOneController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.model = self?.item
+            self?.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {
@@ -43,7 +65,7 @@ class TokenDetailController: UIViewController, HomeNavigationble {
         setupNavigationbar()
         setupChildVCStyle()
         view.backgroundColor = ColorConfiguration.listBg.toColor()
-        headerView?.titleLabel.text = "Token Name".toMultilingualism()
+        headerView?.titleLabel.text = item?.tokenName
         headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
             self?.navigationController?.popViewController(animated: true)
         }).disposed(by: rx.disposeBag)
@@ -60,6 +82,9 @@ class TokenDetailController: UIViewController, HomeNavigationble {
             make.top.equalTo(topOperatedView.snp.bottom).offset(10)
             make.leading.trailing.bottom.equalToSuperview()
         }
+        topOperatedView.topButton1.setImage(item?.iconImage, for: .normal)
+        topOperatedView.topButton2.titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .medium)
+        topOperatedView.topButton2.setTitleColor(ColorConfiguration.blodText.toColor(), for: .normal)
     }
 }
 
