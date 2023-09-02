@@ -14,6 +14,10 @@ import NSObject_Rx
 
 class SendTokenPageTwoController: UIViewController, HomeNavigationble {
 
+    var model: WalletToken?
+    var toAddress: String?
+    var sendCount: String?
+    
     @IBOutlet weak var topLabel: UILabel! {
         didSet {
             topLabel.text = "--"
@@ -103,13 +107,29 @@ class SendTokenPageTwoController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var valueLabel1: UILabel!
+    @IBOutlet weak var valueLabel1: UILabel! {
+        didSet {
+            valueLabel1.text = "--"
+        }
+    }
     
-    @IBOutlet weak var valueLabel2: UILabel!
+    @IBOutlet weak var valueLabel2: UILabel! {
+        didSet {
+            valueLabel2.text = "--"
+        }
+    }
     
-    @IBOutlet weak var valueLabel3: UILabel!
+    @IBOutlet weak var valueLabel3: UILabel! {
+        didSet {
+            valueLabel3.text = "--"
+        }
+    }
     
-    @IBOutlet weak var valueLabel4: UILabel!
+    @IBOutlet weak var valueLabel4: UILabel! {
+        didSet {
+            valueLabel4.text = "--"
+        }
+    }
     
     @IBOutlet weak var valueLabel5: UILabel! {
         didSet {
@@ -131,7 +151,18 @@ class SendTokenPageTwoController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
-  
+        valueLabel1.text = model?.tokenName
+        valueLabel2.text = LocaleWalletManager.shared().TRON?.address
+        valueLabel3.text = toAddress
+        valueLabel5.text = sendCount
+        
+        bottomButton.rx.tap.subscribe(onNext: {[weak self] _ in
+            guard let this = self, let amount = Int64(this.sendCount ?? "0"), let address = this.toAddress, let type = this.model else {
+                return
+            }
+            LocaleWalletManager.shared().sendToken(toAddress: address, amount: amount, coinType: type)
+            
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {

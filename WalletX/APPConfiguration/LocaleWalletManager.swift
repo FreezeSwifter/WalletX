@@ -44,7 +44,7 @@ final class LocaleWalletManager {
     private let usdtContractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
     private let walletDidChangedSubject: BehaviorSubject<Void?> = BehaviorSubject(value: nil)
     private var wallets: [WalletModel] = []
-  
+    
     private init() {
         
         if let walletList = fetchLocalWalletList() {
@@ -61,16 +61,16 @@ final class LocaleWalletManager {
         //        let trxPrivateKey = currentWallet?.getKey(coin: .tron, derivationPath: derivationPath.description)
         //        let tronPublicKey = trxPrivateKey!.getPublicKeySecp256k1(compressed: true)
         //        let usdtAddress = AnyAddress(publicKey: publicKey, coin: .tron)
-//        TronTransferTRC20Contract
-//        let ss = currentWallet?.getKeyForCoin(coin: .tron)
-//        ss?.data
-//        let signingInput = TronSigningInput.with {
-//            $0.privateKey = ss?.data ?? Data()
-//            $0.toAddress = "toAddress"
-//            $0.contractAddress = usdtContractAddress
-//            $0.transaction
-//        }
-
+        //        TronTransferTRC20Contract
+        //        let ss = currentWallet?.getKeyForCoin(coin: .tron)
+        //        ss?.data
+        //        let signingInput = TronSigningInput.with {
+        //            $0.privateKey = ss?.data ?? Data()
+        //            $0.toAddress = "toAddress"
+        //            $0.contractAddress = usdtContractAddress
+        //            $0.transaction
+        //        }
+        
     }
     
     func importWallet(mnemonic: String, walletName: String) -> Bool {
@@ -101,7 +101,7 @@ final class LocaleWalletManager {
         currentWallet = wallet
         TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
         USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
-    
+        
         return newMnemoic
     }
     
@@ -238,7 +238,7 @@ final class LocaleWalletManager {
                 case .success:
                     if let data = try? JSONSerialization.jsonObject(with: response.data ?? Data(), options: []) as? [String: Any] {
                         
-                      
+                        
                         continuation.resume(returning: 0.00)
                     } else {
                         let error = NSError(domain: "ResponseError", code: -113, userInfo: nil)
@@ -259,35 +259,74 @@ final class LocaleWalletManager {
         }
         
         let headers = [
-          "accept": "application/json",
-          "content-type": "application/json"
+            "accept": "application/json",
+            "content-type": "application/json"
         ]
         let parameters = [
-          "owner_address": "TZ4UXDV5ZhNW7fb2AMSbgfAEZ7hWsnYS2g",
-          "account_address": address,
-          "visible": true
+            "owner_address": "TZ4UXDV5ZhNW7fb2AMSbgfAEZ7hWsnYS2g",
+            "account_address": address,
+            "visible": true
         ] as [String : Any]
-
+        
         let postData = try? JSONSerialization.data(withJSONObject: parameters, options: [])
-
+        
         let request = NSMutableURLRequest(url: NSURL(string: "https://api.shasta.trongrid.io/wallet/createaccount")! as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                            timeoutInterval: 10.0)
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = headers
         request.httpBody = postData ?? Data()
-
+        
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-          if (error != nil) {
-            print(error as Any)
-          } else {
-              if let data = try? JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any] {
-                 print(data)
-              }
-          }
+            if (error != nil) {
+                print(error as Any)
+            } else {
+                if let data = try? JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any] {
+                    print(data)
+                }
+            }
         })
         dataTask.resume()
+    }
+    
+    
+    func sendToken(toAddress: String, amount: Int64, coinType: WalletToken) {
+        guard let w = currentWallet, let myAddress = TRON?.address else { return }
+        let privateKey = w.getKeyForCoin(coin: .tron)
+    
+        if coinType == .tron("") {
+            let signerInput = TronSigningInput.with {
+                $0.privateKey = privateKey.data
+                $0.transaction = TW_Tron_Proto_Transaction.with {
+                    $0.transfer = TW_Tron_Proto_TransferContract.with {
+                        $0.toAddress = toAddress
+                        $0.amount = amount
+                        $0.ownerAddress = myAddress
+                    }
+                }
+            }
+            
+            let output: TronSigningOutput = AnySigner.sign(input: signerInput, coin: .tron)
+            print(" data:   ", output.json)
+            
+        } else {
+           
+            let signerInput = TronSigningInput.with {
+                $0.privateKey = privateKey.data
+                $0.transaction = TW_Tron_Proto_Transaction.with {
+                    $0.transferTrc20Contract = TW_Tron_Proto_TransferTRC20Contract.with {
+                        $0.contractAddress = self.usdtContractAddress
+                        $0.ownerAddress = myAddress
+                        $0.toAddress = toAddress
+                        let data = withUnsafeBytes(of: amount.bigEndian) { Data($0) }
+                        $0.amount = data
+                    }
+                }
+            }
+            let output: TronSigningOutput = AnySigner.sign(input: signerInput, coin: .tron)
+            print(" data:   ", output.json)
+        }
     }
 }
 
@@ -328,3 +367,4 @@ enum WalletToken: Equatable {
         }
     }
 }
+

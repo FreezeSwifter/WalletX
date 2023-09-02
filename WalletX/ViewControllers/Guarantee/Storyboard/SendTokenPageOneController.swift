@@ -13,7 +13,7 @@ import Then
 import NSObject_Rx
 
 class SendTokenPageOneController: UIViewController, HomeNavigationble {
-
+    
     var model: WalletToken?
     
     @IBOutlet weak var desLabel1: UILabel! {
@@ -44,7 +44,6 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
         didSet {
             let img = UIImage(named: "guarantee_scan")?.qmui_image(withTintColor: ColorConfiguration.primary.toColor())
             scanButton.setImage(img, for: .normal)
-            
         }
     }
     
@@ -54,10 +53,7 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var tokenLabel: UILabel! {
-        didSet {
-        }
-    }
+    @IBOutlet weak var tokenLabel: UILabel!
     
     @IBOutlet weak var textField2: UITextField! {
         didSet {
@@ -92,9 +88,42 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
-  
+    
+        tokenLabel.text = model?.tokenName
+        headerView?.titleLabel.text = model?.tokenName
+        
+        pasteButton.rx.tap.subscribe(onNext: {[weak self] _ in
+            self?.textField.text = UIPasteboard.general.string
+        }).disposed(by: rx.disposeBag)
+        
+        allButton.rx.tap.subscribe(onNext: {[weak self] _ in
+            Task {
+                switch self?.model {
+                case .tron:
+                    let tokenCount = try await LocaleWalletManager.shared().getTRONBalance()
+                    self?.textField2.text = "\(tokenCount ?? 0)"
+            
+                case .usdt:
+                    let tokenCount = try await LocaleWalletManager.shared().getUSDTBalance()
+                    self?.textField2.text = "\(tokenCount ?? 0)"
+                default: break
+                }
+            }
+        }).disposed(by: rx.disposeBag)
+        
+        scanButton.rx.tap.subscribe(onNext: {[weak self] _ in
+            let vc = ScanViewController()
+            self?.navigationController?.pushViewController(vc, animated: true)
+            vc.scanCompletion { address in
+                self?.textField.text = address
+            }
+        }).disposed(by: rx.disposeBag)
+        
         nextButton.rx.tap.subscribe(onNext: {[weak self] _ in
             let vc: SendTokenPageTwoController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.model = self?.model
+            vc.toAddress = self?.textField.text
+            vc.sendCount = self?.textField2.text
             self?.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: rx.disposeBag)
     }
@@ -104,8 +133,6 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
         view.backgroundColor = .white
         setupNavigationbar()
         setupChildVCStyle()
-        headerView?.titleLabel.text = "Token Name".toMultilingualism()
-        headerView?.backgroundColor = .white
         headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
             self?.navigationController?.popViewController(animated: true)
         }).disposed(by: rx.disposeBag)
