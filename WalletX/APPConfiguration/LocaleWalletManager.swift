@@ -290,11 +290,42 @@ final class LocaleWalletManager {
         dataTask.resume()
     }
     
+    private func broadcastTransaction(jsonString: String) {
+        
+        guard let data = jsonString.data(using: .utf8, allowLossyConversion: false) else { return }
+        let parameters = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+        
+        
+        let headers = [
+            "accept": "application/json",
+            "content-type": "application/json"
+        ]
+        let postData = try? JSONSerialization.data(withJSONObject: parameters ?? "", options: [])
+        
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.shasta.trongrid.io/wallet/broadcasttransaction")! as URL,
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = headers
+        request.httpBody = postData ?? Data()
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error as Any)
+            } else {
+                if let data = try? JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any] {
+                    print(data)
+                }
+            }
+        })
+        dataTask.resume()
+    }
     
     func sendToken(toAddress: String, amount: Int64, coinType: WalletToken) {
         guard let w = currentWallet, let myAddress = TRON?.address else { return }
         let privateKey = w.getKeyForCoin(coin: .tron)
-    
+        
         if coinType == .tron("") {
             let signerInput = TronSigningInput.with {
                 $0.privateKey = privateKey.data
@@ -309,9 +340,10 @@ final class LocaleWalletManager {
             
             let output: TronSigningOutput = AnySigner.sign(input: signerInput, coin: .tron)
             print(" data:   ", output.json)
+            broadcastTransaction(jsonString: output.json)
             
         } else {
-           
+            
             let signerInput = TronSigningInput.with {
                 $0.privateKey = privateKey.data
                 $0.transaction = TW_Tron_Proto_Transaction.with {
@@ -326,6 +358,7 @@ final class LocaleWalletManager {
             }
             let output: TronSigningOutput = AnySigner.sign(input: signerInput, coin: .tron)
             print(" data:   ", output.json)
+            broadcastTransaction(jsonString: output.json)
         }
     }
 }

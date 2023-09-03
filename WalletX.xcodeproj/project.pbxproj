@@ -1696,6 +1696,7 @@
 				DEVELOPMENT_TEAM = P66M5767R4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalletX/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "优宝钱包";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1729,6 +1730,7 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalletX/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "优宝钱包";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

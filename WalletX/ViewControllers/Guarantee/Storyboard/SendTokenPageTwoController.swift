@@ -161,7 +161,6 @@ class SendTokenPageTwoController: UIViewController, HomeNavigationble {
                 return
             }
             LocaleWalletManager.shared().sendToken(toAddress: address, amount: amount, coinType: type)
-            
         }).disposed(by: rx.disposeBag)
     }
     
