@@ -743,7 +743,7 @@
                                         <rect key="frame" x="15" y="402.66666666666663" width="331" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7F-w3-aI2" customClass="QMUIButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="158" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="100.33333333333333" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal">
@@ -751,10 +751,18 @@
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sbw-qo-eq4" customClass="QMUIButton">
-                                                <rect key="frame" x="173" y="0.0" width="158" height="40"/>
+                                                <rect key="frame" x="115.33333333333334" y="0.0" width="100.33333333333334" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal">
+                                                    <color key="titleColor" red="0.50196078430000002" green="0.54117647059999996" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ASF-iK-QZ3" customClass="QMUIButton">
+                                                <rect key="frame" x="230.66666666666671" y="0.0" width="100.33333333333334" height="40"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="wallet_share_icon">
                                                     <color key="titleColor" red="0.50196078430000002" green="0.54117647059999996" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
@@ -764,13 +772,19 @@
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2c-S9-m1p">
-                                        <rect key="frame" x="77.666666666666671" y="452.66666666666663" width="33" height="15.666666666666686"/>
+                                        <rect key="frame" x="48.666666666666671" y="452.66666666666663" width="33" height="15.666666666666686"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.50196078431372548" green="0.54117647058823526" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lko-0o-EVh">
-                                        <rect key="frame" x="250.66666666666669" y="452.66666666666663" width="33" height="15.666666666666686"/>
+                                        <rect key="frame" x="164" y="452.66666666666663" width="33" height="15.666666666666686"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.50196078430000002" green="0.54117647059999996" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1u-Sq-6da">
+                                        <rect key="frame" x="279.33333333333331" y="452.66666666666663" width="33" height="15.666666666666686"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.54117647059999996" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -779,12 +793,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="b2c-S9-m1p" firstAttribute="centerX" secondItem="X7F-w3-aI2" secondAttribute="centerX" id="6QE-5I-mVE"/>
+                                    <constraint firstItem="m1u-Sq-6da" firstAttribute="centerY" secondItem="lko-0o-EVh" secondAttribute="centerY" id="DUj-gV-kmg"/>
                                     <constraint firstAttribute="height" constant="550" id="JwU-gj-WIw"/>
                                     <constraint firstItem="0hi-K8-aoy" firstAttribute="top" secondItem="0SB-sw-5aJ" secondAttribute="bottom" constant="80" id="KzO-Lb-x8u"/>
                                     <constraint firstItem="b2c-S9-m1p" firstAttribute="top" secondItem="0hi-K8-aoy" secondAttribute="bottom" constant="10" id="LiT-6g-diT"/>
                                     <constraint firstItem="lko-0o-EVh" firstAttribute="top" secondItem="0hi-K8-aoy" secondAttribute="bottom" constant="10" id="UYs-7p-kq9"/>
                                     <constraint firstItem="nEP-BX-X44" firstAttribute="centerX" secondItem="Ntk-6K-xuD" secondAttribute="centerX" id="WWw-En-lxY"/>
                                     <constraint firstItem="nEP-BX-X44" firstAttribute="top" secondItem="Ntk-6K-xuD" secondAttribute="top" constant="30" id="ZSV-la-vtw"/>
+                                    <constraint firstItem="m1u-Sq-6da" firstAttribute="centerX" secondItem="ASF-iK-QZ3" secondAttribute="centerX" id="c2q-aJ-Ynd"/>
                                     <constraint firstAttribute="trailing" secondItem="Kal-Q3-jeU" secondAttribute="trailing" constant="60" id="cp9-0n-lZW"/>
                                     <constraint firstAttribute="trailing" secondItem="0SB-sw-5aJ" secondAttribute="trailing" constant="15" id="daH-Bf-9L4"/>
                                     <constraint firstItem="0hi-K8-aoy" firstAttribute="leading" secondItem="Ntk-6K-xuD" secondAttribute="leading" constant="15" id="doM-lX-duv"/>
@@ -812,10 +828,12 @@
                         <outlet property="button1Label" destination="b2c-S9-m1p" id="5t2-JS-VCR"/>
                         <outlet property="button2" destination="Sbw-qo-eq4" id="pm6-BQ-scO"/>
                         <outlet property="button2Label" destination="lko-0o-EVh" id="CWP-kV-ErF"/>
+                        <outlet property="button3" destination="ASF-iK-QZ3" id="B4t-OG-ULD"/>
                         <outlet property="notiBg" destination="0SB-sw-5aJ" id="tDU-UT-S1b"/>
                         <outlet property="notiIconImageView" destination="GEf-mf-ui7" id="2VF-6y-eo6"/>
                         <outlet property="notiLabel" destination="ZMN-dI-gx5" id="cb5-zM-Jcq"/>
                         <outlet property="qrImageView" destination="nEP-BX-X44" id="F5s-zW-OkL"/>
+                        <outlet property="shareLabel" destination="m1u-Sq-6da" id="RKG-Nm-4cW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IzE-gl-imd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1326,6 +1344,7 @@
         <image name="wallet_create1" width="201" height="201"/>
         <image name="wallet_noti2" width="22" height="22"/>
         <image name="wallet_search" width="22" height="22"/>
+        <image name="wallet_share_icon" width="21" height="21"/>
         <image name="wallet_success" width="52.666667938232422" height="53.666667938232422"/>
         <image name="wallet_warning" width="15" height="15.333333015441895"/>
         <systemColor name="labelColor">

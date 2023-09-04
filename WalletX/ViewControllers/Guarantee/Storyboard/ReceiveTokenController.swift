@@ -70,6 +70,15 @@ class ReceiveTokenController: UIViewController, HomeNavigationble {
         }
     }
     
+    @IBOutlet weak var button3: QMUIButton! {
+        didSet {
+            button3.setImage(UIImage(named: "wallet_share_icon"), for: .normal)
+            button3.setBackgroundColor(color: ColorConfiguration.primary.toColor(), forState: .normal)
+            button3.clipsToBounds = true
+            button3.layer.cornerRadius = 20
+        }
+    }
+    
     @IBOutlet weak var button1Label: UILabel! {
         didSet {
             button1Label.text = "复制地址".toMultilingualism()
@@ -83,6 +92,12 @@ class ReceiveTokenController: UIViewController, HomeNavigationble {
     }
     
     @IBOutlet weak var addressLabel: UILabel!
+    
+    @IBOutlet weak var shareLabel: UILabel! {
+        didSet {
+            shareLabel.text = "share_Share".toMultilingualism()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,6 +124,12 @@ class ReceiveTokenController: UIViewController, HomeNavigationble {
             UIPasteboard.general.string = address
             APPHUD.flash(text: "完成".toMultilingualism())
         }).disposed(by: rx.disposeBag)
+        
+        button3.rx.tap.subscribe(onNext: {[weak self] _ in
+            guard let img = self?.qrImageView.image else { return }
+            self?.shareImageToTelegram(image: img)
+            
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {
@@ -134,7 +155,7 @@ class ReceiveTokenController: UIViewController, HomeNavigationble {
         }
     }
     
-    func saveScreenshotToAlbum() {
+    private func saveScreenshotToAlbum() {
         UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, false, 0.0)
         guard let context = UIGraphicsGetCurrentContext() else {
             return
@@ -144,7 +165,7 @@ class ReceiveTokenController: UIViewController, HomeNavigationble {
             return
         }
         UIGraphicsEndImageContext()
-
+        
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.creationRequestForAsset(from: screenshot)
         }) { (success, error) in
@@ -154,5 +175,29 @@ class ReceiveTokenController: UIViewController, HomeNavigationble {
                 print("截图保存失败: \(error?.localizedDescription ?? "")")
             }
         }
+    }
+    
+    private func shareImageToTelegram(image: UIImage) {
+        let activityItems: [Any] = [image]
+        
+        let activityController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        activityController.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            } else if completed {
+                print("Image shared successfully")
+            }
+        }
+        
+        // Exclude all activities except Telegram
+        activityController.excludedActivityTypes = []
+        
+        if let popoverPresentationController = activityController.popoverPresentationController {
+            popoverPresentationController.sourceView = UIApplication.topViewController()?.view
+            popoverPresentationController.sourceRect = CGRect(x: 0, y: 0, width: 1, height: 1)
+            popoverPresentationController.permittedArrowDirections = []
+        }
+        
+        UIApplication.topViewController()?.present(activityController, animated: true, completion: nil)
     }
 }
