@@ -88,7 +88,7 @@ class LanguageManager: NSObject {
                let jsonDict = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
                 languageDict = jsonDict
             } else {
-                assertionFailure("多语言JSON文件出错:\(languageCode)")
+                assertionFailure("多语言JSON文件出错:\(currentCode)")
             }
         } else {
             guard let languageCode = NSLocale.current.languageCode else {
@@ -108,7 +108,7 @@ class LanguageManager: NSObject {
                let jsonDict = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
                 languageDict = jsonDict
             } else {
-                assertionFailure("多语言JSON文件出错:\(languageCode)")
+                assertionFailure("多语言JSON文件出错:\(currentCode)")
             }
         }
     }

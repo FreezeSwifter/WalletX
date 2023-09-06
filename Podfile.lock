@@ -16,6 +16,11 @@ PODS:
   - MMKV (1.3.1):
     - MMKVCore (~> 1.3.1)
   - MMKVCore (1.3.1)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - Moya/RxSwift (15.0.0):
+    - Moya/Core
+    - RxSwift (~> 6.0)
   - "NSObject+Rx (5.2.2)":
     - RxSwift (~> 6.2)
   - QMUIKit (4.6.0):
@@ -345,10 +350,11 @@ DEPENDENCIES:
   - IGListKit (= 4.0.0)
   - IQKeyboardManager (= 6.5.12)
   - JXSegmentedView (= 1.3.0)
-  - Kingfisher
+  - Kingfisher (= 6.3.1)
   - MBProgressHUD (= 1.2.0)
   - MJRefresh (= 3.7.5)
   - MMKV (= 1.3.1)
+  - Moya/RxSwift (= 15.0.0)
   - "NSObject+Rx (= 5.2.2)"
   - QMUIKit (= 4.6.0)
   - RxCocoa (= 6.5.0)
@@ -375,6 +381,7 @@ SPEC REPOS:
     - MJRefresh
     - MMKV
     - MMKVCore
+    - Moya
     - "NSObject+Rx"
     - QMUIKit
     - RxCocoa
@@ -402,6 +409,7 @@ SPEC CHECKSUMS:
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   MMKV: 5a07930c70c70b86cd87761a42c8f3836fb681d7
   MMKVCore: e50135dbd33235b6ab390635991bab437ab873c0
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
   QMUIKit: 6321cf1124623d686a9ec0a79a7cc59d0d64a52c
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
@@ -415,6 +423,6 @@ SPEC CHECKSUMS:
   TrustWalletCore: 77ed44e6965e5121245d7fafc58c56a03bf13490
   ZLPhotoBrowser: 0563c2bfc7b247b65d023d646012f46cba94101b
 
-PODFILE CHECKSUM: 02587f1af07c1e6a7992942628946ec49ba54055
+PODFILE CHECKSUM: 380c39218080d5bf4625a41d61204dc433f310ab
 
 COCOAPODS: 1.11.3

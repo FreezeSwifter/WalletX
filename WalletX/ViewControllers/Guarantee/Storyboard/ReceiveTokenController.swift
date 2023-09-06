@@ -191,7 +191,6 @@ class ReceiveTokenController: UIViewController, HomeNavigationble {
         
         // Exclude all activities except Telegram
         activityController.excludedActivityTypes = []
-        
         if let popoverPresentationController = activityController.popoverPresentationController {
             popoverPresentationController.sourceView = UIApplication.topViewController()?.view
             popoverPresentationController.sourceRect = CGRect(x: 0, y: 0, width: 1, height: 1)

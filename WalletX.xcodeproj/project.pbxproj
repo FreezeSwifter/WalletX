@@ -7,6 +7,124 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A000D3C2AA8469D00FA1817 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D3B2AA8469D00FA1817 /* NetworkConfig.swift */; };
+		7A000DB72AA84F4500FA1817 /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D3E2AA84F4500FA1817 /* AES.swift */; };
+		7A000DB82AA84F4500FA1817 /* ASN1Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D402AA84F4500FA1817 /* ASN1Scanner.swift */; };
+		7A000DB92AA84F4500FA1817 /* ASN1Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D412AA84F4500FA1817 /* ASN1Encoder.swift */; };
+		7A000DBA2AA84F4500FA1817 /* ASN1Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D422AA84F4500FA1817 /* ASN1Decoder.swift */; };
+		7A000DBB2AA84F4500FA1817 /* ASN1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D432AA84F4500FA1817 /* ASN1.swift */; };
+		7A000DBC2AA84F4500FA1817 /* StreamDecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D442AA84F4500FA1817 /* StreamDecryptor.swift */; };
+		7A000DBD2AA84F4500FA1817 /* DER.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D462AA84F4500FA1817 /* DER.swift */; };
+		7A000DBE2AA84F4500FA1817 /* BlockEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D472AA84F4500FA1817 /* BlockEncryptor.swift */; };
+		7A000DBF2AA84F4500FA1817 /* UInt64+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D482AA84F4500FA1817 /* UInt64+Extension.swift */; };
+		7A000DC02AA84F4500FA1817 /* Cryptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D492AA84F4500FA1817 /* Cryptors.swift */; };
+		7A000DC12AA84F4500FA1817 /* HKDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D4A2AA84F4500FA1817 /* HKDF.swift */; };
+		7A000DC22AA84F4500FA1817 /* ISO10126Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D4B2AA84F4500FA1817 /* ISO10126Padding.swift */; };
+		7A000DC32AA84F4500FA1817 /* Cipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D4C2AA84F4500FA1817 /* Cipher.swift */; };
+		7A000DC42AA84F4500FA1817 /* AEADXChaCha20Poly1305.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D4E2AA84F4500FA1817 /* AEADXChaCha20Poly1305.swift */; };
+		7A000DC52AA84F4500FA1817 /* AEADChaCha20Poly1305.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D4F2AA84F4500FA1817 /* AEADChaCha20Poly1305.swift */; };
+		7A000DC62AA84F4500FA1817 /* AEAD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D502AA84F4500FA1817 /* AEAD.swift */; };
+		7A000DC72AA84F4500FA1817 /* CBCMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D512AA84F4500FA1817 /* CBCMAC.swift */; };
+		7A000DC82AA84F4500FA1817 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D522AA84F4500FA1817 /* Int+Extension.swift */; };
+		7A000DC92AA84F4500FA1817 /* AES.Cryptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D532AA84F4500FA1817 /* AES.Cryptors.swift */; };
+		7A000DCA2AA84F4500FA1817 /* Bit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D542AA84F4500FA1817 /* Bit.swift */; };
+		7A000DCB2AA84F4500FA1817 /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D552AA84F4500FA1817 /* HMAC.swift */; };
+		7A000DCC2AA84F4500FA1817 /* CMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D562AA84F4500FA1817 /* CMAC.swift */; };
+		7A000DCD2AA84F4500FA1817 /* UInt16+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D572AA84F4500FA1817 /* UInt16+Extension.swift */; };
+		7A000DCE2AA84F4500FA1817 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D582AA84F4500FA1817 /* Collection+Extension.swift */; };
+		7A000DCF2AA84F4500FA1817 /* XChaCha20.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D592AA84F4500FA1817 /* XChaCha20.swift */; };
+		7A000DD02AA84F4500FA1817 /* UInt32+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D5A2AA84F4500FA1817 /* UInt32+Extension.swift */; };
+		7A000DD12AA84F4500FA1817 /* Digest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D5B2AA84F4500FA1817 /* Digest.swift */; };
+		7A000DD22AA84F4500FA1817 /* UInt128.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D5C2AA84F4500FA1817 /* UInt128.swift */; };
+		7A000DD32AA84F4500FA1817 /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D5E2AA84F4500FA1817 /* RSA.swift */; };
+		7A000DD42AA84F4500FA1817 /* RSA+Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D5F2AA84F4500FA1817 /* RSA+Signature.swift */; };
+		7A000DD52AA84F4500FA1817 /* RSA+Cipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D602AA84F4500FA1817 /* RSA+Cipher.swift */; };
+		7A000DD62AA84F4500FA1817 /* Scrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D612AA84F4500FA1817 /* Scrypt.swift */; };
+		7A000DD72AA84F4600FA1817 /* NoPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D622AA84F4500FA1817 /* NoPadding.swift */; };
+		7A000DD82AA84F4600FA1817 /* String+FoundationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D642AA84F4500FA1817 /* String+FoundationExtension.swift */; };
+		7A000DD92AA84F4600FA1817 /* XChaCha20+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D652AA84F4500FA1817 /* XChaCha20+Foundation.swift */; };
+		7A000DDA2AA84F4600FA1817 /* Blowfish+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D662AA84F4500FA1817 /* Blowfish+Foundation.swift */; };
+		7A000DDB2AA84F4600FA1817 /* Utils+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D672AA84F4500FA1817 /* Utils+Foundation.swift */; };
+		7A000DDC2AA84F4600FA1817 /* HMAC+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D682AA84F4500FA1817 /* HMAC+Foundation.swift */; };
+		7A000DDD2AA84F4600FA1817 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D692AA84F4500FA1817 /* Data+Extension.swift */; };
+		7A000DDE2AA84F4600FA1817 /* ChaCha20+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D6A2AA84F4500FA1817 /* ChaCha20+Foundation.swift */; };
+		7A000DDF2AA84F4600FA1817 /* Array+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D6B2AA84F4500FA1817 /* Array+Foundation.swift */; };
+		7A000DE02AA84F4600FA1817 /* AES+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D6C2AA84F4500FA1817 /* AES+Foundation.swift */; };
+		7A000DE12AA84F4600FA1817 /* Rabbit+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D6D2AA84F4500FA1817 /* Rabbit+Foundation.swift */; };
+		7A000DE22AA84F4600FA1817 /* UInt8+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D6E2AA84F4500FA1817 /* UInt8+Extension.swift */; };
+		7A000DE32AA84F4600FA1817 /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D6F2AA84F4500FA1817 /* MD5.swift */; };
+		7A000DE42AA84F4600FA1817 /* Cryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D702AA84F4500FA1817 /* Cryptor.swift */; };
+		7A000DE52AA84F4600FA1817 /* CompactMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D712AA84F4500FA1817 /* CompactMap.swift */; };
+		7A000DE62AA84F4600FA1817 /* BatchedCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D722AA84F4500FA1817 /* BatchedCollection.swift */; };
+		7A000DE72AA84F4600FA1817 /* ISO78164Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D732AA84F4500FA1817 /* ISO78164Padding.swift */; };
+		7A000DE82AA84F4600FA1817 /* SecureBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D742AA84F4500FA1817 /* SecureBytes.swift */; };
+		7A000DE92AA84F4600FA1817 /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D752AA84F4500FA1817 /* Signature.swift */; };
+		7A000DEA2AA84F4600FA1817 /* ZeroPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D762AA84F4500FA1817 /* ZeroPadding.swift */; };
+		7A000DEB2AA84F4600FA1817 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D772AA84F4500FA1817 /* String+Extension.swift */; };
+		7A000DEC2AA84F4600FA1817 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D782AA84F4500FA1817 /* Authenticator.swift */; };
+		7A000DED2AA84F4600FA1817 /* SHA3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D792AA84F4500FA1817 /* SHA3.swift */; };
+		7A000DEE2AA84F4600FA1817 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D7A2AA84F4500FA1817 /* Operators.swift */; };
+		7A000DEF2AA84F4600FA1817 /* Rabbit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D7B2AA84F4500FA1817 /* Rabbit.swift */; };
+		7A000DF02AA84F4600FA1817 /* SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D7C2AA84F4500FA1817 /* SHA1.swift */; };
+		7A000DF12AA84F4600FA1817 /* Poly1305.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D7D2AA84F4500FA1817 /* Poly1305.swift */; };
+		7A000DF22AA84F4600FA1817 /* BlockCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D7E2AA84F4500FA1817 /* BlockCipher.swift */; };
+		7A000DF32AA84F4600FA1817 /* Updatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D7F2AA84F4500FA1817 /* Updatable.swift */; };
+		7A000DF42AA84F4600FA1817 /* Blowfish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D802AA84F4500FA1817 /* Blowfish.swift */; };
+		7A000DF52AA84F4600FA1817 /* BlockDecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D812AA84F4500FA1817 /* BlockDecryptor.swift */; };
+		7A000DF62AA84F4600FA1817 /* StreamEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D822AA84F4500FA1817 /* StreamEncryptor.swift */; };
+		7A000DF72AA84F4600FA1817 /* DigestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D832AA84F4500FA1817 /* DigestType.swift */; };
+		7A000DF82AA84F4600FA1817 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D842AA84F4500FA1817 /* Utils.swift */; };
+		7A000DF92AA84F4600FA1817 /* Generics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D852AA84F4500FA1817 /* Generics.swift */; };
+		7A000DFA2AA84F4600FA1817 /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D862AA84F4500FA1817 /* Checksum.swift */; };
+		7A000DFB2AA84F4600FA1817 /* SHA2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D872AA84F4500FA1817 /* SHA2.swift */; };
+		7A000DFC2AA84F4600FA1817 /* Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D882AA84F4500FA1817 /* Padding.swift */; };
+		7A000DFD2AA84F4600FA1817 /* PKCS7Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D8A2AA84F4500FA1817 /* PKCS7Padding.swift */; };
+		7A000DFE2AA84F4600FA1817 /* PKCS5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D8B2AA84F4500FA1817 /* PKCS5.swift */; };
+		7A000DFF2AA84F4600FA1817 /* PKCS7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D8C2AA84F4500FA1817 /* PKCS7.swift */; };
+		7A000E002AA84F4600FA1817 /* PKCS1v15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D8D2AA84F4500FA1817 /* PKCS1v15.swift */; };
+		7A000E012AA84F4600FA1817 /* PBKDF2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D8E2AA84F4500FA1817 /* PBKDF2.swift */; };
+		7A000E022AA84F4600FA1817 /* PBKDF1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D8F2AA84F4500FA1817 /* PBKDF1.swift */; };
+		7A000E032AA84F4600FA1817 /* BlockModeOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D912AA84F4500FA1817 /* BlockModeOptions.swift */; };
+		7A000E042AA84F4600FA1817 /* OCB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D922AA84F4500FA1817 /* OCB.swift */; };
+		7A000E052AA84F4600FA1817 /* CFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D932AA84F4500FA1817 /* CFB.swift */; };
+		7A000E062AA84F4600FA1817 /* CBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D942AA84F4500FA1817 /* CBC.swift */; };
+		7A000E072AA84F4600FA1817 /* ECB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D952AA84F4500FA1817 /* ECB.swift */; };
+		7A000E082AA84F4600FA1817 /* CCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D962AA84F4500FA1817 /* CCM.swift */; };
+		7A000E092AA84F4600FA1817 /* PCBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D972AA84F4500FA1817 /* PCBC.swift */; };
+		7A000E0A2AA84F4600FA1817 /* BlockMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D982AA84F4500FA1817 /* BlockMode.swift */; };
+		7A000E0B2AA84F4600FA1817 /* GCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D992AA84F4500FA1817 /* GCM.swift */; };
+		7A000E0C2AA84F4600FA1817 /* CipherModeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D9A2AA84F4500FA1817 /* CipherModeWorker.swift */; };
+		7A000E0D2AA84F4600FA1817 /* CTR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D9B2AA84F4500FA1817 /* CTR.swift */; };
+		7A000E0E2AA84F4600FA1817 /* OFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D9C2AA84F4500FA1817 /* OFB.swift */; };
+		7A000E0F2AA84F4600FA1817 /* ChaCha20.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D9D2AA84F4500FA1817 /* ChaCha20.swift */; };
+		7A000E102AA84F4600FA1817 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D9F2AA84F4500FA1817 /* Random.swift */; };
+		7A000E112AA84F4600FA1817 /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DA02AA84F4500FA1817 /* GCD.swift */; };
+		7A000E122AA84F4600FA1817 /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DA12AA84F4500FA1817 /* Hashable.swift */; };
+		7A000E132AA84F4600FA1817 /* Strideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DA22AA84F4500FA1817 /* Strideable.swift */; };
+		7A000E142AA84F4600FA1817 /* Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DA32AA84F4500FA1817 /* Addition.swift */; };
+		7A000E152AA84F4600FA1817 /* Data Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DA42AA84F4500FA1817 /* Data Conversion.swift */; };
+		7A000E162AA84F4600FA1817 /* Bitwise Ops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DA52AA84F4500FA1817 /* Bitwise Ops.swift */; };
+		7A000E172AA84F4600FA1817 /* Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DA62AA84F4500FA1817 /* Comparable.swift */; };
+		7A000E182AA84F4600FA1817 /* Words and Bits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DA72AA84F4500FA1817 /* Words and Bits.swift */; };
+		7A000E192AA84F4600FA1817 /* Square Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DA82AA84F4500FA1817 /* Square Root.swift */; };
+		7A000E1A2AA84F4600FA1817 /* Division.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DA92AA84F4500FA1817 /* Division.swift */; };
+		7A000E1B2AA84F4600FA1817 /* Prime Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DAA2AA84F4500FA1817 /* Prime Test.swift */; };
+		7A000E1C2AA84F4600FA1817 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DAB2AA84F4500FA1817 /* Codable.swift */; };
+		7A000E1D2AA84F4600FA1817 /* BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DAC2AA84F4500FA1817 /* BigUInt.swift */; };
+		7A000E1E2AA84F4600FA1817 /* Multiplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DAD2AA84F4500FA1817 /* Multiplication.swift */; };
+		7A000E1F2AA84F4600FA1817 /* CS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DAE2AA84F4500FA1817 /* CS.swift */; };
+		7A000E202AA84F4600FA1817 /* Exponentiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DAF2AA84F4500FA1817 /* Exponentiation.swift */; };
+		7A000E212AA84F4600FA1817 /* Floating Point Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DB02AA84F4500FA1817 /* Floating Point Conversion.swift */; };
+		7A000E222AA84F4600FA1817 /* Shifts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DB12AA84F4500FA1817 /* Shifts.swift */; };
+		7A000E232AA84F4600FA1817 /* Subtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DB22AA84F4500FA1817 /* Subtraction.swift */; };
+		7A000E242AA84F4600FA1817 /* Integer Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DB32AA84F4500FA1817 /* Integer Conversion.swift */; };
+		7A000E252AA84F4600FA1817 /* BigInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DB42AA84F4500FA1817 /* BigInt.swift */; };
+		7A000E262AA84F4600FA1817 /* String Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DB52AA84F4500FA1817 /* String Conversion.swift */; };
+		7A000E272AA84F4600FA1817 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000DB62AA84F4500FA1817 /* Array+Extension.swift */; };
+		7A000E2B2AA8537800FA1817 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000E2A2AA8537800FA1817 /* NetworkManager.swift */; };
+		7A000E2D2AA85DF000FA1817 /* ResponseToModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000E2C2AA85DF000FA1817 /* ResponseToModelable.swift */; };
+		7A000E302AA8743300FA1817 /* APPBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000E2F2AA8743300FA1817 /* APPBaseModel.swift */; };
+		7A000E322AA874C500FA1817 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000E312AA874C500FA1817 /* LoginModel.swift */; };
 		7A2BE0832A8B4E3C001B2970 /* AssociatedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE0822A8B4E3C001B2970 /* AssociatedManager.swift */; };
 		7A2BE0862A8B773F001B2970 /* WalletHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE0852A8B773F001B2970 /* WalletHeaderView.swift */; };
 		7A2BE0882A8B774A001B2970 /* WalletHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A2BE0872A8B774A001B2970 /* WalletHeaderView.xib */; };
@@ -190,6 +308,124 @@
 /* Begin PBXFileReference section */
 		044529E4FB5778B72BDB39C3 /* libPods-WalletX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WalletX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E1FF6B9D44BF6B90AA7FD3B /* Pods-WalletX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalletX.release.xcconfig"; path = "Target Support Files/Pods-WalletX/Pods-WalletX.release.xcconfig"; sourceTree = "<group>"; };
+		7A000D3B2AA8469D00FA1817 /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
+		7A000D3E2AA84F4500FA1817 /* AES.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AES.swift; sourceTree = "<group>"; };
+		7A000D402AA84F4500FA1817 /* ASN1Scanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASN1Scanner.swift; sourceTree = "<group>"; };
+		7A000D412AA84F4500FA1817 /* ASN1Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASN1Encoder.swift; sourceTree = "<group>"; };
+		7A000D422AA84F4500FA1817 /* ASN1Decoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASN1Decoder.swift; sourceTree = "<group>"; };
+		7A000D432AA84F4500FA1817 /* ASN1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASN1.swift; sourceTree = "<group>"; };
+		7A000D442AA84F4500FA1817 /* StreamDecryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamDecryptor.swift; sourceTree = "<group>"; };
+		7A000D462AA84F4500FA1817 /* DER.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DER.swift; sourceTree = "<group>"; };
+		7A000D472AA84F4500FA1817 /* BlockEncryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockEncryptor.swift; sourceTree = "<group>"; };
+		7A000D482AA84F4500FA1817 /* UInt64+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt64+Extension.swift"; sourceTree = "<group>"; };
+		7A000D492AA84F4500FA1817 /* Cryptors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cryptors.swift; sourceTree = "<group>"; };
+		7A000D4A2AA84F4500FA1817 /* HKDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HKDF.swift; sourceTree = "<group>"; };
+		7A000D4B2AA84F4500FA1817 /* ISO10126Padding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO10126Padding.swift; sourceTree = "<group>"; };
+		7A000D4C2AA84F4500FA1817 /* Cipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cipher.swift; sourceTree = "<group>"; };
+		7A000D4E2AA84F4500FA1817 /* AEADXChaCha20Poly1305.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AEADXChaCha20Poly1305.swift; sourceTree = "<group>"; };
+		7A000D4F2AA84F4500FA1817 /* AEADChaCha20Poly1305.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AEADChaCha20Poly1305.swift; sourceTree = "<group>"; };
+		7A000D502AA84F4500FA1817 /* AEAD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AEAD.swift; sourceTree = "<group>"; };
+		7A000D512AA84F4500FA1817 /* CBCMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBCMAC.swift; sourceTree = "<group>"; };
+		7A000D522AA84F4500FA1817 /* Int+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		7A000D532AA84F4500FA1817 /* AES.Cryptors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AES.Cryptors.swift; sourceTree = "<group>"; };
+		7A000D542AA84F4500FA1817 /* Bit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bit.swift; sourceTree = "<group>"; };
+		7A000D552AA84F4500FA1817 /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
+		7A000D562AA84F4500FA1817 /* CMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMAC.swift; sourceTree = "<group>"; };
+		7A000D572AA84F4500FA1817 /* UInt16+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt16+Extension.swift"; sourceTree = "<group>"; };
+		7A000D582AA84F4500FA1817 /* Collection+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
+		7A000D592AA84F4500FA1817 /* XChaCha20.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XChaCha20.swift; sourceTree = "<group>"; };
+		7A000D5A2AA84F4500FA1817 /* UInt32+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt32+Extension.swift"; sourceTree = "<group>"; };
+		7A000D5B2AA84F4500FA1817 /* Digest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Digest.swift; sourceTree = "<group>"; };
+		7A000D5C2AA84F4500FA1817 /* UInt128.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UInt128.swift; sourceTree = "<group>"; };
+		7A000D5E2AA84F4500FA1817 /* RSA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSA.swift; sourceTree = "<group>"; };
+		7A000D5F2AA84F4500FA1817 /* RSA+Signature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RSA+Signature.swift"; sourceTree = "<group>"; };
+		7A000D602AA84F4500FA1817 /* RSA+Cipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RSA+Cipher.swift"; sourceTree = "<group>"; };
+		7A000D612AA84F4500FA1817 /* Scrypt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scrypt.swift; sourceTree = "<group>"; };
+		7A000D622AA84F4500FA1817 /* NoPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoPadding.swift; sourceTree = "<group>"; };
+		7A000D642AA84F4500FA1817 /* String+FoundationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+FoundationExtension.swift"; sourceTree = "<group>"; };
+		7A000D652AA84F4500FA1817 /* XChaCha20+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XChaCha20+Foundation.swift"; sourceTree = "<group>"; };
+		7A000D662AA84F4500FA1817 /* Blowfish+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Blowfish+Foundation.swift"; sourceTree = "<group>"; };
+		7A000D672AA84F4500FA1817 /* Utils+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Utils+Foundation.swift"; sourceTree = "<group>"; };
+		7A000D682AA84F4500FA1817 /* HMAC+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HMAC+Foundation.swift"; sourceTree = "<group>"; };
+		7A000D692AA84F4500FA1817 /* Data+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
+		7A000D6A2AA84F4500FA1817 /* ChaCha20+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChaCha20+Foundation.swift"; sourceTree = "<group>"; };
+		7A000D6B2AA84F4500FA1817 /* Array+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Foundation.swift"; sourceTree = "<group>"; };
+		7A000D6C2AA84F4500FA1817 /* AES+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AES+Foundation.swift"; sourceTree = "<group>"; };
+		7A000D6D2AA84F4500FA1817 /* Rabbit+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rabbit+Foundation.swift"; sourceTree = "<group>"; };
+		7A000D6E2AA84F4500FA1817 /* UInt8+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt8+Extension.swift"; sourceTree = "<group>"; };
+		7A000D6F2AA84F4500FA1817 /* MD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
+		7A000D702AA84F4500FA1817 /* Cryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cryptor.swift; sourceTree = "<group>"; };
+		7A000D712AA84F4500FA1817 /* CompactMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompactMap.swift; sourceTree = "<group>"; };
+		7A000D722AA84F4500FA1817 /* BatchedCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchedCollection.swift; sourceTree = "<group>"; };
+		7A000D732AA84F4500FA1817 /* ISO78164Padding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO78164Padding.swift; sourceTree = "<group>"; };
+		7A000D742AA84F4500FA1817 /* SecureBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureBytes.swift; sourceTree = "<group>"; };
+		7A000D752AA84F4500FA1817 /* Signature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signature.swift; sourceTree = "<group>"; };
+		7A000D762AA84F4500FA1817 /* ZeroPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZeroPadding.swift; sourceTree = "<group>"; };
+		7A000D772AA84F4500FA1817 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		7A000D782AA84F4500FA1817 /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
+		7A000D792AA84F4500FA1817 /* SHA3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA3.swift; sourceTree = "<group>"; };
+		7A000D7A2AA84F4500FA1817 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		7A000D7B2AA84F4500FA1817 /* Rabbit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rabbit.swift; sourceTree = "<group>"; };
+		7A000D7C2AA84F4500FA1817 /* SHA1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA1.swift; sourceTree = "<group>"; };
+		7A000D7D2AA84F4500FA1817 /* Poly1305.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Poly1305.swift; sourceTree = "<group>"; };
+		7A000D7E2AA84F4500FA1817 /* BlockCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipher.swift; sourceTree = "<group>"; };
+		7A000D7F2AA84F4500FA1817 /* Updatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Updatable.swift; sourceTree = "<group>"; };
+		7A000D802AA84F4500FA1817 /* Blowfish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blowfish.swift; sourceTree = "<group>"; };
+		7A000D812AA84F4500FA1817 /* BlockDecryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockDecryptor.swift; sourceTree = "<group>"; };
+		7A000D822AA84F4500FA1817 /* StreamEncryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamEncryptor.swift; sourceTree = "<group>"; };
+		7A000D832AA84F4500FA1817 /* DigestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigestType.swift; sourceTree = "<group>"; };
+		7A000D842AA84F4500FA1817 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		7A000D852AA84F4500FA1817 /* Generics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generics.swift; sourceTree = "<group>"; };
+		7A000D862AA84F4500FA1817 /* Checksum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checksum.swift; sourceTree = "<group>"; };
+		7A000D872AA84F4500FA1817 /* SHA2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA2.swift; sourceTree = "<group>"; };
+		7A000D882AA84F4500FA1817 /* Padding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Padding.swift; sourceTree = "<group>"; };
+		7A000D8A2AA84F4500FA1817 /* PKCS7Padding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKCS7Padding.swift; sourceTree = "<group>"; };
+		7A000D8B2AA84F4500FA1817 /* PKCS5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKCS5.swift; sourceTree = "<group>"; };
+		7A000D8C2AA84F4500FA1817 /* PKCS7.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKCS7.swift; sourceTree = "<group>"; };
+		7A000D8D2AA84F4500FA1817 /* PKCS1v15.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKCS1v15.swift; sourceTree = "<group>"; };
+		7A000D8E2AA84F4500FA1817 /* PBKDF2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PBKDF2.swift; sourceTree = "<group>"; };
+		7A000D8F2AA84F4500FA1817 /* PBKDF1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PBKDF1.swift; sourceTree = "<group>"; };
+		7A000D912AA84F4500FA1817 /* BlockModeOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockModeOptions.swift; sourceTree = "<group>"; };
+		7A000D922AA84F4500FA1817 /* OCB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCB.swift; sourceTree = "<group>"; };
+		7A000D932AA84F4500FA1817 /* CFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFB.swift; sourceTree = "<group>"; };
+		7A000D942AA84F4500FA1817 /* CBC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBC.swift; sourceTree = "<group>"; };
+		7A000D952AA84F4500FA1817 /* ECB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ECB.swift; sourceTree = "<group>"; };
+		7A000D962AA84F4500FA1817 /* CCM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCM.swift; sourceTree = "<group>"; };
+		7A000D972AA84F4500FA1817 /* PCBC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PCBC.swift; sourceTree = "<group>"; };
+		7A000D982AA84F4500FA1817 /* BlockMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockMode.swift; sourceTree = "<group>"; };
+		7A000D992AA84F4500FA1817 /* GCM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCM.swift; sourceTree = "<group>"; };
+		7A000D9A2AA84F4500FA1817 /* CipherModeWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherModeWorker.swift; sourceTree = "<group>"; };
+		7A000D9B2AA84F4500FA1817 /* CTR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTR.swift; sourceTree = "<group>"; };
+		7A000D9C2AA84F4500FA1817 /* OFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OFB.swift; sourceTree = "<group>"; };
+		7A000D9D2AA84F4500FA1817 /* ChaCha20.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChaCha20.swift; sourceTree = "<group>"; };
+		7A000D9F2AA84F4500FA1817 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
+		7A000DA02AA84F4500FA1817 /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
+		7A000DA12AA84F4500FA1817 /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashable.swift; sourceTree = "<group>"; };
+		7A000DA22AA84F4500FA1817 /* Strideable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strideable.swift; sourceTree = "<group>"; };
+		7A000DA32AA84F4500FA1817 /* Addition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Addition.swift; sourceTree = "<group>"; };
+		7A000DA42AA84F4500FA1817 /* Data Conversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data Conversion.swift"; sourceTree = "<group>"; };
+		7A000DA52AA84F4500FA1817 /* Bitwise Ops.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bitwise Ops.swift"; sourceTree = "<group>"; };
+		7A000DA62AA84F4500FA1817 /* Comparable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comparable.swift; sourceTree = "<group>"; };
+		7A000DA72AA84F4500FA1817 /* Words and Bits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Words and Bits.swift"; sourceTree = "<group>"; };
+		7A000DA82AA84F4500FA1817 /* Square Root.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Square Root.swift"; sourceTree = "<group>"; };
+		7A000DA92AA84F4500FA1817 /* Division.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Division.swift; sourceTree = "<group>"; };
+		7A000DAA2AA84F4500FA1817 /* Prime Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Prime Test.swift"; sourceTree = "<group>"; };
+		7A000DAB2AA84F4500FA1817 /* Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
+		7A000DAC2AA84F4500FA1817 /* BigUInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigUInt.swift; sourceTree = "<group>"; };
+		7A000DAD2AA84F4500FA1817 /* Multiplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multiplication.swift; sourceTree = "<group>"; };
+		7A000DAE2AA84F4500FA1817 /* CS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CS.swift; sourceTree = "<group>"; };
+		7A000DAF2AA84F4500FA1817 /* Exponentiation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exponentiation.swift; sourceTree = "<group>"; };
+		7A000DB02AA84F4500FA1817 /* Floating Point Conversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Floating Point Conversion.swift"; sourceTree = "<group>"; };
+		7A000DB12AA84F4500FA1817 /* Shifts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shifts.swift; sourceTree = "<group>"; };
+		7A000DB22AA84F4500FA1817 /* Subtraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subtraction.swift; sourceTree = "<group>"; };
+		7A000DB32AA84F4500FA1817 /* Integer Conversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Integer Conversion.swift"; sourceTree = "<group>"; };
+		7A000DB42AA84F4500FA1817 /* BigInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigInt.swift; sourceTree = "<group>"; };
+		7A000DB52AA84F4500FA1817 /* String Conversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String Conversion.swift"; sourceTree = "<group>"; };
+		7A000DB62AA84F4500FA1817 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		7A000E2A2AA8537800FA1817 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		7A000E2C2AA85DF000FA1817 /* ResponseToModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseToModelable.swift; sourceTree = "<group>"; };
+		7A000E2F2AA8743300FA1817 /* APPBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APPBaseModel.swift; sourceTree = "<group>"; };
+		7A000E312AA874C500FA1817 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		7A2BE0822A8B4E3C001B2970 /* AssociatedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociatedManager.swift; sourceTree = "<group>"; };
 		7A2BE0852A8B773F001B2970 /* WalletHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeaderView.swift; sourceTree = "<group>"; };
 		7A2BE0872A8B774A001B2970 /* WalletHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletHeaderView.xib; sourceTree = "<group>"; };
@@ -397,6 +633,210 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7A000D3A2AA8465F00FA1817 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				7A000E2E2AA8742500FA1817 /* Model */,
+				7A000D3B2AA8469D00FA1817 /* NetworkConfig.swift */,
+				7A000E2A2AA8537800FA1817 /* NetworkManager.swift */,
+				7A000E2C2AA85DF000FA1817 /* ResponseToModelable.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		7A000D3D2AA84F4500FA1817 /* CryptoSwift */ = {
+			isa = PBXGroup;
+			children = (
+				7A000D3E2AA84F4500FA1817 /* AES.swift */,
+				7A000D3F2AA84F4500FA1817 /* ASN1 */,
+				7A000D442AA84F4500FA1817 /* StreamDecryptor.swift */,
+				7A000D452AA84F4500FA1817 /* PEM */,
+				7A000D472AA84F4500FA1817 /* BlockEncryptor.swift */,
+				7A000D482AA84F4500FA1817 /* UInt64+Extension.swift */,
+				7A000D492AA84F4500FA1817 /* Cryptors.swift */,
+				7A000D4A2AA84F4500FA1817 /* HKDF.swift */,
+				7A000D4B2AA84F4500FA1817 /* ISO10126Padding.swift */,
+				7A000D4C2AA84F4500FA1817 /* Cipher.swift */,
+				7A000D4D2AA84F4500FA1817 /* AEAD */,
+				7A000D512AA84F4500FA1817 /* CBCMAC.swift */,
+				7A000D522AA84F4500FA1817 /* Int+Extension.swift */,
+				7A000D532AA84F4500FA1817 /* AES.Cryptors.swift */,
+				7A000D542AA84F4500FA1817 /* Bit.swift */,
+				7A000D552AA84F4500FA1817 /* HMAC.swift */,
+				7A000D562AA84F4500FA1817 /* CMAC.swift */,
+				7A000D572AA84F4500FA1817 /* UInt16+Extension.swift */,
+				7A000D582AA84F4500FA1817 /* Collection+Extension.swift */,
+				7A000D592AA84F4500FA1817 /* XChaCha20.swift */,
+				7A000D5A2AA84F4500FA1817 /* UInt32+Extension.swift */,
+				7A000D5B2AA84F4500FA1817 /* Digest.swift */,
+				7A000D5C2AA84F4500FA1817 /* UInt128.swift */,
+				7A000D5D2AA84F4500FA1817 /* RSA */,
+				7A000D612AA84F4500FA1817 /* Scrypt.swift */,
+				7A000D622AA84F4500FA1817 /* NoPadding.swift */,
+				7A000D632AA84F4500FA1817 /* Foundation */,
+				7A000D6E2AA84F4500FA1817 /* UInt8+Extension.swift */,
+				7A000D6F2AA84F4500FA1817 /* MD5.swift */,
+				7A000D702AA84F4500FA1817 /* Cryptor.swift */,
+				7A000D712AA84F4500FA1817 /* CompactMap.swift */,
+				7A000D722AA84F4500FA1817 /* BatchedCollection.swift */,
+				7A000D732AA84F4500FA1817 /* ISO78164Padding.swift */,
+				7A000D742AA84F4500FA1817 /* SecureBytes.swift */,
+				7A000D752AA84F4500FA1817 /* Signature.swift */,
+				7A000D762AA84F4500FA1817 /* ZeroPadding.swift */,
+				7A000D772AA84F4500FA1817 /* String+Extension.swift */,
+				7A000D782AA84F4500FA1817 /* Authenticator.swift */,
+				7A000D792AA84F4500FA1817 /* SHA3.swift */,
+				7A000D7A2AA84F4500FA1817 /* Operators.swift */,
+				7A000D7B2AA84F4500FA1817 /* Rabbit.swift */,
+				7A000D7C2AA84F4500FA1817 /* SHA1.swift */,
+				7A000D7D2AA84F4500FA1817 /* Poly1305.swift */,
+				7A000D7E2AA84F4500FA1817 /* BlockCipher.swift */,
+				7A000D7F2AA84F4500FA1817 /* Updatable.swift */,
+				7A000D802AA84F4500FA1817 /* Blowfish.swift */,
+				7A000D812AA84F4500FA1817 /* BlockDecryptor.swift */,
+				7A000D822AA84F4500FA1817 /* StreamEncryptor.swift */,
+				7A000D832AA84F4500FA1817 /* DigestType.swift */,
+				7A000D842AA84F4500FA1817 /* Utils.swift */,
+				7A000D852AA84F4500FA1817 /* Generics.swift */,
+				7A000D862AA84F4500FA1817 /* Checksum.swift */,
+				7A000D872AA84F4500FA1817 /* SHA2.swift */,
+				7A000D882AA84F4500FA1817 /* Padding.swift */,
+				7A000D892AA84F4500FA1817 /* PKCS */,
+				7A000D902AA84F4500FA1817 /* BlockMode */,
+				7A000D9D2AA84F4500FA1817 /* ChaCha20.swift */,
+				7A000D9E2AA84F4500FA1817 /* CS_BigInt */,
+				7A000DB62AA84F4500FA1817 /* Array+Extension.swift */,
+			);
+			path = CryptoSwift;
+			sourceTree = "<group>";
+		};
+		7A000D3F2AA84F4500FA1817 /* ASN1 */ = {
+			isa = PBXGroup;
+			children = (
+				7A000D402AA84F4500FA1817 /* ASN1Scanner.swift */,
+				7A000D412AA84F4500FA1817 /* ASN1Encoder.swift */,
+				7A000D422AA84F4500FA1817 /* ASN1Decoder.swift */,
+				7A000D432AA84F4500FA1817 /* ASN1.swift */,
+			);
+			path = ASN1;
+			sourceTree = "<group>";
+		};
+		7A000D452AA84F4500FA1817 /* PEM */ = {
+			isa = PBXGroup;
+			children = (
+				7A000D462AA84F4500FA1817 /* DER.swift */,
+			);
+			path = PEM;
+			sourceTree = "<group>";
+		};
+		7A000D4D2AA84F4500FA1817 /* AEAD */ = {
+			isa = PBXGroup;
+			children = (
+				7A000D4E2AA84F4500FA1817 /* AEADXChaCha20Poly1305.swift */,
+				7A000D4F2AA84F4500FA1817 /* AEADChaCha20Poly1305.swift */,
+				7A000D502AA84F4500FA1817 /* AEAD.swift */,
+			);
+			path = AEAD;
+			sourceTree = "<group>";
+		};
+		7A000D5D2AA84F4500FA1817 /* RSA */ = {
+			isa = PBXGroup;
+			children = (
+				7A000D5E2AA84F4500FA1817 /* RSA.swift */,
+				7A000D5F2AA84F4500FA1817 /* RSA+Signature.swift */,
+				7A000D602AA84F4500FA1817 /* RSA+Cipher.swift */,
+			);
+			path = RSA;
+			sourceTree = "<group>";
+		};
+		7A000D632AA84F4500FA1817 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				7A000D642AA84F4500FA1817 /* String+FoundationExtension.swift */,
+				7A000D652AA84F4500FA1817 /* XChaCha20+Foundation.swift */,
+				7A000D662AA84F4500FA1817 /* Blowfish+Foundation.swift */,
+				7A000D672AA84F4500FA1817 /* Utils+Foundation.swift */,
+				7A000D682AA84F4500FA1817 /* HMAC+Foundation.swift */,
+				7A000D692AA84F4500FA1817 /* Data+Extension.swift */,
+				7A000D6A2AA84F4500FA1817 /* ChaCha20+Foundation.swift */,
+				7A000D6B2AA84F4500FA1817 /* Array+Foundation.swift */,
+				7A000D6C2AA84F4500FA1817 /* AES+Foundation.swift */,
+				7A000D6D2AA84F4500FA1817 /* Rabbit+Foundation.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		7A000D892AA84F4500FA1817 /* PKCS */ = {
+			isa = PBXGroup;
+			children = (
+				7A000D8A2AA84F4500FA1817 /* PKCS7Padding.swift */,
+				7A000D8B2AA84F4500FA1817 /* PKCS5.swift */,
+				7A000D8C2AA84F4500FA1817 /* PKCS7.swift */,
+				7A000D8D2AA84F4500FA1817 /* PKCS1v15.swift */,
+				7A000D8E2AA84F4500FA1817 /* PBKDF2.swift */,
+				7A000D8F2AA84F4500FA1817 /* PBKDF1.swift */,
+			);
+			path = PKCS;
+			sourceTree = "<group>";
+		};
+		7A000D902AA84F4500FA1817 /* BlockMode */ = {
+			isa = PBXGroup;
+			children = (
+				7A000D912AA84F4500FA1817 /* BlockModeOptions.swift */,
+				7A000D922AA84F4500FA1817 /* OCB.swift */,
+				7A000D932AA84F4500FA1817 /* CFB.swift */,
+				7A000D942AA84F4500FA1817 /* CBC.swift */,
+				7A000D952AA84F4500FA1817 /* ECB.swift */,
+				7A000D962AA84F4500FA1817 /* CCM.swift */,
+				7A000D972AA84F4500FA1817 /* PCBC.swift */,
+				7A000D982AA84F4500FA1817 /* BlockMode.swift */,
+				7A000D992AA84F4500FA1817 /* GCM.swift */,
+				7A000D9A2AA84F4500FA1817 /* CipherModeWorker.swift */,
+				7A000D9B2AA84F4500FA1817 /* CTR.swift */,
+				7A000D9C2AA84F4500FA1817 /* OFB.swift */,
+			);
+			path = BlockMode;
+			sourceTree = "<group>";
+		};
+		7A000D9E2AA84F4500FA1817 /* CS_BigInt */ = {
+			isa = PBXGroup;
+			children = (
+				7A000D9F2AA84F4500FA1817 /* Random.swift */,
+				7A000DA02AA84F4500FA1817 /* GCD.swift */,
+				7A000DA12AA84F4500FA1817 /* Hashable.swift */,
+				7A000DA22AA84F4500FA1817 /* Strideable.swift */,
+				7A000DA32AA84F4500FA1817 /* Addition.swift */,
+				7A000DA42AA84F4500FA1817 /* Data Conversion.swift */,
+				7A000DA52AA84F4500FA1817 /* Bitwise Ops.swift */,
+				7A000DA62AA84F4500FA1817 /* Comparable.swift */,
+				7A000DA72AA84F4500FA1817 /* Words and Bits.swift */,
+				7A000DA82AA84F4500FA1817 /* Square Root.swift */,
+				7A000DA92AA84F4500FA1817 /* Division.swift */,
+				7A000DAA2AA84F4500FA1817 /* Prime Test.swift */,
+				7A000DAB2AA84F4500FA1817 /* Codable.swift */,
+				7A000DAC2AA84F4500FA1817 /* BigUInt.swift */,
+				7A000DAD2AA84F4500FA1817 /* Multiplication.swift */,
+				7A000DAE2AA84F4500FA1817 /* CS.swift */,
+				7A000DAF2AA84F4500FA1817 /* Exponentiation.swift */,
+				7A000DB02AA84F4500FA1817 /* Floating Point Conversion.swift */,
+				7A000DB12AA84F4500FA1817 /* Shifts.swift */,
+				7A000DB22AA84F4500FA1817 /* Subtraction.swift */,
+				7A000DB32AA84F4500FA1817 /* Integer Conversion.swift */,
+				7A000DB42AA84F4500FA1817 /* BigInt.swift */,
+				7A000DB52AA84F4500FA1817 /* String Conversion.swift */,
+			);
+			path = CS_BigInt;
+			sourceTree = "<group>";
+		};
+		7A000E2E2AA8742500FA1817 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7A000E2F2AA8743300FA1817 /* APPBaseModel.swift */,
+				7A000E312AA874C500FA1817 /* LoginModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		7A2BE0842A8B7721001B2970 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,6 +914,7 @@
 		7A7D4DB02A84A19B0098262F /* WalletX */ = {
 			isa = PBXGroup;
 			children = (
+				7A000D3A2AA8465F00FA1817 /* Network */,
 				7AD08A7C2A89F35C000B247E /* Resource */,
 				7AB377492A862E20005BD1CB /* Vendor */,
 				7AB377432A8612C2005BD1CB /* APPConfiguration */,
@@ -513,6 +954,7 @@
 		7AB377492A862E20005BD1CB /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				7A000D3D2AA84F4500FA1817 /* CryptoSwift */,
 				7AD08B382A8A083B000B247E /* SwiftyUtils */,
 				7AB377602A868A5E005BD1CB /* FDFullscreenPopGesture */,
 				7AB3774A2A862E2B005BD1CB /* FSPagerView */,
@@ -1401,101 +1843,196 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A000DE22AA84F4600FA1817 /* UInt8+Extension.swift in Sources */,
 				7AD08BC72A8A083B000B247E /* UICollectionViewExtension.swift in Sources */,
+				7A000DE12AA84F4600FA1817 /* Rabbit+Foundation.swift in Sources */,
+				7A000DCE2AA84F4500FA1817 /* Collection+Extension.swift in Sources */,
+				7A000DFA2AA84F4600FA1817 /* Checksum.swift in Sources */,
+				7A000E272AA84F4600FA1817 /* Array+Extension.swift in Sources */,
 				7AC9E8302A939729004CC21F /* ServiceProviderChildController.swift in Sources */,
+				7A000E202AA84F4600FA1817 /* Exponentiation.swift in Sources */,
 				7AE94F312A96EB7D00ECEB1D /* StartGuaranteeConfirmController.swift in Sources */,
 				7AB377632A868A5E005BD1CB /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				7AD08BCE2A8A083B000B247E /* NSMutableAttributedStringExtension.swift in Sources */,
+				7A000DC32AA84F4500FA1817 /* Cipher.swift in Sources */,
 				7AD08BBD2A8A083B000B247E /* UIScreenExtension.swift in Sources */,
 				7AC5551E2A94869A0082A070 /* SettingViewController.swift in Sources */,
+				7A000E062AA84F4600FA1817 /* CBC.swift in Sources */,
 				7AD08BC32A8A083B000B247E /* UIStoryboardExtension.swift in Sources */,
 				7AC555282A94B5BB0082A070 /* SettingChildViewController.swift in Sources */,
 				7AC425242A9A0F7F00CBC5C3 /* JoinGuaranteeController.swift in Sources */,
+				7A000DE32AA84F4600FA1817 /* MD5.swift in Sources */,
 				7AD08BD92A8A083B000B247E /* NSAttributedStringExtension.swift in Sources */,
+				7A000DFB2AA84F4600FA1817 /* SHA2.swift in Sources */,
 				7A3B7D952A9C70C50036199F /* MeTobeAddedCell.swift in Sources */,
 				7AF15A132A85022800C48F39 /* GuranteeViewController.swift in Sources */,
 				7AD08BDA2A8A083B000B247E /* NSObjectExtension.swift in Sources */,
+				7A000DCA2AA84F4500FA1817 /* Bit.swift in Sources */,
 				7AD08BB92A8A083B000B247E /* CGPointExtension.swift in Sources */,
+				7A000DC42AA84F4500FA1817 /* AEADXChaCha20Poly1305.swift in Sources */,
+				7A000E012AA84F4600FA1817 /* PBKDF2.swift in Sources */,
+				7A000DF02AA84F4600FA1817 /* SHA1.swift in Sources */,
 				7AFB57AB2A95D73F003451CB /* ShareViewController.swift in Sources */,
+				7A000E192AA84F4600FA1817 /* Square Root.swift in Sources */,
+				7A000DBB2AA84F4500FA1817 /* ASN1.swift in Sources */,
 				7AD08BB52A8A083B000B247E /* UITesting.swift in Sources */,
 				7AB377592A862E2B005BD1CB /* FSPageControl.swift in Sources */,
 				7AD08BBF2A8A083B000B247E /* UIApplicationExtension.swift in Sources */,
 				7AB377712A87AC10005BD1CB /* HomeBannerSectionCellCollectionViewCell.swift in Sources */,
 				7A2BE08E2A8B8D51001B2970 /* WalletTokenViewController.swift in Sources */,
 				7AD08BB32A8A083B000B247E /* UserDefaultsBacked.swift in Sources */,
+				7A000E0E2AA84F4600FA1817 /* OFB.swift in Sources */,
 				7AD08BC22A8A083B000B247E /* UIViewExtension.swift in Sources */,
+				7A000E152AA84F4600FA1817 /* Data Conversion.swift in Sources */,
 				7AB3776B2A87A324005BD1CB /* XibLoadble.swift in Sources */,
 				7AD08BE72A8A083B000B247E /* Reusable.swift in Sources */,
+				7A000DE92AA84F4600FA1817 /* Signature.swift in Sources */,
+				7A000DF12AA84F4600FA1817 /* Poly1305.swift in Sources */,
+				7A000E022AA84F4600FA1817 /* PBKDF1.swift in Sources */,
 				7AD08BB82A8A083B000B247E /* CGSizeExtension.swift in Sources */,
 				7A3B7DA32A9CDC980036199F /* DepositingAlterView.swift in Sources */,
+				7A000E262AA84F4600FA1817 /* String Conversion.swift in Sources */,
+				7A000DD02AA84F4500FA1817 /* UInt32+Extension.swift in Sources */,
+				7A000E112AA84F4600FA1817 /* GCD.swift in Sources */,
 				7AC425262A9A14DF00CBC5C3 /* JoinGuaranteeStepTwoController.swift in Sources */,
 				7AB93E052A8D5F1A0098BF9E /* MeListChildViewController.swift in Sources */,
+				7A000E072AA84F4600FA1817 /* ECB.swift in Sources */,
 				7A3859D72A97521E0052DAEF /* InviteGuaranteeController.swift in Sources */,
 				7A5866C12A9FACDA00925EEC /* ReceiveTokenController.swift in Sources */,
+				7A000DEE2AA84F4600FA1817 /* Operators.swift in Sources */,
 				7AB377582A862E2B005BD1CB /* FSPageViewLayout.swift in Sources */,
+				7A000DE62AA84F4600FA1817 /* BatchedCollection.swift in Sources */,
 				7AD08BEE2A8A0AC3000B247E /* HomeQuickAccessSecion.swift in Sources */,
 				7AD08BCF2A8A083B000B247E /* NSRangeExtension.swift in Sources */,
 				7AD08BB22A8A083B000B247E /* Constants.swift in Sources */,
 				7A831C532A9F38DB0086B540 /* MessageDetailCell.swift in Sources */,
+				7A000DF62AA84F4600FA1817 /* StreamEncryptor.swift in Sources */,
 				7AD08BF12A8A0D64000B247E /* ServiceProviderCell.swift in Sources */,
 				7AD08BB62A8A083B000B247E /* UnitTesting.swift in Sources */,
+				7A000DE82AA84F4600FA1817 /* SecureBytes.swift in Sources */,
 				7AC9E82A2A937961004CC21F /* ServiceProviderController.swift in Sources */,
+				7A000E1D2AA84F4600FA1817 /* BigUInt.swift in Sources */,
+				7A000DFF2AA84F4600FA1817 /* PKCS7.swift in Sources */,
+				7A000DF72AA84F4600FA1817 /* DigestType.swift in Sources */,
+				7A000DBE2AA84F4500FA1817 /* BlockEncryptor.swift in Sources */,
+				7A000DE72AA84F4600FA1817 /* ISO78164Padding.swift in Sources */,
+				7A000DFE2AA84F4600FA1817 /* PKCS5.swift in Sources */,
 				7AFB57AE2A95F901003451CB /* NotiAlterView.swift in Sources */,
+				7A000DF92AA84F4600FA1817 /* Generics.swift in Sources */,
 				7A647F3F2A8C85A800A4A56F /* MessageListCell.swift in Sources */,
 				7AD08BEA2A8A083B000B247E /* AnyOptional.swift in Sources */,
+				7A000DBF2AA84F4500FA1817 /* UInt64+Extension.swift in Sources */,
+				7A000E142AA84F4600FA1817 /* Addition.swift in Sources */,
 				7A831C5C2A9F61000086B540 /* VerifyPhraseController.swift in Sources */,
 				7AD08BC42A8A083B000B247E /* UIFontExtension.swift in Sources */,
 				7AD08BE12A8A083B000B247E /* SequenceExtension.swift in Sources */,
+				7A000DEF2AA84F4600FA1817 /* Rabbit.swift in Sources */,
+				7A000E2B2AA8537800FA1817 /* NetworkManager.swift in Sources */,
+				7A000DD32AA84F4500FA1817 /* RSA.swift in Sources */,
+				7A000DBA2AA84F4500FA1817 /* ASN1Decoder.swift in Sources */,
+				7A000E1F2AA84F4600FA1817 /* CS.swift in Sources */,
 				7AF2BCED2A9DB32C0067C8A2 /* DepositingDetailController.swift in Sources */,
 				7AD08BC02A8A083B000B247E /* UIButtonExtension.swift in Sources */,
+				7A000E102AA84F4600FA1817 /* Random.swift in Sources */,
+				7A000DB82AA84F4500FA1817 /* ASN1Scanner.swift in Sources */,
 				7AB3775B2A862E2B005BD1CB /* FSPagerCollectionView.swift in Sources */,
+				7A000DD52AA84F4500FA1817 /* RSA+Cipher.swift in Sources */,
 				7A647F432A8C91BE00A4A56F /* MeInfoView.swift in Sources */,
 				7AF2BCF02A9DD2610067C8A2 /* GuaranteeingCell.swift in Sources */,
 				7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */,
 				7AD08BD42A8A083B000B247E /* URLExtension.swift in Sources */,
 				7AD08A822A89FAE8000B247E /* ColorConfiguration.swift in Sources */,
 				7AFB57A62A95D512003451CB /* UIApplication+Rx.swift in Sources */,
+				7A000E1A2AA84F4600FA1817 /* Division.swift in Sources */,
 				7A831C632A9F6B1D0086B540 /* WalletSignatureCell.swift in Sources */,
 				7A5866BD2A9F82C100925EEC /* ChangeNameController.swift in Sources */,
+				7A000E222AA84F4600FA1817 /* Shifts.swift in Sources */,
 				7AD08BDD2A8A083B000B247E /* DictionaryExtension.swift in Sources */,
 				7AD08BC52A8A083B000B247E /* UITextViewExtension.swift in Sources */,
 				7AD08BBB2A8A083B000B247E /* UIImageExtension.swift in Sources */,
 				7AB377572A862E2B005BD1CB /* FSPagerViewLayoutAttributes.swift in Sources */,
+				7A000E122AA84F4600FA1817 /* Hashable.swift in Sources */,
+				7A000DDE2AA84F4600FA1817 /* ChaCha20+Foundation.swift in Sources */,
+				7A000DDA2AA84F4600FA1817 /* Blowfish+Foundation.swift in Sources */,
 				7AB377552A862E2B005BD1CB /* FSPageViewTransformer.swift in Sources */,
 				7AB377542A862E2B005BD1CB /* FSPagerView.swift in Sources */,
+				7A000D3C2AA8469D00FA1817 /* NetworkConfig.swift in Sources */,
 				7AF2BCF32A9DEF770067C8A2 /* OrderOperationViewController.swift in Sources */,
+				7A000E132AA84F4600FA1817 /* Strideable.swift in Sources */,
 				7AD08BE62A8A083B000B247E /* NibOwnerLoadable.swift in Sources */,
+				7A000E1C2AA84F4600FA1817 /* Codable.swift in Sources */,
 				7A831C582A9F49C70086B540 /* CreateWalletStepOneController.swift in Sources */,
 				7ABF24A32A93EE39008D7001 /* APPHUD.swift in Sources */,
+				7A000DFC2AA84F4600FA1817 /* Padding.swift in Sources */,
+				7A000DF52AA84F4600FA1817 /* BlockDecryptor.swift in Sources */,
+				7A000E242AA84F4600FA1817 /* Integer Conversion.swift in Sources */,
 				7AD08BE42A8A083B000B247E /* BindingExtension.swift in Sources */,
+				7A000DEC2AA84F4600FA1817 /* Authenticator.swift in Sources */,
+				7A000DDB2AA84F4600FA1817 /* Utils+Foundation.swift in Sources */,
 				7AB377472A8612E1005BD1CB /* QMUIConfigurationTemplate.m in Sources */,
+				7A000DB72AA84F4500FA1817 /* AES.swift in Sources */,
+				7A000E0F2AA84F4600FA1817 /* ChaCha20.swift in Sources */,
+				7A000DD42AA84F4500FA1817 /* RSA+Signature.swift in Sources */,
 				7AD08BDC2A8A083B000B247E /* IntExtension.swift in Sources */,
+				7A000DCF2AA84F4500FA1817 /* XChaCha20.swift in Sources */,
+				7A000DDF2AA84F4600FA1817 /* Array+Foundation.swift in Sources */,
 				7AD08BCA2A8A083B000B247E /* UITableViewExtension.swift in Sources */,
+				7A000DC52AA84F4500FA1817 /* AEADChaCha20Poly1305.swift in Sources */,
+				7A000E092AA84F4600FA1817 /* PCBC.swift in Sources */,
+				7A000E0C2AA84F4600FA1817 /* CipherModeWorker.swift in Sources */,
 				7A2BE0922A8B91AF001B2970 /* WalletWithoutWalletView.swift in Sources */,
 				7AF8F2442AA057E700852F5B /* TokenTransferDetailController.swift in Sources */,
+				7A000E322AA874C500FA1817 /* LoginModel.swift in Sources */,
 				7AD08BD32A8A083B000B247E /* BundleExtension.swift in Sources */,
 				7A2BE0902A8B8D83001B2970 /* WalletSignatureViewController.swift in Sources */,
 				7AC555302A94CAB90082A070 /* ScanViewController.swift in Sources */,
+				7A000E082AA84F4600FA1817 /* CCM.swift in Sources */,
+				7A000DD62AA84F4500FA1817 /* Scrypt.swift in Sources */,
+				7A000E212AA84F4600FA1817 /* Floating Point Conversion.swift in Sources */,
+				7A000DD12AA84F4500FA1817 /* Digest.swift in Sources */,
+				7A000DCB2AA84F4500FA1817 /* HMAC.swift in Sources */,
+				7A000E182AA84F4600FA1817 /* Words and Bits.swift in Sources */,
+				7A000DE52AA84F4600FA1817 /* CompactMap.swift in Sources */,
 				7AD0C10B2AA1F49E003FCBF2 /* ImportWalletController.swift in Sources */,
+				7A000DC12AA84F4500FA1817 /* HKDF.swift in Sources */,
 				7AC9E8332A939F3E004CC21F /* OverlayContainerController.swift in Sources */,
+				7A000DBD2AA84F4500FA1817 /* DER.swift in Sources */,
 				7A3B7D992A9C990E0036199F /* MyListStatus.swift in Sources */,
+				7A000DE42AA84F4600FA1817 /* Cryptor.swift in Sources */,
 				7AB377562A862E2B005BD1CB /* FSPagerViewCell.swift in Sources */,
 				7AB377672A869278005BD1CB /* HomeNavigationBarView.swift in Sources */,
 				7AC555212A949EB90082A070 /* ArchivedKey.swift in Sources */,
+				7A000DC82AA84F4500FA1817 /* Int+Extension.swift in Sources */,
 				7A831C5F2A9F666A0086B540 /* WalletTokenCell.swift in Sources */,
 				7A2BE0862A8B773F001B2970 /* WalletHeaderView.swift in Sources */,
+				7A000DD92AA84F4600FA1817 /* XChaCha20+Foundation.swift in Sources */,
+				7A000DD72AA84F4600FA1817 /* NoPadding.swift in Sources */,
+				7A000DF22AA84F4600FA1817 /* BlockCipher.swift in Sources */,
+				7A000DC22AA84F4500FA1817 /* ISO10126Padding.swift in Sources */,
+				7A000DDC2AA84F4600FA1817 /* HMAC+Foundation.swift in Sources */,
+				7A000DEA2AA84F4600FA1817 /* ZeroPadding.swift in Sources */,
 				7AD08BC92A8A083B000B247E /* UIViewControllerExtension.swift in Sources */,
+				7A000E0A2AA84F4600FA1817 /* BlockMode.swift in Sources */,
 				7AD08BCB2A8A083B000B247E /* UISliderExtension.swift in Sources */,
 				7AD08BD62A8A083B000B247E /* NSLayoutConstraintsExtension.swift in Sources */,
 				7AD08BE92A8A083B000B247E /* Injectable.swift in Sources */,
+				7A000E1B2AA84F4600FA1817 /* Prime Test.swift in Sources */,
 				7ABF24A52A93F746008D7001 /* GuaranteeYesNoView.swift in Sources */,
 				7AD08BBC2A8A083B000B247E /* UISwitchExtension.swift in Sources */,
 				7AF15A172A85023C00C48F39 /* MyViewController.swift in Sources */,
+				7A000DF32AA84F4600FA1817 /* Updatable.swift in Sources */,
 				7AFB57B52A961B4B003451CB /* StartGuaranteeController.swift in Sources */,
+				7A000E042AA84F4600FA1817 /* OCB.swift in Sources */,
+				7A000DE02AA84F4600FA1817 /* AES+Foundation.swift in Sources */,
+				7A000DD22AA84F4500FA1817 /* UInt128.swift in Sources */,
 				7AD08BF42A8A11D8000B247E /* HomeServiceProviderSecion.swift in Sources */,
+				7A000E2D2AA85DF000FA1817 /* ResponseToModelable.swift in Sources */,
+				7A000DED2AA84F4600FA1817 /* SHA3.swift in Sources */,
 				7AD08BFA2A8A15A9000B247E /* UIButton+Tool.swift in Sources */,
 				7A5866BF2A9FA3CA00925EEC /* SendTokenPageOneController.swift in Sources */,
 				7AD08BEB2A8A083B000B247E /* Occupiable.swift in Sources */,
+				7A000E0D2AA84F4600FA1817 /* CTR.swift in Sources */,
+				7A000DCD2AA84F4500FA1817 /* UInt16+Extension.swift in Sources */,
 				7AD08BF82A8A1495000B247E /* UIImage+Tool.swift in Sources */,
 				7AD08BE02A8A083B000B247E /* StringExtension.swift in Sources */,
 				7AD08A7B2A89F26D000B247E /* LanguageManager.swift in Sources */,
@@ -1506,43 +2043,66 @@
 				7A831C6B2A9F76C90086B540 /* WalletManagementCell.swift in Sources */,
 				7AD08BE32A8A083B000B247E /* NSViewExtension.swift in Sources */,
 				7AD08BE52A8A083B000B247E /* NibLoadable.swift in Sources */,
+				7A000DCC2AA84F4500FA1817 /* CMAC.swift in Sources */,
 				7AD08BEC2A8A083B000B247E /* UIElementPreview.swift in Sources */,
 				7A3B7D9B2A9CA38D0036199F /* ChangeMoneyAlterVIew.swift in Sources */,
 				7AC5552C2A94C3E70082A070 /* SettingChildViewController2.swift in Sources */,
+				7A000E032AA84F4600FA1817 /* BlockModeOptions.swift in Sources */,
 				7AD08BCC2A8A083B000B247E /* UITextFieldExtension.swift in Sources */,
 				7A2BE0832A8B4E3C001B2970 /* AssociatedManager.swift in Sources */,
 				7AB377742A87B025005BD1CB /* HomeQuickAccessCell.swift in Sources */,
 				7A7D4DB22A84A19B0098262F /* AppDelegate.swift in Sources */,
 				7A831C662A9F6FEA0086B540 /* SelectedTokenController.swift in Sources */,
+				7A000DC92AA84F4500FA1817 /* AES.Cryptors.swift in Sources */,
 				7AC9E82C2A9382A6004CC21F /* ServiceProviderNotiView.swift in Sources */,
 				7AF8F2412AA0548D00852F5B /* TokenDetailCell.swift in Sources */,
+				7A000DC72AA84F4500FA1817 /* CBCMAC.swift in Sources */,
 				7AD08BCD2A8A083B000B247E /* UserDefaultsExtension.swift in Sources */,
+				7A000E1E2AA84F4600FA1817 /* Multiplication.swift in Sources */,
 				7AD08BB72A8A083B000B247E /* CGFloatLiteral.swift in Sources */,
 				7AD08BDF2A8A083B000B247E /* DoubleExtension.swift in Sources */,
+				7A000DDD2AA84F4600FA1817 /* Data+Extension.swift in Sources */,
+				7A000DEB2AA84F4600FA1817 /* String+Extension.swift in Sources */,
+				7A000E232AA84F4600FA1817 /* Subtraction.swift in Sources */,
 				7AD08BC12A8A083B000B247E /* UIAlertControllerExtension.swift in Sources */,
 				7AF15A192A85024600C48F39 /* WalletViewController.swift in Sources */,
 				7AC555242A94B2270082A070 /* FaceIDViewController.swift in Sources */,
 				7A831C502A9F368F0086B540 /* MessageDetailViewController.swift in Sources */,
+				7A000E172AA84F4600FA1817 /* Comparable.swift in Sources */,
 				7AD08BB42A8A083B000B247E /* SystemUtility.swift in Sources */,
 				7AD08BBE2A8A083B000B247E /* UILabelExtension.swift in Sources */,
 				7AD08BC82A8A083B000B247E /* UICollectionViewCellExtension.swift in Sources */,
+				7A000E252AA84F4600FA1817 /* BigInt.swift in Sources */,
+				7A000DF82AA84F4600FA1817 /* Utils.swift in Sources */,
 				7AD08BD52A8A083B000B247E /* ReusableFormatters.swift in Sources */,
 				7AD08BE22A8A083B000B247E /* DataExtension.swift in Sources */,
+				7A000E162AA84F4600FA1817 /* Bitwise Ops.swift in Sources */,
 				7AF8F23E2AA0531E00852F5B /* TokenDetailController.swift in Sources */,
 				7AD08BD12A8A083B000B247E /* DateExtension.swift in Sources */,
+				7A000DBC2AA84F4500FA1817 /* StreamDecryptor.swift in Sources */,
 				7AD08BDE2A8A083B000B247E /* MutableCollectionExtension.swift in Sources */,
+				7A000DC62AA84F4500FA1817 /* AEAD.swift in Sources */,
+				7A000E0B2AA84F4600FA1817 /* GCM.swift in Sources */,
+				7A000DD82AA84F4600FA1817 /* String+FoundationExtension.swift in Sources */,
+				7A000DC02AA84F4500FA1817 /* Cryptors.swift in Sources */,
 				7AD08BD82A8A083B000B247E /* FileManagerExtension.swift in Sources */,
 				7AB3775A2A862E2B005BD1CB /* FSPagerViewObjcCompat.m in Sources */,
 				7AD08BD72A8A083B000B247E /* NotificationCenterExtension.swift in Sources */,
 				7A831C682A9F75D40086B540 /* WalletManagementController.swift in Sources */,
+				7A000E052AA84F4600FA1817 /* CFB.swift in Sources */,
 				7A3B7DA12A9CAD180036199F /* ContactOtherController.swift in Sources */,
+				7A000DFD2AA84F4600FA1817 /* PKCS7Padding.swift in Sources */,
+				7A000DB92AA84F4500FA1817 /* ASN1Encoder.swift in Sources */,
 				7AD08BC62A8A083B000B247E /* UIDeviceExtension.swift in Sources */,
+				7A000E002AA84F4600FA1817 /* PKCS1v15.swift in Sources */,
 				7AD08BD22A8A083B000B247E /* TimerExtension.swift in Sources */,
 				7AB93E072A8D69520098BF9E /* MeListEmptyView.swift in Sources */,
 				7AFB57A82A95D53A003451CB /* UIViewController+Rx.swift in Sources */,
+				7A000DF42AA84F4600FA1817 /* Blowfish.swift in Sources */,
 				7AA505B02AA143C400BCE403 /* LocaleWalletManager.swift in Sources */,
 				7AD08BD02A8A083B000B247E /* ColorExtension.swift in Sources */,
 				7AF8F23A2AA0458E00852F5B /* SendTokenPageTwoController.swift in Sources */,
+				7A000E302AA8743300FA1817 /* APPBaseModel.swift in Sources */,
 				7AD08BBA2A8A083B000B247E /* CGRectExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

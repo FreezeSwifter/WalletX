@@ -11,6 +11,7 @@ target 'WalletX' do
   # Network
   pod 'Alamofire', '5.8.0'
   pod 'Kingfisher', '6.3.1'
+  pod 'Moya/RxSwift', '15.0.0'
   
   # DataBase
   pod 'HandyJSON', '5.0.2'
