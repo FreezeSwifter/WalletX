@@ -10,6 +10,11 @@ import Moya
 
 enum NetworkService {
     case login(walletAddr: String)
+    case banner(type: Int) // 0 首页banner 1 钱包banner
+    case guaranteeDisplayData // 担保笔数,担保金额
+    case serviceCategory // 商户分类
+    case serviceList(categoryId: String) // 根据分类获取列表
+
 }
 
 
@@ -22,6 +27,16 @@ extension NetworkService: TargetType {
         switch self {
         case .login:
             return "/api/user/login"
+        case .banner:
+            return "/api/banner/list"
+        case .guaranteeDisplayData:
+            return "/api/assureOrder/dataIndex"
+        case .serviceCategory:
+            return "/api/merchant/category"
+        case .serviceList:
+            return "/api/merchant/service/list"
+        
+        
         }
     }
     
@@ -68,8 +83,17 @@ extension NetworkService: TargetType {
     private var parameters: [String: Any]? {
         switch self {
         case let .login(walletAddr):
-            let p: [String: Any] = ["walletAddr": walletAddr, "deviceId": UIDevice.current.identifierForVendor?.uuidString ?? "", "model": UIDevice.current.model]
-            return p
+            let dict: [String: Any] = ["walletAddr": walletAddr, "deviceId": UIDevice.current.identifierForVendor?.uuidString ?? "", "model": UIDevice.current.model]
+            return dict
+            
+        case let .banner(type):
+            return ["type": type]
+            
+        case let .serviceList(categoryId):
+            return ["categoryId": categoryId]
+            
+        default:
+            return nil
         }
     }
     

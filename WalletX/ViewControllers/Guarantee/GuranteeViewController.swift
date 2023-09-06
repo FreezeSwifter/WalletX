@@ -17,7 +17,9 @@ import NSObject_Rx
 class GuranteeViewController: UIViewController, HomeNavigationble {
 
     private var adapter: ListAdapter!
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    
+    private var dataSource: [ListDiffable] = [HomeBannerSection.Model(), HomeQuickAccessSecion.Model(), HomeServiceProviderSecion.Model()]
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -74,13 +76,40 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
             self?.navigationController?.pushViewController(shareVC, animated: true)
         }).disposed(by: rx.disposeBag)
         
+        let bannerReq: Observable<[BannerModel]> = APIProvider.rx.request(.banner(type: 0)).mapModelArray()
+        let totalCountReq = APIProvider.rx.request(.guaranteeDisplayData).mapJSON()
+        let cartgoryListReq: Observable<[CategoryModel]> = APIProvider.rx.request(.serviceCategory).mapModelArray()
+        
+        bannerReq.subscribe {[weak self] list in
+            let data = HomeBannerSection.Model()
+            data.list = list
+            self?.dataSource[0] = data
+            self?.adapter.performUpdates(animated: true)
+        }.disposed(by: rx.disposeBag)
+        
+        totalCountReq.subscribe(onSuccess: {[weak self] obj in
+            let json = obj as? [String: Any]
+            let data = json?["data"] as? [String: Any]
+            let model = HomeQuickAccessSecion.Model()
+            model.assureAmount = data?["assureAmount"] as? Int64
+            model.assureNum = data?["assureNum"] as? Int64
+            self?.dataSource[1] = model
+            self?.adapter.performUpdates(animated: true)
+        }).disposed(by: rx.disposeBag)
+        
+        cartgoryListReq.subscribe(onNext: {[weak self] list in
+            let model = HomeServiceProviderSecion.Model()
+            model.list = list
+            self?.dataSource[2] = model
+            self?.adapter.performUpdates(animated: true)
+        }).disposed(by: rx.disposeBag)
     }
 }
 
 extension GuranteeViewController: ListAdapterDataSource {
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        return [HomeBannerSection.Model(), HomeQuickAccessSecion.Model(), HomeServiceProviderSecion.Model()]
+        return dataSource
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {

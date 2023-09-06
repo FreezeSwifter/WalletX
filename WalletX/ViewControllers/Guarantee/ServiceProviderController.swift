@@ -13,6 +13,8 @@ import JXSegmentedView
 
 class ServiceProviderController: UIViewController, HomeNavigationble {
 
+    var list: [CategoryModel] = []
+    
     private lazy var notiView: ServiceProviderNotiView = ViewLoader.Xib.view()
     
     private static var titleData = ["home_item_all".toMultilingualism(), "home_USDT".toMultilingualism(), "home_RMB".toMultilingualism(), "home_item_trade".toMultilingualism()]

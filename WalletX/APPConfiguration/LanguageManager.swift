@@ -144,5 +144,6 @@ class LanguageManager: NSObject {
         NotificationCenter.default.post(name: .languageChanged, object: nil)
         languageChangedSubject.onNext(currentCode)
     }
+    
 }
 

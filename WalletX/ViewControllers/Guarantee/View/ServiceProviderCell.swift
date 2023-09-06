@@ -10,9 +10,16 @@ import QMUIKit
 import RxCocoa
 import RxSwift
 import NSObject_Rx
+import Kingfisher
 
 class ServiceProviderCell: UICollectionViewCell {
-
+    
+    var datasource: [ServiceListModel] = [] {
+        didSet {
+            reloadLayoutView()
+        }
+    }
+    
     @IBOutlet weak var topLabel: UILabel! {
         didSet {
             topLabel.textColor = ColorConfiguration.blodText.toColor()
@@ -28,6 +35,7 @@ class ServiceProviderCell: UICollectionViewCell {
             changeButton.applyCornerRadius(7)
             changeButton.setTitle("home_USDT".toMultilingualism(), for: UIControl.State())
             changeButton.isSelected = true
+            changeButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15)
         }
     }
     
@@ -38,6 +46,7 @@ class ServiceProviderCell: UICollectionViewCell {
             collectButton.setTitleColor(ColorConfiguration.blackText.toColor(), for: .selected)
             collectButton.applyCornerRadius(7)
             collectButton.setTitle("home_RMB".toMultilingualism(), for: UIControl.State())
+            collectButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15)
         }
     }
     
@@ -48,9 +57,10 @@ class ServiceProviderCell: UICollectionViewCell {
             moreButton.setTitleColor(ColorConfiguration.blackText.toColor(), for: .selected)
             moreButton.applyCornerRadius(7)
             moreButton.setTitle("home_more".toMultilingualism(), for: UIControl.State())
+            moreButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15)
         }
     }
-
+    
     lazy var layoutView: QMUIFloatLayoutView = {
         let v = QMUIFloatLayoutView.init(frame: .zero)
         v.itemMargins = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
@@ -60,30 +70,36 @@ class ServiceProviderCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-    
+        
         contentView.addSubview(layoutView)
         layoutView.snp.makeConstraints { make in
             make.top.equalTo(topLabel.snp.bottom).offset(30)
             make.trailing.leading.equalToSuperview().inset(10)
             make.bottom.equalToSuperview()
         }
-        
-        ["Sfodmge", "Christina", "Ashcryin", "Kyistine", "Sfodmge", "Kyistine", "Rathera", "Britishy", "Machiel"].forEach { str in
+    }
+    
+    private func reloadLayoutView() {
+        layoutView.subviews.forEach { $0.removeFromSuperview() }
+        datasource.enumerated().forEach { (index, item) in
             let btn = QMUIButton(type: .custom)
             btn.backgroundColor = ColorConfiguration.homeItemBg.toColor()
-            btn.setImage(UIImage(named: "tabbar_gurantee_item"), for: UIControl.State())
+            if let logo = item.logo, let logoUrl = URL(string: logo) {
+                btn.kf.setImage(with: logoUrl, for: .normal)
+            }
             btn.imagePosition = .left
             btn.spacingBetweenImageAndTitle = 4
-            btn.setTitle(str, for: .normal)
+            btn.setTitle(item.mertName, for: .normal)
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
             btn.setTitleColor(ColorConfiguration.descriptionText.toColor(), for: .normal)
             btn.titleLabel?.minimumScaleFactor = 0.5
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
             btn.applyCornerRadius(7)
+            btn.tag = index
             layoutView.addSubview(btn)
         }
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -93,7 +109,7 @@ class ServiceProviderCell: UICollectionViewCell {
         super.init(coder: coder)
         commonInit()
     }
-
+    
     private func commonInit() {
         
         NotificationCenter.default.rx.notification(.languageChanged).observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
@@ -103,5 +119,5 @@ class ServiceProviderCell: UICollectionViewCell {
             self?.moreButton.setTitle("home_more".toMultilingualism(), for: UIControl.State())
         }).disposed(by: rx.disposeBag)
     }
-
+    
 }

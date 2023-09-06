@@ -16,16 +16,23 @@ class HomeBannerSectionCellCollectionViewCell: UICollectionViewCell, FSPagerView
     }
     
     func numberOfItems(in pagerView: FSPagerView) -> Int {
-        return 3
+        return list.count
     }
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
-        cell.imageView?.image = UIImage.init(named: "guarantee_service")
-        let url = URL(string: "https://img2.baidu.com/it/u=1041327415,728509871&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281")
+        let item = list[index]
+        let url = URL(string: item.imageUrl ?? "")
         cell.imageView?.kf.setImage(with: url)
         cell.applyCornerRadius(7)
         return cell
+    }
+    
+    var list: [BannerModel] = [] {
+        didSet {
+            pagerView.reloadData()
+            pageControl.numberOfPages = list.count
+        }
     }
     
     lazy var pagerView: FSPagerView = {
@@ -39,7 +46,6 @@ class HomeBannerSectionCellCollectionViewCell: UICollectionViewCell, FSPagerView
     
     lazy var pageControl: FSPageControl = {
         let v = FSPageControl(frame: .zero)
-        v.numberOfPages = 3
         return v
     }()
 
@@ -53,7 +59,6 @@ class HomeBannerSectionCellCollectionViewCell: UICollectionViewCell, FSPagerView
         setupUI()
     }
     
- 
     private func setupUI() {
         contentView.addSubview(pagerView)
         pagerView.snp.makeConstraints { make in

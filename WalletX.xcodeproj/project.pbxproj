@@ -125,6 +125,9 @@
 		7A000E2D2AA85DF000FA1817 /* ResponseToModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000E2C2AA85DF000FA1817 /* ResponseToModelable.swift */; };
 		7A000E302AA8743300FA1817 /* APPBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000E2F2AA8743300FA1817 /* APPBaseModel.swift */; };
 		7A000E322AA874C500FA1817 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000E312AA874C500FA1817 /* LoginModel.swift */; };
+		7A000E3C2AA8C40A00FA1817 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A000E3E2AA8C40A00FA1817 /* InfoPlist.strings */; };
+		7A000E412AA8CC3700FA1817 /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000E402AA8CC3700FA1817 /* BannerModel.swift */; };
+		7A000E432AA8CD7F00FA1817 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000E422AA8CD7F00FA1817 /* CategoryModel.swift */; };
 		7A2BE0832A8B4E3C001B2970 /* AssociatedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE0822A8B4E3C001B2970 /* AssociatedManager.swift */; };
 		7A2BE0862A8B773F001B2970 /* WalletHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE0852A8B773F001B2970 /* WalletHeaderView.swift */; };
 		7A2BE0882A8B774A001B2970 /* WalletHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A2BE0872A8B774A001B2970 /* WalletHeaderView.xib */; };
@@ -426,6 +429,12 @@
 		7A000E2C2AA85DF000FA1817 /* ResponseToModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseToModelable.swift; sourceTree = "<group>"; };
 		7A000E2F2AA8743300FA1817 /* APPBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APPBaseModel.swift; sourceTree = "<group>"; };
 		7A000E312AA874C500FA1817 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		7A000E382AA8C3D600FA1817 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		7A000E392AA8C3D700FA1817 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		7A000E3D2AA8C40A00FA1817 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7A000E3F2AA8C41B00FA1817 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		7A000E402AA8CC3700FA1817 /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
+		7A000E422AA8CD7F00FA1817 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		7A2BE0822A8B4E3C001B2970 /* AssociatedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociatedManager.swift; sourceTree = "<group>"; };
 		7A2BE0852A8B773F001B2970 /* WalletHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeaderView.swift; sourceTree = "<group>"; };
 		7A2BE0872A8B774A001B2970 /* WalletHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletHeaderView.xib; sourceTree = "<group>"; };
@@ -833,6 +842,8 @@
 			children = (
 				7A000E2F2AA8743300FA1817 /* APPBaseModel.swift */,
 				7A000E312AA874C500FA1817 /* LoginModel.swift */,
+				7A000E402AA8CC3700FA1817 /* BannerModel.swift */,
+				7A000E422AA8CD7F00FA1817 /* CategoryModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -924,6 +935,7 @@
 				7A7D4DBA2A84A19D0098262F /* Assets.xcassets */,
 				7A7D4DBC2A84A19D0098262F /* LaunchScreen.storyboard */,
 				7A7D4DBF2A84A19D0098262F /* Info.plist */,
+				7A000E3E2AA8C40A00FA1817 /* InfoPlist.strings */,
 			);
 			path = WalletX;
 			sourceTree = "<group>";
@@ -1741,6 +1753,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 7A7D4DA52A84A19B0098262F;
 			productRefGroup = 7A7D4DAF2A84A19B0098262F /* Products */;
@@ -1786,6 +1799,7 @@
 				7AD08BF22A8A0D64000B247E /* ServiceProviderCell.xib in Resources */,
 				7AB377752A87B025005BD1CB /* HomeQuickAccessCell.xib in Resources */,
 				7A647F402A8C85A800A4A56F /* MessageListCell.xib in Resources */,
+				7A000E3C2AA8C40A00FA1817 /* InfoPlist.strings in Resources */,
 				7AC5552D2A94C3E70082A070 /* SettingChildViewController2.xib in Resources */,
 				7AB377692A869281005BD1CB /* HomeNavigationBarView.xib in Resources */,
 				7AC555292A94B5BB0082A070 /* SettingChildViewController.xib in Resources */,
@@ -1902,6 +1916,7 @@
 				7A000DEE2AA84F4600FA1817 /* Operators.swift in Sources */,
 				7AB377582A862E2B005BD1CB /* FSPageViewLayout.swift in Sources */,
 				7A000DE62AA84F4600FA1817 /* BatchedCollection.swift in Sources */,
+				7A000E412AA8CC3700FA1817 /* BannerModel.swift in Sources */,
 				7AD08BEE2A8A0AC3000B247E /* HomeQuickAccessSecion.swift in Sources */,
 				7AD08BCF2A8A083B000B247E /* NSRangeExtension.swift in Sources */,
 				7AD08BB22A8A083B000B247E /* Constants.swift in Sources */,
@@ -2072,6 +2087,7 @@
 				7AD08BB42A8A083B000B247E /* SystemUtility.swift in Sources */,
 				7AD08BBE2A8A083B000B247E /* UILabelExtension.swift in Sources */,
 				7AD08BC82A8A083B000B247E /* UICollectionViewCellExtension.swift in Sources */,
+				7A000E432AA8CD7F00FA1817 /* CategoryModel.swift in Sources */,
 				7A000E252AA84F4600FA1817 /* BigInt.swift in Sources */,
 				7A000DF82AA84F4600FA1817 /* Utils.swift in Sources */,
 				7AD08BD52A8A083B000B247E /* ReusableFormatters.swift in Sources */,
@@ -2110,10 +2126,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		7A000E3E2AA8C40A00FA1817 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7A000E3D2AA8C40A00FA1817 /* en */,
+				7A000E3F2AA8C41B00FA1817 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		7A7D4DB72A84A19B0098262F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7A7D4DB82A84A19B0098262F /* Base */,
+				7A000E382AA8C3D600FA1817 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -2122,6 +2148,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7A7D4DBD2A84A19D0098262F /* Base */,
+				7A000E392AA8C3D700FA1817 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -2133,6 +2160,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -2193,6 +2221,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
