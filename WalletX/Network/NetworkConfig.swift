@@ -65,7 +65,7 @@ extension NetworkService: TargetType {
         return dict
     }
     
-    var parameters: [String: Any]? {
+    private var parameters: [String: Any]? {
         switch self {
         case let .login(walletAddr):
             let p: [String: Any] = ["walletAddr": walletAddr, "deviceId": UIDevice.current.identifierForVendor?.uuidString ?? "", "model": UIDevice.current.model]
@@ -73,7 +73,7 @@ extension NetworkService: TargetType {
         }
     }
     
-    func encrypted(json: [String: Any]?) -> String? {
+    private func encrypted(json: [String: Any]?) -> String? {
         guard let dict = json else {
             return nil
         }
