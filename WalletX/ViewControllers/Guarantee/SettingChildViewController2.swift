@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+import NSObject_Rx
 
 class SettingChildViewController2: UIViewController, HomeNavigationble {
     
@@ -39,6 +42,36 @@ class SettingChildViewController2: UIViewController, HomeNavigationble {
             self?.navigationController?.popViewController(animated: true)
         }).disposed(by: rx.disposeBag)
         
+    }
+    
+    @IBAction func changeTelegramTap(_ sender: UIControl) {
+        
+        SettingModifyAlterView.show(title: "home_setting_telegram".toMultilingualism(), placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
+            
+            guard let text = str, text.isNotEmpty else {
+                return Observable<Any>.empty()
+            }
+            let dict: [String: Any] = ["tg": text]
+            return APIProvider.rx.request(.userInfoSetting(info: dict)).mapJSON().asObservable()
+            
+        }.subscribe(onNext: { _ in
+
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    @IBAction func changeEmailTap(_ sender: UIControl) {
+        
+        SettingModifyAlterView.show(title: "home_setting_email".toMultilingualism(), placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
+            
+            guard let text = str, text.isNotEmpty else {
+                return Observable<Any>.empty()
+            }
+            let dict: [String: Any] = ["email": text]
+            return APIProvider.rx.request(.userInfoSetting(info: dict)).mapJSON().asObservable()
+            
+        }.subscribe(onNext: { _ in
+
+        }).disposed(by: rx.disposeBag)
     }
     
 }

@@ -123,22 +123,20 @@ class SettingViewController: UIViewController, HomeNavigationble {
     @IBAction func switchTap(_ sender: UISwitch) {
         let context = LAContext()
         var error: NSError?
-        
+        let isOn = sender.isOn
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "home_setting_ScreenLock".toMultilingualism()
             
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
                 
-                DispatchQueue.main.async {
-                    if success {
-                        
-                    } else {
-                        // error
-                    }
-                    AppArchiveder.shared().mmkv?.set(sender.isOn, forKey: ArchivedKey.screenLock.rawValue)
+                if success {
+                    AppArchiveder.shared().mmkv?.set(isOn, forKey: ArchivedKey.screenLock.rawValue)
                 }
             }
         } else {
+            DispatchQueue.main.async {
+                sender.isOn = false
+            }
             APPHUD.flash(text: "home_setting_lock_error".toMultilingualism())
         }
     }
@@ -151,6 +149,22 @@ class SettingViewController: UIViewController, HomeNavigationble {
     @IBAction func contactTap(_ sender: UIControl) {
         let contactVC: SettingChildViewController2 = ViewLoader.Xib.controller()
         navigationController?.pushViewController(contactVC, animated: true)
+    }
+    
+    @IBAction func changeNickNameTap(_ sender: UIControl) {
+        
+        SettingModifyAlterView.show(title: "home_setting_Nickname".toMultilingualism(), placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
+            
+            guard let text = str, text.isNotEmpty else {
+                return Observable<Any>.empty()
+            }
+            let dict: [String: Any] = ["nickName": text]
+            return APIProvider.rx.request(.userInfoSetting(info: dict)).mapJSON().asObservable()
+            
+        }.subscribe(onNext: { _ in
+
+        }).disposed(by: rx.disposeBag)
+        
     }
     
 }

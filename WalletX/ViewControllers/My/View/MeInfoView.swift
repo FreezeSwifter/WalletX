@@ -6,9 +6,16 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MeInfoView: UIView {
-        
+    
+    var userInfo: UserInfoModel? {
+        didSet {
+            setupData()
+        }
+    }
+    
     @IBOutlet weak var avatarImageView: UIImageView! {
         didSet {
             avatarImageView.applyCornerRadius(avatarImageView.bounds.width / 2)
@@ -33,13 +40,16 @@ class MeInfoView: UIView {
     @IBOutlet weak var telegramLabel: UILabel! {
         didSet {
             telegramLabel.textColor = ColorConfiguration.descriptionText.toColor()
-            telegramLabel.text = "Telegram: \("me_noBind".toMultilingualism())"
+            telegramLabel.text = "Telegram: \("--")"
         }
     }
     
     @IBOutlet weak var levelStackView: UIStackView! {
         didSet{
             levelStackView.backgroundColor = ColorConfiguration.primary.toColor().withAlphaComponent(0.15)
+            levelStackView.isLayoutMarginsRelativeArrangement = true
+            levelStackView.layoutMargins = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
+            levelStackView.applyCornerRadius(2)
         }
     }
     
@@ -52,15 +62,30 @@ class MeInfoView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
         commonInit()
     }
     
     private func commonInit() {
         backgroundColor = .clear
+    }
+    
+    private func setupData() {
+
+        nameLabel.text = userInfo?.data?.nickName ?? "--"
+        let walletString = userInfo?.data?.walletId ?? "me_noCreate".toMultilingualism()
+        walletLabel.text = "\("me_walletId".toMultilingualism()): \(walletString)"
+        let telegramString = userInfo?.data?.tg ?? "--"
+        telegramLabel.text = "Telegram: \(telegramString)"
+        avatarImageView.kf.setImage(with: URL(string: userInfo?.data?.headImage ?? ""))
+        let levelString = "Lv\(userInfo?.data?.creditLevel ?? 1)"
+        levelLabel.text = levelString
     }
 }

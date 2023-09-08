@@ -14,9 +14,10 @@ enum NetworkService {
     case guaranteeDisplayData // 担保笔数,担保金额
     case serviceCategory // 商户分类
     case serviceList(categoryId: String) // 根据分类获取列表
+    case userInfoSetting(info: [String: Any])
+    case getUserInfo // 查询用户信息
 
 }
-
 
 extension NetworkService: TargetType {
     var baseURL: URL {
@@ -35,8 +36,10 @@ extension NetworkService: TargetType {
             return "/api/merchant/category"
         case .serviceList:
             return "/api/merchant/service/list"
-        
-        
+        case .userInfoSetting:
+            return "/api/user/other/install"
+        case .getUserInfo:
+            return "/api/user/info"
         }
     }
     
@@ -47,7 +50,7 @@ extension NetworkService: TargetType {
     var task: Moya.Task {
         let requestParameters = parameters ?? [:]
         let encoding: ParameterEncoding = JSONEncoding.default
-        
+    
         let object = encrypted(json: requestParameters)
         let encryptedParameters = [
             "object": object ?? "",
@@ -87,10 +90,13 @@ extension NetworkService: TargetType {
             return dict
             
         case let .banner(type):
-            return ["type": type]
+            return ["type": "\(type)"]
             
         case let .serviceList(categoryId):
             return ["categoryId": categoryId]
+            
+        case let .userInfoSetting(info):
+            return info
             
         default:
             return nil

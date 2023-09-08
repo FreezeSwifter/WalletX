@@ -29,3 +29,9 @@ struct ServiceListModel: HandyJSON {
     var status: Int?
     var tg: String?
 }
+
+struct ServiceDetailModel: HandyJSON {
+    
+    var category: CategoryModel?
+    var merchantList: [ServiceListModel]?
+}

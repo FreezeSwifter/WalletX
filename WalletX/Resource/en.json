@@ -202,4 +202,6 @@
     "导入": "Import",
     "请输入助记词": "Please input the secret phrase",
     "创建钱包第二步提醒": "Write or copy your secret phrase, and then store it in a secure location.",
+    "请输入": "Please Input",
+    "取消": "Cancel",
 }

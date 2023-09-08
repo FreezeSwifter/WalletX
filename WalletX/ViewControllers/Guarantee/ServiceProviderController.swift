@@ -13,11 +13,15 @@ import JXSegmentedView
 
 class ServiceProviderController: UIViewController, HomeNavigationble {
 
-    var list: [CategoryModel] = []
+    var list: [CategoryModel] = [] {
+        didSet {
+            setupSegmentData()
+        }
+    }
     
     private lazy var notiView: ServiceProviderNotiView = ViewLoader.Xib.view()
     
-    private static var titleData = ["home_item_all".toMultilingualism(), "home_USDT".toMultilingualism(), "home_RMB".toMultilingualism(), "home_item_trade".toMultilingualism()]
+    private var titleData = ["home_item_all".toMultilingualism()]
     
     private lazy var segmentedDataSource: JXSegmentedTitleDataSource = {
         let ds = JXSegmentedTitleDataSource()
@@ -29,7 +33,7 @@ class ServiceProviderController: UIViewController, HomeNavigationble {
         ds.titleNormalFont = UIFont.systemFont(ofSize: 15, weight: .medium)
         ds.isTitleZoomEnabled = false
         ds.titleSelectedZoomScale = 1
-        ds.titles = ServiceProviderController.titleData
+        ds.titles = []
         return ds
     }()
     
@@ -40,12 +44,42 @@ class ServiceProviderController: UIViewController, HomeNavigationble {
         return segContainerView
     }()
     
-    private lazy var childVC: [JXSegmentedListContainerViewListDelegate] = [ServiceProviderChildController(), ServiceProviderChildController(), ServiceProviderChildController(), ServiceProviderChildController()]
+    private lazy var childVC: [JXSegmentedListContainerViewListDelegate] = {
+        let vc = ServiceProviderChildController()
+        vc.index = 0
+        return [vc]
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        
+        bind()
+    }
+    
+    private func bind() {
+   
+    }
+    
+    private func setupSegmentData() {
+        if list.count == 0 {
+            let cartgoryListReq: Observable<[CategoryModel]> = APIProvider.rx.request(.serviceCategory).mapModelArray()
+            cartgoryListReq.subscribe(onNext: {[weak self] list in
+                self?.list = list
+            }).disposed(by: rx.disposeBag)
+            
+        } else {
+            let titleArray = list.compactMap { $0.category }
+            let vcArray = list.enumerated().map { (index, obj) in
+                let vc = ServiceProviderChildController()
+                vc.index = index + 1
+                vc.category = obj
+                return vc
+            }
+            childVC.append(contentsOf: vcArray)
+            titleData.append(contentsOf: titleArray)
+            segmentedDataSource.titles = titleData
+            segmentedView.reloadData()
+        }
     }
     
     private func setupView() {
@@ -93,7 +127,7 @@ extension ServiceProviderController: JXSegmentedListContainerViewDataSource {
     
     func numberOfLists(in listContainerView: JXSegmentedListContainerView) -> Int {
         
-        return segmentedDataSource.titles.count
+        return titleData.count
     }
     
     func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {

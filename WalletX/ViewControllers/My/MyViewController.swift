@@ -105,6 +105,14 @@ class MyViewController: UIViewController, HomeNavigationble {
             shareVC.hidesBottomBarWhenPushed = true
             self?.navigationController?.pushViewController(shareVC, animated: true)
         }).disposed(by: rx.disposeBag)
+        
+        let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
+        
+        getUserInfoReq.subscribe(onNext: {[weak self] obj in
+            self?.infoView.userInfo = obj
+        }).disposed(by: rx.disposeBag)
+        
+        
     }
     
     private func setupView() {
@@ -204,7 +212,7 @@ extension MyViewController: MeListChildViewDelegate {
         let listOrigniY: CGFloat = segmentedContainerOriginY + segmentedContainerView.height
         var listY: CGFloat = listOrigniY
         listY -= contentOffsetY
-
+        
         if listY <= segmentedContainerOriginY {
             listY = segmentedContainerOriginY - 22
         }

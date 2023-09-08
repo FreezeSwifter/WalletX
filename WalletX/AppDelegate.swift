@@ -86,6 +86,7 @@ extension AppDelegate {
         
         setupObserver()
         autoLogin()
+        checkFaceId()
     }
     
     func createTabBarItem(title: String, image: UIImage, selecteColor: UIColor, tag: Int) -> UITabBarItem {
@@ -95,18 +96,11 @@ extension AppDelegate {
     }
     
     func setupObserver() {
-
+        
         UIApplication.shared.rx.applicationWillEnterForeground.subscribe(onNext: {[weak self] _ in
-
-//            if let isOpenLock = AppArchiveder.shared().mmkv?.bool(forKey: ArchivedKey.screenLock.rawValue), isOpenLock {
-//                let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
-//                faceIdVC.modalPresentationStyle = .fullScreen
-//                AppDelegate.topViewController()?.present(faceIdVC, animated: true)
-//            }
+            self?.checkFaceId()
             self?.autoLogin()
         }).disposed(by: rx.disposeBag)
-        
-        
     }
     
     func autoLogin() {
@@ -116,8 +110,16 @@ extension AppDelegate {
             guard let addressKey = LocaleWalletManager.shared().TRON?.address?.md5() else { return }
             guard let jsonString = model?.toJSONString() else { return }
             AppArchiveder.shared().mmkv?.set(jsonString, forKey: addressKey)
-             
+            
         }).disposed(by: rx.disposeBag)
+    }
+    
+    func checkFaceId() {
+        if let isOpenLock = AppArchiveder.shared().mmkv?.bool(forKey: ArchivedKey.screenLock.rawValue), isOpenLock {
+            let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
+            faceIdVC.modalPresentationStyle = .fullScreen
+            AppDelegate.topViewController()?.present(faceIdVC, animated: true)
+        }
     }
 }
 

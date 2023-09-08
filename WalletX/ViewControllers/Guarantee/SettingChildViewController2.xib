@@ -67,6 +67,9 @@
                                 <constraint firstItem="38Y-XK-6yo" firstAttribute="centerY" secondItem="E90-6A-3GK" secondAttribute="centerY" id="g19-kC-MER"/>
                                 <constraint firstItem="zZ9-ee-2UK" firstAttribute="leading" secondItem="E90-6A-3GK" secondAttribute="leading" constant="16" id="v1v-qA-RDn"/>
                             </constraints>
+                            <connections>
+                                <action selector="changeTelegramTap:" destination="-1" eventType="touchUpInside" id="rek-Pg-l60"/>
+                            </connections>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gT8-qK-PRg" customClass="UIControl">
                             <rect key="frame" x="0.0" y="52" width="393" height="52"/>
@@ -111,6 +114,9 @@
                                 <constraint firstItem="j2I-Eb-hd2" firstAttribute="centerY" secondItem="gT8-qK-PRg" secondAttribute="centerY" id="hWa-a9-zPS"/>
                                 <constraint firstAttribute="height" constant="52" id="wKL-qx-uSC"/>
                             </constraints>
+                            <connections>
+                                <action selector="changeEmailTap:" destination="-1" eventType="touchUpInside" id="Zm4-Sv-0p4"/>
+                            </connections>
                         </view>
                     </subviews>
                 </stackView>
@@ -127,7 +133,7 @@
     </objects>
     <resources>
         <image name="global_list_right_arrow" width="6" height="11"/>
-        <image name="guarantee_setting_email" width="60" height="60"/>
+        <image name="guarantee_setting_email" width="20" height="20"/>
         <image name="guarantee_setting_telegram" width="20" height="20"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -181,7 +181,7 @@
                                 <action selector="contactTap:" destination="-1" eventType="touchUpInside" id="4rO-qc-CrF"/>
                             </connections>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehw-dG-PwW">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehw-dG-PwW" customClass="UIControl">
                             <rect key="frame" x="0.0" y="104.00000000000003" width="393" height="52"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Pce-fV-zuo">
@@ -218,6 +218,9 @@
                                 <constraint firstAttribute="trailing" secondItem="vFJ-q9-cd2" secondAttribute="trailing" constant="16" id="pab-aM-jX4"/>
                                 <constraint firstItem="vFJ-q9-cd2" firstAttribute="centerY" secondItem="ehw-dG-PwW" secondAttribute="centerY" id="v0z-8I-P6h"/>
                             </constraints>
+                            <connections>
+                                <action selector="changeNickNameTap:" destination="-1" eventType="touchUpInside" id="QCP-hm-SEq"/>
+                            </connections>
                         </view>
                     </subviews>
                 </stackView>

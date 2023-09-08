@@ -24,5 +24,38 @@ struct LoginModel: APPBaseModel {
     
     var data: Meta?
     
+}
+
+struct UserInfoModel: APPBaseModel {
     
+    struct Meta: HandyJSON {
+        var id: Int64?
+        var nickName: String?
+        var headImage: String?
+        var walletId: String?
+        var walletAddr: String?
+        var tg: String?
+        var email: String?
+        var lange: Int64?
+        var creditLevel: Int64?
+        var balanceUsdt: Double?
+        var balanceTrx: Double?
+        var inviteCode: String?
+        var kyc: Int?
+        var pin: Int?
+        var status: Int?
+        var createTime: Double?
+        var loginFinalTime: Double?
+        var loginNum: Int64?
+        var terminal: String?
+        var remark: String?
+        var token: String?
+        var assureFeeRemind: Int64?
+    }
+    
+    var code: Int?
+    
+    var message: String?
+    
+    var data: Meta?
 }
