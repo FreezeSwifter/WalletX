@@ -11,9 +11,14 @@ import RxSwift
 import QMUIKit
 import Then
 import NSObject_Rx
+import HandyJSON
 
 
 class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
+    
+    var parameter: StartGuaranteeController.Parameter?
+    
+    @IBOutlet weak var topPaddingOffset: NSLayoutConstraint!
     
     @IBOutlet weak var topNotiBg: UIStackView! {
         didSet {
@@ -32,7 +37,7 @@ class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
     @IBOutlet weak var feeBg: UIView!
     @IBOutlet weak var feeTextField: UITextField! {
         didSet {
-            feeTextField.placeholder = "请输入手续费".toMultilingualism()
+            feeTextField.isUserInteractionEnabled = false
         }
     }
     
@@ -63,16 +68,7 @@ class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var rqCodeImage: UIImageView! {
-        didSet {
-            Task {
-                let img = await ScanViewController.generateQRCode(text: "测试数据", size: 172)
-                DispatchQueue.main.async {
-                    self.rqCodeImage.image = img
-                }
-            }
-        }
-    }
+    @IBOutlet weak var rqCodeImage: UIImageView!
     
     @IBOutlet weak var qrCodeDesLabel: UILabel! {
         didSet {
@@ -88,7 +84,7 @@ class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var addressTextField: UITextField! {
         didSet {
-            addressTextField.placeholder = "请输入收款地址".toMultilingualism()
+            addressTextField.isUserInteractionEnabled = false
         }
     }
     
@@ -118,6 +114,8 @@ class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
         }
     }
     
+    @IBOutlet weak var bottomBg: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -127,16 +125,63 @@ class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
     
     private func bind() {
         
-        doneButton.rx.tap.subscribe(onNext: {[unowned self] in
+        
+        
+        
+        doneButton.rx.tap.flatMapLatest {[weak self] _ in
+            guard let obj = self?.parameter, let param = obj.toJSON() else { return Observable<Any>.empty() }
+            return APIProvider.rx.request(.assureOrderLaunch(parameter: param)).mapJSON().asObservable()
+        }.subscribe(onNext: { obj in
+            guard let dict = obj as? [String: Any], let message = dict["message"] as? String else { return }
             
-            GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_yes_no"), title: "发起担保确认转账标题".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "发起担保确认转账内容".toMultilingualism(), leftButton: "未完成".toMultilingualism(), rightButton: "已完成".toMultilingualism()).subscribe(onNext: { index in
-                if index == 1 {
-                    let vc: InviteGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
-                    self.navigationController?.pushViewController(vc, animated: true)
+            if message == "Success" {
+                GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_yes_no"), title: "发起担保确认转账标题".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "发起担保确认转账内容".toMultilingualism(), leftButton: "未完成".toMultilingualism(), rightButton: "已完成".toMultilingualism()).subscribe(onNext: {[weak self] index in
+                    if index == 1 {
+//                        let vc: InviteGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
+//                        self.navigationController?.pushViewController(vc, animated: true)
+                        self?.navigationController?.popToRootViewController(animated: true)
+                    }
+                    
+                }).disposed(by: self.rx.disposeBag)
+            }
+            
+        }).disposed(by: rx.disposeBag)
+        
+        if parameter?.assureType == 0 { // 普通签
+            feeBg.isHidden = true
+            waringBg.isHidden = true
+            topPaddingOffset.isActive = false
+            bottomBg.snp.makeConstraints { make in
+                make.top.equalTo(topNotiBg.snp.bottom).offset(20)
+            }
+            
+        } else { // 多签
+            
+            APIProvider.rx.request(.getFeeforMultipleSignatures).mapDoubleValue().subscribe(onNext: {[weak self] value in
+                guard let fee = value else { return }
+                self?.feeTextField.text = fee.description
+                self?.parameter?.hc = fee
+            }).disposed(by: rx.disposeBag)
+        }
+        
+        let type = parameter?.assureType ?? 1
+        APIProvider.rx.request(.getSignaturesAddress(type: type)).mapJSON().subscribe(onSuccess: {[weak self] obj in
+            guard let dict = obj as? [String: Any], let data = dict["data"] as? [String: Any] else { return }
+            
+            let walletAddr = data["walletAddr"] as? String
+            if let qrCode = data["qrCode"] as? String {
+                Task {
+                    let img = await ScanViewController.generateQRCode(text: qrCode, size: 172)
+                    self?.rqCodeImage.image = img
                 }
-                
-            }).disposed(by: self.rx.disposeBag)
+            }
+            self?.addressTextField.text = walletAddr
+            self?.parameter?.hcAddr  = walletAddr
             
+        }).disposed(by: rx.disposeBag)
+        
+        addressCopyButton.rx.tap.subscribe(onNext: {[weak self] in
+            UIPasteboard.general.string = self?.addressTextField.text
         }).disposed(by: rx.disposeBag)
     }
     

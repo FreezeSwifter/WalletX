@@ -8,11 +8,12 @@
 import Foundation
 import MMKV
 
-enum ArchivedKey: String{
+enum ArchivedKey: String {
     case language
     case screenLock
     case currentWalletIndex
     case walletList
+    case ratePopup
 }
 
 final class AppArchiveder {

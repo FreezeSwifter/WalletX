@@ -14,6 +14,8 @@ import NSObject_Rx
 
 class ContactOtherController: UIViewController, HomeNavigationble {
 
+    var model: UserInfoModel?
+    
     @IBOutlet weak var telegramLabel: UILabel! {
         didSet {
             telegramLabel.text = "home_setting_telegram".toMultilingualism()

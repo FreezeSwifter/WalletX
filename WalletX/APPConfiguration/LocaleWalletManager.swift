@@ -57,20 +57,6 @@ final class LocaleWalletManager {
         
         TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
         USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
-        //        let derivationPath = DerivationPath(purpose: .bip44, coin: CoinType.tron.rawValue, account: 0, change: 0, address: 0)
-        //        let trxPrivateKey = currentWallet?.getKey(coin: .tron, derivationPath: derivationPath.description)
-        //        let tronPublicKey = trxPrivateKey!.getPublicKeySecp256k1(compressed: true)
-        //        let usdtAddress = AnyAddress(publicKey: publicKey, coin: .tron)
-        //        TronTransferTRC20Contract
-        //        let ss = currentWallet?.getKeyForCoin(coin: .tron)
-        //        ss?.data
-        //        let signingInput = TronSigningInput.with {
-        //            $0.privateKey = ss?.data ?? Data()
-        //            $0.toAddress = "toAddress"
-        //            $0.contractAddress = usdtContractAddress
-        //            $0.transaction
-        //        }
-        
     }
     
     func importWallet(mnemonic: String, walletName: String) -> Bool {

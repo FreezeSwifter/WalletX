@@ -20,16 +20,11 @@ class GuaranteeFeesView: UIView {
         }
     }
     
-    @IBOutlet weak var noNotiButton: UIButton! {
+    @IBOutlet weak var noNotiButton: QMUIButton! {
         didSet {
-            let spacing: CGFloat = 10
-            noNotiButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: spacing)
-            noNotiButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: 0)
-            noNotiButton.setTitle("home_no_noti_again".toMultilingualism(), for: .normal)
-            noNotiButton.setTitleColor(ColorConfiguration.descriptionText.toColor(), for: .normal)
-            noNotiButton.setImage(UIImage(named: "guarantee_check_box1"), for: .normal)
+            noNotiButton.imagePosition = .left
+            noNotiButton.spacingBetweenImageAndTitle = 10
             noNotiButton.setImage(UIImage(named: "guarantee_check_box2"), for: .selected)
-            noNotiButton.sizeToFit()
         }
     }
     
@@ -54,7 +49,7 @@ class GuaranteeFeesView: UIView {
     
     @IBOutlet weak var contentLabel: UILabel! {
         didSet {
-            contentLabel.qmui_lineHeight = 16
+            contentLabel.qmui_lineHeight = 20
             contentLabel.textColor = ColorConfiguration.blackText.toColor()
             contentLabel.text = "home_fee_noti_content".toMultilingualism()
         }
@@ -74,7 +69,7 @@ class GuaranteeFeesView: UIView {
         backgroundColor = .white
     }
     
-    public static func show() -> Observable<Int> {
+    public static func show() -> Observable<(Int, Bool)> {
         
         return Observable.create { o in
             
@@ -93,16 +88,16 @@ class GuaranteeFeesView: UIView {
             topVc.view.present(overlay: ovc)
             
             contentView.do { it in
-                it.IKnowButton.rx.tap.subscribe(onNext: { _ in
+                it.IKnowButton.rx.tap.subscribe(onNext: {[weak it] _ in
                 
-                    o.onNext(1)
+                    o.onNext((1, it?.noNotiButton.isSelected ?? false))
                     o.onCompleted()
                     topVc.view.dissmiss(overlay: ovc)
                 }).disposed(by: ovc.rx.disposeBag)
                 
-                it.contactServerButton.rx.tap.subscribe(onNext: { _ in
+                it.contactServerButton.rx.tap.subscribe(onNext: {[weak it] _ in
                 
-                    o.onNext(0)
+                    o.onNext((0, it?.noNotiButton.isSelected ?? false))
                     o.onCompleted()
                     topVc.view.dissmiss(overlay: ovc)
                 }).disposed(by: ovc.rx.disposeBag)
@@ -110,7 +105,7 @@ class GuaranteeFeesView: UIView {
                 
                 it.noNotiButton.rx.tap.subscribe(onNext: {[weak it] _ in
                 
-                    it?.noNotiButton.isSelected = true
+                    it?.noNotiButton.isSelected = !(it?.noNotiButton.isSelected ?? false)
                     
                 }).disposed(by: ovc.rx.disposeBag)
             }

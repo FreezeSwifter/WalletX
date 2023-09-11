@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    private let tabBarViewController = QMUITabBarViewController()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         commonInit()
@@ -32,6 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return topController
         }
         return nil
+    }
+    
+    func tabBarSelecte(index: Int) {
+        tabBarViewController.selectedIndex = index
     }
 }
 
@@ -51,7 +57,6 @@ extension AppDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let tabBarViewController = QMUITabBarViewController()
         // 担保
         let guranteeVC = GuranteeViewController()
         guranteeVC.hidesBottomBarWhenPushed = false

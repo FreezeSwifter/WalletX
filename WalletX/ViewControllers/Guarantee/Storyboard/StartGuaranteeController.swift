@@ -10,8 +10,24 @@ import RxCocoa
 import RxSwift
 import QMUIKit
 import Then
+import NSObject_Rx
+import HandyJSON
+
+extension StartGuaranteeController {
+    
+    class Parameter: HandyJSON {
+        required init() {}
+        var amount: Int64?
+        var agreement: String?
+        var assureType: Int?
+        var hc: Double?
+        var hcAddr: String?
+    }
+}
 
 class StartGuaranteeController: UIViewController, HomeNavigationble {
+    
+    private let parameter: Parameter = Parameter()
     
     @IBOutlet weak var desLabel1: UILabel! {
         didSet {
@@ -66,6 +82,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
         didSet {
             normalButton.setTitle("普通担保".toMultilingualism(), for: .normal)
             normalButton.setImage(UIImage(named: "guarantee_check_box2"), for: .selected)
+            normalButton.isSelected = true
         }
     }
     
@@ -177,8 +194,13 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
         textViewPlaceholderLabel.isHidden = !textView.text.isEmpty
         textView.delegate = self
         
+        moneyTextField.rx.text.subscribe(onNext: {[weak self] text in
+            self?.parameter.amount = Int64(text ?? "0")
+        }).disposed(by: rx.disposeBag)
+        
         textView.rx.didChange.subscribe(onNext: {[weak self] in
             self?.textViewPlaceholderLabel.isHidden = !(self?.textView.text.isEmpty ?? false)
+            self?.parameter.agreement = self?.textView.text
         }).disposed(by: rx.disposeBag)
         
         textView.rx.didEndEditing.subscribe(onNext: {[weak self] in
@@ -200,9 +222,28 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
             
         }).disposed(by: rx.disposeBag)
         
-        nextButton.rx.tap.subscribe(onNext: {[weak self] in
+        nextButton.rx.tap.subscribe(onNext: { [weak self] in
             let vc: StartGuaranteeConfirmController = ViewLoader.Storyboard.controller(from: "Guarantee")
+            vc.parameter = self?.parameter
             self?.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
+        
+        parameter.assureType = 0
+        
+        multipleButton.rx.tap.subscribe(onNext: {[weak self] in
+            guard let this = self else { return }
+            this.multipleButton.isSelected = true
+            this.normalButton.isSelected = false
+            this.parameter.assureType = 1
+            
+        }).disposed(by: rx.disposeBag)
+        
+        normalButton.rx.tap.subscribe(onNext: {[weak self] in
+            guard let this = self else { return }
+            this.multipleButton.isSelected = false
+            this.normalButton.isSelected = true
+            this.parameter.assureType = 0
             
         }).disposed(by: rx.disposeBag)
     }

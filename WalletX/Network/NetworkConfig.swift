@@ -16,6 +16,12 @@ enum NetworkService {
     case serviceList(categoryId: String) // 根据分类获取列表
     case userInfoSetting(info: [String: Any])
     case getUserInfo // 查询用户信息
+    case getFeeforMultipleSignatures // 获取多签手续费
+    case getSignaturesAddress(type: Int) // 获取收款地址 0多签, 1普通签
+    case assureOrderLaunch(parameter: [String: Any]) // 发起担保
+    case getWaitJoinInfo(assureId: String) // 查询待加入担保信息
+    case assureOrderJoin(assureId: String, agreeFlag: Bool) // 加入协议
+    case queryContactInfo(walletId: String) // 查询联系方式
 
 }
 
@@ -40,6 +46,18 @@ extension NetworkService: TargetType {
             return "/api/user/other/install"
         case .getUserInfo:
             return "/api/user/info"
+        case .getFeeforMultipleSignatures:
+            return "/api/assureOrder/hc"
+        case .assureOrderLaunch:
+            return "/api/assureOrder/launch"
+        case .getSignaturesAddress:
+            return "/api/collection/account/info"
+        case .getWaitJoinInfo:
+            return "/api/assureOrder/waitJoinInfo"
+        case .assureOrderJoin:
+            return "/api/assureOrder/join"
+        case .queryContactInfo:
+            return "/api/user/contactInfo"
         }
     }
     
@@ -97,6 +115,21 @@ extension NetworkService: TargetType {
             
         case let .userInfoSetting(info):
             return info
+            
+        case let .assureOrderLaunch(parameter):
+            return parameter
+            
+        case let .getSignaturesAddress(type):
+            return ["type": type]
+            
+        case let .getWaitJoinInfo(assureId):
+            return ["assureId": assureId]
+            
+        case let .assureOrderJoin(assureId, agreeFlag):
+            return ["assureId": assureId, "agreeFlag": agreeFlag]
+            
+        case let .queryContactInfo(walletId):
+            return ["walletId": walletId]
             
         default:
             return nil

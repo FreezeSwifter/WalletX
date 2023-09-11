@@ -195,6 +195,7 @@
 		7AB377712A87AC10005BD1CB /* HomeBannerSectionCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377702A87AC10005BD1CB /* HomeBannerSectionCellCollectionViewCell.swift */; };
 		7AB377742A87B025005BD1CB /* HomeQuickAccessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB377722A87B025005BD1CB /* HomeQuickAccessCell.swift */; };
 		7AB377752A87B025005BD1CB /* HomeQuickAccessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AB377732A87B025005BD1CB /* HomeQuickAccessCell.xib */; };
+		7AB6C1742AAF0AA00078A9F9 /* GuaranteeInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB6C1732AAF0AA00078A9F9 /* GuaranteeInfoModel.swift */; };
 		7AB93E052A8D5F1A0098BF9E /* MeListChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB93E042A8D5F1A0098BF9E /* MeListChildViewController.swift */; };
 		7AB93E072A8D69520098BF9E /* MeListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB93E062A8D69520098BF9E /* MeListEmptyView.swift */; };
 		7ABF24A32A93EE39008D7001 /* APPHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF24A22A93EE39008D7001 /* APPHUD.swift */; };
@@ -515,6 +516,7 @@
 		7AB377702A87AC10005BD1CB /* HomeBannerSectionCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerSectionCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		7AB377722A87B025005BD1CB /* HomeQuickAccessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeQuickAccessCell.swift; sourceTree = "<group>"; };
 		7AB377732A87B025005BD1CB /* HomeQuickAccessCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeQuickAccessCell.xib; sourceTree = "<group>"; };
+		7AB6C1732AAF0AA00078A9F9 /* GuaranteeInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuaranteeInfoModel.swift; sourceTree = "<group>"; };
 		7AB93E042A8D5F1A0098BF9E /* MeListChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeListChildViewController.swift; sourceTree = "<group>"; };
 		7AB93E062A8D69520098BF9E /* MeListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeListEmptyView.swift; sourceTree = "<group>"; };
 		7ABF24A22A93EE39008D7001 /* APPHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APPHUD.swift; sourceTree = "<group>"; };
@@ -856,6 +858,7 @@
 				7A000E312AA874C500FA1817 /* LoginModel.swift */,
 				7A000E402AA8CC3700FA1817 /* BannerModel.swift */,
 				7A000E422AA8CD7F00FA1817 /* CategoryModel.swift */,
+				7AB6C1732AAF0AA00078A9F9 /* GuaranteeInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1942,6 +1945,7 @@
 				7A000E412AA8CC3700FA1817 /* BannerModel.swift in Sources */,
 				7AD08BEE2A8A0AC3000B247E /* HomeQuickAccessSecion.swift in Sources */,
 				7AD08BCF2A8A083B000B247E /* NSRangeExtension.swift in Sources */,
+				7AB6C1742AAF0AA00078A9F9 /* GuaranteeInfoModel.swift in Sources */,
 				7AD08BB22A8A083B000B247E /* Constants.swift in Sources */,
 				7A831C532A9F38DB0086B540 /* MessageDetailCell.swift in Sources */,
 				7A000DF62AA84F4600FA1817 /* StreamEncryptor.swift in Sources */,

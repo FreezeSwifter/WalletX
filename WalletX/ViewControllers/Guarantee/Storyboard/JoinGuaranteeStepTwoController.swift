@@ -14,6 +14,8 @@ import NSObject_Rx
 
 class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
 
+    var model: GuaranteeInfoModel?
+    var contactInfo: UserInfoModel?
     
     @IBOutlet weak var desLabel1: UILabel! {
         didSet {
@@ -24,6 +26,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
     @IBOutlet weak var valueTextField1: UITextField! {
         didSet {
             valueTextField1.placeholder = "请输入担保ID".toMultilingualism()
+            valueTextField1.isUserInteractionEnabled = false
         }
     }
     
@@ -36,6 +39,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
     @IBOutlet weak var valueTextField2: UITextField! {
         didSet {
             valueTextField2.placeholder = "担保类型".toMultilingualism()
+            valueTextField2.isUserInteractionEnabled = false
         }
     }
     
@@ -48,6 +52,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
     @IBOutlet weak var valueTextField3: UITextField! {
         didSet {
             valueTextField3.placeholder = "请输入担保金额".toMultilingualism()
+            valueTextField3.isUserInteractionEnabled = false
         }
     }
     
@@ -65,7 +70,11 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textView: UITextView! {
+        didSet {
+            textView.isUserInteractionEnabled = false
+        }
+    }
     
     @IBOutlet weak var countLabel: UILabel!
     
@@ -100,9 +109,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
             joinButton.backgroundColor = ColorConfiguration.primary.toColor()
         }
     }
-    
-    private let textViewPlaceholderLabel = UILabel()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -117,37 +124,23 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
             
         }).disposed(by: rx.disposeBag)
         
-        joinButton.rx.tap.subscribe(onNext: {[unowned self] in
-            
-            GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: "成功加入担保弹窗标题".toMultilingualism(), titleIcon: nil, content: "成功加入担保弹窗内容".toMultilingualism(), leftButton: "提醒对方上押".toMultilingualism(), rightButton: "我来上押".toMultilingualism()).subscribe(onNext: { index in
-           
-                
-            }).disposed(by: self.rx.disposeBag)
-            
-        }).disposed(by: rx.disposeBag)
-        
-        textViewPlaceholderLabel.text = "担保协议占位".toMultilingualism()
-        textViewPlaceholderLabel.font = self.textView.font
-        textViewPlaceholderLabel.sizeToFit()
-        textView.addSubview(textViewPlaceholderLabel)
-        textViewPlaceholderLabel.frame.origin = CGPoint(x: 0, y: (textView.font?.pointSize)! / 2)
-        textViewPlaceholderLabel.textColor = ColorConfiguration.descriptionText.toColor()
-        textViewPlaceholderLabel.isHidden = !textView.text.isEmpty
-        textView.delegate = self
-        
-        textView.rx.didChange.subscribe(onNext: {[weak self] in
-            self?.textViewPlaceholderLabel.isHidden = !(self?.textView.text.isEmpty ?? false)
-        }).disposed(by: rx.disposeBag)
-        
-        textView.rx.didEndEditing.subscribe(onNext: {[weak self] in
-            self?.textViewPlaceholderLabel.isHidden = !(self?.textView.text.isEmpty ?? false)
-        }).disposed(by: rx.disposeBag)
-        
-        textView.rx.didBeginEditing.subscribe(onNext: {[weak self] in
-            self?.textViewPlaceholderLabel.isHidden = true
+        joinButton.rx.tap.subscribe(onNext: {[weak self] in
+            self?.joinAssure()
         }).disposed(by: rx.disposeBag)
         
         textView.rx.text.map { "\($0?.count.description ?? "")" + "/1000" }.bind(to: countLabel.rx.text).disposed(by: rx.disposeBag)
+        
+        valueTextField1.text = model?.data?.assureId
+        valueTextField2.text = model?.data?.assureTypeToString()
+        valueTextField3.text = "\(model?.data?.amount ?? 0)"
+        textView.text = model?.data?.agreement
+        
+        if let walletId = model?.data?.walletId {
+            let req: Observable<UserInfoModel?> = APIProvider.rx.request(.queryContactInfo(walletId: walletId)).mapModel()
+            req.subscribe(onNext: {[weak self] info in
+                self?.contactInfo = info
+            }).disposed(by: rx.disposeBag)
+        }
     }
 
     private func setupView() {
@@ -161,12 +154,32 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
             self?.navigationController?.popViewController(animated: true)
         }).disposed(by: rx.disposeBag)
     }
-}
-
-
-extension JoinGuaranteeStepTwoController: UITextViewDelegate {
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        return textView.text.count + (text.count - range.length) <= 1000
+    private func joinAssure() {
+        guard let id = model?.data?.assureId else {
+            return
+        }
+        
+        APIProvider.rx.request(.assureOrderJoin(assureId: id, agreeFlag: agreeButton.isSelected)).mapJSON().subscribe(onSuccess: {[weak self] obj in
+            guard let dict = obj as? [String: Any], let message = dict["message"] as? String, let this = self else { return }
+            
+            if message == "Success" {
+                
+                GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: "成功加入担保弹窗标题".toMultilingualism(), titleIcon: nil, content: "成功加入担保弹窗内容".toMultilingualism(), leftButton: "提醒对方上押".toMultilingualism(), rightButton: "我来上押".toMultilingualism()).subscribe(onNext: {[weak self] index in
+               
+                    if index == 1 {
+                        self?.navigationController?.popToRootViewController(animated: true)
+                        
+                    } else if index == 0 {
+                        let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+                        vc.model = self?.contactInfo
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }).disposed(by: this.rx.disposeBag)
+            } else {
+                APPHUD.flash(text: message)
+            }
+            
+        }).disposed(by: rx.disposeBag)
     }
 }

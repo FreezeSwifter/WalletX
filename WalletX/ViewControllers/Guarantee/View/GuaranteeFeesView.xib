@@ -36,7 +36,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJ4-M5-tZe">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJ4-M5-tZe" customClass="QMUIButton">
                     <rect key="frame" x="156.66666666666666" y="357.66666666666669" width="80" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -87,7 +87,7 @@
                 <outlet property="bulbLabel" destination="agK-Jy-YX2" id="Efw-fP-W8a"/>
                 <outlet property="contactServerButton" destination="VhR-da-j9D" id="YFJ-Wp-aiT"/>
                 <outlet property="contentLabel" destination="DPh-HD-NNq" id="iUs-gy-WgB"/>
-                <outlet property="noNotiButton" destination="RJ4-M5-tZe" id="HEn-ZA-eFB"/>
+                <outlet property="noNotiButton" destination="RJ4-M5-tZe" id="dek-n2-feP"/>
             </connections>
             <point key="canvasLocation" x="93.89312977099236" y="-12.323943661971832"/>
         </view>

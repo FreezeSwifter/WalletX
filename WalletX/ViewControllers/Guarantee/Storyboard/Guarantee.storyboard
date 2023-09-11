@@ -33,7 +33,7 @@
                                                 <rect key="frame" x="16" y="54.333333333333343" width="361" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入保证金额" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5uw-bG-bXy">
-                                                        <rect key="frame" x="20" y="15.666666666666659" width="100" height="18.666666666666679"/>
+                                                        <rect key="frame" x="20.000000000000014" y="15.666666666666659" width="253.33333333333337" height="18.666666666666679"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
@@ -55,6 +55,9 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="52.670000000000002" id="HZn-g5-Ofa"/>
+                                                        </constraints>
                                                     </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.96487385029999995" green="0.9722437263" blue="0.99608176950000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -62,7 +65,7 @@
                                                     <constraint firstItem="5uw-bG-bXy" firstAttribute="centerY" secondItem="o9u-dU-W0b" secondAttribute="centerY" id="2ky-OB-lDM"/>
                                                     <constraint firstAttribute="height" constant="50" id="43F-6T-Wp7"/>
                                                     <constraint firstItem="5uw-bG-bXy" firstAttribute="leading" secondItem="o9u-dU-W0b" secondAttribute="leading" constant="20" id="Omb-3T-bKi"/>
-                                                    <constraint firstItem="VUV-Cd-EKv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5uw-bG-bXy" secondAttribute="trailing" constant="20" id="a5l-uf-Qyf"/>
+                                                    <constraint firstItem="VUV-Cd-EKv" firstAttribute="leading" secondItem="5uw-bG-bXy" secondAttribute="trailing" constant="20" id="a5l-uf-Qyf"/>
                                                     <constraint firstAttribute="trailing" secondItem="VUV-Cd-EKv" secondAttribute="trailing" constant="15" id="b0Q-xL-KCv"/>
                                                     <constraint firstItem="VUV-Cd-EKv" firstAttribute="centerY" secondItem="o9u-dU-W0b" secondAttribute="centerY" id="wdh-JP-ORo"/>
                                                 </constraints>
@@ -340,14 +343,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="liT-pL-qPs">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="liT-pL-qPs">
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rvm-k7-Z2g">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rvm-k7-Z2g">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="715"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Y38-UZ-kIQ">
-                                                <rect key="frame" x="16" y="10" width="361" height="43"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Y38-UZ-kIQ">
+                                                <rect key="frame" x="16" y="10.000000000000002" width="361" height="16.666666666666671"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="wallet_noti" translatesAutoresizingMaskIntoConstraints="NO" id="B7M-BT-LRl">
                                                         <rect key="frame" x="0.0" y="0.0" width="17.333333333333332" height="16.666666666666668"/>
@@ -361,7 +364,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.25098039220000001" green="0.73725490199999999" blue="0.98823529409999999" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             </stackView>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xJC-iI-MmX">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xJC-iI-MmX">
                                                 <rect key="frame" x="0.0" y="36.666666666666657" width="393" height="120"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手续费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKp-vG-RSX">
@@ -419,7 +422,7 @@
                                                     <constraint firstAttribute="height" constant="120" id="xOQ-xa-1vZ"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="V3A-Rh-aRx">
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="V3A-Rh-aRx">
                                                 <rect key="frame" x="30" y="166.66666666666669" width="333" height="22"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="guarantee_noti" translatesAutoresizingMaskIntoConstraints="NO" id="Sz4-av-Lm3">
@@ -435,7 +438,7 @@
                                                 <color key="backgroundColor" red="0.94117647058823528" green="0.63137254901960782" blue="0.34509803921568627" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rx7-9K-hoa">
-                                                <rect key="frame" x="0.0" y="225" width="393" height="400"/>
+                                                <rect key="frame" x="0.0" y="198.66666666666669" width="393" height="400.00000000000006"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收款地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNx-9a-EH2">
                                                         <rect key="frame" x="16" y="15.999999999999998" width="65.333333333333329" height="19.333333333333329"/>
@@ -467,7 +470,7 @@
                                                                     </button>
                                                                 </subviews>
                                                             </stackView>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入地址" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="uh4-4t-5bW">
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入地址" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="uh4-4t-5bW">
                                                                 <rect key="frame" x="20" y="15.666666666666687" width="71.666666666666671" height="18.666666666666679"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -500,13 +503,13 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请使用您的数字币钱包扫码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNT-1K-JlB">
-                                                                <rect key="frame" x="101.00000000000001" y="167.00000000000006" width="159.33333333333337" height="15.666666666666657"/>
+                                                                <rect key="frame" x="101.00000000000001" y="167" width="159.33333333333337" height="15.666666666666657"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="bL4-T5-R2F">
-                                                                <rect key="frame" x="118" y="197.66666666666669" width="125" height="30"/>
+                                                                <rect key="frame" x="118" y="197.66666666666663" width="125" height="30"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1i-OE-5Pt">
                                                                         <rect key="frame" x="0.0" y="0.0" width="41" height="30"/>
@@ -560,7 +563,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="NpE-37-2EM" secondAttribute="trailing" constant="16" id="wg6-zO-wHz"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PE1-5F-MXz">
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PE1-5F-MXz">
                                                 <rect key="frame" x="16" y="645" width="361" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="2ab-AB-GE8"/>
@@ -572,7 +575,7 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstItem="PE1-5F-MXz" firstAttribute="top" secondItem="Rx7-9K-hoa" secondAttribute="bottom" constant="20" id="1u3-sj-dHO"/>
+                                            <constraint firstItem="PE1-5F-MXz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Rx7-9K-hoa" secondAttribute="bottom" constant="20" id="1u3-sj-dHO"/>
                                             <constraint firstItem="xJC-iI-MmX" firstAttribute="top" secondItem="Y38-UZ-kIQ" secondAttribute="bottom" constant="10" id="6Nt-LA-2bF"/>
                                             <constraint firstItem="Rx7-9K-hoa" firstAttribute="leading" secondItem="rvm-k7-Z2g" secondAttribute="leading" id="6dc-s2-4aQ"/>
                                             <constraint firstItem="Rx7-9K-hoa" firstAttribute="top" secondItem="V3A-Rh-aRx" secondAttribute="bottom" constant="10" id="Aow-NX-DwF"/>
@@ -616,6 +619,7 @@
                         <outlet property="addressCopyButton" destination="oLY-cz-lNa" id="vPz-g5-AoU"/>
                         <outlet property="addressDesLabel" destination="hNx-9a-EH2" id="HHg-42-VQx"/>
                         <outlet property="addressTextField" destination="uh4-4t-5bW" id="0rt-4h-5G2"/>
+                        <outlet property="bottomBg" destination="Rx7-9K-hoa" id="3l9-fl-Vwg"/>
                         <outlet property="doneButton" destination="PE1-5F-MXz" id="Xvv-a5-HEH"/>
                         <outlet property="downloadButton" destination="A1i-OE-5Pt" id="DHf-3q-zMo"/>
                         <outlet property="feeBg" destination="xJC-iI-MmX" id="Yfz-lD-arc"/>
@@ -627,6 +631,7 @@
                         <outlet property="shareButton" destination="76b-cF-3iU" id="Hn4-hW-7Uv"/>
                         <outlet property="topNotiBg" destination="Y38-UZ-kIQ" id="vQr-rk-WCr"/>
                         <outlet property="topNotiLabel" destination="IaA-Ly-o3a" id="1QB-Mx-2bq"/>
+                        <outlet property="topPaddingOffset" destination="Aow-NX-DwF" id="umm-ac-Bv5"/>
                         <outlet property="waringBg" destination="V3A-Rh-aRx" id="QCN-yt-pp3"/>
                         <outlet property="waringLabel" destination="IhG-yL-Gvk" id="Sqn-c8-158"/>
                     </connections>
@@ -989,9 +994,12 @@
                                                                         </state>
                                                                     </button>
                                                                 </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="44" id="87B-A1-EwU"/>
+                                                                </constraints>
                                                             </stackView>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入担保ID" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Zgq-SA-vgy">
-                                                                <rect key="frame" x="20" y="15.666666666666659" width="85.333333333333329" height="18.666666666666679"/>
+                                                                <rect key="frame" x="20" y="15.666666666666659" width="262" height="18.666666666666679"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
@@ -1002,7 +1010,7 @@
                                                             <constraint firstItem="uOE-hC-Cm1" firstAttribute="centerY" secondItem="GL1-v8-r4i" secondAttribute="centerY" id="EiH-nT-ACC"/>
                                                             <constraint firstItem="Zgq-SA-vgy" firstAttribute="centerY" secondItem="GL1-v8-r4i" secondAttribute="centerY" id="iuI-Bk-BUJ"/>
                                                             <constraint firstAttribute="trailing" secondItem="uOE-hC-Cm1" secondAttribute="trailing" constant="15" id="rAr-yP-Gts"/>
-                                                            <constraint firstItem="uOE-hC-Cm1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Zgq-SA-vgy" secondAttribute="trailing" constant="20" id="ur7-OL-qPL"/>
+                                                            <constraint firstItem="uOE-hC-Cm1" firstAttribute="leading" secondItem="Zgq-SA-vgy" secondAttribute="trailing" constant="20" id="ur7-OL-qPL"/>
                                                             <constraint firstItem="Zgq-SA-vgy" firstAttribute="leading" secondItem="GL1-v8-r4i" secondAttribute="leading" constant="20" id="w8r-xv-Eq9"/>
                                                         </constraints>
                                                     </view>
@@ -1083,6 +1091,7 @@
                     <connections>
                         <outlet property="idDesLabel" destination="zMO-Yg-oHY" id="Tbo-ca-QSa"/>
                         <outlet property="idTextField" destination="Zgq-SA-vgy" id="T1J-Tw-adl"/>
+                        <outlet property="queryButton" destination="WxF-tF-Paa" id="Rm0-Ck-iBW"/>
                         <outlet property="redDesLabel" destination="8ch-Te-zdx" id="eax-Ak-YvS"/>
                         <outlet property="scanButton" destination="o7m-DE-lzN" id="CXA-T7-ABc"/>
                         <outlet property="scanDesLabel" destination="Hlr-88-ZEM" id="rNj-bz-OnA"/>

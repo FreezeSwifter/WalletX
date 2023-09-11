@@ -61,6 +61,11 @@ final class HomeQuickAccessSecion: ListSectionController {
         
         cell.joinBgView.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] in
             
+            if !LocaleWalletManager.shared().hasWallet {
+                self?.checkHasWalletPopAlter()
+                return
+            }
+            
             let vc: JoinGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
             vc.hidesBottomBarWhenPushed = true
             self?.viewController?.navigationController?.pushViewController(vc, animated: true)
@@ -68,6 +73,11 @@ final class HomeQuickAccessSecion: ListSectionController {
         }).disposed(by: cell.rx.disposeBag)
         
         cell.sendBgView.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] in
+            
+            if !LocaleWalletManager.shared().hasWallet {
+                self?.checkHasWalletPopAlter()
+                return
+            }
             
             let vc: StartGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
             vc.hidesBottomBarWhenPushed = true
@@ -83,4 +93,16 @@ final class HomeQuickAccessSecion: ListSectionController {
         self.data = object as? Model
     }
     
+    
+    func checkHasWalletPopAlter() {
+        
+        GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_yes_no"), title: "home_create_wallet_noti_title".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "home_create_wallet_noti_content".toMultilingualism(), leftButton: "home_after_button".toMultilingualism(), rightButton: "home_gonow_button".toMultilingualism()).subscribe(onNext: { index in
+            
+            if index == 1 {
+                let app = UIApplication.shared.delegate as? AppDelegate
+                app?.tabBarSelecte(index: 1)
+            }
+            
+        }).disposed(by: rx.disposeBag)
+    }
 }

@@ -9,7 +9,7 @@ import Foundation
 import Moya
 import Alamofire
 
-private var requestTimeOut: Double = 30
+private var requestTimeOut: Double = 60
 
 private let endpointClosure = { (target: NetworkService) -> Endpoint in
     let url = (target.baseURL.absoluteString + target.path).removingPercentEncoding!

@@ -14,7 +14,7 @@ import NSObject_Rx
 
 
 class JoinGuaranteeController: UIViewController, HomeNavigationble {
-
+    
     @IBOutlet weak var topBg: UIStackView!{
         didSet {
             topBg.isLayoutMarginsRelativeArrangement = true
@@ -36,13 +36,14 @@ class JoinGuaranteeController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var idTextField: UITextField! {
         didSet {
-            idTextField.text = "请输入担保ID".toMultilingualism()
+            idTextField.placeholder = "请输入担保ID".toMultilingualism()
         }
     }
     
     @IBOutlet weak var redDesLabel: UILabel! {
         didSet {
             redDesLabel.text = "查询失败提示".toMultilingualism()
+            redDesLabel.isHidden = true
         }
     }
     
@@ -61,29 +62,35 @@ class JoinGuaranteeController: UIViewController, HomeNavigationble {
         }
     }
     
+    @IBOutlet weak var queryButton: UIButton! {
+        didSet {
+            queryButton.setTitle("查询".toMultilingualism(), for: .normal)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupView()
         bind()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-            let vc: JoinGuaranteeStepTwoController = ViewLoader.Storyboard.controller(from: "Guarantee")
-            self.navigationController?.pushViewController(vc, animated: true)
-        })
     }
     
     private func bind() {
         scanButton.rx.tap.subscribe(onNext: {[weak self] in
             let scanVC: ScanViewController = ViewLoader.Xib.controller()
             scanVC.scanCompletion {[weak self] text in
-                let vc: JoinGuaranteeStepTwoController = ViewLoader.Storyboard.controller(from: "Guarantee")
-                self?.navigationController?.pushViewController(vc, animated: true)
+                self?.checkID(text: text)
             }
             self?.navigationController?.pushViewController(scanVC, animated: true)
         }).disposed(by: rx.disposeBag)
+        
+        
+        queryButton.rx.tap.subscribe {[weak self] _ in
+            self?.checkID(text: self?.idTextField.text)
+        }.disposed(by: rx.disposeBag)
+           
     }
-
+    
     private func setupView() {
         view.layoutIfNeeded()
         view.backgroundColor = .white
@@ -93,6 +100,27 @@ class JoinGuaranteeController: UIViewController, HomeNavigationble {
         headerView?.backgroundColor = .white
         headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
             self?.navigationController?.popViewController(animated: true)
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    private func checkID(text: String?) {
+        guard let id = text, id.count > 0 else {
+            redDesLabel.isHidden = false
+            return
+        }
+        
+        let req: Observable<GuaranteeInfoModel?> = APIProvider.rx.request(.getWaitJoinInfo(assureId: id)).mapModel()
+        req.subscribe(onNext: {[weak self] obj in
+            if obj?.message == "Failure" {
+                self?.redDesLabel.isHidden = false
+            } else {
+                let vc: JoinGuaranteeStepTwoController = ViewLoader.Storyboard.controller(from: "Guarantee")
+                vc.model = obj
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+        }, onError: {[weak self] error in
+            self?.redDesLabel.isHidden = false
         }).disposed(by: rx.disposeBag)
     }
     
