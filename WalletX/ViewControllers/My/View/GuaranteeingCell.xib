@@ -49,12 +49,24 @@
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发起人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pFE-fS-qMb">
-                                        <rect key="frame" x="22.333333333333336" y="88" width="43.000000000000007" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="St8-GL-bvM">
+                                        <rect key="frame" x="3.6666666666666679" y="88" width="61.666666666666657" height="17"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxT-tR-Fl6">
+                                                <rect key="frame" x="0.0" y="0.0" width="14.333333333333334" height="17"/>
+                                                <color key="backgroundColor" red="0.25098039220000001" green="0.73725490199999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="担保ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Kd-Uh-NYd">
+                                                <rect key="frame" x="19.333333333333332" y="0.0" width="42.333333333333343" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="AJO-mt-Uf1">
                                         <rect key="frame" x="3.6666666666666679" y="117" width="61.666666666666657" height="17"/>
                                         <subviews>
@@ -101,7 +113,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已超时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fgb-Oc-WXf">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已超时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fgb-Oc-WXf" customClass="QMUILabel">
                                 <rect key="frame" x="212.33333333333334" y="22" width="37" height="14.333333333333336"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
@@ -127,44 +139,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="50b-BT-Xbh">
-                                <rect key="frame" x="58" y="197" width="246" height="28"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pw7-GG-Coz">
-                                        <rect key="frame" x="0.0" y="0.0" width="54" height="28"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="联系对方">
-                                            <color key="titleColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYn-pw-zNR">
-                                        <rect key="frame" x="64" y="0.0" width="54" height="28"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="联系对方">
-                                            <color key="titleColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AbQ-oj-lbm">
-                                        <rect key="frame" x="128" y="0.0" width="54" height="28"/>
-                                        <color key="backgroundColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="取消担保">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya2-MF-mB9">
-                                        <rect key="frame" x="192" y="0.0" width="54" height="28"/>
-                                        <color key="backgroundColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="取消担保">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                </subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="50b-BT-Xbh">
+                                <rect key="frame" x="250" y="197" width="54" height="28"/>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="不死的猫咪" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdB-ef-juZ">
                                 <rect key="frame" x="96.333333333333314" y="166" width="71.666666666666686" height="17"/>
@@ -206,6 +182,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="IdZ-9n-MtR" secondAttribute="trailing" constant="16" id="0wN-hw-fM6"/>
+                            <constraint firstItem="f6D-zd-AWg" firstAttribute="centerY" secondItem="2Kd-Uh-NYd" secondAttribute="centerY" id="2Jn-hv-wVl"/>
                             <constraint firstItem="kdB-ef-juZ" firstAttribute="leading" secondItem="EGR-YH-fyp" secondAttribute="trailing" constant="15" id="2yt-TY-uXU"/>
                             <constraint firstItem="61o-7F-dxQ" firstAttribute="centerY" secondItem="SeI-w3-9Ci" secondAttribute="centerY" id="4JR-Dq-rSb"/>
                             <constraint firstItem="NCV-EX-F1M" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gvx-RD-F8s" secondAttribute="trailing" constant="8" id="4RK-6P-x6b"/>
@@ -213,7 +190,6 @@
                             <constraint firstItem="AyQ-gR-faA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Fgb-Oc-WXf" secondAttribute="trailing" constant="5" id="6ts-L4-vay"/>
                             <constraint firstAttribute="bottom" secondItem="50b-BT-Xbh" secondAttribute="bottom" constant="25" id="B0a-XX-d2B"/>
                             <constraint firstItem="61o-7F-dxQ" firstAttribute="leading" secondItem="EGR-YH-fyp" secondAttribute="trailing" constant="15" id="BET-3A-VNp"/>
-                            <constraint firstItem="f6D-zd-AWg" firstAttribute="centerY" secondItem="pFE-fS-qMb" secondAttribute="centerY" id="CxO-9r-dN6"/>
                             <constraint firstItem="VmO-hw-aqL" firstAttribute="centerY" secondItem="i4m-a5-3V4" secondAttribute="centerY" id="Efg-xl-XCI"/>
                             <constraint firstItem="f6D-zd-AWg" firstAttribute="leading" secondItem="EGR-YH-fyp" secondAttribute="trailing" constant="15" id="IqS-Ff-IUC"/>
                             <constraint firstItem="VmO-hw-aqL" firstAttribute="leading" secondItem="EGR-YH-fyp" secondAttribute="trailing" constant="15" id="Lik-rT-1Tw"/>
@@ -250,22 +226,19 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="button1" destination="pw7-GG-Coz" id="kcv-i9-gac"/>
-                <outlet property="button2" destination="hYn-pw-zNR" id="i9W-mN-Kbj"/>
-                <outlet property="button3" destination="AbQ-oj-lbm" id="xQT-q6-83b"/>
-                <outlet property="button4" destination="Ya2-MF-mB9" id="CSo-31-JI3"/>
                 <outlet property="buttonStackView" destination="50b-BT-Xbh" id="Nnp-WR-ba8"/>
                 <outlet property="desLabel1" destination="SeI-w3-9Ci" id="ScI-jz-okW"/>
                 <outlet property="desLabel2" destination="d5Z-Kl-iQL" id="8zH-Sn-iAx"/>
                 <outlet property="desLabel3" destination="i4m-a5-3V4" id="vgS-On-9KN"/>
-                <outlet property="desLabel4" destination="pFE-fS-qMb" id="fG9-Do-6ed"/>
+                <outlet property="desLabel4" destination="2Kd-Uh-NYd" id="CdX-cP-GCi"/>
+                <outlet property="desLabel4Me" destination="mxT-tR-Fl6" id="BdC-0N-VTQ"/>
                 <outlet property="desLabel5" destination="iqy-FA-Gqi" id="hsv-E8-jvX"/>
                 <outlet property="desLabel5Me" destination="IMO-B1-JG7" id="9hn-AE-Pj7"/>
                 <outlet property="desLabel6" destination="DuN-4o-h4G" id="uE1-98-ycg"/>
                 <outlet property="protocolBg" destination="AyQ-gR-faA" id="PDJ-Ls-A75"/>
                 <outlet property="protocolLabel" destination="eTl-dx-om6" id="6qc-6C-HQH"/>
                 <outlet property="valueLabel1" destination="61o-7F-dxQ" id="Yyv-Ma-hoW"/>
-                <outlet property="valueLabel1Status" destination="Fgb-Oc-WXf" id="PKN-uk-9IL"/>
+                <outlet property="valueLabel1Status" destination="Fgb-Oc-WXf" id="Eyt-Nn-zsW"/>
                 <outlet property="valueLabel2" destination="d81-O0-0lo" id="lOq-VC-ieO"/>
                 <outlet property="valueLabel3" destination="VmO-hw-aqL" id="LJ4-0f-B9O"/>
                 <outlet property="valueLabel4" destination="f6D-zd-AWg" id="Fwp-tf-dZ7"/>

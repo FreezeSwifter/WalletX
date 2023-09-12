@@ -4,7 +4,7 @@ target 'WalletX' do
   use_modular_headers!
   inhibit_all_warnings!
   # use_frameworks!
- 
+
   # 二维码
   pod 'SGQRCode', '4.1.0'
  
@@ -25,6 +25,7 @@ target 'WalletX' do
   pod 'IGListKit', '4.0.0'
   pod 'MBProgressHUD', '1.2.0'
   pod 'ZLPhotoBrowser', '4.4.3.2'
+  pod 'MZTimerLabel', '0.5.4'
   
   # WalletCore
   pod 'TrustWalletCore', '2.5.6'
@@ -39,5 +40,5 @@ target 'WalletX' do
   # Common
   pod 'Then', '3.0.0'
   pod 'IQKeyboardManager', '6.5.12'
-  
+  pod 'SwiftDate', '6.3.1'
 end

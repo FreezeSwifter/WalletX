@@ -7,15 +7,6 @@
 
 import Foundation
 
-enum MyListStatus {
-    case pending
-    case depositing
-    case guaranteeing
-    case releasing
-    case released
-}
-
-
 enum OrderOperationGuarantee {
     case applyRelease
     case revoke

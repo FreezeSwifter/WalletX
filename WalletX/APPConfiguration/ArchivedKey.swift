@@ -8,12 +8,14 @@
 import Foundation
 import MMKV
 
+
 enum ArchivedKey: String {
     case language
     case screenLock
     case currentWalletIndex
     case walletList
     case ratePopup
+    case appconfigs
 }
 
 final class AppArchiveder {
@@ -27,17 +29,32 @@ final class AppArchiveder {
     
     private(set) var mmkv: MMKV?
     
+    private(set) var appConfigs: [AppSystemConfigModel] = []
+    
     private init() {
         MMKV.initialize(rootDir: nil, logLevel: .none)
         MMKV.enableAutoCleanUp(maxIdleMinutes: 10)
         let cryptKey = "WalletX-mmkv-Encrypt-Key".data(using: .utf8)
         let mmapId = "WalletAPP"
         mmkv = MMKV(mmapID: mmapId, cryptKey: cryptKey)
+        
+        if let localData = mmkv?.string(forKey: ArchivedKey.appconfigs.rawValue), let configs = [AppSystemConfigModel].deserialize(from: localData)?.compactMap({ $0 }) {
+            appConfigs = configs
+        }
+    }
+    
+    func setupAppConfigs(data: [AppSystemConfigModel]) {
+        appConfigs = data
+        if let dataStr = data.toJSONString() {
+            mmkv?.set(dataStr, forKey: ArchivedKey.appconfigs.rawValue)
+        }
+    }
+    
+    func getAPPConfig(by key: String) -> String? {
+        return appConfigs.filter { $0.key == key }.first?.value
     }
 }
-
-
-
+ 
 extension Notification.Name {
     static let languageChanged = Notification.Name("languageChanged")
 }

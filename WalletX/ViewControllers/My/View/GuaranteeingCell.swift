@@ -11,6 +11,8 @@ import RxSwift
 import QMUIKit
 import Then
 import NSObject_Rx
+import QMUIKit
+import SwiftDate
 
 class GuaranteeingCell: UITableViewCell {
     
@@ -37,6 +39,16 @@ class GuaranteeingCell: UITableViewCell {
             desLabel4.text = "发起人".toMultilingualism()
         }
     }
+
+    @IBOutlet weak var desLabel4Me: UILabel! {
+        didSet {
+            desLabel4Me.text = "我".toMultilingualism()
+            desLabel4Me.layoutMargins = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+            desLabel4Me.minimumScaleFactor = 0.5
+            desLabel4Me.adjustsFontSizeToFitWidth = true
+            desLabel4Me.isHidden = true
+        }
+    }
     
     @IBOutlet weak var desLabel5Me: UILabel! {
         didSet {
@@ -44,6 +56,7 @@ class GuaranteeingCell: UITableViewCell {
             desLabel5Me.layoutMargins = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
             desLabel5Me.minimumScaleFactor = 0.5
             desLabel5Me.adjustsFontSizeToFitWidth = true
+            desLabel5Me.isHidden = true
         }
     }
     
@@ -59,15 +72,33 @@ class GuaranteeingCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var valueLabel1: UILabel!
+    @IBOutlet weak var valueLabel1: UILabel! {
+        didSet {
+            valueLabel1.minimumScaleFactor = 0.5
+            valueLabel1.adjustsFontSizeToFitWidth = true
+        }
+    }
     
-    @IBOutlet weak var valueLabel1Status: UILabel!
+    @IBOutlet weak var valueLabel1Status: QMUILabel! {
+        didSet {
+            valueLabel1Status.minimumScaleFactor = 0.5
+            valueLabel1Status.adjustsFontSizeToFitWidth = true
+            valueLabel1Status.contentEdgeInsets = UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
+            valueLabel1Status.applyCornerRadius(8)
+            valueLabel1Status.backgroundColor = UIColor(hex: "#28C445").withAlphaComponent(0.1)
+            valueLabel1Status.textColor = UIColor(hex: "#28C445")
+            valueLabel1Status.text = "me_guaranteeing".toMultilingualism()
+        }
+    }
+
     
     @IBOutlet weak var protocolBg: UIStackView! {
         didSet {
             protocolBg.isLayoutMarginsRelativeArrangement = true
             protocolBg.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
             protocolBg.applyCornerRadius(protocolBg.height / 2, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+            let ges = UITapGestureRecognizer(target: self, action: #selector(GuaranteeingCell.protocolTap))
+            protocolBg.addGestureRecognizer(ges)
         }
     }
     
@@ -77,51 +108,91 @@ class GuaranteeingCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var valueLabel2: UILabel!
+    @IBOutlet weak var valueLabel2: UILabel! {
+        didSet {
+            valueLabel2.minimumScaleFactor = 0.5
+            valueLabel2.adjustsFontSizeToFitWidth = true
+        }
+    }
     
-    @IBOutlet weak var valueLabel3: UILabel!
+    @IBOutlet weak var valueLabel3: UILabel! {
+        didSet {
+            valueLabel3.minimumScaleFactor = 0.5
+            valueLabel3.adjustsFontSizeToFitWidth = true
+        }
+    }
     
-    @IBOutlet weak var valueLabel4: UILabel!
+    @IBOutlet weak var valueLabel4: UILabel! {
+        didSet {
+            valueLabel4.minimumScaleFactor = 0.5
+            valueLabel4.adjustsFontSizeToFitWidth = true
+        }
+    }
     
-    @IBOutlet weak var valueLabel5: UILabel!
+    @IBOutlet weak var valueLabel5: UILabel! {
+        didSet {
+            valueLabel5.minimumScaleFactor = 0.5
+            valueLabel5.adjustsFontSizeToFitWidth = true
+        }
+    }
     
-    @IBOutlet weak var valueLabel6: UILabel!
+    @IBOutlet weak var valueLabel6: UILabel! {
+        didSet {
+            valueLabel6.minimumScaleFactor = 0.5
+            valueLabel6.adjustsFontSizeToFitWidth = true
+        }
+    }
     
-    @IBOutlet weak var valueLabel5sub: UILabel!
+    @IBOutlet weak var valueLabel5sub: UILabel! {
+        didSet {
+            valueLabel5sub.minimumScaleFactor = 0.5
+            valueLabel5sub.adjustsFontSizeToFitWidth = true
+        }
+    }
     
-    @IBOutlet weak var valueLabel4sub: UILabel!
+    @IBOutlet weak var valueLabel4sub: UILabel! {
+        didSet {
+            valueLabel4sub.minimumScaleFactor = 0.5
+            valueLabel4sub.adjustsFontSizeToFitWidth = true
+        }
+    }
     
     @IBOutlet weak var valueLabel6Button: UIButton! {
         didSet {
             valueLabel6Button.setTitle("share_Copy".toMultilingualism(), for: .normal)
+            valueLabel6Button.titleLabel?.minimumScaleFactor = 0.5
+            valueLabel6Button.titleLabel?.adjustsFontSizeToFitWidth = true
         }
     }
     
-    @IBOutlet weak var button1: UIButton! {
-        didSet {
-            
-        }
-    }
+    private lazy var button1: UIButton = {
+        let v = UIButton(type: .custom)
+        v.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        return v
+    }()
     
-    @IBOutlet weak var button2: UIButton! {
-        didSet {
-            button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
-        }
-    }
+    private lazy var button2: UIButton = {
+        let v = UIButton(type: .custom)
+        v.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        return v
+    }()
     
-    @IBOutlet weak var button3: UIButton! {
-        didSet {
-            
-        }
-    }
+    private lazy var button3: UIButton = {
+        let v = UIButton(type: .custom)
+        v.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        return v
+    }()
     
-    @IBOutlet weak var button4: UIButton! {
-        didSet {
-            button4.setupAPPUISolidStyle(title: "申请解押".toMultilingualism())
-        }
-    }
+    private lazy var button4: UIButton = {
+        let v = UIButton(type: .custom)
+        v.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        return v
+    }()
+   
     
     @IBOutlet weak var buttonStackView: UIStackView!
+    
+    private(set) var model: GuaranteeInfoModel.Meta?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -131,6 +202,12 @@ class GuaranteeingCell: UITableViewCell {
         }
         desLabel5Me.clipsToBounds = true
         desLabel5Me.layer.cornerRadius = 13
+        
+        desLabel4Me.snp.remakeConstraints { make in
+            make.width.height.equalTo(26)
+        }
+        desLabel4Me.clipsToBounds = true
+        desLabel4Me.layer.cornerRadius = 13
         
         bind()
     }
@@ -147,69 +224,109 @@ class GuaranteeingCell: UITableViewCell {
             
         }).disposed(by: rx.disposeBag)
         
+        valueLabel6Button.rx.tap.subscribe(onNext: {[weak self] _ in
+            var address: String = ""
+            if let str = self?.model?.pushAddress {
+                address = str
+            }
+            if let str = self?.model?.multisigAddress {
+                address = str
+            }
+            UIPasteboard.general.string = address
+        }).disposed(by: rx.disposeBag)
+        
     }
     
-    func switchUI(state: MyListStatus) {
-        layoutIfNeeded()
-        if state == .guaranteeing {
-            if button1 != nil {
-                buttonStackView.removeArrangedSubview(button1)
-                button1.removeFromSuperview()
-            }
-            if button3 != nil {
-                buttonStackView.removeArrangedSubview(button3)
-                button3.removeFromSuperview()
-            }
-            if button2 != nil {
-                if !buttonStackView.arrangedSubviews.contains(button2) {
-                    buttonStackView.addArrangedSubview(button2)
-                }
-                button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
-            }
-            button4.setupAPPUISolidStyle(title: "申请解押".toMultilingualism())
+    
+    func setupData(data: GuaranteeInfoModel.Meta) {
+        model = data
+        valueLabel1.text = data.assureId
+        valueLabel2.text = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 ).toFormat("yyyy-MM-dd HH:mm:ss")
+        let amount = NSMutableAttributedString(string: "\(data.amount ?? 0) USDT")
+        valueLabel3.textColor = ColorConfiguration.lightBlue.toColor()
+        amount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
+        valueLabel3.attributedText = amount
+        valueLabel4.text = data.sponsorUser ?? "--"
+        valueLabel5.text = data.partnerUser ?? "--"
+        
+        if data.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+            desLabel4Me.isHidden = false
+            desLabel5Me.isHidden = true
+        } else {
+            desLabel4Me.isHidden = true
+            desLabel5Me.isHidden = false
         }
         
-        if state == .releasing {
-            if button1 != nil {
-                if !buttonStackView.arrangedSubviews.contains(button1) {
-                    buttonStackView.addArrangedSubview(button1)
-                }
-                button1.setupAPPUIHollowStyle(title: "联系客服".toMultilingualism())
-            }
-            
-            if button3 != nil {
-                if !buttonStackView.arrangedSubviews.contains(button3) {
-                    buttonStackView.addArrangedSubview(button3)
-                }
-                button3.setupAPPUIHollowStyle(title: "撤销申请".toMultilingualism())
-            }
-            
-            if button2 != nil {
-                if !buttonStackView.arrangedSubviews.contains(button2) {
-                    buttonStackView.addArrangedSubview(button2)
-                }
-                button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
-            }
-            button4.setupAPPUISolidStyle(title: "处理解押".toMultilingualism())
+        var address: String = ""
+        if let str = data.pushAddress {
+            address = str
         }
+        if let str = data.multisigAddress {
+            address = str
+        }
+        let attributedAddress = NSMutableAttributedString(string: address)
+        attributedAddress.underline(occurences: address)
+        valueLabel6.attributedText = attributedAddress
         
-        if state == .released {
-            if button1 != nil {
-                buttonStackView.removeArrangedSubview(button1)
-                button1.removeFromSuperview()
+        let sponsorReleasedAmount = NSMutableAttributedString(string: "\(data.sponsorReleasedAmount ?? 0) USDT")
+        valueLabel4sub.textColor = ColorConfiguration.lightBlue.toColor()
+        sponsorReleasedAmount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
+        valueLabel4sub.attributedText = sponsorReleasedAmount
+        
+        let partnerReleasedAmount = NSMutableAttributedString(string: "\(data.partnerReleasedAmount ?? 0) USDT")
+        valueLabel5sub.textColor = ColorConfiguration.lightBlue.toColor()
+        partnerReleasedAmount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
+        valueLabel5sub.attributedText = partnerReleasedAmount
+        
+        if data.assureStatus == 2 { // 担保中
+            buttonStackView.isHidden = false
+            buttonStackView.arrangedSubviews.forEach { v in
+                v.removeFromSuperview()
             }
-            if button2 != nil {
-                buttonStackView.removeArrangedSubview(button2)
-                button2.removeFromSuperview()
+            buttonStackView.addArrangedSubview(button1)
+            buttonStackView.addArrangedSubview(button2)
+            button1.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
+            button2.setupAPPUISolidStyle(title: "申请解押".toMultilingualism())
+            
+        } else if data.assureStatus == 9 { // 退押中
+            buttonStackView.isHidden = false
+            buttonStackView.arrangedSubviews.forEach { v in
+                v.removeFromSuperview()
+            }
+            buttonStackView.addArrangedSubview(button1)
+            buttonStackView.addArrangedSubview(button2)
+            buttonStackView.addArrangedSubview(button3)
+            button1.setupAPPUIHollowStyle(title: "联系客服".toMultilingualism())
+            button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
+        
+            if data.releaseSponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+                button3.setupAPPUISolidStyle(title: "撤销申请".toMultilingualism())
+            } else {
+                button3.setupAPPUISolidStyle(title: "处理解押".toMultilingualism())
             }
             
-            button4.setupAPPUISolidStyle(title: "联系对方".toMultilingualism())
-            if button3 != nil {
-                if !buttonStackView.arrangedSubviews.contains(button3) {
-                    buttonStackView.addArrangedSubview(button3)
-                }
-                button3.setupAPPUIHollowStyle(title: "联系客服".toMultilingualism())
+        } else if data.assureStatus == 3 { // 已退押
+            buttonStackView.isHidden = false
+            buttonStackView.arrangedSubviews.forEach { v in
+                v.removeFromSuperview()
+            }
+            buttonStackView.addArrangedSubview(button1)
+            buttonStackView.addArrangedSubview(button2)
+            button1.setupAPPUIHollowStyle(title: "联系客服".toMultilingualism())
+            button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
+
+        } else if data.assureStatus == 8 { // 已删除, 已取消
+            buttonStackView.isHidden = true
+            buttonStackView.arrangedSubviews.forEach { v in
+                v.removeFromSuperview()
             }
         }
+    }
+    
+    @objc
+    private func protocolTap() {
+        NotiAlterView.show(title: "协议".toMultilingualism(), content: model?.agreement, leftButtonTitle: nil, rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { _ in
+            
+        }).disposed(by: rx.disposeBag)
     }
 }

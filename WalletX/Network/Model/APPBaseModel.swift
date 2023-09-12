@@ -17,3 +17,21 @@ protocol APPBaseModel: HandyJSON {
     var data: T? { set  get }
 }
 
+
+final class AppSystemConfigModel: NSObject, NSCoding, HandyJSON {
+    
+    var key: String?
+    var value: String?
+    
+    required override init() {}
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(key, forKey: "key")
+        coder.encode(value, forKey: "value")
+    }
+    
+    init?(coder: NSCoder) {
+        key = coder.decodeObject(forKey: "key") as? String
+        value = coder.decodeObject(forKey: "value") as? String
+    }
+}

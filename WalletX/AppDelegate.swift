@@ -10,6 +10,8 @@ import IQKeyboardManager
 import QMUIKit
 import RxCocoa
 import RxSwift
+import SwiftDate
+import NSObject_Rx
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -45,6 +47,12 @@ private
 extension AppDelegate {
     
     func commonInit() {
+        
+        AppArchiveder.shared()
+        
+        LocaleWalletManager.shared()
+        
+        SwiftDate.defaultRegion = Region.current
         
         QMUIThemeManagerCenter.defaultThemeManager.themeGenerator = { identifier -> NSObject in
             return QMUIConfigurationTemplate.init()
@@ -92,6 +100,7 @@ extension AppDelegate {
         setupObserver()
         autoLogin()
         checkFaceId()
+        fetchAPPConfig()
     }
     
     func createTabBarItem(title: String, image: UIImage, selecteColor: UIColor, tag: Int) -> UITabBarItem {
@@ -125,6 +134,15 @@ extension AppDelegate {
             faceIdVC.modalPresentationStyle = .fullScreen
             AppDelegate.topViewController()?.present(faceIdVC, animated: true)
         }
+    }
+    
+    func fetchAPPConfig() {
+        let req: Observable<[AppSystemConfigModel]> =  APIProvider.rx.request(.systemConfigFind).mapModelArray()
+        
+        req.subscribe(onNext: {[weak self] list in
+            AppArchiveder.shared().setupAppConfigs(data: list)
+        }).disposed(by: rx.disposeBag)
+        
     }
 }
 

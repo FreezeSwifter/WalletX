@@ -36,6 +36,8 @@ class ServiceProviderCell: UICollectionViewCell {
             changeButton.setTitle("home_USDT".toMultilingualism(), for: UIControl.State())
             changeButton.isSelected = true
             changeButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15)
+            changeButton.titleLabel?.minimumScaleFactor = 0.5
+            changeButton.titleLabel?.adjustsFontSizeToFitWidth = true
         }
     }
     
@@ -47,6 +49,8 @@ class ServiceProviderCell: UICollectionViewCell {
             collectButton.applyCornerRadius(7)
             collectButton.setTitle("home_RMB".toMultilingualism(), for: UIControl.State())
             collectButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15)
+            collectButton.titleLabel?.minimumScaleFactor = 0.5
+            collectButton.titleLabel?.adjustsFontSizeToFitWidth = true
         }
     }
     
@@ -58,6 +62,8 @@ class ServiceProviderCell: UICollectionViewCell {
             moreButton.applyCornerRadius(7)
             moreButton.setTitle("home_more".toMultilingualism(), for: UIControl.State())
             moreButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15)
+            moreButton.titleLabel?.minimumScaleFactor = 0.5
+            moreButton.titleLabel?.adjustsFontSizeToFitWidth = true
         }
     }
     

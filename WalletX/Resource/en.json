@@ -204,4 +204,9 @@
     "创建钱包第二步提醒": "Write or copy your secret phrase, and then store it in a secure location.",
     "请输入": "Please Input",
     "取消": "Cancel",
+    "加载中…": "Loading...",
+    "没有更多": "No More!",
+    "已超时": "Timeout",
+    "创建钱包中": "Creating Wallet",
+    "担保协议": "Surety Protocol",
 }

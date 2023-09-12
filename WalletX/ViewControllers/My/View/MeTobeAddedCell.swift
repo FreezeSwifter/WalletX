@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import QMUIKit
+import SwiftDate
+import MZTimerLabel
 
 class MeTobeAddedCell: UITableViewCell {
     
@@ -28,17 +31,28 @@ class MeTobeAddedCell: UITableViewCell {
     }
     
     @IBOutlet weak var creatorDesLabel: UILabel! {
-        didSet  {
+        didSet {
             creatorDesLabel.text = "发起人".toMultilingualism()
         }
     }
     
-    @IBOutlet weak var meDesLabel: UILabel! {
+    @IBOutlet weak var meDes2Label: QMUILabel! {
         didSet {
-            meDesLabel.text = "我".toMultilingualism()
-            meDesLabel.layoutMargins = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+            meDes2Label.minimumScaleFactor = 0.5
+            meDes2Label.adjustsFontSizeToFitWidth = true
+            meDes2Label.contentEdgeInsets = UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
+            meDes2Label.text = "我".toMultilingualism()
+            meDes2Label.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var meDesLabel: QMUILabel! {
+        didSet {
             meDesLabel.minimumScaleFactor = 0.5
             meDesLabel.adjustsFontSizeToFitWidth = true
+            meDesLabel.contentEdgeInsets = UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
+            meDesLabel.text = "我".toMultilingualism()
+            meDesLabel.isHidden = true
         }
     }
     
@@ -48,8 +62,19 @@ class MeTobeAddedCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var idValueLabel: UILabel!
-    @IBOutlet weak var timeValueLabel: UILabel!
+    @IBOutlet weak var idValueLabel: UILabel! {
+        didSet {
+            idValueLabel.minimumScaleFactor = 0.5
+            idValueLabel.adjustsFontSizeToFitWidth = true
+        }
+    }
+    
+    @IBOutlet weak var timeValueLabel: UILabel! {
+        didSet {
+            timeValueLabel.minimumScaleFactor = 0.5
+            timeValueLabel.adjustsFontSizeToFitWidth = true
+        }
+    }
     
     @IBOutlet weak var moneyValueLabel: UILabel! {
         didSet {
@@ -59,15 +84,35 @@ class MeTobeAddedCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var creatorValueLabel: UILabel!
-    @IBOutlet weak var meValueLabel: UILabel!
-    @IBOutlet weak var stateLabel: UILabel!
+    @IBOutlet weak var creatorValueLabel: UILabel! {
+        didSet {
+            creatorValueLabel.minimumScaleFactor = 0.5
+            creatorValueLabel.adjustsFontSizeToFitWidth = true
+        }
+    }
+    @IBOutlet weak var meValueLabel: UILabel! {
+        didSet {
+            meValueLabel.minimumScaleFactor = 0.5
+            meValueLabel.adjustsFontSizeToFitWidth = true
+        }
+    }
+    
+    @IBOutlet weak var stateLabel: QMUILabel! {
+        didSet {
+            stateLabel.minimumScaleFactor = 0.5
+            stateLabel.adjustsFontSizeToFitWidth = true
+            stateLabel.contentEdgeInsets = UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
+            stateLabel.applyCornerRadius(8)
+        }
+    }
     
     @IBOutlet weak var topContractBg: UIStackView! {
         didSet {
             topContractBg.isLayoutMarginsRelativeArrangement = true
             topContractBg.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
             topContractBg.applyCornerRadius(topContractBg.height / 2, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+            let ges = UITapGestureRecognizer(target: self, action: #selector(MeTobeAddedCell.protocolTap))
+            topContractBg.addGestureRecognizer(ges)
         }
     }
     
@@ -94,33 +139,43 @@ class MeTobeAddedCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var time: UILabel!
-    
-    @IBOutlet weak var contactButton: UIButton! {
+    @IBOutlet weak var time: UILabel! {
         didSet {
-            contactButton.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
+            time.text = "等待加入中".toMultilingualism()
+            time.minimumScaleFactor = 0.5
+            time.adjustsFontSizeToFitWidth = true
         }
     }
     
-    @IBOutlet weak var cancelButton: UIButton! {
-        didSet {
-            cancelButton.setupAPPUIHollowStyle(title: "取消担保".toMultilingualism())
-        }
-    }
+    private lazy var contactButton: UIButton = {
+        let v = UIButton(type: .custom)
+        v.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        return v
+    }()
+   
+    private lazy var cancelButton: UIButton = {
+        let v = UIButton(type: .custom)
+        v.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        return v
+    }()
     
-    @IBOutlet weak var modifyButton: UIButton! {
-        didSet {
-            modifyButton.setupAPPUISolidStyle(title: "修改信息".toMultilingualism())
-        }
-    }
+    private lazy var modifyButton: UIButton = {
+        let v = UIButton(type: .custom)
+        v.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        return v
+    }()
     
-    @IBOutlet weak var inviteButton: UIButton! {
-        didSet {
-            inviteButton.setupAPPUISolidStyle(title: "邀请对方".toMultilingualism())
-        }
-    }
+    private lazy var inviteButton: UIButton = {
+        let v = UIButton(type: .custom)
+        v.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        return v
+    }()
     
     @IBOutlet weak var buttonStackView: UIStackView!
+    
+    var timerLabel: MZTimerLabel?
+    
+    private(set) var model: GuaranteeInfoModel.Meta?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -128,42 +183,17 @@ class MeTobeAddedCell: UITableViewCell {
         meDesLabel.snp.remakeConstraints { make in
             make.width.height.equalTo(26)
         }
-        meDesLabel.clipsToBounds = true
-        meDesLabel.layer.cornerRadius = 13
+        meDesLabel.applyCornerRadius(13)
+        
+        meDes2Label.snp.remakeConstraints { make in
+            make.width.height.equalTo(26)
+        }
+        meDes2Label.applyCornerRadius(13)
         
         bind()
     }
     
-    func switchUI(state: MyListStatus) {
-        layoutIfNeeded()
-        if state == .pending {
-            if cancelButton != nil {
-                if !buttonStackView.arrangedSubviews.contains(cancelButton) {
-                    buttonStackView.addArrangedSubview(cancelButton)
-                }
-            }
-            
-            if modifyButton != nil {
-                if !buttonStackView.arrangedSubviews.contains(modifyButton) {
-                    buttonStackView.addArrangedSubview(modifyButton)
-                }
-            }
-            inviteButton.setTitle("邀请对方".toMultilingualism(), for: .normal)
-        }
-        
-        if state == .depositing {
-            if cancelButton != nil {
-                buttonStackView.removeArrangedSubview(cancelButton)
-                cancelButton.removeFromSuperview()
-            }
-            if modifyButton != nil {
-                buttonStackView.removeArrangedSubview(modifyButton)
-                modifyButton.removeFromSuperview()
-            }
-            inviteButton.setTitle("我来上押".toMultilingualism(), for: .normal)
-        }
-    }
-    
+  
     private func bind() {
         contactButton.rx.tap.subscribe(onNext: { _ in
             let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
@@ -174,8 +204,11 @@ class MeTobeAddedCell: UITableViewCell {
         
         cancelButton.rx.tap.subscribe(onNext: {[unowned self] _ in
             
-            GuaranteeYesNoView.showFromBottom(image: UIImage(named: "me_cancel_alter_img"), title: "取消担保弹窗标题".toMultilingualism(), titleIcon: nil, content: "取消担保弹窗内容".toMultilingualism(), leftButton: "立即取消".toMultilingualism(), rightButton: "稍后再说".toMultilingualism()).subscribe(onNext: { _ in
-                
+            GuaranteeYesNoView.showFromBottom(image: UIImage(named: "me_cancel_alter_img"), title: "取消担保弹窗标题".toMultilingualism(), titleIcon: nil, content: "取消担保弹窗内容".toMultilingualism(), leftButton: "立即取消".toMultilingualism(), rightButton: "稍后再说".toMultilingualism()).subscribe(onNext: {[weak self] index in
+                guard let this = self, let id = this.model?.assureId else { return }
+                if index == 0 {
+                    APIProvider.rx.request(.cancelGuarantee(assureId: id)).mapJSON().subscribe().disposed(by: this.rx.disposeBag)
+                }
             }).disposed(by: self.rx.disposeBag)
             
         }).disposed(by: rx.disposeBag)
@@ -197,6 +230,18 @@ class MeTobeAddedCell: UITableViewCell {
             }
             
         }).disposed(by: rx.disposeBag)
+        
+        modifyButton.rx.tap.subscribe(onNext: {[unowned self] in
+            
+            SettingModifyAlterView.show(title: "担保协议".toMultilingualism(), placeholder: self.model?.agreement, leftButtonTitle: "返回".toMultilingualism(), rightButtonTitle: "保存".toMultilingualism()).subscribe(onNext: {[weak self] str in
+                
+                guard let this = self, let updateText = str, let id = this.model?.assureId else { return }
+                APIProvider.rx.request(.updateGuarantee(assureId: id, agreement: updateText)).mapJSON().subscribe().disposed(by: this.rx.disposeBag)
+                
+            }).disposed(by: self.rx.disposeBag)
+            
+        }).disposed(by: rx.disposeBag)
+        
     }
     
     @objc
@@ -209,6 +254,107 @@ class MeTobeAddedCell: UITableViewCell {
                 vc.hidesBottomBarWhenPushed = true
                 UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
             }
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    func setupData(data: GuaranteeInfoModel.Meta) {
+        model = data
+        idValueLabel.text = data.assureId ?? "--"
+        timeValueLabel.text = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 ).toFormat("yyyy-MM-dd HH:mm:ss")
+        creatorValueLabel.text = data.sponsorUser ?? "--"
+        let amount = NSMutableAttributedString(string: "\(data.amount ?? 0) USDT")
+        moneyValueLabel.textColor = ColorConfiguration.lightBlue.toColor()
+        amount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
+        moneyValueLabel.attributedText = amount
+        meValueLabel.text = data.partnerUser ?? "--"
+        
+        if data.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+            meDes2Label.isHidden = false
+            meDesLabel.isHidden = true
+        } else {
+            meDes2Label.isHidden = true
+            meDesLabel.isHidden = false
+        }
+        
+        if data.assureStatus == 0 { // 待加入
+            stateLabel.backgroundColor = UIColor(hex: "#40BCFC").withAlphaComponent(0.1)
+            stateLabel.textColor = UIColor(hex: "#40BCFC")
+            stateLabel.text = "me_pending".toMultilingualism()
+            timeIcon.image = UIImage(named: "me_time")
+            time.textColor = ColorConfiguration.descriptionText.toColor()
+            time.text = "待加入".toMultilingualism()
+            buttonStackView.isHidden = false
+            
+            if timerLabel == nil {
+                timerLabel = MZTimerLabel(label: time, andTimerType: MZTimerLabelType(rawValue: 1))
+            }
+            let createTime = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 )
+            let timeout = Int(AppArchiveder.shared().getAPPConfig(by: "joinTimeout") ?? "0") ?? 0
+            let endTime = createTime + timeout.minutes
+            let countTime = endTime - Date()
+            timerLabel?.setCountDownTime(countTime.timeInterval)
+            timerLabel?.start()
+            
+            buttonStackView.arrangedSubviews.forEach { v in
+                v.removeFromSuperview()
+            }
+            
+            buttonStackView.addArrangedSubview(cancelButton)
+            buttonStackView.addArrangedSubview(modifyButton)
+            buttonStackView.addArrangedSubview(inviteButton)
+            cancelButton.setupAPPUIHollowStyle(title: "取消担保".toMultilingualism())
+            modifyButton.setupAPPUISolidStyle(title: "修改信息".toMultilingualism())
+            inviteButton.setupAPPUISolidStyle(title: "邀请对方".toMultilingualism())
+            
+        } else if data.assureStatus == 5 { // 加入超时
+            buttonStackView.isHidden = true
+            stateLabel.backgroundColor = UIColor(hex: "#FF5966").withAlphaComponent(0.1)
+            stateLabel.textColor = UIColor(hex: "#FF5966")
+            stateLabel.text = "已超时".toMultilingualism()
+            timeIcon.image = UIImage(named: "me_overtime")
+            time.textColor = UIColor(hex: "#FF5966")
+            time.text = "已超时".toMultilingualism()
+            buttonStackView.arrangedSubviews.forEach { v in
+                v.removeFromSuperview()
+            }
+            timerLabel = nil
+            
+        } else if data.assureStatus == 1 { // 待上押
+            stateLabel.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
+            stateLabel.textColor = UIColor(hex: "#F0A158")
+            stateLabel.text = "me_depositing".toMultilingualism()
+            timeIcon.image = UIImage(named: "me_time")
+            time.textColor = ColorConfiguration.descriptionText.toColor()
+            time.text = "创建钱包中".toMultilingualism()
+            buttonStackView.isHidden = false
+            buttonStackView.arrangedSubviews.forEach { v in
+                v.removeFromSuperview()
+            }
+            buttonStackView.addArrangedSubview(contactButton)
+            buttonStackView.addArrangedSubview(modifyButton)
+            modifyButton.setupAPPUISolidStyle(title: "我来上押".toMultilingualism())
+            contactButton.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
+            
+        } else if data.assureStatus == 7 || data.assureStatus == 4 {
+            buttonStackView.isHidden = true
+            stateLabel.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
+            stateLabel.textColor = UIColor(hex: "#F0A158")
+            stateLabel.text = "已超时".toMultilingualism()
+            timeIcon.image = UIImage(named: "me_overtime")
+            time.textColor = UIColor(hex: "#FF5966")
+            time.text = "已超时".toMultilingualism()
+            buttonStackView.arrangedSubviews.forEach { v in
+                v.removeFromSuperview()
+            }
+            timerLabel = nil
+            
+        }
+    }
+    
+    @objc
+    private func protocolTap() {
+        NotiAlterView.show(title: "协议".toMultilingualism(), content: model?.agreement, leftButtonTitle: nil, rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { _ in
+            
         }).disposed(by: rx.disposeBag)
     }
 }

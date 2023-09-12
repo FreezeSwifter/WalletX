@@ -13,6 +13,7 @@ struct GuaranteeInfoModel: APPBaseModel {
     
     
     struct Meta: HandyJSON {
+        
         var id: String?
         var assureId: String? // 担保id
         var amount: Double?
@@ -65,6 +66,7 @@ struct GuaranteeInfoModel: APPBaseModel {
             }
         }
     }
+    
     
     var code: Int?
     

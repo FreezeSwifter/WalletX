@@ -59,12 +59,14 @@ class MyViewController: UIViewController, HomeNavigationble {
     
     private lazy var listContainerView: JXSegmentedListContainerView! = {
         let segContainerView = JXSegmentedListContainerView(dataSource: self, type: .scrollView)
+        segContainerView.scrollView.isScrollEnabled = false
         return segContainerView
     }()
     
     private lazy var childVC: [JXSegmentedListContainerViewListDelegate] = MyViewController.titleData.enumerated().map { index, str -> JXSegmentedListContainerViewListDelegate in
         let vc = MeListChildViewController()
         vc.delegate = self
+        vc.index = index - 1
         return vc
     }
     
@@ -111,8 +113,6 @@ class MyViewController: UIViewController, HomeNavigationble {
         getUserInfoReq.subscribe(onNext: {[weak self] obj in
             self?.infoView.userInfo = obj
         }).disposed(by: rx.disposeBag)
-        
-        
     }
     
     private func setupView() {

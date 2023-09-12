@@ -22,6 +22,14 @@ enum NetworkService {
     case getWaitJoinInfo(assureId: String) // 查询待加入担保信息
     case assureOrderJoin(assureId: String, agreeFlag: Bool) // 加入协议
     case queryContactInfo(walletId: String) // 查询联系方式
+    /*
+     1, // 担保状态，0:待加入，1:待上押，2:担保中，3:已退押，4:已取消，5:加入超时，6:创建超时，7:上押超时，8:已删除，9:退押中
+     */
+    case queryAssureOrderList(assureStatus: Int?, pageNum: Int) // 查询担保列表
+    case systemConfigFind // 查询系统配置
+    case cancelGuarantee(assureId: String) // 取消担保
+    case updateGuarantee(assureId: String, agreement: String) // 更新担保
+    case deleteGuarantee(assureId: String) // 删除担保
 
 }
 
@@ -58,6 +66,16 @@ extension NetworkService: TargetType {
             return "/api/assureOrder/join"
         case .queryContactInfo:
             return "/api/user/contactInfo"
+        case .queryAssureOrderList:
+            return "/api/assureOrder/list"
+        case .systemConfigFind:
+            return "/api/config/find"
+        case .cancelGuarantee:
+            return "/api/assureOrder/cancel"
+        case .updateGuarantee:
+            return "/api/assureOrder/modify"
+        case .deleteGuarantee:
+            return "/api/assureOrder/info"
         }
     }
     
@@ -130,6 +148,22 @@ extension NetworkService: TargetType {
             
         case let .queryContactInfo(walletId):
             return ["walletId": walletId]
+            
+        case let .queryAssureOrderList(assureStatus, pageNum):
+            if let status = assureStatus {
+                return ["assureStatus": status, "pageNum": pageNum, "pageSize": 10]
+            } else {
+                return ["pageNum": pageNum, "pageSize": 10]
+            }
+        
+        case let .cancelGuarantee(assureId):
+            return ["assureId": assureId]
+            
+        case let .updateGuarantee(assureId, agreement):
+            return ["assureId": assureId, "agreement": agreement]
+            
+        case let .deleteGuarantee(assureId):
+            return ["assureId": assureId]
             
         default:
             return nil

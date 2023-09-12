@@ -44,6 +44,8 @@ final class LocaleWalletManager {
     private let usdtContractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
     private let walletDidChangedSubject: BehaviorSubject<Void?> = BehaviorSubject(value: nil)
     private var wallets: [WalletModel] = []
+    private(set) var userInfo: UserInfoModel?
+    private let disposeBag = DisposeBag()
     
     private init() {
         
@@ -57,6 +59,14 @@ final class LocaleWalletManager {
         
         TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
         USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
+            
+            getUserInfoReq.subscribe(onNext: {[weak self] obj in
+                self?.userInfo = obj
+            }).disposed(by: self.disposeBag)
+        })
     }
     
     func importWallet(mnemonic: String, walletName: String) -> Bool {

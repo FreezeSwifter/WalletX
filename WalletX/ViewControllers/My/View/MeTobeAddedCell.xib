@@ -49,16 +49,28 @@
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发起人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WTT-eE-Zbu">
-                                        <rect key="frame" x="22.333333333333336" y="88" width="43.000000000000007" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vgK-JO-Var">
+                                        <rect key="frame" x="3.6666666666666679" y="88" width="61.666666666666657" height="17"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4rz-1h-KRt" customClass="QMUILabel">
+                                                <rect key="frame" x="0.0" y="0.0" width="14.333333333333334" height="17"/>
+                                                <color key="backgroundColor" red="0.25098039220000001" green="0.73725490199999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="担保ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0f-NU-guc">
+                                                <rect key="frame" x="19.333333333333332" y="0.0" width="42.333333333333343" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MSw-yb-G1g">
                                         <rect key="frame" x="3.6666666666666679" y="117" width="61.666666666666657" height="17"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXR-6h-9dd">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXR-6h-9dd" customClass="QMUILabel">
                                                 <rect key="frame" x="0.0" y="0.0" width="14.333333333333334" height="17"/>
                                                 <color key="backgroundColor" red="0.25098039215686274" green="0.73725490196078436" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -76,23 +88,23 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QRg-Wz-m6G">
-                                <rect key="frame" x="232" y="82" width="72" height="72"/>
+                                <rect key="frame" x="228" y="68" width="76" height="76"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_time" translatesAutoresizingMaskIntoConstraints="NO" id="rrK-2M-gkS">
-                                        <rect key="frame" x="29" y="7" width="14" height="14"/>
+                                        <rect key="frame" x="31" y="7" width="14" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="BLf-3l-128"/>
                                             <constraint firstAttribute="width" constant="14" id="mMY-Nh-qMX"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="等待加入" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqy-BB-tvL">
-                                        <rect key="frame" x="2" y="24.999999999999996" width="68" height="14.333333333333332"/>
+                                        <rect key="frame" x="2" y="24.999999999999996" width="72" height="14.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04:23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSy-dP-0B2">
-                                        <rect key="frame" x="19" y="41.333333333333329" width="34" height="14.333333333333336"/>
+                                        <rect key="frame" x="21" y="41.333333333333329" width="34" height="14.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -104,10 +116,10 @@
                                     <constraint firstItem="LSy-dP-0B2" firstAttribute="top" secondItem="aqy-BB-tvL" secondAttribute="bottom" constant="2" id="Bg6-ej-PMP"/>
                                     <constraint firstItem="rrK-2M-gkS" firstAttribute="top" secondItem="QRg-Wz-m6G" secondAttribute="top" constant="7" id="O49-Z3-wYM"/>
                                     <constraint firstItem="aqy-BB-tvL" firstAttribute="top" secondItem="rrK-2M-gkS" secondAttribute="bottom" constant="4" id="b0c-ao-qDq"/>
-                                    <constraint firstAttribute="height" constant="72" id="dtV-gV-GZq"/>
+                                    <constraint firstAttribute="height" constant="76" id="dtV-gV-GZq"/>
                                     <constraint firstItem="LSy-dP-0B2" firstAttribute="centerX" secondItem="QRg-Wz-m6G" secondAttribute="centerX" id="gSn-52-Yjc"/>
                                     <constraint firstAttribute="trailing" secondItem="aqy-BB-tvL" secondAttribute="trailing" constant="2" id="rru-PE-qKs"/>
-                                    <constraint firstAttribute="width" constant="72" id="v4W-Hj-gwy"/>
+                                    <constraint firstAttribute="width" constant="76" id="v4W-Hj-gwy"/>
                                     <constraint firstItem="aqy-BB-tvL" firstAttribute="leading" secondItem="QRg-Wz-m6G" secondAttribute="leading" constant="2" id="w23-T3-b2g"/>
                                     <constraint firstItem="aqy-BB-tvL" firstAttribute="centerX" secondItem="QRg-Wz-m6G" secondAttribute="centerX" id="w5S-fD-7Lk"/>
                                 </constraints>
@@ -132,7 +144,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已超时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gle-fL-PcU">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已超时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gle-fL-PcU" customClass="QMUILabel">
                                 <rect key="frame" x="212.33333333333334" y="22" width="37" height="14.333333333333336"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
@@ -158,44 +170,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yxo-FS-6XA">
-                                <rect key="frame" x="58" y="170" width="246" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jZZ-rB-Y04">
-                                        <rect key="frame" x="0.0" y="0.0" width="54" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="联系对方">
-                                            <color key="titleColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBM-8M-1Ve">
-                                        <rect key="frame" x="64" y="0.0" width="54" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="取消担保">
-                                            <color key="titleColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bBf-tR-RVH">
-                                        <rect key="frame" x="128" y="0.0" width="54" height="30"/>
-                                        <color key="backgroundColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="取消担保">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P6z-wp-Qmb">
-                                        <rect key="frame" x="192" y="0.0" width="54" height="30"/>
-                                        <color key="backgroundColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="取消担保">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                </subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yxo-FS-6XA">
+                                <rect key="frame" x="250" y="170" width="54" height="30"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -212,11 +188,12 @@
                             <constraint firstItem="yxo-FS-6XA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="V8z-5b-t31" secondAttribute="leading" constant="16" id="F2P-lr-fau"/>
                             <constraint firstAttribute="bottom" secondItem="yxo-FS-6XA" secondAttribute="bottom" constant="20" id="Gif-hA-Z0W"/>
                             <constraint firstItem="QRg-Wz-m6G" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WD4-0G-V9N" secondAttribute="trailing" constant="5" id="Ifl-FE-E0X"/>
+                            <constraint firstItem="Bka-t9-8KJ" firstAttribute="centerY" secondItem="Q0f-NU-guc" secondAttribute="centerY" id="MbY-g3-KA9"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CXx-0G-W7F" secondAttribute="trailing" constant="16" id="NR5-WB-5yo"/>
                             <constraint firstItem="CXx-0G-W7F" firstAttribute="leading" secondItem="MgV-EA-IOB" secondAttribute="trailing" constant="15" id="QP6-Vu-ly6"/>
                             <constraint firstItem="Gle-fL-PcU" firstAttribute="centerY" secondItem="Pf5-HM-VVb" secondAttribute="centerY" id="TpX-pX-iao"/>
                             <constraint firstItem="QRg-Wz-m6G" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="f2A-xm-4Pi" secondAttribute="trailing" constant="5" id="WZa-ZB-1cb"/>
-                            <constraint firstItem="QRg-Wz-m6G" firstAttribute="bottom" secondItem="gw3-mR-uKw" secondAttribute="bottom" id="Wll-15-nJw"/>
+                            <constraint firstItem="QRg-Wz-m6G" firstAttribute="bottom" secondItem="gw3-mR-uKw" secondAttribute="bottom" constant="-10" id="Wll-15-nJw"/>
                             <constraint firstItem="f2A-xm-4Pi" firstAttribute="leading" secondItem="MgV-EA-IOB" secondAttribute="trailing" constant="15" id="YRO-uJ-dwC"/>
                             <constraint firstItem="Bka-t9-8KJ" firstAttribute="leading" secondItem="MgV-EA-IOB" secondAttribute="trailing" constant="15" id="aI6-67-k3c"/>
                             <constraint firstItem="WD4-0G-V9N" firstAttribute="centerY" secondItem="prj-mu-YQm" secondAttribute="centerY" id="bKM-Hd-DNH"/>
@@ -226,7 +203,6 @@
                             <constraint firstItem="WD4-0G-V9N" firstAttribute="leading" secondItem="MgV-EA-IOB" secondAttribute="trailing" constant="15" id="oTv-vK-7cM"/>
                             <constraint firstItem="QRg-Wz-m6G" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Bka-t9-8KJ" secondAttribute="trailing" constant="5" id="usO-Ks-aYJ"/>
                             <constraint firstAttribute="trailing" secondItem="QRg-Wz-m6G" secondAttribute="trailing" constant="16" id="utZ-Rs-r5z"/>
-                            <constraint firstItem="Bka-t9-8KJ" firstAttribute="centerY" secondItem="WTT-eE-Zbu" secondAttribute="centerY" id="y1y-bl-nlM"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -240,20 +216,17 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="buttonStackView" destination="yxo-FS-6XA" id="wtt-7m-pDq"/>
-                <outlet property="cancelButton" destination="zBM-8M-1Ve" id="aei-Ph-yNk"/>
-                <outlet property="contactButton" destination="jZZ-rB-Y04" id="ACA-Du-3Pq"/>
-                <outlet property="creatorDesLabel" destination="WTT-eE-Zbu" id="j57-s1-x4k"/>
+                <outlet property="creatorDesLabel" destination="Q0f-NU-guc" id="ahd-xb-HZE"/>
                 <outlet property="creatorValueLabel" destination="Bka-t9-8KJ" id="DCU-51-e2E"/>
                 <outlet property="guaranteeIdDesLabel" destination="Y16-KI-pZv" id="em9-NS-RLc"/>
                 <outlet property="idValueLabel" destination="Pf5-HM-VVb" id="qht-jr-THh"/>
-                <outlet property="inviteButton" destination="P6z-wp-Qmb" id="b5a-C2-LnK"/>
-                <outlet property="meDesLabel" destination="KXR-6h-9dd" id="IEJ-QV-YZ6"/>
+                <outlet property="meDes2Label" destination="4rz-1h-KRt" id="oo0-U7-9cQ"/>
+                <outlet property="meDesLabel" destination="KXR-6h-9dd" id="ZQA-pf-Q0t"/>
                 <outlet property="meIdDesLabel2" destination="gw3-mR-uKw" id="uYv-bD-GXb"/>
                 <outlet property="meValueLabel" destination="f2A-xm-4Pi" id="kvg-i6-Qp5"/>
-                <outlet property="modifyButton" destination="bBf-tR-RVH" id="8VB-Hb-2kU"/>
                 <outlet property="moneyDesLabel" destination="prj-mu-YQm" id="M5Q-FD-g1W"/>
                 <outlet property="moneyValueLabel" destination="WD4-0G-V9N" id="GfD-Vw-ln3"/>
-                <outlet property="stateLabel" destination="Gle-fL-PcU" id="LHz-Wa-gWt"/>
+                <outlet property="stateLabel" destination="Gle-fL-PcU" id="Uv4-5I-v6L"/>
                 <outlet property="time" destination="LSy-dP-0B2" id="qjP-DO-cus"/>
                 <outlet property="timeBg" destination="QRg-Wz-m6G" id="ei7-EV-NLS"/>
                 <outlet property="timeDesLabel" destination="LmZ-OO-ybM" id="SMy-Ix-ybm"/>
