@@ -11,6 +11,8 @@ import RxSwift
 import QMUIKit
 import Then
 import NSObject_Rx
+import MZTimerLabel
+import SwiftDate
 
 class DepositingAlterView: UIView {
     
@@ -53,9 +55,10 @@ class DepositingAlterView: UIView {
         }
     }
     
+    var timerLabel: MZTimerLabel?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
     }
     
     required init?(coder: NSCoder) {
@@ -69,9 +72,10 @@ class DepositingAlterView: UIView {
     
     private func commonInit() {
         backgroundColor = .white
+        timerLabel = MZTimerLabel(label: timeLabel, andTimerType: MZTimerLabelType(rawValue: 1))
     }
     
-    static func show() -> Observable<Int> {
+    static func show(time: Double) -> Observable<Int> {
         return Observable.create { o in
             
             guard let topVc = UIApplication.topViewController() else {
@@ -98,6 +102,13 @@ class DepositingAlterView: UIView {
                         topVc.view.dissmiss(overlay: oc)
                     }
                 }).disposed(by: it.rx.disposeBag)
+                
+                let createTime = Date(timeIntervalSince1970: time / 1000 )
+                let timeout = Int(AppArchiveder.shared().getAPPConfig(by: "multisigTimeout") ?? "0") ?? 0
+                let endTime = createTime + timeout.minutes
+                let countTime = endTime - Date()
+                it.timerLabel?.setCountDownTime(countTime.timeInterval)
+                it.timerLabel?.start()
             }
             
             let ovc = OverlayController(view: contentView)

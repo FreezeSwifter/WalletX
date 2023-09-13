@@ -232,7 +232,7 @@ public extension UIButton {
         setBackgroundColor(color: ColorConfiguration.primary.toColor(), forState: .normal)
         setTitleColor(ColorConfiguration.wihteText.toColor(), for: .normal)
         setTitle(title, for: .normal)
-        layer.cornerRadius = 10
+        layer.cornerRadius = 4
         titleLabel?.minimumScaleFactor = 0.5
         contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
     }
@@ -241,7 +241,7 @@ public extension UIButton {
         backgroundColor = .clear
         setTitleColor(ColorConfiguration.primary.toColor(), for: .normal)
         setTitle(title, for: .normal)
-        layer.cornerRadius = 10
+        layer.cornerRadius = 4
         titleLabel?.minimumScaleFactor = 0.5
         contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         layer.borderColor = ColorConfiguration.primary.toColor().cgColor

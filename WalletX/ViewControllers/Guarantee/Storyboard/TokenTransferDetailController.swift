@@ -15,6 +15,7 @@ import NSObject_Rx
 class TokenTransferDetailController: UIViewController, HomeNavigationble {
     
     var item: WalletToken?
+    var model: TokenTecordTransferModel?
     
     @IBOutlet weak var topLabel: UILabel!
     

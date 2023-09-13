@@ -9,6 +9,9 @@ import UIKit
 import QMUIKit
 import SwiftDate
 import MZTimerLabel
+import RxCocoa
+import RxSwift
+import NSObject_Rx
 
 class MeTobeAddedCell: UITableViewCell {
     
@@ -152,7 +155,7 @@ class MeTobeAddedCell: UITableViewCell {
         v.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         return v
     }()
-   
+    
     private lazy var cancelButton: UIButton = {
         let v = UIButton(type: .custom)
         v.titleLabel?.font = UIFont.systemFont(ofSize: 13)
@@ -193,7 +196,7 @@ class MeTobeAddedCell: UITableViewCell {
         bind()
     }
     
-  
+    
     private func bind() {
         contactButton.rx.tap.subscribe(onNext: { _ in
             let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
@@ -213,33 +216,28 @@ class MeTobeAddedCell: UITableViewCell {
             
         }).disposed(by: rx.disposeBag)
         
-        inviteButton.rx.tap.subscribe(onNext: {[weak self] in
-            guard let this = self else { return }
-            
-            if this.inviteButton.titleLabel?.text == "我来上押".toMultilingualism() {
-                
-                DepositingAlterView.show().subscribe(onNext: { index in
-                    
-                    if index == 1 {
-                        let vc: DepositingDetailController = ViewLoader.Storyboard.controller(from: "Me")
-                        vc.hidesBottomBarWhenPushed = true
-                        UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
-                    }
-                    
-                }).disposed(by: this.rx.disposeBag)
-            }
-            
-        }).disposed(by: rx.disposeBag)
         
         modifyButton.rx.tap.subscribe(onNext: {[unowned self] in
             
-            SettingModifyAlterView.show(title: "担保协议".toMultilingualism(), placeholder: self.model?.agreement, leftButtonTitle: "返回".toMultilingualism(), rightButtonTitle: "保存".toMultilingualism()).subscribe(onNext: {[weak self] str in
+            if modifyButton.titleLabel?.text == "修改信息".toMultilingualism() {
+                SettingModifyAlterView.show(title: "担保协议".toMultilingualism(), placeholder: self.model?.agreement, leftButtonTitle: "返回".toMultilingualism(), rightButtonTitle: "保存".toMultilingualism()).subscribe(onNext: {[weak self] str in
+                    
+                    guard let this = self, let updateText = str, let id = this.model?.assureId else { return }
+                    APIProvider.rx.request(.updateGuarantee(assureId: id, agreement: updateText)).mapJSON().subscribe().disposed(by: this.rx.disposeBag)
+                    
+                }).disposed(by: self.rx.disposeBag)
                 
-                guard let this = self, let updateText = str, let id = this.model?.assureId else { return }
-                APIProvider.rx.request(.updateGuarantee(assureId: id, agreement: updateText)).mapJSON().subscribe().disposed(by: this.rx.disposeBag)
-                
-            }).disposed(by: self.rx.disposeBag)
-            
+            } else if modifyButton.titleLabel?.text == "我来上押".toMultilingualism() {
+                self.depositTap()
+            }
+        }).disposed(by: rx.disposeBag)
+        
+        
+        inviteButton.rx.tap.subscribe(onNext: {[weak self] in
+            let vc: InviteGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
+            vc.model = self?.model
+            vc.hidesBottomBarWhenPushed = true
+            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: rx.disposeBag)
         
     }
@@ -261,12 +259,12 @@ class MeTobeAddedCell: UITableViewCell {
         model = data
         idValueLabel.text = data.assureId ?? "--"
         timeValueLabel.text = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 ).toFormat("yyyy-MM-dd HH:mm:ss")
-        creatorValueLabel.text = data.sponsorUser ?? "--"
+        creatorValueLabel.text = data.sponsorUserName ?? "--"
         let amount = NSMutableAttributedString(string: "\(data.amount ?? 0) USDT")
         moneyValueLabel.textColor = ColorConfiguration.lightBlue.toColor()
         amount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
         moneyValueLabel.attributedText = amount
-        meValueLabel.text = data.partnerUser ?? "--"
+        meValueLabel.text = data.partnerUserName ?? "--"
         
         if data.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
             meDes2Label.isHidden = false
@@ -335,7 +333,17 @@ class MeTobeAddedCell: UITableViewCell {
             modifyButton.setupAPPUISolidStyle(title: "我来上押".toMultilingualism())
             contactButton.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
             
-        } else if data.assureStatus == 7 || data.assureStatus == 4 {
+            if timerLabel == nil {
+                timerLabel = MZTimerLabel(label: time, andTimerType: MZTimerLabelType(rawValue: 1))
+            }
+            let createTime = Date(timeIntervalSince1970: (data.multisigTime ?? 0) / 1000 )
+            let timeout = Int(AppArchiveder.shared().getAPPConfig(by: "pushTimeout") ?? "0") ?? 0
+            let endTime = createTime + timeout.minutes
+            let countTime = endTime - Date()
+            timerLabel?.setCountDownTime(countTime.timeInterval)
+            timerLabel?.start()
+            
+        } else if data.assureStatus == 7 { // 上押超时
             buttonStackView.isHidden = true
             stateLabel.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
             stateLabel.textColor = UIColor(hex: "#F0A158")
@@ -348,6 +356,18 @@ class MeTobeAddedCell: UITableViewCell {
             }
             timerLabel = nil
             
+        } else if data.assureStatus == 4 { // 已取消
+            buttonStackView.isHidden = true
+            stateLabel.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
+            stateLabel.textColor = UIColor(hex: "#F0A158")
+            stateLabel.text = "交易取消".toMultilingualism()
+            timeIcon.image = UIImage(named: "me_overtime")
+            time.textColor = UIColor(hex: "#FF5966")
+            time.text = "交易取消".toMultilingualism()
+            buttonStackView.arrangedSubviews.forEach { v in
+                v.removeFromSuperview()
+            }
+            timerLabel = nil
         }
     }
     
@@ -356,5 +376,30 @@ class MeTobeAddedCell: UITableViewCell {
         NotiAlterView.show(title: "协议".toMultilingualism(), content: model?.agreement, leftButtonTitle: nil, rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { _ in
             
         }).disposed(by: rx.disposeBag)
+    }
+    
+    private func depositTap() {
+    
+        guard let id = model?.assureId else { return }
+        let req: Observable<GuaranteeInfoModel?> = APIProvider.rx.request(.getAssureOrderDetail(assureId: id)).mapModel()
+        
+        req.subscribe(onNext: {[weak self] obj in
+            guard let this = self else { return }
+            if obj?.data?.multisigStatus == 0 && obj?.data?.assureType == 1 {
+                let time = obj?.data?.multisigTime ?? 0
+                DepositingAlterView.show(time: time).subscribe(onNext: { index in
+                    
+                }).disposed(by: this.rx.disposeBag)
+
+            } else {
+                
+                let vc: DepositingDetailController = ViewLoader.Storyboard.controller(from: "Me")
+                vc.model = self?.model
+                vc.hidesBottomBarWhenPushed = true
+                UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+        }).disposed(by: rx.disposeBag)
+        
     }
 }

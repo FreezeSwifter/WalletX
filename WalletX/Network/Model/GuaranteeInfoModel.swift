@@ -24,6 +24,7 @@ struct GuaranteeInfoModel: APPBaseModel {
         var sponsorAmount: Double?
         var pushDecimalSponsor: String?
         var partnerUser: String?
+        var partnerUserName: String?
         var partnerAmount: Double?
         var pushDecimalPartner: String?
         var agreement: String? // 担保协议
@@ -49,9 +50,9 @@ struct GuaranteeInfoModel: APPBaseModel {
         var pushAddressQrCode: String?
         var sponsorUserName: String?
         var duration: Double?
-        var releaseAmountCan: Bool?
+        var releaseAmountCan: Double?
         var multisigAddress: String?
-        var reason: String?
+        var reason: Int?
         var sponsorReleasedAmount: Double?
         var partnerReleasedAmount: Double?
         

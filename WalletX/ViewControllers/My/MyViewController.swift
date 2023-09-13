@@ -66,7 +66,21 @@ class MyViewController: UIViewController, HomeNavigationble {
     private lazy var childVC: [JXSegmentedListContainerViewListDelegate] = MyViewController.titleData.enumerated().map { index, str -> JXSegmentedListContainerViewListDelegate in
         let vc = MeListChildViewController()
         vc.delegate = self
-        vc.index = index - 1
+        switch index {
+        case 0:
+            vc.index = -1
+        case 1:
+            vc.index = 0
+        case 2:
+            vc.index = 1
+        case 3:
+            vc.index = 2
+        case 4:
+            vc.index = 9
+        case 5:
+            vc.index = 3
+        default: break
+        }
         return vc
     }
     

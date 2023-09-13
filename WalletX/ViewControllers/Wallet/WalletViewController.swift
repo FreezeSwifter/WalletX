@@ -186,10 +186,10 @@ class WalletViewController: UIViewController, HomeNavigationble {
     }
     
     private func updateBalance() {
-        Task {
-            let formattedBalance = try? await LocaleWalletManager.shared().getTRONBalance()
-            topOperatedView.topButton1.setTitle("TRX \(String(format: "%.2f", formattedBalance ?? 0.00))", for: .normal)
-        }
+        
+        LocaleWalletManager.shared().walletBalance.subscribe(onNext: {[weak self] obj in
+            self?.topOperatedView.topButton1.setTitle("$\(obj?.data?.USDT ?? "")", for: .normal)
+        }).disposed(by: rx.disposeBag)
     }
 }
 

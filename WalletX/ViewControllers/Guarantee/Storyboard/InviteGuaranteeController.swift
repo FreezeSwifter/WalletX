@@ -36,7 +36,7 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var moneyTextField: UITextField! {
         didSet {
-            moneyTextField.placeholder = "请输入担保金额".toMultilingualism()
+            moneyTextField.isUserInteractionEnabled = false
         }
     }
     
@@ -48,7 +48,7 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var idTextField: UITextField! {
         didSet {
-            idTextField.text = "请输入担保ID".toMultilingualism()
+            idTextField.isUserInteractionEnabled = false
         }
     }
     
@@ -82,7 +82,7 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
         didSet {
             contactOtherButton.setTitle("联系对方".toMultilingualism(), for: .normal)
             contactOtherButton.setTitleColor(ColorConfiguration.primary.toColor(), for: .normal)
-            contactOtherButton.layer.cornerRadius = 10
+            contactOtherButton.layer.cornerRadius = 4
             contactOtherButton.layer.borderWidth = 1
             contactOtherButton.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
             contactOtherButton.backgroundColor = .clear
@@ -93,10 +93,12 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
         didSet {
             doneButton.setTitle("完成".toMultilingualism(), for: .normal)
             doneButton.setTitleColor(ColorConfiguration.wihteText.toColor(), for: .normal)
-            doneButton.layer.cornerRadius = 10
+            doneButton.layer.cornerRadius = 4
             doneButton.backgroundColor = ColorConfiguration.primary.toColor()
         }
     }
+    
+    var model: GuaranteeInfoModel.Meta?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,7 +108,30 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
+        moneyTextField.text = "\(model?.amount ?? 0)"
+        idTextField.text = "\(model?.assureId ?? "--")"
+        if let id = model?.assureId {
+            Task {
+                let img = await ScanViewController.generateQRCode(text: id, size: 141)
+                qrImageView.image = img
+            }
+        }
         
+        copyButton.rx.tap.subscribe(onNext: {[weak self] in
+            UIPasteboard.general.string = self?.model?.assureId
+        }).disposed(by: rx.disposeBag)
+        
+        doneButton.rx.tap.subscribe(onNext: {[weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }).disposed(by: rx.disposeBag)
+        
+        contactOtherButton.rx.tap.subscribe(onNext: {[weak self] in
+            
+            let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+            vc.partnerUser = self?.model?.partnerUser
+            self?.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
     }
 
     private func setupView() {

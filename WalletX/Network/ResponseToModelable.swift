@@ -45,4 +45,13 @@ public extension PrimitiveSequence where Trait == SingleTrait, Element == Respon
             return .just(value)
         }.asObservable()
     }
+    
+    func mapStringValue() -> Observable<String?> {
+        
+        return mapJSON().flatMap { obj in
+            let dict = obj as? [String: Any]
+            let value = dict?["data"] as? String
+            return .just(value)
+        }.asObservable()
+    }
 }

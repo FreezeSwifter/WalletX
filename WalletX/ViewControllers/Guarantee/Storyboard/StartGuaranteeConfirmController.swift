@@ -137,8 +137,6 @@ class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
             if message == "Success" {
                 GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_yes_no"), title: "发起担保确认转账标题".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "发起担保确认转账内容".toMultilingualism(), leftButton: "未完成".toMultilingualism(), rightButton: "已完成".toMultilingualism()).subscribe(onNext: {[weak self] index in
                     if index == 1 {
-//                        let vc: InviteGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
-//                        self.navigationController?.pushViewController(vc, animated: true)
                         self?.navigationController?.popToRootViewController(animated: true)
                     }
                     

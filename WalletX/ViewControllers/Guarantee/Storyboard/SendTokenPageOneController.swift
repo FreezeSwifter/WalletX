@@ -97,18 +97,7 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
         }).disposed(by: rx.disposeBag)
         
         allButton.rx.tap.subscribe(onNext: {[weak self] _ in
-            Task {
-                switch self?.model {
-                case .tron:
-                    let tokenCount = try await LocaleWalletManager.shared().getTRONBalance()
-                    self?.textField2.text = "\(tokenCount ?? 0)"
-            
-                case .usdt:
-                    let tokenCount = try await LocaleWalletManager.shared().getUSDTBalance()
-                    self?.textField2.text = "\(tokenCount ?? 0)"
-                default: break
-                }
-            }
+         
         }).disposed(by: rx.disposeBag)
         
         scanButton.rx.tap.subscribe(onNext: {[weak self] _ in

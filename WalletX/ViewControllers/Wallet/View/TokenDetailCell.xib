@@ -65,6 +65,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="countLabel" destination="PzJ-1f-dHu" id="RtQ-u3-fYG"/>
+                <outlet property="fromLabel" destination="P0d-M0-ceC" id="z8O-mQ-PeM"/>
+                <outlet property="timeLabel" destination="PXX-7g-eZN" id="zp4-0y-rHQ"/>
                 <outlet property="transferLabel" destination="lZ1-07-Hei" id="9oJ-Xb-xpd"/>
             </connections>
             <point key="canvasLocation" x="9.9236641221374047" y="13.380281690140846"/>

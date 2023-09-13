@@ -104,22 +104,24 @@ extension SelectedTokenController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WalletTokenCell", for: indexPath) as? WalletTokenCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WalletTokenCell", for: indexPath) as! WalletTokenCell
         
         let item = datasource[indexPath.row]
-        cell?.iconImageView.image = item.iconImage
-        cell?.tokenLabel.text = item.tokenName
-        Task {
-            let formattedBalance = try? await LocaleWalletManager.shared().getTRONBalance()
+        cell.iconImageView.image = item.iconImage
+        cell.tokenLabel.text = item.tokenName
+        
+        let token = LocaleWalletManager.shared().walletBalance.share().map { m in
             switch item {
-            case .tron:
-                cell?.countLabel.text = String(format: "%.2f", formattedBalance ?? 0.00)
             case .usdt:
-                cell?.countLabel.text = "0.00"
+                return m?.data?.USDT
+            case .tron:
+                return m?.data?.TRX
             }
         }
-        cell?.priceLabel.text = nil
-        cell?.countPriceLabel.text = nil
-        return cell ?? UITableViewCell()
+        token.bind(to: cell.countLabel.rx.text).disposed(by: cell.rx.disposeBag)
+        
+        cell.priceLabel.text = nil
+        cell.countPriceLabel.text = nil
+        return cell 
     }
 }

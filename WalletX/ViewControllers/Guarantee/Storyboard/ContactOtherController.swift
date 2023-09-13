@@ -14,7 +14,9 @@ import NSObject_Rx
 
 class ContactOtherController: UIViewController, HomeNavigationble {
 
-    var model: UserInfoModel?
+    var partnerUser: String?
+    
+    private(set) var userModel: UserInfoModel?
     
     @IBOutlet weak var telegramLabel: UILabel! {
         didSet {
@@ -123,7 +125,12 @@ class ContactOtherController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
-        
+        if let walletId = partnerUser {
+            let req: Observable<UserInfoModel?> = APIProvider.rx.request(.queryContactInfo(walletId: walletId)).mapModel()
+            req.subscribe(onNext: {[weak self] info in
+                self?.userModel = info
+            }).disposed(by: rx.disposeBag)
+        }        
     }
     
     private func setupView() {

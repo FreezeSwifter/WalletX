@@ -29,6 +29,8 @@ class TokenDetailController: UIViewController, HomeNavigationble {
         return tv
     }()
     
+    private var datasource: [TokenTecordTransferModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,11 +39,21 @@ class TokenDetailController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
-        Task {
-            guard item != nil else { return }
-            let formattedBalance = try? await LocaleWalletManager.shared().getTRONBalance()
-            topOperatedView.topButton2.setTitle("TRX \(String(format: "%.2f", formattedBalance ?? 0.00))", for: .normal)
-        }
+
+       LocaleWalletManager.shared().walletBalance.share().map {[weak self] m in
+            switch self?.item {
+            case .usdt:
+                return "\(m?.data?.USDT ?? "0") USDT"
+            case .tron:
+                return "\(m?.data?.TRX ?? "0") TRX"
+            default:
+                return "\(m?.data?.USDT ?? "0") USDT"
+            }
+       }.subscribe(onNext: {[weak self] token in
+           
+           self?.topOperatedView.topButton2.setTitle(token, for: .normal)
+        
+       }).disposed(by: rx.disposeBag)
         
         topOperatedView.receiveButton.rx.tap.subscribe(onNext: {[weak self] _ in
             let vc: ReceiveTokenController = ViewLoader.Storyboard.controller(from: "Wallet")
@@ -55,6 +67,13 @@ class TokenDetailController: UIViewController, HomeNavigationble {
             vc.model = self?.item
             self?.navigationController?.pushViewController(vc, animated: true)
             
+        }).disposed(by: rx.disposeBag)
+        
+        let req: Observable<[TokenTecordTransferModel]> = APIProvider.rx.request(.getTokenTecordTransfer).mapModelArray()
+        
+        req.subscribe(onNext: {[weak self] list in
+            self?.datasource = list
+            self?.tableView.reloadData()
         }).disposed(by: rx.disposeBag)
     }
     
@@ -91,6 +110,8 @@ extension TokenDetailController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc: TokenTransferDetailController = ViewLoader.Storyboard.controller(from: "Wallet")
+        vc.item = item
+        vc.model = datasource[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -98,12 +119,13 @@ extension TokenDetailController: UITableViewDelegate {
 extension TokenDetailController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return datasource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TokenDetailCell", for: indexPath) as? TokenDetailCell
-        
+        let item = datasource[indexPath.row]
+        cell?.setupData(data: item)
         return cell ?? UITableViewCell()
     }
 }

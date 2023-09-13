@@ -76,7 +76,7 @@ class MeListChildViewController: UIViewController, JXSegmentedListContainerViewL
         let parameter: Int? = (index == -1) ? nil : index
         let req: Observable<[GuaranteeInfoModel.Meta]> = APIProvider.rx.request(.queryAssureOrderList(assureStatus: parameter, pageNum: pageNum)).mapModelArray()
         req.subscribe(onNext: {[weak self] list in
-            
+        
             self?.tableView.mj_header?.endRefreshing()
             self?.tableView.mj_footer?.endRefreshing()
             if self?.pageNum == 1 {

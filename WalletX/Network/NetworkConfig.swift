@@ -30,6 +30,14 @@ enum NetworkService {
     case cancelGuarantee(assureId: String) // 取消担保
     case updateGuarantee(assureId: String, agreement: String) // 更新担保
     case deleteGuarantee(assureId: String) // 删除担保
+    case getTokenLogo(token: String) // 获取币种logo
+    case getWalletBalance // 获取钱包余额
+    case getTokenTecordTransfer // 获取转账记录
+    case getAssureOrderDetail(assureId: String) // 查询订单信息
+    case finiedOrder(assureId: String) // 完成上押
+    case assureReleaseApply(assureId: String, reason: Int, sponsorReleasedAmount: Int, partnerReleasedAmount: Int) // 申请解押
+    case revokeAssureApply(assureId: String) //撤销申请
+    case releaseAgree(assureId: String) // 同意解押
 
 }
 
@@ -75,7 +83,23 @@ extension NetworkService: TargetType {
         case .updateGuarantee:
             return "/api/assureOrder/modify"
         case .deleteGuarantee:
+            return "/api/assureOrder/delete"
+        case .getTokenLogo:
+            return "/api/coin/image"
+        case .getWalletBalance:
+            return "/api/user/balance"
+        case .getTokenTecordTransfer:
+            return "/api/user/record/transfer"
+        case .getAssureOrderDetail:
             return "/api/assureOrder/info"
+        case .finiedOrder:
+            return "/api/assureOrder/push"
+        case .assureReleaseApply:
+            return "/api/assureOrder/release/apply"
+        case .revokeAssureApply:
+            return "/api/assureOrder/release/cancel"
+        case .releaseAgree:
+            return "/api/assureOrder/release/agree"
         }
     }
     
@@ -163,6 +187,24 @@ extension NetworkService: TargetType {
             return ["assureId": assureId, "agreement": agreement]
             
         case let .deleteGuarantee(assureId):
+            return ["assureId": assureId]
+            
+        case let .getTokenLogo(token):
+            return ["coin": token]
+            
+        case let .getAssureOrderDetail(assureId):
+            return ["assureId": assureId]
+            
+        case let .finiedOrder(assureId):
+            return ["assureId": assureId]
+            
+        case let .assureReleaseApply(assureId, reason, sponsorReleasedAmount, partnerReleasedAmount):
+            return ["assureId": assureId, "reason": reason, "sponsorReleasedAmount": sponsorReleasedAmount, "partnerReleasedAmount": partnerReleasedAmount]
+            
+        case let .revokeAssureApply(assureId):
+            return ["assureId": assureId]
+            
+        case let .releaseAgree(assureId):
             return ["assureId": assureId]
             
         default:

@@ -15,7 +15,6 @@ import NSObject_Rx
 class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
 
     var model: GuaranteeInfoModel?
-    var contactInfo: UserInfoModel?
     
     @IBOutlet weak var desLabel1: UILabel! {
         didSet {
@@ -134,13 +133,6 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         valueTextField2.text = model?.data?.assureTypeToString()
         valueTextField3.text = "\(model?.data?.amount ?? 0)"
         textView.text = model?.data?.agreement
-        
-        if let walletId = model?.data?.walletId {
-            let req: Observable<UserInfoModel?> = APIProvider.rx.request(.queryContactInfo(walletId: walletId)).mapModel()
-            req.subscribe(onNext: {[weak self] info in
-                self?.contactInfo = info
-            }).disposed(by: rx.disposeBag)
-        }
     }
 
     private func setupView() {
@@ -172,7 +164,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
                         
                     } else if index == 0 {
                         let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
-                        vc.model = self?.contactInfo
+                        vc.partnerUser = self?.model?.data?.partnerUser
                         self?.navigationController?.pushViewController(vc, animated: true)
                     }
                 }).disposed(by: this.rx.disposeBag)

@@ -27,6 +27,12 @@ final class LocaleWalletManager {
             return entity == nil
         }
     }
+   
+    var walletBalance: Observable<TokenModel?> {
+        return walletBalanceSubject.asObservable().skip { entity in
+            return entity == nil
+        }
+    }
     
     var currentWalletModel: WalletModel? {
         let currentIndex = AppArchiveder.shared().mmkv?.int32(forKey: ArchivedKey.currentWalletIndex.rawValue) ?? 0
@@ -45,6 +51,8 @@ final class LocaleWalletManager {
     private let walletDidChangedSubject: BehaviorSubject<Void?> = BehaviorSubject(value: nil)
     private var wallets: [WalletModel] = []
     private(set) var userInfo: UserInfoModel?
+    private(set) var walletBalanceModel: TokenModel?
+    private let walletBalanceSubject: BehaviorSubject<TokenModel?> = BehaviorSubject(value: nil)
     private let disposeBag = DisposeBag()
     
     private init() {
@@ -61,11 +69,7 @@ final class LocaleWalletManager {
         USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-            let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
-            
-            getUserInfoReq.subscribe(onNext: {[weak self] obj in
-                self?.userInfo = obj
-            }).disposed(by: self.disposeBag)
+            self.fetchData()
         })
     }
     
@@ -175,79 +179,24 @@ final class LocaleWalletManager {
         }
     }
     
-    // 获取trx数量
-    func getTRONBalance() async throws -> Double? {
-        let tronURL = "https://api.shasta.trongrid.io/wallet/getaccount"
-        let headers: HTTPHeaders = [
-            "content-type": "application/json",
-            "accept": "application/json"
-        ]
-        var parameters: [String: Any] = [
-            "visible": true
-        ]
-        guard let address = TRON?.address else {
-            return nil
-        }
-        parameters.updateValue(address, forKey: "address")
+    // 获取账户余额,和用户数据
+    private func fetchData() {
+        let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
         
-        return try await withCheckedThrowingContinuation { continuation in
-            
-            AF.request(tronURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: Empty.self) { response in
-                
-                switch response.result {
-                case .success:
-                    if let data = try? JSONSerialization.jsonObject(with: response.data ?? Data(), options: []) as? [String: Any] {
-                        
-                        let tokenBalance = data["balance"] as? Int64
-                        let formattedBalance = Double(tokenBalance ?? 0)
-                        continuation.resume(returning: formattedBalance)
-                    } else {
-                        let error = NSError(domain: "ResponseError", code: -113, userInfo: nil)
-                        continuation.resume(throwing: error)
-                    }
-                    
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                }
-            }
-        }
+        getUserInfoReq.subscribe(onNext: {[weak self] obj in
+            self?.userInfo = obj
+        }).disposed(by: disposeBag)
+        
+        let getWalletBalance: Observable<TokenModel?> = APIProvider.rx.request(.getWalletBalance).mapModel()
+        
+        getWalletBalance.subscribe(onNext: {[weak self] obj in
+            self?.walletBalanceModel = obj
+            self?.walletBalanceSubject.onNext(obj)
+        }).disposed(by: disposeBag)
+        
     }
     
-    
-    func getUSDTBalance() async throws -> Double? {
-        
-        guard let address = USDT?.address else {
-            return nil
-        }
-        
-        let url = "https://api.shasta.trongrid.io/accounts/\(address)"
-        let headers: HTTPHeaders = [
-            "content-type": "application/json",
-            "accept": "application/json"
-        ]
-        
-        return try await withCheckedThrowingContinuation { continuation in
-            
-            AF.request(url, method: .get, headers: headers).responseDecodable(of: Empty.self) { response in
-                
-                switch response.result {
-                case .success:
-                    if let data = try? JSONSerialization.jsonObject(with: response.data ?? Data(), options: []) as? [String: Any] {
-                        
-                        
-                        continuation.resume(returning: 0.00)
-                    } else {
-                        let error = NSError(domain: "ResponseError", code: -113, userInfo: nil)
-                        continuation.resume(throwing: error)
-                    }
-                    
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                }
-            }
-        }
-    }
-    
+    // 激活账户
     private func activationAccount() {
         
         guard let address = TRON?.address else {
@@ -286,6 +235,7 @@ final class LocaleWalletManager {
         dataTask.resume()
     }
     
+    // 广播交易凭证
     private func broadcastTransaction(jsonString: String) {
         
         guard let data = jsonString.data(using: .utf8, allowLossyConversion: false) else { return }
@@ -318,6 +268,7 @@ final class LocaleWalletManager {
         dataTask.resume()
     }
     
+    // 发送token
     func sendToken(toAddress: String, amount: Int64, coinType: WalletToken) {
         guard let w = currentWallet, let myAddress = TRON?.address else { return }
         let privateKey = w.getKeyForCoin(coin: .tron)

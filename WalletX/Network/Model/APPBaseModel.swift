@@ -35,3 +35,29 @@ final class AppSystemConfigModel: NSObject, NSCoding, HandyJSON {
         value = coder.decodeObject(forKey: "value") as? String
     }
 }
+
+struct TokenModel: APPBaseModel {
+    
+    struct Meta: HandyJSON {
+        var USDT: String?
+        var TRX: String?
+    }
+    
+    var code: Int?
+    
+    var message: String?
+    
+    var data: Meta?
+}
+
+struct TokenTecordTransferModel: HandyJSON {
+    
+    var id: Int64?
+    var txid: String?
+    var contract: String?
+    var from: String?
+    var to: String?
+    var amount: Double?
+    var blockNum: Int64?
+    var createTime: Double?
+}

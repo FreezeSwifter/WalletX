@@ -11,8 +11,20 @@ import RxSwift
 import QMUIKit
 import Then
 import NSObject_Rx
+import SwiftDate
 
 class OrderOperationViewController: UIViewController, HomeNavigationble {
+    
+    var assureId: String?
+    
+    private var model: GuaranteeInfoModel?
+    
+    var state: OrderOperationGuarantee = .applyRelease {
+        didSet {
+            headerView?.titleLabel.text = state.title
+        }
+    }
+    
     
     @IBOutlet weak var desLabel1: UILabel! {
         didSet {
@@ -20,21 +32,18 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var desLabel2: UILabel! {
-        didSet {
-            desLabel2.text = "发起时间".toMultilingualism()
-        }
-    }
+    @IBOutlet weak var desLabel2: UILabel!
     
-    @IBOutlet weak var desLabel3: UILabel! {
-        didSet {
-            desLabel3.text = "担保金额没有1".toMultilingualism()
-        }
-    }
+    @IBOutlet weak var desLabel3: UILabel!
     
-    @IBOutlet weak var desLabel4: UILabel! {
+    @IBOutlet weak var desLabel4: UILabel!
+
+    @IBOutlet weak var desLabel4Me: UILabel! {
         didSet {
-            desLabel4.text = "发起人".toMultilingualism()
+            desLabel4Me.text = "我".toMultilingualism()
+            desLabel4Me.layoutMargins = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+            desLabel4Me.minimumScaleFactor = 0.5
+            desLabel4Me.adjustsFontSizeToFitWidth = true
         }
     }
     
@@ -47,29 +56,59 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var desLabel5: UILabel! {
+    @IBOutlet weak var desLabel5: UILabel!
+    
+    @IBOutlet weak var valueLabel1: UILabel! {
         didSet {
-            desLabel5.text = "参与人".toMultilingualism()
+            valueLabel1.minimumScaleFactor = 0.5
+            valueLabel1.adjustsFontSizeToFitWidth = true
         }
     }
     
-    @IBOutlet weak var valueLabel1: UILabel!
+    @IBOutlet weak var valueLabel1State: QMUILabel! {
+        didSet {
+            valueLabel1State.minimumScaleFactor = 0.5
+            valueLabel1State.adjustsFontSizeToFitWidth = true
+            valueLabel1State.contentEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
+            valueLabel1State.applyCornerRadius(4)
+        }
+    }
     
-    @IBOutlet weak var valueLabel1State: UILabel!
+    @IBOutlet weak var valueLabel2: UILabel! {
+        didSet {
+            valueLabel2.minimumScaleFactor = 0.5
+            valueLabel2.adjustsFontSizeToFitWidth = true
+        }
+    }
     
-    @IBOutlet weak var valueLabel2: UILabel!
+    @IBOutlet weak var valueLabel3: UILabel! {
+        didSet {
+            valueLabel3.minimumScaleFactor = 0.5
+            valueLabel3.adjustsFontSizeToFitWidth = true
+        }
+    }
     
-    @IBOutlet weak var valueLabel3: UILabel!
+    @IBOutlet weak var valueLabel4: UILabel! {
+        didSet {
+            valueLabel4.minimumScaleFactor = 0.5
+            valueLabel4.adjustsFontSizeToFitWidth = true
+        }
+    }
     
-    @IBOutlet weak var valueLabel4: UILabel!
-    
-    @IBOutlet weak var valueLabel5: UILabel!
+    @IBOutlet weak var valueLabel5: UILabel! {
+        didSet {
+            valueLabel5.minimumScaleFactor = 0.5
+            valueLabel5.adjustsFontSizeToFitWidth = true
+        }
+    }
     
     @IBOutlet weak var protocolBg: UIStackView! {
         didSet {
             protocolBg.isLayoutMarginsRelativeArrangement = true
             protocolBg.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
             protocolBg.applyCornerRadius(protocolBg.height / 2, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+            let ges = UITapGestureRecognizer(target: self, action: #selector(OrderOperationViewController.protocolTap))
+            protocolBg.addGestureRecognizer(ges)
         }
     }
     
@@ -79,52 +118,42 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var valueLabel4Sub: UILabel!
-    
-    @IBOutlet weak var valueLabel5Sub: UILabel!
-    
-    
-    @IBOutlet weak var desLabel6: UILabel! {
+    @IBOutlet weak var valueLabel4Sub: UILabel! {
         didSet {
-            desLabel6.text = "担保时长".toMultilingualism()
+            valueLabel4Sub.minimumScaleFactor = 0.5
+            valueLabel4Sub.adjustsFontSizeToFitWidth = true
         }
     }
     
-    @IBOutlet weak var desLabel7: UILabel! {
+    @IBOutlet weak var valueLabel5Sub: UILabel! {
         didSet {
-            desLabel7.text = "担保费用".toMultilingualism()
+            valueLabel5Sub.minimumScaleFactor = 0.5
+            valueLabel5Sub.adjustsFontSizeToFitWidth = true
         }
     }
     
-    @IBOutlet weak var desLabel8: UILabel! {
+    
+    @IBOutlet weak var desLabel20: UILabel!
+
+    @IBOutlet weak var valueLabel20: UILabel! {
         didSet {
-            desLabel8.text = "可解金额".toMultilingualism()
+            valueLabel20.minimumScaleFactor = 0.5
+            valueLabel20.adjustsFontSizeToFitWidth = true
         }
     }
     
-    @IBOutlet weak var desLabel9: UILabel! {
-        didSet {
-            desLabel9.text = "解押原因".toMultilingualism()
-        }
-    }
+    @IBOutlet weak var desLabel7: UILabel!
     
-    @IBOutlet weak var desLabel10: UILabel! {
-        didSet {
-            desLabel10.text = "收款账户".toMultilingualism()
-        }
-    }
+    @IBOutlet weak var desLabel8: UILabel!
     
-    var state: OrderOperationGuarantee = .applyRelease {
-        didSet {
-            headerView?.titleLabel.text = state.title
-        }
-    }
+    @IBOutlet weak var desLabel9: UILabel!
+    
+    @IBOutlet weak var desLabel10: UILabel!
     
     @IBOutlet weak var tradeCompletedButton: QMUIButton! {
         didSet {
             tradeCompletedButton.setImage(UIImage(named: "me_checkbox2"), for: .selected)
             tradeCompletedButton.setTitle("交易结束".toMultilingualism(), for: .normal)
-            tradeCompletedButton.isSelected = true
             tradeCompletedButton.spacingBetweenImageAndTitle = 10
         }
     }
@@ -146,11 +175,11 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
             explainButton.setTitle("说明".toMultilingualism(), for: .normal)
         }
     }
+
     
     @IBOutlet weak var accountButton1: QMUIButton! {
         didSet {
             accountButton1.setImage(UIImage(named: "guarantee_check_box2"), for: .selected)
-            accountButton1.isSelected = true
             accountButton1.spacingBetweenImageAndTitle = 10
         }
     }
@@ -162,11 +191,26 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var valueLabel6: UILabel!
+    @IBOutlet weak var valueLabel6: UILabel! {
+        didSet {
+            valueLabel6.minimumScaleFactor = 0.5
+            valueLabel6.adjustsFontSizeToFitWidth = true
+        }
+    }
     
-    @IBOutlet weak var valueLabel7: UILabel!
+    @IBOutlet weak var valueLabel7: UILabel! {
+        didSet {
+            valueLabel7.minimumScaleFactor = 0.5
+            valueLabel7.adjustsFontSizeToFitWidth = true
+        }
+    }
     
-    @IBOutlet weak var valueLabel8: UILabel!
+    @IBOutlet weak var valueLabel8: UILabel! {
+        didSet {
+            valueLabel8.minimumScaleFactor = 0.5
+            valueLabel8.adjustsFontSizeToFitWidth = true
+        }
+    }
     
     @IBOutlet weak var textFieldBg1: UIView! {
         didSet {
@@ -182,9 +226,19 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var textField1: UITextField!
+    @IBOutlet weak var textField1: UITextField! {
+        didSet {
+            textField1.placeholder = "请输入金额".toMultilingualism()
+        }
+    }
     
-    @IBOutlet weak var textField2: UITextField!
+    @IBOutlet weak var textField2: UITextField! {
+        didSet {
+            textField1.placeholder = "请输入金额".toMultilingualism()
+        }
+    }
+    
+    @IBOutlet weak var desLabel6: UILabel!
     
     @IBOutlet weak var walletDesLabel: UILabel! {
         didSet {
@@ -232,7 +286,180 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
+        switch state {
+        case .applyRelease:
+            textField1.isUserInteractionEnabled = true
+            textField2.isUserInteractionEnabled = true
+            buttonLeftButton.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
+            bottomRightButton.setupAPPUISolidStyle(title: "立即申请".toMultilingualism())
+            
+        case .handling:
+            textField1.isUserInteractionEnabled = false
+            textField2.isUserInteractionEnabled = false
+            tradeCancelButton.isUserInteractionEnabled = false
+            tradeCompletedButton.isUserInteractionEnabled = false
+            bottomRightButton.setupAPPUISolidStyle(title: "同意解押".toMultilingualism())
+            
+        case .revoke:
+            textField1.isUserInteractionEnabled = false
+            textField2.isUserInteractionEnabled = false
+            tradeCancelButton.isUserInteractionEnabled = false
+            tradeCompletedButton.isUserInteractionEnabled = false
+            bottomRightButton.setupAPPUISolidStyle(title: "撤销申请".toMultilingualism())
+        }
         
+        desLabel2.text = "发起时间".toMultilingualism()
+        desLabel3.text = "上押时间".toMultilingualism()
+        desLabel20.text = "担保金额没有1".toMultilingualism()
+        desLabel4.text = "发起人".toMultilingualism()
+        desLabel5.text = "参与人".toMultilingualism()
+        desLabel6.text = "担保时长".toMultilingualism()
+        desLabel7.text = "担保费用".toMultilingualism()
+        desLabel8.text = "可解金额".toMultilingualism()
+        desLabel9.text = "解押原因".toMultilingualism()
+        desLabel10.text = "收款账户".toMultilingualism()
+        
+        if let id = assureId {
+            let req: Observable<GuaranteeInfoModel?> = APIProvider.rx.request(.getAssureOrderDetail(assureId: id)).mapModel()
+            req.subscribe(onNext: {[weak self] obj in
+                self?.model = obj
+                self?.valueLabel1.text = id
+                self?.valueLabel2.text = Date(timeIntervalSince1970: (obj?.data?.createTime ?? 0) / 1000 ).toFormat("yyyy-MM-dd HH:mm:ss")
+                self?.valueLabel3.text = Date(timeIntervalSince1970: (obj?.data?.multisigTime ?? 0) / 1000 ).toFormat("yyyy-MM-dd HH:mm:ss")
+                let amount = NSMutableAttributedString(string: "\(obj?.data?.amount ?? 0) USDT")
+                self?.valueLabel20.textColor = ColorConfiguration.lightBlue.toColor()
+                amount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
+                self?.valueLabel20.attributedText = amount
+                self?.valueLabel4.text = obj?.data?.sponsorUserName ?? "--"
+                self?.valueLabel5.text = obj?.data?.partnerUserName ?? "--"
+                
+                let sponsorReleasedAmount = NSMutableAttributedString(string: "\(obj?.data?.sponsorReleasedAmount ?? 0) USDT")
+                self?.valueLabel4Sub.textColor = ColorConfiguration.lightBlue.toColor()
+                sponsorReleasedAmount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
+                self?.valueLabel4Sub.attributedText = sponsorReleasedAmount
+                
+                let partnerReleasedAmount = NSMutableAttributedString(string: "\(obj?.data?.partnerReleasedAmount ?? 0) USDT")
+                self?.valueLabel5Sub.textColor = ColorConfiguration.lightBlue.toColor()
+                partnerReleasedAmount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
+                self?.valueLabel5Sub.attributedText = partnerReleasedAmount
+                
+                self?.valueLabel6.text = "\(Date(timeIntervalSince1970: (obj?.data?.duration ?? 0) / 1000 ).minutes(since: Date()))"
+                self?.valueLabel7.text = "\(obj?.data?.assureFee ?? 0)"
+                self?.valueLabel8.text = "\(obj?.data?.releaseAmountCan ?? 0)"
+                if obj?.data?.reason == 0 {
+                    self?.tradeCompletedButton.isSelected = true
+                } else {
+                    self?.tradeCancelButton.isSelected = true
+                }
+                
+                self?.accountButton1.setTitle(obj?.data?.sponsorUserName, for: .normal)
+                self?.accountButton2.setTitle(obj?.data?.partnerUserName, for: .normal)
+                self?.textField1.text = "\(obj?.data?.sponsorReleasedAmount ?? 0)"
+                self?.textField2.text = "\(obj?.data?.partnerReleasedAmount ?? 0)"
+                
+                if obj?.data?.assureType == 0 {
+                    self?.walletTextField.text = obj?.data?.pushAddress
+                } else {
+                    self?.walletTextField.text = obj?.data?.multisigAddress
+                }
+                
+                if obj?.data?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+                    self?.desLabel4Me.isHidden = false
+                    self?.desLabel5Me.isHidden = true
+                    self?.accountButton1.isSelected = true
+                    self?.accountButton2.isSelected = false
+                    self?.textField1.isUserInteractionEnabled = true
+                    self?.textField2.isUserInteractionEnabled = false
+                } else {
+                    self?.desLabel4Me.isHidden = true
+                    self?.desLabel5Me.isHidden = false
+                    self?.accountButton1.isSelected = false
+                    self?.accountButton2.isSelected = true
+                    self?.textField1.isUserInteractionEnabled = false
+                    self?.textField2.isUserInteractionEnabled = true
+                }
+                
+                if obj?.data?.assureStatus == 2 {
+                    self?.valueLabel1State.backgroundColor = UIColor(hex: "#28C445").withAlphaComponent(0.1)
+                    self?.valueLabel1State.textColor = UIColor(hex: "#28C445")
+                    self?.valueLabel1State.text = "me_guaranteeing".toMultilingualism()
+                    
+                } else if obj?.data?.assureStatus == 9 {
+                    self?.valueLabel1State.backgroundColor = UIColor(hex: "#7241FF").withAlphaComponent(0.1)
+                    self?.valueLabel1State.textColor = UIColor(hex: "#7241FF")
+                    self?.valueLabel1State.text = "me_releasing".toMultilingualism()
+                }
+                
+            }).disposed(by: rx.disposeBag)
+        }
+        
+        addressCopyButton.rx.tap.subscribe(onNext: {[weak self] in
+            UIPasteboard.general.string = self?.walletTextField.text
+        }).disposed(by: rx.disposeBag)
+        
+        tradeCompletedButton.rx.tap.subscribe(onNext: {[weak self] in
+            self?.tradeCompletedButton.isSelected = true
+            self?.tradeCancelButton.isSelected = false
+        }).disposed(by: rx.disposeBag)
+        
+        tradeCancelButton.rx.tap.subscribe(onNext: {[weak self] in
+            self?.tradeCancelButton.isSelected = true
+            self?.tradeCompletedButton.isSelected = false
+        }).disposed(by: rx.disposeBag)
+        
+        bottomRightButton.rx.tap.subscribe(onNext: {[weak self] in
+            guard let this = self, let id = this.model?.data?.assureId else { return }
+            
+            if this.bottomRightButton.titleLabel?.text == "立即申请".toMultilingualism() {
+                let reason = this.tradeCompletedButton.isSelected ? 0 : 1
+                let sponsorReleasedAmount = Int(this.textField1.text ?? "0") ?? 0
+                let partnerReleasedAmount = Int(this.textField2.text ?? "0") ?? 0
+                APIProvider.rx.request(.assureReleaseApply(assureId: id, reason: reason, sponsorReleasedAmount: sponsorReleasedAmount, partnerReleasedAmount: partnerReleasedAmount)).mapJSON().subscribe(onSuccess: {[weak self] obj in
+                    guard let dict = obj as? [String: Any], let this = self else { return }
+                    let message = dict["message"] as? String
+                    if message.isNilOrEmpty {
+                        let titleIcon = UIImage(named: "wallet_noti2")?.qmui_image(withTintColor: ColorConfiguration.primary.toColor())
+                        GuaranteeYesNoView.showFromBottom(image: UIImage(named: "me_release_apply"), title: "解押通知".toMultilingualism(), titleIcon: titleIcon, content: "解押通知内容".toMultilingualism(), leftButton: "通知对方".toMultilingualism(), rightButton: "完成".toMultilingualism()).subscribe(onNext: { index in
+                            
+                        }).disposed(by: this.rx.disposeBag)
+                        
+                    } else {
+                        APPHUD.flash(text: message)
+                    }
+                }).disposed(by: this.rx.disposeBag)
+                
+            } else if this.bottomRightButton.titleLabel?.text == "撤销申请".toMultilingualism() {
+             
+                APIProvider.rx.request(.revokeAssureApply(assureId: id)).mapJSON().subscribe(onSuccess: { [weak self] obj in
+                    
+                    guard let dict = obj as? [String: Any], let this = self else { return }
+                    let message = dict["message"] as? String
+                    if message.isNilOrEmpty {
+                        
+                        let titleIcon = UIImage(named: "me_revoke_img")?.qmui_image(withTintColor: ColorConfiguration.primary.toColor())
+                        GuaranteeYesNoView.showFromBottom(image: UIImage(named: "me_revoke_img"), title: "您已成功取消解押申请".toMultilingualism(), titleIcon: titleIcon, content: "您已成功取消解押申请内容".toMultilingualism(), leftButton: "通知对方".toMultilingualism(), rightButton: "完成".toMultilingualism()).subscribe(onNext: { index in
+                            
+                        }).disposed(by: this.rx.disposeBag)
+                        
+                    } else {
+                        APPHUD.flash(text: message)
+                    }
+                    
+                }).disposed(by: this.rx.disposeBag)
+                
+            } else if this.bottomRightButton.titleLabel?.text == "同意解押".toMultilingualism() {
+                
+                let titleIcon = UIImage(named: "guarantee_bulb")
+                GuaranteeYesNoView.showFromCenter(image: UIImage(named: "guarantee_yes_no"), title: "您确定要同意这个解押申请吗".toMultilingualism(), titleIcon: titleIcon, content: "您确定要同意这个解押申请吗内容".toMultilingualism(), leftButton: "取消".toMultilingualism(), rightButton: "确定".toMultilingualism()).subscribe(onNext: {[weak self] index in
+                    if index == 1 {
+                        self?.agreeRelease()
+                    }
+                    
+                }).disposed(by: this.rx.disposeBag)
+                
+            }
+            
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {
@@ -251,5 +478,42 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         }
         desLabel5Me.clipsToBounds = true
         desLabel5Me.layer.cornerRadius = 13
+        
+        desLabel4Me.snp.remakeConstraints { make in
+            make.width.height.equalTo(26)
+        }
+        desLabel4Me.clipsToBounds = true
+        desLabel4Me.layer.cornerRadius = 13
+    }
+    
+    @objc
+    private func protocolTap() {
+        NotiAlterView.show(title: "协议".toMultilingualism(), content: model?.data?.agreement, leftButtonTitle: nil, rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { _ in
+
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    private func agreeRelease() {
+        guard let id = model?.data?.assureId else { return }
+        APIProvider.rx.request(.releaseAgree(assureId: id)).mapJSON().subscribe(onSuccess: {[weak self] obj in
+            
+            guard let dict = obj as? [String: Any], let this = self else { return }
+            let message = dict["message"] as? String
+            if message.isNilOrEmpty {
+
+                let titleIcon = UIImage(named: "me_revoke_img")?.qmui_image(withTintColor: ColorConfiguration.primary.toColor())
+                GuaranteeYesNoView.showFromBottom(image: UIImage(named: "me_dollar_mobile"), title: "您已批准对方的解押申请".toMultilingualism(), titleIcon: titleIcon, content: "您已批准对方的解押申请内容".toMultilingualism(), leftButton: "通知对方".toMultilingualism(), rightButton: "完成".toMultilingualism()).subscribe(onNext: { index in
+                    
+                    if index == 1 {
+                        UIApplication.topViewController()?.navigationController?.popViewController(animated: true)
+                    }
+                    
+                }).disposed(by: this.rx.disposeBag)
+                
+            } else {
+                APPHUD.flash(text: message)
+            }
+            
+        }).disposed(by: rx.disposeBag)
     }
 }

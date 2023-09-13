@@ -213,11 +213,25 @@ class GuaranteeingCell: UITableViewCell {
     }
     
     private func bind() {
-        button4.rx.tap.subscribe(onNext: {[unowned self] _ in
+        button2.rx.tap.subscribe(onNext: {[unowned self] _ in
             
-            if self.button4.titleLabel?.text == "申请解押".toMultilingualism() {
+            if self.button2.titleLabel?.text == "申请解押".toMultilingualism() {
                 let vc: OrderOperationViewController = ViewLoader.Storyboard.controller(from: "Me")
                 vc.state = .applyRelease
+                vc.assureId = self.model?.assureId
+                vc.hidesBottomBarWhenPushed = true
+                UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+        }).disposed(by: rx.disposeBag)
+        
+        button3.rx.tap.subscribe(onNext: {[unowned self] in
+            if self.button3.titleLabel?.text == "撤销申请".toMultilingualism() {
+                
+            } else if self.button3.titleLabel?.text == "处理解押".toMultilingualism() {
+                let vc: OrderOperationViewController = ViewLoader.Storyboard.controller(from: "Me")
+                vc.state = .handling
+                vc.assureId = self.model?.assureId
                 vc.hidesBottomBarWhenPushed = true
                 UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
             }
@@ -246,8 +260,8 @@ class GuaranteeingCell: UITableViewCell {
         valueLabel3.textColor = ColorConfiguration.lightBlue.toColor()
         amount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
         valueLabel3.attributedText = amount
-        valueLabel4.text = data.sponsorUser ?? "--"
-        valueLabel5.text = data.partnerUser ?? "--"
+        valueLabel4.text = data.sponsorUserName ?? "--"
+        valueLabel5.text = data.partnerUserName ?? "--"
         
         if data.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
             desLabel4Me.isHidden = false
