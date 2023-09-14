@@ -129,11 +129,12 @@ final class LocaleWalletManager {
     }
     
     func didSelectedWallet(index: Int) {
-        AppArchiveder.shared().mmkv?.set(Int32(index), forKey: ArchivedKey.walletList.rawValue)
+        AppArchiveder.shared().mmkv?.set(Int32(index), forKey: ArchivedKey.currentWalletIndex.rawValue)
         guard let list = fetchLocalWalletList(), list.count != 0 else { return }
         let currentModel = list[index]
         currentWallet = HDWallet(mnemonic: currentModel.mnemoic, passphrase: "")
         walletDidChangedSubject.onNext(())
+        fetchData()
     }
     
     func deleteWalletModel(by model: WalletModel) {

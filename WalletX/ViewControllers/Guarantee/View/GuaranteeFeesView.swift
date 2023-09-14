@@ -25,6 +25,7 @@ class GuaranteeFeesView: UIView {
             noNotiButton.imagePosition = .left
             noNotiButton.spacingBetweenImageAndTitle = 10
             noNotiButton.setImage(UIImage(named: "guarantee_check_box2"), for: .selected)
+            noNotiButton.setTitle("不再提醒".toMultilingualism(), for: .normal)
         }
     }
     

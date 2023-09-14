@@ -68,6 +68,10 @@ class MeListChildViewController: UIViewController, JXSegmentedListContainerViewL
         footer.setTitle("加载中…".toMultilingualism(), for: .idle)
         footer.setTitle("加载中…".toMultilingualism(), for: .pulling)
         tableView.mj_footer = footer
+        
+        LocaleWalletManager.shared().walletDidChanged.observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
+            self?.fetchData()
+        }).disposed(by: rx.disposeBag)
     }
     
     @objc

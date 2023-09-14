@@ -13,7 +13,6 @@ import RxCocoa
 import RxSwift
 import NSObject_Rx
 
-
 class MyViewController: UIViewController, HomeNavigationble {
     
     private static let titleData = ["me_all".toMultilingualism(), "me_pending".toMultilingualism(), "me_depositing".toMultilingualism(), "me_guaranteeing".toMultilingualism(), "me_releasing".toMultilingualism(), "me_released".toMultilingualism()]
@@ -122,6 +121,15 @@ class MyViewController: UIViewController, HomeNavigationble {
             self?.navigationController?.pushViewController(shareVC, animated: true)
         }).disposed(by: rx.disposeBag)
         
+        fetchData()
+        
+        LocaleWalletManager.shared().walletDidChanged.observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
+            self?.fetchData()
+        }).disposed(by: rx.disposeBag)
+     
+    }
+    
+    private func fetchData() {
         let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
         
         getUserInfoReq.subscribe(onNext: {[weak self] obj in

@@ -39,7 +39,7 @@
     "home_noti_text": "All recommended merchants have been selected and verified by us. They all promised to use our surety service during all transactions with you to keep your money safe.\nIf any merchant ask you not to use our surety service, please do NOT trade with them and tell us immediately to avoid possible lost!",
     "home_item_all": "All",
     "home_item_trade": "Trade",
-    "home_fee_noti": "担保费用告知",
+    "home_fee_noti": "Surety Fee Charge Notification",
     "home_fee_noti_content": "Surety Fee = Surety Amount * 0.1% * Duration Days,Guarantee rate is 0.1% per day;\nThe duration part which is less than 1 day shall be calculated as 1 day,\nThe fee part which is less than 1 USDT shall be calculated as 1 USDT;",
     "home_no_noti_again": "Don't remind me any more",
     "home_contact_us": "Contact Us",
@@ -222,4 +222,5 @@
     "您确定要同意这个解押申请吗内容": "If confirmed, it means that this surety guarantee has been finished, and there is no any more dispute between you and the counterpart.",
     "您已批准对方的解押申请": "You have approved this release request.",
     "您已批准对方的解押申请内容": "The refund will arrive within 5 minutes. Thank you for using Uoobal Wallet surety service!",
+    "不再提醒": "Don't remind me any more",
 }

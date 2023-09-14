@@ -12,6 +12,8 @@ class WalletManagementCell: UITableViewCell {
 
     private static let changeColorImg =  UIImage(named: "wallet_management_list_icon")?.qmui_image(withTintColor: ColorConfiguration.blackText.toColor())
     
+    @IBOutlet weak var button1: UIButton!
+    
     @IBOutlet weak var imageBg: UIView! {
         didSet {
             imageBg.layer.cornerRadius = imageBg.bounds.height / 2

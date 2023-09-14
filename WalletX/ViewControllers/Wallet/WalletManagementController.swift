@@ -126,24 +126,33 @@ extension WalletManagementController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WalletManagementCell", for: indexPath) as? WalletManagementCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WalletManagementCell", for: indexPath) as! WalletManagementCell
         let item = datasouce[indexPath.row]
-        cell?.nameLabel.text = item.name
-        return cell ?? UITableViewCell()
+        cell.nameLabel.text = item.name
+        cell.button1.rx.tap.subscribe(onNext: {[weak self] in
+            guard let this = self else { return }
+            
+            let item = this.datasouce[indexPath.row]
+            let vc: ChangeNameController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.changeWalletModel = item
+            vc.didSaveBlock = { m in
+                if let m1 = m {
+                    LocaleWalletManager.shared().updateWalletModel(model: m1)
+                }
+            }
+            this.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: cell.rx.disposeBag)
+        
+        return cell
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let item = datasouce[indexPath.row]
-        let vc: ChangeNameController = ViewLoader.Storyboard.controller(from: "Wallet")
-        vc.changeWalletModel = item
-        vc.didSaveBlock = { m in
-            if let m1 = m {
-                LocaleWalletManager.shared().updateWalletModel(model: m1)
-            }
-        }
-        navigationController?.pushViewController(vc, animated: true)
+        
+        LocaleWalletManager.shared().didSelectedWallet(index: indexPath.row)
+        navigationController?.popViewController(animated: true)
     }
     
     

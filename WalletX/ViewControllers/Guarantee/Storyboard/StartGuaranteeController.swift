@@ -45,6 +45,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
     @IBOutlet weak var moneyTextField: UITextField! {
         didSet {
             moneyTextField.placeholder = "请输入担保金额".toMultilingualism()
+            moneyTextField.keyboardType = .decimalPad
         }
     }
     

@@ -38,22 +38,28 @@
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet_three_point" translatesAutoresizingMaskIntoConstraints="NO" id="VBN-tG-CWc">
-                        <rect key="frame" x="286.33333333333331" y="42" width="3.6666666666666856" height="16"/>
-                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaw-LX-1Yq">
+                        <rect key="frame" x="260" y="39" width="30" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="enZ-jM-H5Y"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" image="wallet_three_point"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="ekg-ip-KvF" firstAttribute="leading" secondItem="OxA-Yw-ogh" secondAttribute="trailing" constant="15" id="Uw4-KL-wXj"/>
-                    <constraint firstItem="VBN-tG-CWc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YmP-a6-x5P"/>
+                    <constraint firstItem="gaw-LX-1Yq" firstAttribute="centerY" secondItem="ekg-ip-KvF" secondAttribute="centerY" id="XsA-S0-AGH"/>
                     <constraint firstItem="OxA-Yw-ogh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="ZxR-BZ-mMJ"/>
-                    <constraint firstAttribute="trailing" secondItem="VBN-tG-CWc" secondAttribute="trailing" constant="30" id="cf8-03-4G0"/>
                     <constraint firstItem="ekg-ip-KvF" firstAttribute="centerY" secondItem="OxA-Yw-ogh" secondAttribute="centerY" id="qNq-is-PFY"/>
                     <constraint firstItem="OxA-Yw-ogh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rj2-aF-QQw"/>
-                    <constraint firstItem="VBN-tG-CWc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ekg-ip-KvF" secondAttribute="trailing" constant="10" id="wI5-ki-aIT"/>
+                    <constraint firstItem="gaw-LX-1Yq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ekg-ip-KvF" secondAttribute="trailing" constant="10" id="wzF-a7-2mw"/>
+                    <constraint firstAttribute="trailing" secondItem="gaw-LX-1Yq" secondAttribute="trailing" constant="30" id="zo3-25-H4O"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="button1" destination="gaw-LX-1Yq" id="3IO-ZE-Qhh"/>
                 <outlet property="imageBg" destination="OxA-Yw-ogh" id="DNK-H3-T27"/>
                 <outlet property="imageIcon" destination="qW9-ml-1EQ" id="CQW-dW-ch7"/>
                 <outlet property="nameLabel" destination="ekg-ip-KvF" id="kQ9-af-yPq"/>
