@@ -115,6 +115,11 @@ extension AppDelegate {
             self?.checkFaceId()
             self?.autoLogin()
         }).disposed(by: rx.disposeBag)
+        
+        LocaleWalletManager.shared().walletDidChanged.observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
+            guard let this = self else { return }
+            this.autoLogin()
+        }).disposed(by: rx.disposeBag)
     }
     
     func autoLogin() {

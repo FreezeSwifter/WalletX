@@ -224,12 +224,13 @@ final class LocaleWalletManager {
         request.httpBody = postData ?? Data()
         
         let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: {[weak self] (data, response, error) -> Void in
             if (error != nil) {
                 print(error as Any)
             } else {
                 if let data = try? JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any] {
                     print(data)
+                    self?.walletDidChangedSubject.onNext(())
                 }
             }
         })
