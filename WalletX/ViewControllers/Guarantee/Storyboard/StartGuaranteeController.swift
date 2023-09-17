@@ -186,6 +186,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
+//        TXhcz9yLurPQ4fqEfzS3zCycfzJSdZkZwC
         textViewPlaceholderLabel.text = "担保协议占位".toMultilingualism()
         textViewPlaceholderLabel.font = self.textView.font
         textViewPlaceholderLabel.sizeToFit()

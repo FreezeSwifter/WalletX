@@ -27,7 +27,7 @@ final class LocaleWalletManager {
             return entity == nil
         }
     }
-   
+    
     var walletBalance: Observable<TokenModel?> {
         return walletBalanceSubject.asObservable().skip { entity in
             return entity == nil
@@ -275,7 +275,7 @@ final class LocaleWalletManager {
         guard let w = currentWallet, let myAddress = TRON?.address else { return }
         let privateKey = w.getKeyForCoin(coin: .tron)
         
-        if coinType == .tron("") {
+        if coinType == .tron(nil) {
             let signerInput = TronSigningInput.with {
                 $0.privateKey = privateKey.data
                 $0.transaction = TW_Tron_Proto_Transaction.with {
@@ -288,7 +288,6 @@ final class LocaleWalletManager {
             }
             
             let output: TronSigningOutput = AnySigner.sign(input: signerInput, coin: .tron)
-            print(" data:   ", output.json)
             broadcastTransaction(jsonString: output.json)
             
         } else {
@@ -306,7 +305,6 @@ final class LocaleWalletManager {
                 }
             }
             let output: TronSigningOutput = AnySigner.sign(input: signerInput, coin: .tron)
-            print(" data:   ", output.json)
             broadcastTransaction(jsonString: output.json)
         }
     }
@@ -346,6 +344,17 @@ enum WalletToken: Equatable {
             return UIImage(named: "wallet_tron_icon")
         case .usdt:
             return UIImage(named: "wallet_usdt_icon")
+        }
+    }
+    
+    static func ==(lhs: WalletToken, rhs: WalletToken) -> Bool {
+        
+        switch (lhs, rhs) {
+        case (.tron, .tron),
+             (.usdt, .usdt):
+            return true
+        default:
+            return false
         }
     }
 }
