@@ -10,6 +10,7 @@ import WalletCore
 import RxCocoa
 import RxSwift
 import Alamofire
+import TronWeb
 
 final class LocaleWalletManager {
     
@@ -44,7 +45,15 @@ final class LocaleWalletManager {
     }
     
     private static let instance = LocaleWalletManager()
-    private(set) var currentWallet: HDWallet?
+    private(set) var currentWallet: HDWallet? {
+        didSet {
+            if let key = currentWallet?.getKeyForCoin(coin: .tron) {
+                tronWeb.tronWebResetPrivateKey(privateKey: key.data.toHexString()) { setupResult in
+                    print(setupResult)
+                }
+            }
+        }
+    }
     private(set) var TRON: WalletToken? = .tron(nil)
     private(set) var USDT: WalletToken? = .usdt(nil)
     private let usdtContractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
@@ -54,6 +63,7 @@ final class LocaleWalletManager {
     private(set) var walletBalanceModel: TokenModel?
     private let walletBalanceSubject: BehaviorSubject<TokenModel?> = BehaviorSubject(value: nil)
     private let disposeBag = DisposeBag()
+    private let tronWeb = TronWeb3()
     
     private init() {
         
@@ -71,6 +81,14 @@ final class LocaleWalletManager {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
             self.fetchData()
         })
+        
+        if tronWeb.isGenerateTronWebInstanceSuccess != true {
+            if let privateKeyData = currentWallet?.getKeyForCoin(coin: .tron) {
+                tronWeb.setup(privateKey: privateKeyData.data.toHexString(), node: TRONMainNet) { setupResult in
+                    print(setupResult)
+                }
+            }
+        }
     }
     
     func importWallet(mnemonic: String, walletName: String) -> Bool {
@@ -209,7 +227,7 @@ final class LocaleWalletManager {
             "content-type": "application/json"
         ]
         let parameters = [
-            "owner_address": "TZ4UXDV5ZhNW7fb2AMSbgfAEZ7hWsnYS2g",
+            "owner_address": address,
             "account_address": address,
             "visible": true
         ] as [String : Any]
@@ -237,75 +255,25 @@ final class LocaleWalletManager {
         dataTask.resume()
     }
     
-    // 广播交易凭证
-    private func broadcastTransaction(jsonString: String) {
-        
-        guard let data = jsonString.data(using: .utf8, allowLossyConversion: false) else { return }
-        let parameters = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-        
-        
-        let headers = [
-            "accept": "application/json",
-            "content-type": "application/json"
-        ]
-        let postData = try? JSONSerialization.data(withJSONObject: parameters ?? "", options: [])
-        
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.shasta.trongrid.io/wallet/broadcasttransaction")! as URL,
-                                          cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
-        request.httpMethod = "POST"
-        request.allHTTPHeaderFields = headers
-        request.httpBody = postData ?? Data()
-        
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error as Any)
-            } else {
-                if let data = try? JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any] {
-                    print(data)
-                }
-            }
-        })
-        dataTask.resume()
-    }
-    
     // 发送token
     func sendToken(toAddress: String, amount: Int64, coinType: WalletToken) {
-        guard let w = currentWallet, let myAddress = TRON?.address else { return }
-        let privateKey = w.getKeyForCoin(coin: .tron)
-        
+       
         if coinType == .tron(nil) {
-            let signerInput = TronSigningInput.with {
-                $0.privateKey = privateKey.data
-                $0.transaction = TW_Tron_Proto_Transaction.with {
-                    $0.transfer = TW_Tron_Proto_TransferContract.with {
-                        $0.toAddress = toAddress
-                        $0.amount = amount
-                        $0.ownerAddress = myAddress
-                    }
-                }
+            // 1 This value is 0.000001
+            let amountText = amount * 100000
+            tronWeb.trxTransfer(toAddress: toAddress, amount: amountText.description) { [weak self] (state, txid) in
+                guard let self = self else { return }
+                print("state = \(state)")
+                print("txid = \(txid)")
             }
-            
-            let output: TronSigningOutput = AnySigner.sign(input: signerInput, coin: .tron)
-            broadcastTransaction(jsonString: output.json)
             
         } else {
-            
-            let signerInput = TronSigningInput.with {
-                $0.privateKey = privateKey.data
-                $0.transaction = TW_Tron_Proto_Transaction.with {
-                    $0.transferTrc20Contract = TW_Tron_Proto_TransferTRC20Contract.with {
-                        $0.contractAddress = self.usdtContractAddress
-                        $0.ownerAddress = myAddress
-                        $0.toAddress = toAddress
-                        let data = withUnsafeBytes(of: amount.bigEndian) { Data($0) }
-                        $0.amount = data
-                    }
-                }
+            let amountText = amount.description
+            tronWeb.trc20TokenTransfer(toAddress: toAddress, trc20ContractAddress: usdtContractAddress, amount: amountText, remark: "") { [weak self] (state, txid) in
+                guard let self = self else { return }
+                print("state = \(state)")
+                print("txid = \(txid)")
             }
-            let output: TronSigningOutput = AnySigner.sign(input: signerInput, coin: .tron)
-            broadcastTransaction(jsonString: output.json)
         }
     }
 }
@@ -351,7 +319,7 @@ enum WalletToken: Equatable {
         
         switch (lhs, rhs) {
         case (.tron, .tron),
-             (.usdt, .usdt):
+            (.usdt, .usdt):
             return true
         default:
             return false

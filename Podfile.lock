@@ -335,6 +335,7 @@ PODS:
   - SwiftDate (6.3.1)
   - SwiftProtobuf (1.22.1)
   - Then (3.0.0)
+  - TronWeb (1.1.0)
   - TrustWalletCore (2.5.6):
     - TrustWalletCore/Core (= 2.5.6)
   - TrustWalletCore/Core (2.5.6):
@@ -357,7 +358,7 @@ DEPENDENCIES:
   - MJRefresh (= 3.7.5)
   - MMKV (= 1.3.1)
   - Moya/RxSwift (= 15.0.0)
-  - MZTimerLabel
+  - MZTimerLabel (= 0.5.4)
   - "NSObject+Rx (= 5.2.2)"
   - QMUIKit (= 4.6.0)
   - RxCocoa (= 6.5.0)
@@ -365,8 +366,9 @@ DEPENDENCIES:
   - RxSwift (= 6.5.0)
   - SGQRCode (= 4.1.0)
   - SnapKit (= 5.6.0)
-  - SwiftDate
+  - SwiftDate (= 6.3.1)
   - Then (= 3.0.0)
+  - TronWeb (= 1.1.0)
   - TrustWalletCore (= 2.5.6)
   - ZLPhotoBrowser (= 4.4.3.2)
 
@@ -398,6 +400,7 @@ SPEC REPOS:
     - SwiftDate
     - SwiftProtobuf
     - Then
+    - TronWeb
     - TrustWalletCore
     - ZLPhotoBrowser
 
@@ -428,9 +431,10 @@ SPEC CHECKSUMS:
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
   SwiftProtobuf: 7773c4e96a99d7b8ab7cda0fc30a883732ff93b1
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
+  TronWeb: 21a2fb0ab0884b600023a46fef8236681ab73c2f
   TrustWalletCore: 77ed44e6965e5121245d7fafc58c56a03bf13490
   ZLPhotoBrowser: 0563c2bfc7b247b65d023d646012f46cba94101b
 
-PODFILE CHECKSUM: a7b634c8fa8d5c242d347c8df44d9778c317cfa7
+PODFILE CHECKSUM: c2b055bfde48b2527c4864caeb8f0adccebd5093
 
 COCOAPODS: 1.11.3

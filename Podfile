@@ -29,7 +29,8 @@ target 'WalletX' do
   
   # WalletCore
   pod 'TrustWalletCore', '2.5.6'
-
+  pod 'TronWeb', '1.1.0'
+  
   # RX
   pod 'RxSwift', '6.5.0'
   pod 'RxCocoa', '6.5.0'
