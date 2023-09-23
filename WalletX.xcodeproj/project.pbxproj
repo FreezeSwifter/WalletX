@@ -128,6 +128,7 @@
 		7A000E3C2AA8C40A00FA1817 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A000E3E2AA8C40A00FA1817 /* InfoPlist.strings */; };
 		7A000E412AA8CC3700FA1817 /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000E402AA8CC3700FA1817 /* BannerModel.swift */; };
 		7A000E432AA8CD7F00FA1817 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000E422AA8CD7F00FA1817 /* CategoryModel.swift */; };
+		7A2123232ABF67750088ACB2 /* DepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2123222ABF67750088ACB2 /* DepositViewController.swift */; };
 		7A26EE812AA9B491005BF1AF /* SettingModifyAlterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A26EE802AA9B491005BF1AF /* SettingModifyAlterView.swift */; };
 		7A26EE832AA9B4BF005BF1AF /* SettingModifyAlterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A26EE822AA9B4BF005BF1AF /* SettingModifyAlterView.xib */; };
 		7A2BE0832A8B4E3C001B2970 /* AssociatedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2BE0822A8B4E3C001B2970 /* AssociatedManager.swift */; };
@@ -442,6 +443,7 @@
 		7A000E3F2AA8C41B00FA1817 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		7A000E402AA8CC3700FA1817 /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
 		7A000E422AA8CD7F00FA1817 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		7A2123222ABF67750088ACB2 /* DepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositViewController.swift; sourceTree = "<group>"; };
 		7A26EE802AA9B491005BF1AF /* SettingModifyAlterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModifyAlterView.swift; sourceTree = "<group>"; };
 		7A26EE822AA9B4BF005BF1AF /* SettingModifyAlterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingModifyAlterView.xib; sourceTree = "<group>"; };
 		7A2BE0822A8B4E3C001B2970 /* AssociatedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociatedManager.swift; sourceTree = "<group>"; };
@@ -1716,6 +1718,7 @@
 				7A5866C02A9FACDA00925EEC /* ReceiveTokenController.swift */,
 				7AF8F2432AA057E700852F5B /* TokenTransferDetailController.swift */,
 				7AD0C10A2AA1F49E003FCBF2 /* ImportWalletController.swift */,
+				7A2123222ABF67750088ACB2 /* DepositViewController.swift */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -1978,6 +1981,7 @@
 				7AD08BC02A8A083B000B247E /* UIButtonExtension.swift in Sources */,
 				7A000E102AA84F4600FA1817 /* Random.swift in Sources */,
 				7A000DB82AA84F4500FA1817 /* ASN1Scanner.swift in Sources */,
+				7A2123232ABF67750088ACB2 /* DepositViewController.swift in Sources */,
 				7AB3775B2A862E2B005BD1CB /* FSPagerCollectionView.swift in Sources */,
 				7A000DD52AA84F4500FA1817 /* RSA+Cipher.swift in Sources */,
 				7A647F432A8C91BE00A4A56F /* MeInfoView.swift in Sources */,

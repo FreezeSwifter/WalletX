@@ -32,12 +32,13 @@ enum NetworkService {
     case deleteGuarantee(assureId: String) // 删除担保
     case getTokenLogo(token: String) // 获取币种logo
     case getWalletBalance // 获取钱包余额
-    case getTokenTecordTransfer // 获取转账记录
+    case getTokenTecordTransfer(pageNumber: Int) // 获取转账记录
     case getAssureOrderDetail(assureId: String) // 查询订单信息
     case finiedOrder(assureId: String) // 完成上押
     case assureReleaseApply(assureId: String, reason: Int, sponsorReleasedAmount: Int, partnerReleasedAmount: Int) // 申请解押
     case revokeAssureApply(assureId: String) //撤销申请
     case releaseAgree(assureId: String) // 同意解押
+    case getTXInfo(txId: String) // 获取TX信息
 
 }
 
@@ -100,6 +101,8 @@ extension NetworkService: TargetType {
             return "/api/assureOrder/release/cancel"
         case .releaseAgree:
             return "/api/assureOrder/release/agree"
+        case .getTXInfo:
+            return "/api/user/txInfo"
         }
     }
     
@@ -206,6 +209,12 @@ extension NetworkService: TargetType {
             
         case let .releaseAgree(assureId):
             return ["assureId": assureId]
+            
+        case let .getTokenTecordTransfer(pageNumber):
+            return ["pageNumber": pageNumber, "pageSize": 10]
+            
+        case let .getTXInfo(txId):
+            return ["txId": txId]
             
         default:
             return nil

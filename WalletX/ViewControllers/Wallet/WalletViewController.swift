@@ -98,6 +98,14 @@ class WalletViewController: UIViewController, HomeNavigationble {
             
         }).disposed(by: rx.disposeBag)
         
+        topOperatedView.walletButton.rx.tap.subscribe(onNext: { _ in
+            let vc: DepositViewController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.hidesBottomBarWhenPushed = true
+            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
+        
+        
         topOperatedView.topButton2.rx.tap.subscribe(onNext: { _ in
             let vc: WalletManagementController = WalletManagementController()
             vc.hidesBottomBarWhenPushed = true

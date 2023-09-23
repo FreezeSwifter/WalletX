@@ -94,14 +94,14 @@ class ImportWalletController: UIViewController, HomeNavigationble {
             } else {
                 self?.doneButton.isEnabled = false
             }
-
+            
         }).disposed(by: rx.disposeBag)
         
         doneButton.rx.tap.subscribe(onNext: {[weak self] _ in
             guard let this = self else { return }
             guard let res = this.textView.text else {
                 return
-            }            
+            }
             let success = LocaleWalletManager.shared().importWallet(mnemonic: res, walletName: self?.textField.text ?? "Wallet 1")
             if success {
                 this.navigationController?.popToRootViewController(animated: true)
@@ -122,4 +122,5 @@ class ImportWalletController: UIViewController, HomeNavigationble {
         headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
             self?.navigationController?.popViewController(animated: true)
         }).disposed(by: rx.disposeBag)
-    }}
+    }
+}

@@ -223,4 +223,7 @@
     "您已批准对方的解押申请": "You have approved this release request.",
     "您已批准对方的解押申请内容": "The refund will arrive within 5 minutes. Thank you for using Uoobal Wallet surety service!",
     "不再提醒": "Don't remind me any more",
+    "待上押担保": "Waiting Deposit Surety",
+    "钱包余额": "Wallet Balance",
+    "上押温馨提示": "The gas fee for this transfer is about 10 TRX.\nThe balance of your account is {} TRX.\nPlease make sure you have enough TRX, otherwise the transfer may fail.",
 }

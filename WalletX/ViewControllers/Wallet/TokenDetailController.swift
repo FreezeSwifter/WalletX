@@ -11,6 +11,7 @@ import JXSegmentedView
 import RxCocoa
 import RxSwift
 import NSObject_Rx
+import MJRefresh
 
 class TokenDetailController: UIViewController, HomeNavigationble {
     
@@ -28,6 +29,8 @@ class TokenDetailController: UIViewController, HomeNavigationble {
         tv.backgroundColor = .white
         return tv
     }()
+    
+    private var pageNum: Int = 1
     
     private var datasource: [TokenTecordTransferModel] = []
     
@@ -69,7 +72,36 @@ class TokenDetailController: UIViewController, HomeNavigationble {
             
         }).disposed(by: rx.disposeBag)
         
-        let req: Observable<[TokenTecordTransferModel]> = APIProvider.rx.request(.getTokenTecordTransfer).mapModelArray()
+        topOperatedView.walletButton.rx.tap.subscribe(onNext: {[weak self] _ in
+            let vc: DepositViewController = ViewLoader.Storyboard.controller(from: "Wallet")
+            self?.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
+        
+      
+        let header = MJRefreshGifHeader {[weak self] in
+            self?.pageNum = 1
+            self?.fetchData()
+        }
+        header.lastUpdatedTimeLabel?.isHidden = true
+        header.setTitle("加载中…".toMultilingualism(), for: .idle)
+        header.setTitle("加载中…".toMultilingualism(), for: .pulling)
+        tableView.mj_header = header
+        tableView.mj_header?.beginRefreshing()
+        
+        let footer = MJRefreshAutoGifFooter {[weak self] in
+            self?.pageNum += 1
+            self?.fetchData()
+        }
+        footer.setTitle("没有更多".toMultilingualism(), for: .noMoreData)
+        footer.setTitle("加载中…".toMultilingualism(), for: .idle)
+        footer.setTitle("加载中…".toMultilingualism(), for: .pulling)
+        tableView.mj_footer = footer
+        
+    }
+    
+    private func fetchData() {
+        let req: Observable<[TokenTecordTransferModel]> = APIProvider.rx.request(.getTokenTecordTransfer(pageNumber: pageNum)).mapModelArray()
         
         req.subscribe(onNext: {[weak self] list in
             self?.datasource = list
