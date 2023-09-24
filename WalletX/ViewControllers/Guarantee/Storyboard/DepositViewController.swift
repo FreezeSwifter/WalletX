@@ -12,10 +12,10 @@ import QMUIKit
 import Then
 import NSObject_Rx
 import Action
-
+import SwiftData
 
 class DepositViewController: UIViewController, HomeNavigationble {
-
+    
     @IBOutlet weak var DesLabel1: UILabel! {
         didSet {
             DesLabel1.text = "待上押担保".toMultilingualism()
@@ -28,8 +28,11 @@ class DepositViewController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var valueControl1: UIControl!
-    
+    @IBOutlet weak var valueControl1: UIControl! {
+        didSet {
+            valueControl1.addTarget(self, action: #selector(DepositViewController.controlTap), for: .touchUpInside)
+        }
+    }
     
     @IBOutlet weak var desLabel2: UILabel! {
         didSet {
@@ -39,19 +42,20 @@ class DepositViewController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var desTagLabel2: QMUILabel! {
         didSet {
-            desTagLabel2.contentEdgeInsets = UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
+            desTagLabel2.contentEdgeInsets = UIEdgeInsets(top: 2, left: 8, bottom: 2, right: 8)
             desTagLabel2.backgroundColor = UIColor(hex: "#F0A1581A").withAlphaComponent(0.1)
             desTagLabel2.applyCornerRadius(desTagLabel2.bounds.height / 2)
             desTagLabel2.text = "me_depositing".toMultilingualism()
             desTagLabel2.textColor = UIColor(hex: "#F0A158")
             desTagLabel2.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
+            desTagLabel2.font = UIFont.systemFont(ofSize: 12)
         }
     }
     
     @IBOutlet weak var desTagContainer3: UIStackView! {
         didSet {
             desTagContainer3.isLayoutMarginsRelativeArrangement = true
-            desTagContainer3.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+            desTagContainer3.layoutMargins = UIEdgeInsets(top: 2, left: 8, bottom: 2, right: 8)
             desTagContainer3.applyCornerRadius(desTagContainer3.height / 2, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
         }
     }
@@ -133,15 +137,32 @@ class DepositViewController: UIViewController, HomeNavigationble {
         }
     }
     
+    var currentItem: GuaranteeInfoModel.Meta? {
+        didSet {
+            updateData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupView()
         bind()
     }
     
+    private func updateData() {
+        guard let item = currentItem else { return }
+        valueLabel1.text = "\(item.assureId ?? ""), \(item.pushWaitAmount ?? 0.0)"
+        valeLabel2.text = item.assureId
+        valueLabel3.text = Date(timeIntervalSince1970: (item.createTime ?? 0) / 1000 ).toFormat("yyyy-MM-dd HH:mm:ss")
+        valueLabel4.text = "\(item.amount ?? 0.0)"
+    }
+    
     private func bind() {
-     
+        LocaleWalletManager.shared().walletBalance.subscribe(onNext: {[weak self] obj in
+            self?.valueLabel5Sub1.text = "\(obj?.data?.TRX ?? "--")"
+            self?.valueLabel5Sub2.text = "\(obj?.data?.USDT ?? "--")"
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {
@@ -155,5 +176,28 @@ class DepositViewController: UIViewController, HomeNavigationble {
             self?.navigationController?.popViewController(animated: true)
         }).disposed(by: rx.disposeBag)
     }
-
+    
+    @objc
+    private func controlTap() {
+        
+        let contentView = PendingPledgeListView(frame: CGRect(x: 0, y: 0, width: valueControl1.bounds.size.width, height: 400))
+        contentView.setupDidSelectedItem {[weak self] item in
+            self?.currentItem = item
+        }
+        
+        let popContainer = QMUIPopupContainerView()
+        popContainer.contentView.addSubview(contentView)
+        popContainer.automaticallyHidesWhenUserTap = true;
+        popContainer.contentViewSizeThatFitsBlock = {[weak self] _ -> CGSize in
+            guard let this = self else {
+                return .zero
+            }
+            return CGSize(width: this.valueControl1.bounds.width, height: 400)
+        }
+        popContainer.arrowSize = CGSize.zero
+        popContainer.preferLayoutDirection = QMUIPopupContainerViewLayoutDirection.below
+        popContainer.sourceView = valueControl1
+        popContainer.showWith(animated: true)
+    }
+    
 }

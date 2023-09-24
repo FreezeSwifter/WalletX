@@ -291,6 +291,9 @@
 		7AD08BF82A8A1495000B247E /* UIImage+Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BF72A8A1495000B247E /* UIImage+Tool.swift */; };
 		7AD08BFA2A8A15A9000B247E /* UIButton+Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD08BF92A8A15A9000B247E /* UIButton+Tool.swift */; };
 		7AD0C10B2AA1F49E003FCBF2 /* ImportWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD0C10A2AA1F49E003FCBF2 /* ImportWalletController.swift */; };
+		7AD2AC502AC0078300D08757 /* PendingPledgeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD2AC4F2AC0078300D08757 /* PendingPledgeListView.swift */; };
+		7AD2AC532AC0093700D08757 /* PendingPledgeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD2AC512AC0093700D08757 /* PendingPledgeListCell.swift */; };
+		7AD2AC542AC0093700D08757 /* PendingPledgeListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AD2AC522AC0093700D08757 /* PendingPledgeListCell.xib */; };
 		7AE94F312A96EB7D00ECEB1D /* StartGuaranteeConfirmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE94F302A96EB7D00ECEB1D /* StartGuaranteeConfirmController.swift */; };
 		7AF15A132A85022800C48F39 /* GuranteeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A122A85022800C48F39 /* GuranteeViewController.swift */; };
 		7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF15A142A85023300C48F39 /* MessageViewController.swift */; };
@@ -613,6 +616,9 @@
 		7AD08BF72A8A1495000B247E /* UIImage+Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Tool.swift"; sourceTree = "<group>"; };
 		7AD08BF92A8A15A9000B247E /* UIButton+Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Tool.swift"; sourceTree = "<group>"; };
 		7AD0C10A2AA1F49E003FCBF2 /* ImportWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWalletController.swift; sourceTree = "<group>"; };
+		7AD2AC4F2AC0078300D08757 /* PendingPledgeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingPledgeListView.swift; sourceTree = "<group>"; };
+		7AD2AC512AC0093700D08757 /* PendingPledgeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingPledgeListCell.swift; sourceTree = "<group>"; };
+		7AD2AC522AC0093700D08757 /* PendingPledgeListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PendingPledgeListCell.xib; sourceTree = "<group>"; };
 		7AE94F302A96EB7D00ECEB1D /* StartGuaranteeConfirmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGuaranteeConfirmController.swift; sourceTree = "<group>"; };
 		7AF15A122A85022800C48F39 /* GuranteeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuranteeViewController.swift; sourceTree = "<group>"; };
 		7AF15A142A85023300C48F39 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -880,6 +886,9 @@
 				7A831C6A2A9F76C90086B540 /* WalletManagementCell.xib */,
 				7AF8F23F2AA0548D00852F5B /* TokenDetailCell.swift */,
 				7AF8F2402AA0548D00852F5B /* TokenDetailCell.xib */,
+				7AD2AC4F2AC0078300D08757 /* PendingPledgeListView.swift */,
+				7AD2AC512AC0093700D08757 /* PendingPledgeListCell.swift */,
+				7AD2AC522AC0093700D08757 /* PendingPledgeListCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1797,6 +1806,7 @@
 				7ABF24A72A93F765008D7001 /* GuaranteeYesNoView.xib in Resources */,
 				7A831C6C2A9F76C90086B540 /* WalletManagementCell.xib in Resources */,
 				7A3B7DA52A9CDCC10036199F /* DepositingAlterView.xib in Resources */,
+				7AD2AC542AC0093700D08757 /* PendingPledgeListCell.xib in Resources */,
 				7A831C602A9F666A0086B540 /* WalletTokenCell.xib in Resources */,
 				7A831C642A9F6B1D0086B540 /* WalletSignatureCell.xib in Resources */,
 				7AFB57B32A961B06003451CB /* Guarantee.storyboard in Resources */,
@@ -1926,6 +1936,7 @@
 				7A000E0E2AA84F4600FA1817 /* OFB.swift in Sources */,
 				7AD08BC22A8A083B000B247E /* UIViewExtension.swift in Sources */,
 				7A26EE812AA9B491005BF1AF /* SettingModifyAlterView.swift in Sources */,
+				7AD2AC502AC0078300D08757 /* PendingPledgeListView.swift in Sources */,
 				7A000E152AA84F4600FA1817 /* Data Conversion.swift in Sources */,
 				7AB3776B2A87A324005BD1CB /* XibLoadble.swift in Sources */,
 				7AD08BE72A8A083B000B247E /* Reusable.swift in Sources */,
@@ -2077,6 +2088,7 @@
 				7A000DED2AA84F4600FA1817 /* SHA3.swift in Sources */,
 				7AD08BFA2A8A15A9000B247E /* UIButton+Tool.swift in Sources */,
 				7A5866BF2A9FA3CA00925EEC /* SendTokenPageOneController.swift in Sources */,
+				7AD2AC532AC0093700D08757 /* PendingPledgeListCell.swift in Sources */,
 				7AD08BEB2A8A083B000B247E /* Occupiable.swift in Sources */,
 				7A000E0D2AA84F4600FA1817 /* CTR.swift in Sources */,
 				7A000DCD2AA84F4500FA1817 /* UInt16+Extension.swift in Sources */,
