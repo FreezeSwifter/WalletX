@@ -163,6 +163,15 @@ class DepositViewController: UIViewController, HomeNavigationble {
             self?.valueLabel5Sub1.text = "\(obj?.data?.TRX ?? "--")"
             self?.valueLabel5Sub2.text = "\(obj?.data?.USDT ?? "--")"
         }).disposed(by: rx.disposeBag)
+        
+        nextButton.rx.tap.subscribe(onNext: {[weak self] in
+            
+            let vc: SelectedTokenController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.operationType = .send
+            vc.hidesBottomBarWhenPushed = true
+            self?.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {
