@@ -29,6 +29,12 @@ public extension PrimitiveSequence where Trait == SingleTrait, Element == Respon
             let dict = obj as? [String: Any]
             let objList = dict?["data"] as? [[String: Any]]
             let res = [T].deserialize(from: objList)?.compactMap { $0 }
+            let code = dict?["code"] as? Int ?? 0
+            let error = dict?["message"] as? String ?? "Error"
+            if code != 200 {
+                throw NSError.init(domain: "https://appservice.usdtsure.com", code: code, userInfo: ["errorMsg": error])
+            }
+            
             if let nonEmpty = res {
                 return .just(nonEmpty)
             } else {

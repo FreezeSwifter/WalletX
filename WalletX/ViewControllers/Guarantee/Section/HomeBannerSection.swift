@@ -16,6 +16,7 @@ extension HomeBannerSection {
         var list: [BannerModel] = []
         
         func diffIdentifier() -> NSObjectProtocol {
+            
             return self
         }
         

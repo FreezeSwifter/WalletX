@@ -61,7 +61,13 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var pasteButton: UIButton!
+    @IBOutlet weak var pasteButton: UIButton! {
+        didSet {
+            pasteButton.setTitle("粘贴".toMultilingualism(), for: .normal)
+            pasteButton.titleLabel?.minimumScaleFactor = 0.5
+            pasteButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        }
+    }
     
     @IBOutlet weak var textViewBg: UIView! {
         didSet {

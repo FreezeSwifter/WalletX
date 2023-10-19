@@ -73,6 +73,7 @@ class LanguageManager: NSObject {
             guard let languageCode = Locale.current.language.languageCode?.identifier else {
                 return
             }
+            
             if languageCode == "cn" {
                 currentCode = .cn
             } else {

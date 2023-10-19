@@ -17,7 +17,7 @@ extension StartGuaranteeController {
     
     class Parameter: HandyJSON {
         required init() {}
-        var amount: Int64?
+        var amount: String?
         var agreement: String?
         var assureType: Int?
         var hc: Double?
@@ -197,7 +197,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
         textView.delegate = self
         
         moneyTextField.rx.text.subscribe(onNext: {[weak self] text in
-            self?.parameter.amount = Int64(text ?? "0")
+            self?.parameter.amount = text
         }).disposed(by: rx.disposeBag)
         
         textView.rx.didChange.subscribe(onNext: {[weak self] in

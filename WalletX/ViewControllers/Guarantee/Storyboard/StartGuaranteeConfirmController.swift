@@ -125,9 +125,6 @@ class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
     
     private func bind() {
         
-        
-        
-        
         doneButton.rx.tap.flatMapLatest {[weak self] _ in
             guard let obj = self?.parameter, let param = obj.toJSON() else { return Observable<Any>.empty() }
             return APIProvider.rx.request(.assureOrderLaunch(parameter: param)).mapJSON().asObservable()
@@ -139,8 +136,10 @@ class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
                     if index == 1 {
                         self?.navigationController?.popToRootViewController(animated: true)
                     }
-                    
                 }).disposed(by: self.rx.disposeBag)
+                
+            } else {
+                APPHUD.flash(text: message)
             }
             
         }).disposed(by: rx.disposeBag)

@@ -234,7 +234,7 @@ final class LocaleWalletManager {
         
         let postData = try? JSONSerialization.data(withJSONObject: parameters, options: [])
         
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.shasta.trongrid.io/wallet/createaccount")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.trongrid.io/wallet/createaccount")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         request.httpMethod = "POST"

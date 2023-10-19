@@ -101,11 +101,21 @@ class TokenDetailController: UIViewController, HomeNavigationble {
     }
     
     private func fetchData() {
-        let req: Observable<[TokenTecordTransferModel]> = APIProvider.rx.request(.getTokenTecordTransfer(pageNumber: pageNum)).mapModelArray()
+        let symbolID = item?.tokenName ?? "USDT"
+        let req: Observable<[TokenTecordTransferModel]> = APIProvider.rx.request(.getTokenTecordTransfer(pageNumber: pageNum, symbolID: symbolID)).mapModelArray()
         
         req.subscribe(onNext: {[weak self] list in
             self?.datasource = list
             self?.tableView.reloadData()
+            self?.tableView.mj_header?.endRefreshing()
+            self?.tableView.mj_footer?.endRefreshing()
+            if list.count == 0 {
+                self?.tableView.mj_footer?.endRefreshingWithNoMoreData()
+            }
+        } ,onError: {[weak self] error in
+            self?.tableView.mj_header?.endRefreshing()
+            self?.tableView.mj_footer?.endRefreshingWithNoMoreData()
+            APPHUD.showError(error: error)
         }).disposed(by: rx.disposeBag)
     }
     

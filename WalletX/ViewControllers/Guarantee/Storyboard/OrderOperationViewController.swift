@@ -412,8 +412,8 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
             
             if this.bottomRightButton.titleLabel?.text == "立即申请".toMultilingualism() {
                 let reason = this.tradeCompletedButton.isSelected ? 0 : 1
-                let sponsorReleasedAmount = Int(this.textField1.text ?? "0") ?? 0
-                let partnerReleasedAmount = Int(this.textField2.text ?? "0") ?? 0
+                let sponsorReleasedAmount = this.textField1.text ?? ""
+                let partnerReleasedAmount = this.textField2.text ?? ""
                 APIProvider.rx.request(.assureReleaseApply(assureId: id, reason: reason, sponsorReleasedAmount: sponsorReleasedAmount, partnerReleasedAmount: partnerReleasedAmount)).mapJSON().subscribe(onSuccess: {[weak self] obj in
                     guard let dict = obj as? [String: Any], let this = self else { return }
                     let message = dict["message"] as? String

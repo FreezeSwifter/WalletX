@@ -53,4 +53,19 @@ final class APPHUD {
         hud?.mode = .indeterminate
         hud?.label.text = text
     }
+    
+    static func showError(error: Error?) {
+        hide()
+        guard let view = AppDelegate.topViewController()?.view else {
+            return
+        }
+        let e = error as? NSError
+        hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud?.mode = .text
+        hud?.label.text = e?.userInfo["errorMsg"] as? String
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            hud?.hide(animated: true)
+        })
+    }
+    
 }
