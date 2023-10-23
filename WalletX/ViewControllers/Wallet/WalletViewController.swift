@@ -17,7 +17,7 @@ class WalletViewController: UIViewController, HomeNavigationble {
     private let topOperatedView: WalletHeaderView = ViewLoader.Xib.view()
     
     private var titleData: [String] {
-        return  ["wallet_tokens".toMultilingualism(), "wallet_signature".toMultilingualism()]
+        return  ["wallet_tokens".toMultilingualism()]
     }
     
     private lazy var segmentedDataSource: JXSegmentedTitleDataSource = {
@@ -41,7 +41,7 @@ class WalletViewController: UIViewController, HomeNavigationble {
         return segContainerView
     }()
     
-    private lazy var childVC: [JXSegmentedListContainerViewListDelegate] = [WalletTokenViewController(), WalletSignatureViewController()]
+    private lazy var childVC: [JXSegmentedListContainerViewListDelegate] = [WalletTokenViewController()]
     
     private let noWalletView: WalletWithoutWalletView = ViewLoader.Xib.view()
     

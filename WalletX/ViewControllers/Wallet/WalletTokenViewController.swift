@@ -83,6 +83,7 @@ extension WalletTokenViewController: UITableViewDataSource {
         let item = datasource[indexPath.row]
         cell.iconImageView.image = item.iconImage
         cell.tokenLabel.text = item.tokenName
+        cell.priceLabel.text = item.companyName
         
         let token = LocaleWalletManager.shared().walletBalance.share().map { m in
             switch item {
@@ -93,8 +94,6 @@ extension WalletTokenViewController: UITableViewDataSource {
             }
         }
         token.bind(to: cell.countLabel.rx.text).disposed(by: cell.rx.disposeBag)
-        
-        cell.priceLabel.text = nil
         cell.countPriceLabel.text = nil
         return cell
     }

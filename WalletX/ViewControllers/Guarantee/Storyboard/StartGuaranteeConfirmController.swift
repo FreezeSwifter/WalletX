@@ -165,10 +165,15 @@ class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
         APIProvider.rx.request(.getSignaturesAddress(type: type)).mapJSON().subscribe(onSuccess: {[weak self] obj in
             guard let dict = obj as? [String: Any], let data = dict["data"] as? [String: Any] else { return }
             
-            let walletAddr = data["walletAddr"] as? String
+            let walletAddr = data["walletAddr"] as? String ?? ""
             if let qrCode = data["qrCode"] as? String {
                 Task {
                     let img = await ScanViewController.generateQRCode(text: qrCode, size: 172)
+                    self?.rqCodeImage.image = img
+                }
+            } else {
+                Task {
+                    let img = await ScanViewController.generateQRCode(text: walletAddr, size: 172)
                     self?.rqCodeImage.image = img
                 }
             }

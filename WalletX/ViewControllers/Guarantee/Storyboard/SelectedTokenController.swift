@@ -22,6 +22,7 @@ class SelectedTokenController: UIViewController, HomeNavigationble {
     
     var operationType: OperationType = .send
     private var datasource: [WalletToken] = []
+    private var filterDatasrouce: [WalletToken] = []
     
     @IBOutlet weak var searchBg: UIView! {
         didSet {
@@ -61,7 +62,19 @@ class SelectedTokenController: UIViewController, HomeNavigationble {
         if let tron = LocaleWalletManager.shared().TRON {
             datasource.append(tron)
         }
+        filterDatasrouce = datasource
         tableView.reloadData()
+        
+        textField.rx.text.orEmpty.changed.throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] str in
+                if str.count == 0 {
+                    self?.filterDatasrouce = self?.datasource ?? []
+                } else {
+                    let uppercased = str.uppercased()
+                    self?.filterDatasrouce = self?.datasource.filter { $0.tokenName.contains(uppercased) } ?? []
+                }
+                self?.tableView.reloadData()
+            }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {
@@ -83,7 +96,7 @@ extension SelectedTokenController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let item = datasource[indexPath.row]
+        let item = filterDatasrouce[indexPath.row]
         switch operationType {
         case .send:
             let vc: SendTokenPageOneController = ViewLoader.Storyboard.controller(from: "Wallet")
@@ -100,15 +113,16 @@ extension SelectedTokenController: UITableViewDelegate {
 extension SelectedTokenController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datasource.count
+        return filterDatasrouce.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WalletTokenCell", for: indexPath) as! WalletTokenCell
         
-        let item = datasource[indexPath.row]
+        let item = filterDatasrouce[indexPath.row]
         cell.iconImageView.image = item.iconImage
         cell.tokenLabel.text = item.tokenName
+        cell.priceLabel.text = item.companyName
         
         let token = LocaleWalletManager.shared().walletBalance.share().map { m in
             switch item {
@@ -119,8 +133,6 @@ extension SelectedTokenController: UITableViewDataSource {
             }
         }
         token.bind(to: cell.countLabel.rx.text).disposed(by: cell.rx.disposeBag)
-        
-        cell.priceLabel.text = nil
         cell.countPriceLabel.text = nil
         return cell 
     }

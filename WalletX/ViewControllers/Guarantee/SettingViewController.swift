@@ -153,12 +153,26 @@ class SettingViewController: UIViewController, HomeNavigationble {
     
     @IBAction func changeNickNameTap(_ sender: UIControl) {
         
+        func filterSpecialCharactersAndEmojis(from string: String) -> String {
+            do {
+                let regex = try NSRegularExpression(pattern: "[^a-zA-Z0-9\\s]", options: .caseInsensitive)
+                let range = NSMakeRange(0, string.count)
+                let filteredString = regex.stringByReplacingMatches(in: string, options: [], range: range, withTemplate: "")
+                return filteredString
+            } catch {
+                print("Error creating regular expression: \(error)")
+                return string
+            }
+        }
+        
         SettingModifyAlterView.show(title: "home_setting_Nickname".toMultilingualism(), placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
             
             guard let text = str, text.isNotEmpty else {
                 return Observable<Any>.empty()
             }
-            let dict: [String: Any] = ["nickName": text]
+            let filteredString = filterSpecialCharactersAndEmojis(from: text)
+            
+            let dict: [String: Any] = ["nickName": filteredString]
             return APIProvider.rx.request(.userInfoSetting(info: dict)).mapJSON().asObservable()
             
         }.subscribe(onNext: { _ in

@@ -31,7 +31,7 @@ public extension PrimitiveSequence where Trait == SingleTrait, Element == Respon
             let res = [T].deserialize(from: objList)?.compactMap { $0 }
             let code = dict?["code"] as? Int ?? 0
             let error = dict?["message"] as? String ?? "Error"
-            if code != 200 {
+            if code != 0 {
                 throw NSError.init(domain: "https://appservice.usdtsure.com", code: code, userInfo: ["errorMsg": error])
             }
             

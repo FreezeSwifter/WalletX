@@ -72,6 +72,12 @@ class MeListChildViewController: UIViewController, JXSegmentedListContainerViewL
         LocaleWalletManager.shared().walletDidChanged.observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
             self?.fetchData()
         }).disposed(by: rx.disposeBag)
+        
+        NotificationCenter.default.rx.notification(.orderDidChangeed).observe(on: MainScheduler.instance)
+            .take(until: self.rx.methodInvoked(#selector(MeListChildViewController.viewDidDisappear(_:))))
+            .subscribe(onNext: {[weak self] _ in
+                self?.fetchData()
+        }).disposed(by: rx.disposeBag)
     }
     
     @objc

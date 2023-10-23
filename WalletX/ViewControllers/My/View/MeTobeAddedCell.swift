@@ -211,6 +211,7 @@ class MeTobeAddedCell: UITableViewCell {
                 guard let this = self, let id = this.model?.assureId else { return }
                 if index == 0 {
                     APIProvider.rx.request(.cancelGuarantee(assureId: id)).mapJSON().subscribe().disposed(by: this.rx.disposeBag)
+                    NotificationCenter.default.post(name: .orderDidChangeed, object: nil)
                 }
             }).disposed(by: self.rx.disposeBag)
             
@@ -224,6 +225,7 @@ class MeTobeAddedCell: UITableViewCell {
                     
                     guard let this = self, let updateText = str, let id = this.model?.assureId else { return }
                     APIProvider.rx.request(.updateGuarantee(assureId: id, agreement: updateText)).mapJSON().subscribe().disposed(by: this.rx.disposeBag)
+                    NotificationCenter.default.post(name: .orderDidChangeed, object: nil)
                     
                 }).disposed(by: self.rx.disposeBag)
                 
