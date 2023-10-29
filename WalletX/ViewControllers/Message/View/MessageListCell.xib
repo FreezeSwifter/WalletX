@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -47,25 +48,43 @@
                         <color key="textColor" systemColor="systemGray2Color"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pje-tf-pli" customClass="QMUILabel">
+                        <rect key="frame" x="344.33333333333331" y="62.666666666666664" width="11.333333333333314" height="14.333333333333336"/>
+                        <color key="backgroundColor" systemColor="systemPinkColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="UIx-Wg-7LI" firstAttribute="top" secondItem="aw2-HR-IqN" secondAttribute="top" id="CCj-4P-Mh4"/>
                     <constraint firstItem="vk7-yQ-Ql6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VgM-dY-5pc"/>
+                    <constraint firstItem="pje-tf-pli" firstAttribute="centerX" secondItem="UIx-Wg-7LI" secondAttribute="centerX" id="X9r-jn-Bl0"/>
                     <constraint firstItem="vk7-yQ-Ql6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="YlZ-Fi-zXk"/>
                     <constraint firstItem="aw2-HR-IqN" firstAttribute="leading" secondItem="vk7-yQ-Ql6" secondAttribute="trailing" constant="15" id="ebY-iy-kSR"/>
+                    <constraint firstItem="pje-tf-pli" firstAttribute="top" secondItem="UIx-Wg-7LI" secondAttribute="bottom" constant="4" id="mWy-2G-7Y6"/>
                     <constraint firstAttribute="trailing" secondItem="UIx-Wg-7LI" secondAttribute="trailing" constant="15" id="ou6-oM-V3t"/>
                     <constraint firstItem="aw2-HR-IqN" firstAttribute="centerY" secondItem="vk7-yQ-Ql6" secondAttribute="centerY" id="yL2-6h-Bnd"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="bottomContentLabel" destination="qGk-7V-QHF" id="vPt-Sb-e6Z"/>
+                <outlet property="dotLabel" destination="pje-tf-pli" id="ubh-WI-Ami"/>
+                <outlet property="timeLabel" destination="UIx-Wg-7LI" id="MII-Mk-HRA"/>
+                <outlet property="topTitleLabel" destination="1tW-bW-H4R" id="68j-xV-cg6"/>
+            </connections>
             <point key="canvasLocation" x="127.48091603053435" y="47.183098591549296"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="message_guarantee" width="50" height="50"/>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

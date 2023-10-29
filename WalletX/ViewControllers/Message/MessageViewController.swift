@@ -10,6 +10,8 @@ import SnapKit
 import RxCocoa
 import RxSwift
 import NSObject_Rx
+import QMUIKit
+import SwiftDate
 
 class MessageViewController: UIViewController, HomeNavigationble {
     
@@ -22,6 +24,8 @@ class MessageViewController: UIViewController, HomeNavigationble {
         tv.backgroundColor = .white
         return tv
     }()
+    
+    private var datasource: [MessageListModel] = []
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -41,6 +45,7 @@ class MessageViewController: UIViewController, HomeNavigationble {
         view.backgroundColor = .white
         setupView()
         bind()
+        
     }
     
     private func bind() {
@@ -62,6 +67,13 @@ class MessageViewController: UIViewController, HomeNavigationble {
             shareVC.hidesBottomBarWhenPushed = true
             self?.navigationController?.pushViewController(shareVC, animated: true)
         }).disposed(by: rx.disposeBag)
+        
+        
+        let app = UIApplication.shared.delegate as? AppDelegate
+        app?.messageData.subscribe(onNext: { [weak self] list in
+            self?.datasource = list ?? []
+            self?.tableView.reloadData()
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {
@@ -82,6 +94,8 @@ extension MessageViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let vc: MessageDetailViewController = MessageDetailViewController()
+        let item = datasource[indexPath.row]
+        vc.titleData = item.displayType()
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -90,12 +104,22 @@ extension MessageViewController: UITableViewDelegate {
 extension MessageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return datasource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageListCell", for: indexPath) as? MessageListCell
-        
-        return cell ?? UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageListCell", for: indexPath) as! MessageListCell
+        let item = datasource[indexPath.row]
+        cell.topTitleLabel.text = item.displayType()
+        cell.bottomContentLabel.text = item.content
+        cell.timeLabel.text = Date(timeIntervalSince1970: Double((item.createTime ?? 0)) / 1000 ).toRelative(style: RelativeFormatter.twitterStyle())
+        if item.status == 0 {
+            cell.dotLabel.text = "1"
+            cell.dotLabel.isHidden = false
+        } else {
+            cell.dotLabel.text = nil
+            cell.dotLabel.isHidden = true
+        }
+        return cell
     }
 }

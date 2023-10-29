@@ -69,17 +69,7 @@ class LanguageManager: NSObject {
     }
     
     private func loadLanguageFile() {
-        if #available(iOS 16, *) {
-            guard let languageCode = Locale.current.language.languageCode?.identifier else {
-                return
-            }
-            
-            if languageCode == "cn" {
-                currentCode = .cn
-            } else {
-                currentCode = .en
-            }
-            
+            currentCode = .cn
             if let localSave = AppArchiveder.shared().mmkv?.string(forKey: ArchivedKey.language.rawValue), let v = LanguageCode(rawValue: localSave) {
                 currentCode = v
             }
@@ -91,27 +81,6 @@ class LanguageManager: NSObject {
             } else {
                 assertionFailure("多语言JSON文件出错:\(currentCode)")
             }
-        } else {
-            guard let languageCode = NSLocale.current.languageCode else {
-                return
-            }
-            if languageCode == "cn" {
-                currentCode = .cn
-            } else {
-                currentCode = .en
-            }
-            
-            if let localSave = AppArchiveder.shared().mmkv?.string(forKey: ArchivedKey.language.rawValue), let v = LanguageCode(rawValue: localSave) {
-                currentCode = v
-            }
-            if let path = Bundle.main.path(forResource: currentCode.rawValue, ofType: "json"),
-               let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path)),
-               let jsonDict = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
-                languageDict = jsonDict
-            } else {
-                assertionFailure("多语言JSON文件出错:\(currentCode)")
-            }
-        }
     }
     
     func replaceBraces(inString string: String, with replacements: String...) -> String {

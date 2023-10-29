@@ -56,6 +56,11 @@ class WalletViewController: UIViewController, HomeNavigationble {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        LocaleWalletManager.shared().fetchWalletBalanceData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()

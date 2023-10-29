@@ -19,11 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     private let tabBarViewController = QMUITabBarViewController()
+    private let messageDataSubject = BehaviorRelay<[MessageListModel]?>(value: nil)
+    
+    var messageData: Observable<[MessageListModel]?> {
+        return messageDataSubject.asObservable()
+    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         commonInit()
-        
         return true
     }
     
@@ -41,6 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func tabBarSelecte(index: Int) {
         tabBarViewController.selectedIndex = index
     }
+    
+    func cleanMessageItemRedDot() {
+        tabBarViewController.children[2].tabBarItem.qmui_shouldShowUpdatesIndicator = false
+    }
+    
 }
 
 private
@@ -101,6 +110,7 @@ extension AppDelegate {
         autoLogin()
         checkFaceId()
         fetchAPPConfig()
+        fetchMessage()
     }
     
     func createTabBarItem(title: String, image: UIImage, selecteColor: UIColor, tag: Int) -> UITabBarItem {
@@ -142,13 +152,24 @@ extension AppDelegate {
     }
     
     func fetchAPPConfig() {
-        let req: Observable<[AppSystemConfigModel]> =  APIProvider.rx.request(.systemConfigFind).mapModelArray()
-        
-        req.subscribe(onNext: {[weak self] list in
+        let req: Observable<[AppSystemConfigModel]> = APIProvider.rx.request(.systemConfigFind).mapModelArray()
+        req.subscribe(onNext: { list in
             AppArchiveder.shared().setupAppConfigs(data: list)
         }).disposed(by: rx.disposeBag)
-        
     }
+    
+    func fetchMessage() {
+        let req: Observable<[MessageListModel]> = APIProvider.rx.request(.messageList).mapModelArray()
+        req.subscribe(onNext: {[weak self] list in
+            self?.messageDataSubject.accept(list)
+            let unread = list.filter { $0.status == 0 }
+            if unread.count > 0 {
+                self?.tabBarViewController.children[2].tabBarItem.qmui_shouldShowUpdatesIndicator = true
+                self?.tabBarViewController.children[2].tabBarItem.qmui_badgeInteger = 0
+            }
+        }).disposed(by: rx.disposeBag)
+    }
+    
 }
 
 

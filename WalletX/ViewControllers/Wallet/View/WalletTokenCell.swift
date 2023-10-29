@@ -15,13 +15,29 @@ class WalletTokenCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var tokenLabel: UILabel!
+    @IBOutlet weak var tokenLabel: UILabel! {
+        didSet {
+            tokenLabel.text = "--"
+        }
+    }
     
-    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel! {
+        didSet {
+            priceLabel.text = "--"
+        }
+    }
     
-    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var countLabel: UILabel! {
+        didSet {
+            countLabel.text = "--"
+        }
+    }
     
-    @IBOutlet weak var countPriceLabel: UILabel!
+    @IBOutlet weak var countPriceLabel: UILabel! {
+        didSet {
+            countPriceLabel.text = "--"
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

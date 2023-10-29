@@ -80,6 +80,18 @@ class ServiceProviderChildController: UIViewController, JXSegmentedListContainer
             }).disposed(by: rx.disposeBag)
         }
     }
+    
+    private func openTg(id: String) {
+        let appURL = URL(string: "telegram://")!
+        if UIApplication.shared.canOpenURL(appURL) {
+            let appUrl = URL(string:  "telegram://user?id=\(id)")
+            if let url = appUrl {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        } else {
+            APPHUD.flash(text: "Not Install Telegram")
+        }
+    }
 }
 
 extension ServiceProviderChildController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -98,7 +110,6 @@ extension ServiceProviderChildController: UICollectionViewDataSource, UICollecti
         } else {
             return datasourceOther.count
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -142,4 +153,16 @@ extension ServiceProviderChildController: UICollectionViewDataSource, UICollecti
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (UIScreen.main.bounds.width / 3) - 40, height: 40)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if index == 0 {
+            let item = datasourceAll[indexPath.section].merchantList?[indexPath.item]
+            openTg(id: item?.tg ?? "")
+            
+        } else {
+            let item = datasourceOther[indexPath.item]
+            openTg(id: item.tg ?? "")
+        }
+    }
+    
 }

@@ -225,9 +225,37 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
         }).disposed(by: rx.disposeBag)
         
         nextButton.rx.tap.subscribe(onNext: { [weak self] in
-            let vc: StartGuaranteeConfirmController = ViewLoader.Storyboard.controller(from: "Guarantee")
-            vc.parameter = self?.parameter
-            self?.navigationController?.pushViewController(vc, animated: true)
+            
+            if self?.parameter.agreement?.count == 0 || self?.parameter.amount?.count == 0 {
+                APPHUD.flash(text: "请检查输入项".toMultilingualism())
+                return
+            }
+            guard let this = self, let param = this.parameter.toJSON() else { return }
+            
+            APIProvider.rx.request(.assureOrderLaunch(parameter: param)).mapJSON().asObservable()
+                .subscribe(onNext: {[weak self] obj in
+                    guard let this2 = self, let dict = obj as? [String: Any], let data = dict["data"] as? [String: Any] else { return }
+                    let assureId = data["assureId"] as? String ?? ""
+                    let amount = data["amount"] as? Double ?? 0
+                    if this2.parameter.assureType == 0 { // 普通
+                        let vc: InviteGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
+                        var m =  GuaranteeInfoModel.Meta()
+                        m.amount = amount
+                        m.assureId = assureId
+                        vc.model = m
+                        this2.navigationController?.pushViewController(vc, animated: true)
+                    
+                    } else { // 多钱手续费
+                        let vc: StartGuaranteeConfirmController = ViewLoader.Storyboard.controller(from: "Guarantee")
+                        vc.parameter = self?.parameter
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    
+                    if dict["message"] as? String != "Success" {
+                        APPHUD.flash(text: dict["message"] as? String)
+                    }
+                    
+                }).disposed(by: this.rx.disposeBag)
             
         }).disposed(by: rx.disposeBag)
         

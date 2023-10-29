@@ -226,4 +226,10 @@
     "待上押担保": "Waiting Deposit Surety",
     "钱包余额": "Wallet Balance",
     "上押温馨提示": "The gas fee for this transfer is about 10 TRX.\nThe balance of your account is {} TRX.\nPlease make sure you have enough TRX, otherwise the transfer may fail.",
+    "担保消息": "Surety Notification",
+    "钱包消息": "Wallet Notification",
+    "平台公告": "Announcement",
+    "成功": "Successfully",
+    "失败": "Failed",
+    "请检查输入项": "Please check your entries",
 }

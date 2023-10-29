@@ -125,8 +125,18 @@ class MyViewController: UIViewController, HomeNavigationble {
         
         LocaleWalletManager.shared().walletDidChanged.observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
             self?.fetchData()
+            self?.infoView.walletAddressValue.text = LocaleWalletManager.shared().TRON?.address
         }).disposed(by: rx.disposeBag)
-     
+        
+        NotificationCenter.default.rx.notification(.userInfoDidChangeed)
+            .observe(on: MainScheduler.instance)
+            .take(until: self.rx.methodInvoked(#selector(MyViewController.viewDidDisappear(_:))))
+            .subscribe(onNext: {[weak self] _ in
+                self?.fetchData()
+        }).disposed(by: rx.disposeBag)
+        
+        infoView.walletAddressValue.text = LocaleWalletManager.shared().TRON?.address
+        
     }
     
     private func fetchData() {

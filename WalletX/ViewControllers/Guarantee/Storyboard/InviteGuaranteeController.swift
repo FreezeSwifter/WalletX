@@ -122,7 +122,7 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
         }).disposed(by: rx.disposeBag)
         
         doneButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
+            self?.navigationController?.popToRootViewController(animated: true)
         }).disposed(by: rx.disposeBag)
         
         contactOtherButton.rx.tap.subscribe(onNext: {[weak self] in

@@ -39,6 +39,8 @@ enum NetworkService {
     case revokeAssureApply(assureId: String) //撤销申请
     case releaseAgree(assureId: String) // 同意解押
     case getTXInfo(txId: String) // 获取TX信息
+    case messageList // 消息列表
+    case readMessage(id: String) // 消息已读
 
 }
 
@@ -103,6 +105,10 @@ extension NetworkService: TargetType {
             return "/api/assureOrder/release/agree"
         case .getTXInfo:
             return "/api/user/txInfo"
+        case .messageList:
+            return "/api/user/message/list"
+        case .readMessage:
+            return "/api/user/message/read"
         }
     }
     
@@ -215,6 +221,9 @@ extension NetworkService: TargetType {
             
         case let .getTXInfo(txId):
             return ["txId": txId]
+            
+        case let .readMessage(id):
+            return ["id": id]
             
         default:
             return nil

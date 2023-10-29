@@ -103,15 +103,7 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
             self?.dataSource[2] = model
             self?.adapter.performUpdates(animated: true)
         }).disposed(by: rx.disposeBag)
-        
-        if !(AppArchiveder.shared().mmkv?.bool(forKey: ArchivedKey.ratePopup.rawValue) ?? false) {
-            GuaranteeFeesView.show().subscribe(onNext: { tuple in
-                if tuple.1 {
-                    AppArchiveder.shared().mmkv?.set(true, forKey: ArchivedKey.ratePopup.rawValue)
-                }
-            }).disposed(by: rx.disposeBag)
-        }
-        
+                
     }
 }
 

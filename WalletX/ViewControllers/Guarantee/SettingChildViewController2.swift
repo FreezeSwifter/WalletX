@@ -26,10 +26,33 @@ class SettingChildViewController2: UIViewController, HomeNavigationble {
         }
     }
     
+    @IBOutlet weak var tgLabel: UILabel! {
+        didSet {
+            tgLabel.textColor = ColorConfiguration.descriptionText.toColor()
+            tgLabel.text = "--"
+        }
+    }
+    
+    @IBOutlet weak var emailLabel: UILabel! {
+        didSet {
+            emailLabel.textColor = ColorConfiguration.descriptionText.toColor()
+            emailLabel.text = "--"
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
+        fetchUserInfo()
+    }
+    
+    private func fetchUserInfo() {
+        let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
+        getUserInfoReq.subscribe(onNext: {[weak self] obj in
+            self?.emailLabel.text = obj?.data?.email
+            self?.tgLabel.text = obj?.data?.tg
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {
@@ -54,8 +77,10 @@ class SettingChildViewController2: UIViewController, HomeNavigationble {
             let dict: [String: Any] = ["tg": text]
             return APIProvider.rx.request(.userInfoSetting(info: dict)).mapJSON().asObservable()
             
-        }.subscribe(onNext: { _ in
-
+        }.subscribe(onNext: {[weak self] _ in
+            APPHUD.flash(text: "成功".toMultilingualism())
+            self?.fetchUserInfo()
+            NotificationCenter.default.post(name: .userInfoDidChangeed, object: nil)
         }).disposed(by: rx.disposeBag)
     }
     
@@ -69,8 +94,10 @@ class SettingChildViewController2: UIViewController, HomeNavigationble {
             let dict: [String: Any] = ["email": text]
             return APIProvider.rx.request(.userInfoSetting(info: dict)).mapJSON().asObservable()
             
-        }.subscribe(onNext: { _ in
-
+        }.subscribe(onNext: {[weak self] _ in
+            APPHUD.flash(text: "成功".toMultilingualism())
+            self?.fetchUserInfo()
+            NotificationCenter.default.post(name: .userInfoDidChangeed, object: nil)
         }).disposed(by: rx.disposeBag)
     }
     

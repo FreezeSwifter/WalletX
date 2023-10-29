@@ -155,6 +155,7 @@
 		7A5866BD2A9F82C100925EEC /* ChangeNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5866BC2A9F82C100925EEC /* ChangeNameController.swift */; };
 		7A5866BF2A9FA3CA00925EEC /* SendTokenPageOneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5866BE2A9FA3CA00925EEC /* SendTokenPageOneController.swift */; };
 		7A5866C12A9FACDA00925EEC /* ReceiveTokenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5866C02A9FACDA00925EEC /* ReceiveTokenController.swift */; };
+		7A5EA82B2AEE768A0037E482 /* MessageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5EA82A2AEE768A0037E482 /* MessageModels.swift */; };
 		7A647F3F2A8C85A800A4A56F /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A647F3D2A8C85A800A4A56F /* MessageListCell.swift */; };
 		7A647F402A8C85A800A4A56F /* MessageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A647F3E2A8C85A800A4A56F /* MessageListCell.xib */; };
 		7A647F432A8C91BE00A4A56F /* MeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A647F422A8C91BE00A4A56F /* MeInfoView.swift */; };
@@ -473,6 +474,7 @@
 		7A5866BC2A9F82C100925EEC /* ChangeNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNameController.swift; sourceTree = "<group>"; };
 		7A5866BE2A9FA3CA00925EEC /* SendTokenPageOneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTokenPageOneController.swift; sourceTree = "<group>"; };
 		7A5866C02A9FACDA00925EEC /* ReceiveTokenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveTokenController.swift; sourceTree = "<group>"; };
+		7A5EA82A2AEE768A0037E482 /* MessageModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModels.swift; sourceTree = "<group>"; };
 		7A647F3D2A8C85A800A4A56F /* MessageListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
 		7A647F3E2A8C85A800A4A56F /* MessageListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageListCell.xib; sourceTree = "<group>"; };
 		7A647F422A8C91BE00A4A56F /* MeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeInfoView.swift; sourceTree = "<group>"; };
@@ -867,6 +869,7 @@
 				7A000E402AA8CC3700FA1817 /* BannerModel.swift */,
 				7A000E422AA8CD7F00FA1817 /* CategoryModel.swift */,
 				7AB6C1732AAF0AA00078A9F9 /* GuaranteeInfoModel.swift */,
+				7A5EA82A2AEE768A0037E482 /* MessageModels.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1957,6 +1960,7 @@
 				7AB377582A862E2B005BD1CB /* FSPageViewLayout.swift in Sources */,
 				7A000DE62AA84F4600FA1817 /* BatchedCollection.swift in Sources */,
 				7A000E412AA8CC3700FA1817 /* BannerModel.swift in Sources */,
+				7A5EA82B2AEE768A0037E482 /* MessageModels.swift in Sources */,
 				7AD08BEE2A8A0AC3000B247E /* HomeQuickAccessSecion.swift in Sources */,
 				7AD08BCF2A8A083B000B247E /* NSRangeExtension.swift in Sources */,
 				7AB6C1742AAF0AA00078A9F9 /* GuaranteeInfoModel.swift in Sources */,
@@ -2332,10 +2336,16 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalletX/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "优宝钱包";
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要使用相机扫描二维码";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "为了您的钱包安全, 需要是FaceID";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "需要使用麦克风, 扫描二维码";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "需要访问相册以保存二维码";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "需要使用相册, 识别二维码";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2345,7 +2355,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.j.creator.WalletX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AdHocTesting;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AdHocTesting-1";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "WalletX/APPConfiguration/WalletX-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2361,6 +2371,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2369,10 +2380,16 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalletX/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "优宝钱包";
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要使用相机扫描二维码";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "为了您的钱包安全, 需要是FaceID";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "需要使用麦克风, 扫描二维码";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "需要访问相册以保存二维码";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "需要使用相册, 识别二维码";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2382,7 +2399,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.j.creator.WalletX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AdHocTesting;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AdHocTesting-1";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "WalletX/APPConfiguration/WalletX-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

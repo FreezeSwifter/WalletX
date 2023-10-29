@@ -125,22 +125,12 @@ class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
     
     private func bind() {
         
-        doneButton.rx.tap.flatMapLatest {[weak self] _ in
-            guard let obj = self?.parameter, let param = obj.toJSON() else { return Observable<Any>.empty() }
-            return APIProvider.rx.request(.assureOrderLaunch(parameter: param)).mapJSON().asObservable()
-        }.subscribe(onNext: { obj in
-            guard let dict = obj as? [String: Any], let message = dict["message"] as? String else { return }
-            
-            if message == "Success" {
-                GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_yes_no"), title: "发起担保确认转账标题".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "发起担保确认转账内容".toMultilingualism(), leftButton: "未完成".toMultilingualism(), rightButton: "已完成".toMultilingualism()).subscribe(onNext: {[weak self] index in
-                    if index == 1 {
-                        self?.navigationController?.popToRootViewController(animated: true)
-                    }
-                }).disposed(by: self.rx.disposeBag)
-                
-            } else {
-                APPHUD.flash(text: message)
-            }
+        doneButton.rx.tap.subscribe(onNext: { _ in
+            GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_yes_no"), title: "发起担保确认转账标题".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "发起担保确认转账内容".toMultilingualism(), leftButton: "未完成".toMultilingualism(), rightButton: "已完成".toMultilingualism()).subscribe(onNext: {[weak self] index in
+                if index == 1 {
+                    self?.navigationController?.popToRootViewController(animated: true)
+                }
+            }).disposed(by: self.rx.disposeBag)
             
         }).disposed(by: rx.disposeBag)
         

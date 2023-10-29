@@ -101,8 +101,26 @@ class ServiceProviderCell: UICollectionViewCell {
             btn.titleLabel?.minimumScaleFactor = 0.5
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
             btn.applyCornerRadius(7)
-            btn.tag = index
+            btn.tag = index + 1
+            btn.addTarget(self, action: #selector(ServiceProviderCell.openTg(sender:)), for: .touchUpInside)
             layoutView.addSubview(btn)
+            
+        }
+    }
+    
+    @objc
+    private func openTg(sender: QMUIButton) {
+        let id = datasource[sender.tag - 1].tg ?? ""
+        let appURL = URL(string: "telegram://")!
+        if UIApplication.shared.canOpenURL(appURL) {
+            let appUrl = URL(string:  "telegram://user?id=\(id)")
+            if let url = appUrl {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                APPHUD.flash(text: "Error")
+            }
+        } else {
+            APPHUD.flash(text: "Not Install Telegram")
         }
     }
     

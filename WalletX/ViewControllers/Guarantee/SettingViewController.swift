@@ -92,6 +92,7 @@ class SettingViewController: UIViewController, HomeNavigationble {
         
         setupView()
         bind()
+        fetchUserInfo()
     }
     
     private func bind() {
@@ -118,6 +119,13 @@ class SettingViewController: UIViewController, HomeNavigationble {
         }).disposed(by: rx.disposeBag)
         
         topPadding.constant = headerView!.height + UIApplication.shared.statusBarFrame.size.height
+    }
+    
+    private func fetchUserInfo() {
+        let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
+        getUserInfoReq.subscribe(onNext: {[weak self] obj in
+            self?.nicknameValueLabel.text = obj?.data?.nickName
+        }).disposed(by: rx.disposeBag)
     }
     
     @IBAction func switchTap(_ sender: UISwitch) {
@@ -175,8 +183,10 @@ class SettingViewController: UIViewController, HomeNavigationble {
             let dict: [String: Any] = ["nickName": filteredString]
             return APIProvider.rx.request(.userInfoSetting(info: dict)).mapJSON().asObservable()
             
-        }.subscribe(onNext: { _ in
-
+        }.subscribe(onNext: {[weak self] _ in
+            APPHUD.flash(text: "成功".toMultilingualism())
+            self?.fetchUserInfo()
+            NotificationCenter.default.post(name: .userInfoDidChangeed, object: nil)
         }).disposed(by: rx.disposeBag)
         
     }

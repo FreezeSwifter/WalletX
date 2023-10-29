@@ -79,7 +79,8 @@ final class LocaleWalletManager {
         USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-            self.fetchData()
+            self.fetchUserData()
+            self.fetchWalletBalanceData()
         })
         
         if tronWeb.isGenerateTronWebInstanceSuccess != true {
@@ -152,7 +153,8 @@ final class LocaleWalletManager {
         let currentModel = list[index]
         currentWallet = HDWallet(mnemonic: currentModel.mnemoic, passphrase: "")
         walletDidChangedSubject.onNext(())
-        fetchData()
+        fetchUserData()
+        fetchWalletBalanceData()
     }
     
     func deleteWalletModel(by model: WalletModel) {
@@ -198,21 +200,21 @@ final class LocaleWalletManager {
         }
     }
     
-    // 获取账户余额,和用户数据
-    private func fetchData() {
-        let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
-        
-        getUserInfoReq.subscribe(onNext: {[weak self] obj in
-            self?.userInfo = obj
-        }).disposed(by: disposeBag)
-        
+    // 获取账户余额
+    func fetchWalletBalanceData() {
         let getWalletBalance: Observable<TokenModel?> = APIProvider.rx.request(.getWalletBalance).mapModel()
-        
         getWalletBalance.subscribe(onNext: {[weak self] obj in
             self?.walletBalanceModel = obj
             self?.walletBalanceSubject.onNext(obj)
         }).disposed(by: disposeBag)
-        
+    }
+    
+    // 获取用户数据
+    func fetchUserData() {
+        let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
+        getUserInfoReq.subscribe(onNext: {[weak self] obj in
+            self?.userInfo = obj
+        }).disposed(by: disposeBag)
     }
     
     // 激活账户
