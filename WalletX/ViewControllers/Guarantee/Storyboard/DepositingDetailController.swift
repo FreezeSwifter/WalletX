@@ -13,9 +13,13 @@ import Then
 import NSObject_Rx
 
 
-class DepositingDetailController: UIViewController, HomeNavigationble {
+class DepositingDetailController: UIViewController {
 
-    var model: GuaranteeInfoModel.Meta?
+    var model: GuaranteeInfoModel.Meta? {
+        didSet {
+            updateVlaue()
+        }
+    }
     
     @IBOutlet weak var desLabel1: UILabel! {
         didSet {
@@ -148,6 +152,8 @@ class DepositingDetailController: UIViewController, HomeNavigationble {
     @IBOutlet weak var addressCopyButton: UIButton! {
         didSet {
             addressCopyButton.setTitle("share_Copy".toMultilingualism(), for: .normal)
+            addressCopyButton.titleLabel?.adjustsFontSizeToFitWidth = true
+            addressCopyButton.titleLabel?.minimumScaleFactor = 0.5
         }
     }
     
@@ -232,7 +238,8 @@ class DepositingDetailController: UIViewController, HomeNavigationble {
         bind()
     }
     
-    private func bind() {
+    private func updateVlaue() {
+        view.layoutIfNeeded()
         valueLabel1.text = model?.assureId ?? "--"
         valueLabel2.text = Date(timeIntervalSince1970: (model?.createTime ?? 0) / 1000 ).toFormat("yyyy-MM-dd HH:mm:ss")
         let amount = NSMutableAttributedString(string: "\(model?.amount ?? 0) USDT")
@@ -274,7 +281,15 @@ class DepositingDetailController: UIViewController, HomeNavigationble {
                 qrImageView.image = img
             }
         }
+    }
+    
+    private func bind() {
         
+        let req: Observable<GuaranteeInfoModel?> = APIProvider.rx.request(.getAssureOrderDetail(assureId: model?.assureId ?? "")).mapModel()
+        req.subscribe(onNext: {[weak self] obj in
+            self?.model = obj?.data
+        }).disposed(by: rx.disposeBag)
+     
         shareButton.rx.tap.subscribe(onNext: {[weak self] in
             UIPasteboard.general.string = self?.addrtessField.text
         }).disposed(by: rx.disposeBag)
@@ -294,8 +309,15 @@ class DepositingDetailController: UIViewController, HomeNavigationble {
                 if index == 1 {
                     guard let id = self?.model?.assureId, let this = self else { return }
                     APIProvider.rx.request(.finiedOrder(assureId: id)).mapJSON().subscribe().disposed(by: this.rx.disposeBag)
+                    this.navigationController?.popViewController(animated: true)
                 }
             }).disposed(by: self.rx.disposeBag)
+            
+        }).disposed(by: rx.disposeBag)
+        
+        bottomLeftButton.rx.tap.subscribe(onNext: {[weak self] _ in
+            
+            
             
         }).disposed(by: rx.disposeBag)
     }
@@ -303,13 +325,7 @@ class DepositingDetailController: UIViewController, HomeNavigationble {
     private func setupView() {
         view.layoutIfNeeded()
         view.backgroundColor = .white
-        setupNavigationbar()
-        setupChildVCStyle()
-        headerView?.titleLabel.text = "上传押金".toMultilingualism()
-        headerView?.backgroundColor = .white
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
+        title = "上传押金".toMultilingualism()
     }
     
     @objc

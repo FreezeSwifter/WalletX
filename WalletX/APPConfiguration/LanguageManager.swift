@@ -81,6 +81,7 @@ class LanguageManager: NSObject {
             } else {
                 assertionFailure("多语言JSON文件出错:\(currentCode)")
             }
+
     }
     
     func replaceBraces(inString string: String, with replacements: String...) -> String {

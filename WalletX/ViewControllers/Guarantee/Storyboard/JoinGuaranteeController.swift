@@ -68,6 +68,8 @@ class JoinGuaranteeController: UIViewController, HomeNavigationble {
         }
     }
     
+    private var isRecognized = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,16 +81,20 @@ class JoinGuaranteeController: UIViewController, HomeNavigationble {
         scanButton.rx.tap.subscribe(onNext: {[weak self] in
             let scanVC: ScanViewController = ViewLoader.Xib.controller()
             scanVC.scanCompletion {[weak self] text in
-                self?.checkID(text: text)
+                guard let this = self else { return }
+                defer {
+                    this.isRecognized = true
+                }
+                if !this.isRecognized {
+                    this.checkID(text: text)
+                }
             }
             self?.navigationController?.pushViewController(scanVC, animated: true)
         }).disposed(by: rx.disposeBag)
         
-        
         queryButton.rx.tap.subscribe {[weak self] _ in
             self?.checkID(text: self?.idTextField.text)
         }.disposed(by: rx.disposeBag)
-           
     }
     
     private func setupView() {

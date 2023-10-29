@@ -162,16 +162,24 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
             guard let dict = obj as? [String: Any], let message = dict["message"] as? String, let this = self else { return }
             
             if message == "Success" {
+                let notiTitle = LanguageManager.shared().replaceBraces(inString: "成功加入担保弹窗标题".toMultilingualism(), with: self?.valueTextField1.text ?? "")
                 
-                GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: "成功加入担保弹窗标题".toMultilingualism(), titleIcon: nil, content: "成功加入担保弹窗内容".toMultilingualism(), leftButton: "提醒对方上押".toMultilingualism(), rightButton: "我来上押".toMultilingualism()).subscribe(onNext: {[weak self] index in
+                GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: notiTitle, titleIcon: nil, content: "成功加入担保弹窗内容".toMultilingualism(), leftButton: "提醒对方上押".toMultilingualism(), rightButton: "我来上押".toMultilingualism()).subscribe(onNext: {[weak self] index in
                
                     if index == 1 {
-                        self?.navigationController?.popToRootViewController(animated: true)
+                        self?.navigationController?.popToRootViewController(animated: false)
+                        let vc: DepositingDetailController = ViewLoader.Storyboard.controller(from: "Me")
+                        vc.hidesBottomBarWhenPushed = true
+                        var m = GuaranteeInfoModel.Meta()
+                        m.assureId = self?.model?.data?.assureId
+                        vc.model = m
+                        UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
                         
                     } else if index == 0 {
-                        let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
-                        vc.partnerUser = self?.model?.data?.partnerUser
-                        self?.navigationController?.pushViewController(vc, animated: true)
+                        //TPDO
+//                        let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+//                        vc.partnerUser = self?.model?.data?.partnerUser
+//                        self?.navigationController?.pushViewController(vc, animated: true)
                     }
                 }).disposed(by: this.rx.disposeBag)
             } else {

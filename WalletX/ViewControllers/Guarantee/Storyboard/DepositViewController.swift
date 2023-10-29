@@ -188,13 +188,13 @@ class DepositViewController: UIViewController, HomeNavigationble {
     
     @objc
     private func controlTap() {
-        
+        let popContainer = QMUIPopupContainerView()
         let contentView = PendingPledgeListView(frame: CGRect(x: 0, y: 0, width: valueControl1.bounds.size.width, height: 400))
         contentView.setupDidSelectedItem {[weak self] item in
             self?.currentItem = item
+            popContainer.hideWith(animated: true)
         }
         
-        let popContainer = QMUIPopupContainerView()
         popContainer.contentView.addSubview(contentView)
         popContainer.automaticallyHidesWhenUserTap = true;
         popContainer.contentViewSizeThatFitsBlock = {[weak self] _ -> CGSize in

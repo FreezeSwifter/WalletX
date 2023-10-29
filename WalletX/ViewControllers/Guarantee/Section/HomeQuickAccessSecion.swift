@@ -59,7 +59,8 @@ final class HomeQuickAccessSecion: ListSectionController {
         cell.guranteeValueLabel.text = "\(data?.assureNum ?? 0)"
         cell.marginValueLabel.text = "\(data?.assureAmount ?? 0)"
         
-        cell.joinBgView.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] in
+        cell.joinBgView.rx.controlEvent(.touchUpInside).take(until: cell.rx.sentMessage(#selector(HomeQuickAccessCell.prepareForReuse)))
+            .subscribe(onNext: {[weak self] in
             
             if !LocaleWalletManager.shared().hasWallet {
                 self?.checkHasWalletPopAlter()
@@ -72,7 +73,9 @@ final class HomeQuickAccessSecion: ListSectionController {
             
         }).disposed(by: cell.rx.disposeBag)
         
-        cell.sendBgView.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] in
+        cell.sendBgView.rx.controlEvent(.touchUpInside)
+            .take(until: cell.rx.sentMessage(#selector(HomeQuickAccessCell.prepareForReuse)))
+            .subscribe(onNext: {[weak self] in
             
             if !(AppArchiveder.shared().mmkv?.bool(forKey: ArchivedKey.ratePopup.rawValue) ?? false) {
                 GuaranteeFeesView.show().subscribe(onNext: { tuple in
