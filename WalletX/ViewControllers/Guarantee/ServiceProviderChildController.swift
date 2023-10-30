@@ -84,7 +84,7 @@ class ServiceProviderChildController: UIViewController, JXSegmentedListContainer
     private func openTg(id: String) {
         let appURL = URL(string: "telegram://")!
         if UIApplication.shared.canOpenURL(appURL) {
-            let appUrl = URL(string:  "telegram://user?id=\(id)")
+            let appUrl = URL(string: "tg://resolve?domain=\(id)")
             if let url = appUrl {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }

@@ -113,7 +113,7 @@ class ServiceProviderCell: UICollectionViewCell {
         let id = datasource[sender.tag - 1].tg ?? ""
         let appURL = URL(string: "telegram://")!
         if UIApplication.shared.canOpenURL(appURL) {
-            let appUrl = URL(string:  "telegram://user?id=\(id)")
+            let appUrl = URL(string: "tg://resolve?domain=\(id)")
             if let url = appUrl {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {
