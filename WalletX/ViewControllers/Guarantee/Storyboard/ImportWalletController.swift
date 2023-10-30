@@ -31,6 +31,7 @@ class ImportWalletController: UIViewController, HomeNavigationble {
     @IBOutlet weak var textField: UITextField! {
         didSet {
             textField.placeholder = "钱包名称".toMultilingualism()
+            textField.keyboardType = .default
         }
     }
     

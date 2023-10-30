@@ -139,6 +139,13 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         valueTextField2.text = model?.data?.assureTypeToString()
         valueTextField3.text = "\(model?.data?.amount ?? 0)"
         textView.text = model?.data?.agreement
+        
+        contactButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+            vc.walletId = self?.model?.data?.sponsorUser
+            self?.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
     }
 
     private func setupView() {

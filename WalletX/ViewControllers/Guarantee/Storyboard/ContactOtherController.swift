@@ -16,7 +16,20 @@ class ContactOtherController: UIViewController, HomeNavigationble {
 
     var partnerUser: String?
     
-    private(set) var userModel: UserInfoModel?
+    // 被邀请人钱包id
+    var walletId: String? {
+        didSet {
+            if let id = walletId {
+                fetchData(walletId: id)
+            }
+        }
+    }
+    
+    private(set) var userModel: UserInfoModel? {
+        didSet {
+            updateValue()
+        }
+    }
     
     @IBOutlet weak var telegramLabel: UILabel! {
         didSet {
@@ -85,6 +98,7 @@ class ContactOtherController: UIViewController, HomeNavigationble {
             gmailButton.backgroundColor = ColorConfiguration.primary.toColor()
             gmailButton.setTitleColor(ColorConfiguration.wihteText.toColor(), for: .normal)
             gmailButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 5)
+            gmailButton.isHidden = true
         }
     }
     
@@ -95,6 +109,7 @@ class ContactOtherController: UIViewController, HomeNavigationble {
             qqButton.backgroundColor = ColorConfiguration.primary.toColor()
             qqButton.setTitleColor(ColorConfiguration.wihteText.toColor(), for: .normal)
             qqButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 5)
+            qqButton.isHidden = true
         }
     }
     
@@ -124,13 +139,41 @@ class ContactOtherController: UIViewController, HomeNavigationble {
         bind()
     }
     
+    private func updateValue() {
+        telegramTextField.text = userModel?.data?.tg
+        emailTextField.text = userModel?.data?.email
+    }
+    
     private func bind() {
-        if let walletId = partnerUser {
-            let req: Observable<UserInfoModel?> = APIProvider.rx.request(.queryContactInfo(walletId: walletId)).mapModel()
-            req.subscribe(onNext: {[weak self] info in
-                self?.userModel = info
-            }).disposed(by: rx.disposeBag)
-        }        
+        if let id = partnerUser {
+            fetchData(walletId: id)
+        }
+        
+        tContactButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            self?.openTg()
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    private func openTg() {
+        guard let id = userModel?.data?.tg else { return }
+        let appURL = URL(string: "telegram://")!
+        if UIApplication.shared.canOpenURL(appURL) {
+            let appUrl = URL(string: "tg://resolve?domain=\(id)")
+            if let url = appUrl {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                APPHUD.flash(text: "Error")
+            }
+        } else {
+            APPHUD.flash(text: "Not Install Telegram")
+        }
+    }
+    
+    private func fetchData(walletId: String) {
+        let req: Observable<UserInfoModel?> = APIProvider.rx.request(.queryContactInfo(walletId: walletId)).mapModel()
+        req.subscribe(onNext: {[weak self] info in
+            self?.userModel = info
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {

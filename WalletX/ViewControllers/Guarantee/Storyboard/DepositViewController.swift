@@ -63,6 +63,9 @@ class DepositViewController: UIViewController, HomeNavigationble {
     @IBOutlet weak var desTagLabel3: UILabel! {
         didSet {
             desTagLabel3.text = "协议".toMultilingualism()
+            desTagLabel3.isUserInteractionEnabled = true
+            let ges = UITapGestureRecognizer(target: self, action: #selector(DepositViewController.protocolTap))
+            desTagLabel3.addGestureRecognizer(ges)
         }
     }
     
@@ -173,6 +176,13 @@ class DepositViewController: UIViewController, HomeNavigationble {
             self?.navigationController?.pushViewController(vc, animated: true)
             
         }).disposed(by: rx.disposeBag)
+    }
+    
+    @objc
+    private func protocolTap() {
+        NotiAlterView.show(title: "协议".toMultilingualism(), content: currentItem?.agreement, leftButtonTitle: nil, rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { _ in
+            
+        }).disposed(by: self.rx.disposeBag)
     }
     
     private func setupView() {

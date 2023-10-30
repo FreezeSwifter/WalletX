@@ -39,6 +39,9 @@ extension HomeNavigationble where Self: UIViewController {
         headerView?.stackView.removeArrangedSubview(headerView!.linkButton)
         headerView?.linkButton.removeFromSuperview()
         headerView?.backgroundColor = .clear
+        
+        headerView?.stackView.removeArrangedSubview(headerView!.scanButton)
+        headerView?.scanButton.removeFromSuperview()
     }
     
     func setupChildVCStyle() {

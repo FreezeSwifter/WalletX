@@ -31,15 +31,6 @@ class ShareViewController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var shareButton: UIButton! {
-        didSet {
-            shareButton.setTitleColor(ColorConfiguration.primary.toColor(), for: .normal)
-            shareButton.setTitle("share_Share".toMultilingualism(), for: .normal)
-            shareButton.layer.borderWidth = 1
-            shareButton.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
-        }
-    }
-    
     @IBOutlet weak var linkDesLabel: UILabel! {
         didSet {
             linkDesLabel.textColor = ColorConfiguration.blackText.toColor()
@@ -87,6 +78,12 @@ class ShareViewController: UIViewController, HomeNavigationble {
             UIPasteboard.general.string = self?.linkLabel.text
             APPHUD.flash(text: "copy successful".toMultilingualism())
         }).disposed(by: rx.disposeBag)
+        
+        downloadButton.rx.tap.subscribe(onNext: {[weak self] _ in
+            
+            self?.captureScreenshot()
+            
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {
@@ -100,19 +97,32 @@ class ShareViewController: UIViewController, HomeNavigationble {
             self?.navigationController?.popViewController(animated: true)
         }).disposed(by: rx.disposeBag)
         
-        shareButton.snp.remakeConstraints { make in
-            make.width.equalTo(shareButton.bounds.size.width + 32)
-            make.height.equalTo(40)
-        }
-        shareButton.layer.cornerRadius = shareButton.height / 2
-        shareButton.centerTextAndImage(spacing: 8)
-        
         downloadButton.snp.remakeConstraints { make in
             make.width.equalTo(downloadButton.bounds.size.width + 32)
             make.height.equalTo(40)
         }
-        downloadButton.layer.cornerRadius = shareButton.height / 2
+        downloadButton.layer.cornerRadius = downloadButton.height / 2
         downloadButton.centerTextAndImage(spacing: 8)
+    }
+    
+    private func captureScreenshot() {
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0.0)
+        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        guard let screenshotImage = UIGraphicsGetImageFromCurrentImageContext() else {
+            return
+        }
+        UIGraphicsEndImageContext()
+
+        // 保存截图到相册
+        UIImageWriteToSavedPhotosAlbum(screenshotImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            print("保存到相册出错: \(error.localizedDescription)")
+        } else {
+            print("成功保存到相册")
+        }
     }
     
     @objc

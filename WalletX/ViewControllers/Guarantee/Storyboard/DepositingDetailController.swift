@@ -179,12 +179,6 @@ class DepositingDetailController: UIViewController {
         }
     }
     
-    @IBOutlet weak var shareButton: UIButton! {
-        didSet {
-            shareButton.setTitle("share_Share".toMultilingualism(), for: .normal)
-        }
-    }
-    
     @IBOutlet weak var bottomLeftButton: UIButton! {
         didSet {
             bottomLeftButton.setTitle("站内钱包导入".toMultilingualism(), for: .normal)
@@ -309,10 +303,6 @@ class DepositingDetailController: UIViewController {
             self?.model = obj?.data
         }).disposed(by: rx.disposeBag)
      
-        shareButton.rx.tap.subscribe(onNext: {[weak self] in
-            UIPasteboard.general.string = self?.addrtessField.text
-        }).disposed(by: rx.disposeBag)
-        
         explainButton.rx.tap.subscribe(onNext: {[unowned self] _ in
             
             NotiAlterView.show(title: "什么是2-3钱包".toMultilingualism(), content: "什么是2-3钱包内容".toMultilingualism(), leftButtonTitle: "联系客服".toMultilingualism(), rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { _ in
@@ -340,6 +330,30 @@ class DepositingDetailController: UIViewController {
             self?.navigationController?.pushViewController(vc, animated: true)
             
         }).disposed(by: rx.disposeBag)
+        
+        downloadButton.rx.tap.subscribe(onNext: {[weak self] _ in
+            self?.captureScreenshot()
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    private func captureScreenshot() {
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0.0)
+        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        guard let screenshotImage = UIGraphicsGetImageFromCurrentImageContext() else {
+            return
+        }
+        UIGraphicsEndImageContext()
+
+        // 保存截图到相册
+        UIImageWriteToSavedPhotosAlbum(screenshotImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            print("保存到相册出错: \(error.localizedDescription)")
+        } else {
+            print("成功保存到相册")
+        }
     }
     
     private func setupView() {

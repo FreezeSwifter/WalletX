@@ -509,7 +509,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="bL4-T5-R2F">
-                                                                <rect key="frame" x="118" y="197.66666666666663" width="125" height="30"/>
+                                                                <rect key="frame" x="160" y="197.66666666666663" width="41" height="30"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1i-OE-5Pt">
                                                                         <rect key="frame" x="0.0" y="0.0" width="41" height="30"/>
@@ -519,17 +519,6 @@
                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         <state key="normal" title="下载" image="share_download">
-                                                                            <color key="titleColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        </state>
-                                                                    </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76b-cF-3iU">
-                                                                        <rect key="frame" x="86" y="0.0" width="39" height="30"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="30" id="2Vf-MX-3yX"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                        <state key="normal" title="分享" image="share_share">
                                                                             <color key="titleColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
                                                                     </button>
@@ -628,7 +617,6 @@
                         <outlet property="qrCodeDesLabel" destination="6ez-u8-Xg9" id="W25-ga-SLY"/>
                         <outlet property="rqCodeDesContentLabel" destination="bNT-1K-JlB" id="9Cj-my-D79"/>
                         <outlet property="rqCodeImage" destination="iFj-EP-Lr0" id="d1l-s7-WvQ"/>
-                        <outlet property="shareButton" destination="76b-cF-3iU" id="Hn4-hW-7Uv"/>
                         <outlet property="topNotiBg" destination="Y38-UZ-kIQ" id="vQr-rk-WCr"/>
                         <outlet property="topNotiLabel" destination="IaA-Ly-o3a" id="1QB-Mx-2bq"/>
                         <outlet property="topPaddingOffset" destination="Aow-NX-DwF" id="umm-ac-Bv5"/>
@@ -794,7 +782,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="uWt-zt-7nw">
-                                                                <rect key="frame" x="118" y="172" width="125" height="30"/>
+                                                                <rect key="frame" x="160" y="172" width="41" height="30"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yp6-wj-mqd">
                                                                         <rect key="frame" x="0.0" y="0.0" width="41" height="30"/>
@@ -804,17 +792,6 @@
                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         <state key="normal" title="下载" image="share_download">
-                                                                            <color key="titleColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        </state>
-                                                                    </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05f-WO-ePU">
-                                                                        <rect key="frame" x="86" y="0.0" width="39" height="30"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="30" id="JTZ-Zo-slU"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                        <state key="normal" title="分享" image="share_share">
                                                                             <color key="titleColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
                                                                     </button>
@@ -923,7 +900,6 @@
                         <outlet property="notiLabel" destination="YFz-NN-GIY" id="WOJ-Ag-hMS"/>
                         <outlet property="qrImageView" destination="YAp-F1-U7H" id="51o-wf-LnZ"/>
                         <outlet property="rqDesLabel" destination="PLI-ls-isu" id="OaA-OH-S2g"/>
-                        <outlet property="shareButton" destination="05f-WO-ePU" id="byS-I9-zvn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="duf-EA-mZe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1372,7 +1348,6 @@
         <image name="guarantee_rmb" width="13.666666984558105" height="13.666666984558105"/>
         <image name="guarantee_waring" width="14.333333015441895" height="14"/>
         <image name="share_download" width="14" height="14"/>
-        <image name="share_share" width="12" height="12"/>
         <image name="wallet_noti" width="17.333333969116211" height="16.666666030883789"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

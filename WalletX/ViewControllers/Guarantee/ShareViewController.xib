@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,6 @@
                 <outlet property="linkLabel" destination="aRC-w7-teS" id="MlT-9A-CIu"/>
                 <outlet property="logoImageView" destination="GZc-UX-Nej" id="KRv-VG-ram"/>
                 <outlet property="qrCodeImageView" destination="fj4-kD-gXd" id="Gu4-jA-wYY"/>
-                <outlet property="shareButton" destination="8IB-Ka-9Gc" id="rc7-vH-aTM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -40,24 +39,13 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4WX-VZ-Mzp">
-                            <rect key="frame" x="69" y="222" width="41" height="30"/>
+                            <rect key="frame" x="160" y="222" width="41" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="Way-Yi-ah6"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" title="下载" image="share_download">
-                                <color key="titleColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8IB-Ka-9Gc">
-                            <rect key="frame" x="253" y="222" width="39" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="91N-3j-IFS"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="分享" image="share_share">
                                 <color key="titleColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
@@ -96,17 +84,15 @@
                         <constraint firstItem="FNH-Ue-wdz" firstAttribute="top" secondItem="4WX-VZ-Mzp" secondAttribute="bottom" constant="20" id="9cG-yj-Yo5"/>
                         <constraint firstItem="fj4-kD-gXd" firstAttribute="centerX" secondItem="wkP-3p-8M0" secondAttribute="centerX" id="DJ2-Tl-c2G"/>
                         <constraint firstAttribute="trailing" secondItem="txN-JO-gZT" secondAttribute="trailing" constant="15" id="GdU-Y0-HEz"/>
-                        <constraint firstItem="8IB-Ka-9Gc" firstAttribute="top" secondItem="fj4-kD-gXd" secondAttribute="bottom" constant="15" id="SUr-MC-TvT"/>
                         <constraint firstItem="txN-JO-gZT" firstAttribute="leading" secondItem="wkP-3p-8M0" secondAttribute="leading" constant="15" id="YPH-YW-k5t"/>
                         <constraint firstItem="aRC-w7-teS" firstAttribute="centerY" secondItem="FNH-Ue-wdz" secondAttribute="centerY" id="ZBw-Qh-H28"/>
                         <constraint firstAttribute="trailing" secondItem="qHj-YY-aCK" secondAttribute="trailing" constant="20" id="btr-e7-Yzy"/>
                         <constraint firstItem="fj4-kD-gXd" firstAttribute="top" secondItem="wkP-3p-8M0" secondAttribute="top" constant="25" id="hmk-Q5-0ZN"/>
                         <constraint firstItem="txN-JO-gZT" firstAttribute="top" secondItem="FNH-Ue-wdz" secondAttribute="bottom" constant="30" id="jSb-lY-RoK"/>
                         <constraint firstItem="aRC-w7-teS" firstAttribute="leading" secondItem="FNH-Ue-wdz" secondAttribute="trailing" constant="30" id="jTR-2S-SMu"/>
-                        <constraint firstItem="4WX-VZ-Mzp" firstAttribute="leading" secondItem="wkP-3p-8M0" secondAttribute="leading" constant="69" id="mHA-JJ-jEl"/>
+                        <constraint firstItem="4WX-VZ-Mzp" firstAttribute="centerX" secondItem="fj4-kD-gXd" secondAttribute="centerX" id="lJU-4S-vbh"/>
                         <constraint firstItem="qHj-YY-aCK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aRC-w7-teS" secondAttribute="trailing" constant="30" id="pTr-AR-glb"/>
                         <constraint firstItem="qHj-YY-aCK" firstAttribute="centerY" secondItem="FNH-Ue-wdz" secondAttribute="centerY" id="qjZ-Nf-Ij7"/>
-                        <constraint firstAttribute="trailing" secondItem="8IB-Ka-9Gc" secondAttribute="trailing" constant="69" id="qo9-Ho-Ybb"/>
                     </constraints>
                 </view>
             </subviews>
@@ -126,12 +112,11 @@
     <resources>
         <image name="share_download" width="14" height="14"/>
         <image name="share_image" width="337.33334350585938" height="149"/>
-        <image name="share_share" width="12" height="12"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

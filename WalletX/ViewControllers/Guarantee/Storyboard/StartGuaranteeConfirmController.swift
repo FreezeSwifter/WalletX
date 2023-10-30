@@ -94,12 +94,6 @@ class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var shareButton: UIButton! {
-        didSet {
-            shareButton.setTitle("share_Share".toMultilingualism(), for: .normal)
-        }
-    }
-    
     @IBOutlet weak var downloadButton: UIButton! {
         didSet {
             downloadButton.setTitle("share_Download".toMultilingualism(), for: .normal)
@@ -176,6 +170,30 @@ class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
         addressCopyButton.rx.tap.subscribe(onNext: {[weak self] in
             UIPasteboard.general.string = self?.addressTextField.text
         }).disposed(by: rx.disposeBag)
+        
+        downloadButton.rx.tap.subscribe(onNext: {[weak self] _ in
+            self?.captureScreenshot()
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    private func captureScreenshot() {
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0.0)
+        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        guard let screenshotImage = UIGraphicsGetImageFromCurrentImageContext() else {
+            return
+        }
+        UIGraphicsEndImageContext()
+
+        // 保存截图到相册
+        UIImageWriteToSavedPhotosAlbum(screenshotImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            print("保存到相册出错: \(error.localizedDescription)")
+        } else {
+            print("成功保存到相册")
+        }
     }
     
     private func setupView() {
