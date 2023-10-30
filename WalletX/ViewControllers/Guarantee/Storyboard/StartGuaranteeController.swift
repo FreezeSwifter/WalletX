@@ -244,7 +244,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
                         m.assureId = assureId
                         vc.model = m
                         this2.navigationController?.pushViewController(vc, animated: true)
-                    
+                        NotificationCenter.default.post(name: .orderDidChangeed, object: nil)
                     } else { // 多钱手续费
                         let vc: StartGuaranteeConfirmController = ViewLoader.Storyboard.controller(from: "Guarantee")
                         vc.parameter = self?.parameter

@@ -148,6 +148,7 @@ class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
                 guard let fee = value else { return }
                 self?.feeTextField.text = fee.description
                 self?.parameter?.hc = fee
+                NotificationCenter.default.post(name: .orderDidChangeed, object: nil)
             }).disposed(by: rx.disposeBag)
         }
         

@@ -151,6 +151,7 @@ class DepositViewController: UIViewController, HomeNavigationble {
     }
     
     private func updateData() {
+        view.layoutIfNeeded()
         guard let item = currentItem else { return }
         valueLabel1.text = "\(item.assureId ?? ""), \(item.pushWaitAmount ?? 0.0)"
         valeLabel2.text = item.assureId

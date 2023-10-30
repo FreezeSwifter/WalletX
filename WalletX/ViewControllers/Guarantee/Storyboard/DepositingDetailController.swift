@@ -48,20 +48,22 @@ class DepositingDetailController: UIViewController {
     @IBOutlet weak var desLabel4Me: UILabel! {
         didSet {
             desLabel4Me.text = "我".toMultilingualism()
-            desLabel4Me.layoutMargins = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+            desLabel4Me.layoutMargins = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
             desLabel4Me.minimumScaleFactor = 0.5
             desLabel4Me.adjustsFontSizeToFitWidth = true
             desLabel4Me.isHidden = true
+            desLabel4Me.textAlignment = .center
         }
     }
     
     @IBOutlet weak var desLabel5Me: UILabel! {
         didSet {
             desLabel5Me.text = "我".toMultilingualism()
-            desLabel5Me.layoutMargins = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+            desLabel5Me.layoutMargins = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
             desLabel5Me.minimumScaleFactor = 0.5
             desLabel5Me.adjustsFontSizeToFitWidth = true
             desLabel5Me.isHidden = true
+            desLabel5Me.textAlignment = .center
         }
     }
     
@@ -75,6 +77,12 @@ class DepositingDetailController: UIViewController {
         didSet {
             valueLabel1Status.minimumScaleFactor = 0.5
             valueLabel1Status.adjustsFontSizeToFitWidth = true
+        }
+    }
+    
+    @IBOutlet weak var desLabel8: UILabel! {
+        didSet {
+            desLabel8.text = "6位小数".toMultilingualism()
         }
     }
     
@@ -232,6 +240,15 @@ class DepositingDetailController: UIViewController {
         }
     }
     
+    @IBOutlet weak var valueLabel8: UILabel! {
+        didSet {
+            valueLabel8.minimumScaleFactor = 0.5
+            valueLabel8.adjustsFontSizeToFitWidth = true
+            valueLabel8.text = "--"
+            valueLabel8.textColor = ColorConfiguration.lightBlue.toColor()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -263,9 +280,11 @@ class DepositingDetailController: UIViewController {
         if model?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
             desLabel4Me.isHidden = false
             desLabel5Me.isHidden = true
+            valueLabel8.text = model?.pushDecimalSponsor
         } else {
             desLabel4Me.isHidden = true
             desLabel5Me.isHidden = false
+            valueLabel8.text = model?.pushDecimalPartner
         }
         
         if model?.assureType == 0 { // 普通担保
@@ -316,8 +335,9 @@ class DepositingDetailController: UIViewController {
         }).disposed(by: rx.disposeBag)
         
         bottomLeftButton.rx.tap.subscribe(onNext: {[weak self] _ in
-            
-            
+            let vc: DepositViewController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.currentItem = self?.model
+            self?.navigationController?.pushViewController(vc, animated: true)
             
         }).disposed(by: rx.disposeBag)
     }
@@ -326,6 +346,16 @@ class DepositingDetailController: UIViewController {
         view.layoutIfNeeded()
         view.backgroundColor = .white
         title = "上传押金".toMultilingualism()
+        view.layoutIfNeeded()
+        
+        desLabel4Me.snp.makeConstraints { make in
+            make.height.width.equalTo(20)
+        }
+        desLabel5Me.snp.makeConstraints { make in
+            make.height.width.equalTo(20)
+        }
+        desLabel4Me.applyCornerRadius(10)
+        desLabel5Me.applyCornerRadius(10)
     }
     
     @objc

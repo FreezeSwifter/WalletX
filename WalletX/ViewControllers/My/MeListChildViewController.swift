@@ -74,7 +74,6 @@ class MeListChildViewController: UIViewController, JXSegmentedListContainerViewL
         }).disposed(by: rx.disposeBag)
         
         NotificationCenter.default.rx.notification(.orderDidChangeed).observe(on: MainScheduler.instance)
-            .take(until: self.rx.methodInvoked(#selector(MeListChildViewController.viewDidDisappear(_:))))
             .subscribe(onNext: {[weak self] _ in
                 self?.fetchData()
         }).disposed(by: rx.disposeBag)
