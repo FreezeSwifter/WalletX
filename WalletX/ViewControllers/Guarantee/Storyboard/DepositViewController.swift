@@ -140,6 +140,21 @@ class DepositViewController: UIViewController, HomeNavigationble {
         }
     }
     
+    @IBOutlet weak var sixBgView: UIView!
+    
+    @IBOutlet weak var sixDesLabel: UILabel! {
+        didSet {
+            sixDesLabel.text = "6位小数".toMultilingualism()
+        }
+    }
+    
+    @IBOutlet weak var sixTextField: UITextField! {
+        didSet {
+            sixTextField.isUserInteractionEnabled = false
+            sixTextField.textColor = ColorConfiguration.lightBlue.toColor()
+        }
+    }
+    
     var currentItem: GuaranteeInfoModel.Meta? {
         didSet {
             updateData()
@@ -160,6 +175,13 @@ class DepositViewController: UIViewController, HomeNavigationble {
         valeLabel2.text = item.assureId
         valueLabel3.text = Date(timeIntervalSince1970: (item.createTime ?? 0) / 1000 ).toFormat("yyyy-MM-dd HH:mm:ss")
         valueLabel4.text = "\(item.amount ?? 0.0)"
+        
+        if item.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+            sixTextField.text = item.pushDecimalSponsor
+        } else {
+            sixTextField.text = item.pushDecimalPartner
+        }
+        
     }
     
     private func bind() {

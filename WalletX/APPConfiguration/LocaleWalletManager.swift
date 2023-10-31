@@ -92,15 +92,25 @@ final class LocaleWalletManager {
         }
     }
     
-    func importWallet(mnemonic: String, walletName: String) -> Bool {
+    func importWallet(mnemonic: String, walletName: String) -> String? {
         let res = HDWallet.isValid(mnemonic: mnemonic)
         if res {
+            
+            if fetchLocalWalletList()?.contains(where: { $0.mnemoic == mnemonic }) ?? false {
+                return "钱包已存在本地".toMultilingualism()
+            }
+            
             currentWallet = HDWallet(mnemonic: mnemonic, passphrase: "")
+            TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
+            USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
             wallets.append(WalletModel(name: walletName, mnemoic: mnemonic))
             save()
             walletDidChangedSubject.onNext(())
+    
+            return nil
+        } else {
+            return "助记词输入有误".toMultilingualism()
         }
-        return res
     }
     
     func createWallet() -> String {
@@ -263,16 +273,16 @@ final class LocaleWalletManager {
         if coinType == .tron(nil) {
             // 1 This value is 0.000001
             let amountText = amount * 100000
-            tronWeb.trxTransfer(toAddress: toAddress, amount: amountText.description) { [weak self] (state, txid) in
-                guard let self = self else { return }
+            tronWeb.trxTransfer(toAddress: toAddress, amount: amountText.description) { (state, txid) in
+                
                 print("state = \(state)")
                 print("txid = \(txid)")
             }
             
         } else {
             let amountText = amount.description
-            tronWeb.trc20TokenTransfer(toAddress: toAddress, trc20ContractAddress: usdtContractAddress, amount: amountText, remark: "") { [weak self] (state, txid) in
-                guard let self = self else { return }
+            tronWeb.trc20TokenTransfer(toAddress: toAddress, trc20ContractAddress: usdtContractAddress, amount: amountText, remark: "") {(state, txid) in
+                
                 print("state = \(state)")
                 print("txid = \(txid)")
             }

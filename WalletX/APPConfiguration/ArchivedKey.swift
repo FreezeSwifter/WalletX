@@ -59,4 +59,5 @@ extension Notification.Name {
     static let languageChanged = Notification.Name("languageChanged")
     static let orderDidChangeed = Notification.Name("orderDidChangeed")
     static let userInfoDidChangeed = Notification.Name("userInfoDidChangeed")
+    static let loginSuccessful = Notification.Name("loginSuccessful")
 }

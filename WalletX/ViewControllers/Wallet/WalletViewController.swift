@@ -65,6 +65,7 @@ class WalletViewController: UIViewController, HomeNavigationble {
         super.viewDidLoad()
         setupView()
         bind()
+        
     }
     
     private func bind() {

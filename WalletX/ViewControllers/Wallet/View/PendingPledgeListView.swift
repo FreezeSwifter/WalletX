@@ -54,7 +54,7 @@ class PendingPledgeListView: UIView {
             self?.fetchData()
         }
         header.lastUpdatedTimeLabel?.isHidden = true
-        header.setTitle("加载中…".toMultilingualism(), for: .idle)
+        header.setTitle("", for: .idle)
         header.setTitle("加载中…".toMultilingualism(), for: .pulling)
         tableView.mj_header = header
         tableView.mj_header?.beginRefreshing()
@@ -64,7 +64,7 @@ class PendingPledgeListView: UIView {
             self?.fetchData()
         }
         footer.setTitle("没有更多".toMultilingualism(), for: .noMoreData)
-        footer.setTitle("加载中…".toMultilingualism(), for: .idle)
+        footer.setTitle("", for: .idle)
         footer.setTitle("加载中…".toMultilingualism(), for: .pulling)
         tableView.mj_footer = footer
     }

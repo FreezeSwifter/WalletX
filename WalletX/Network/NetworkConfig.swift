@@ -41,6 +41,7 @@ enum NetworkService {
     case getTXInfo(txId: String) // 获取TX信息
     case messageList // 消息列表
     case readMessage(id: String) // 消息已读
+    case messageDetail(id: Int) // 消息详情
 
 }
 
@@ -109,6 +110,8 @@ extension NetworkService: TargetType {
             return "/api/user/message/list"
         case .readMessage:
             return "/api/user/message/read"
+        case .messageDetail:
+            return "/api/user/message/detail"
         }
     }
     
@@ -224,6 +227,9 @@ extension NetworkService: TargetType {
             
         case let .readMessage(id):
             return ["id": id]
+            
+        case let .messageDetail(id):
+            return ["type": id]
             
         default:
             return nil

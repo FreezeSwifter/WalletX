@@ -29,4 +29,26 @@ struct MessageListModel: HandyJSON {
             return nil
         }
     }
+    
+    func displayIcon() -> String {
+        switch type {
+        case 0:
+            return "message_guarantee"
+        case 1:
+            return "message_wallet"
+        case 2:
+            return "message_system"
+            
+        default:
+            return ""
+        }
+    }
+}
+
+struct MessageDetailModel: HandyJSON {
+    var id: Int?
+    var type: Int?
+    var walletId: String?
+    var content: String?
+    var createTime: Int64?
 }

@@ -234,4 +234,6 @@
     "请检查输入项": "Please check your entries",
     "6位小数": "6 decimal places",
     "请填写有效邮箱": "Please fill in a valid email address",
+    "钱包已存在本地": "Wallet already exists locally",
+    "助记词输入有误": "Incorrect input of mnemonic words",
 }

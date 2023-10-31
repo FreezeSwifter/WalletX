@@ -95,7 +95,7 @@ extension MessageViewController: UITableViewDelegate {
         
         let vc: MessageDetailViewController = MessageDetailViewController()
         let item = datasource[indexPath.row]
-        vc.titleData = item.displayType()
+        vc.item = item
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -113,12 +113,13 @@ extension MessageViewController: UITableViewDataSource {
         cell.topTitleLabel.text = item.displayType()
         cell.bottomContentLabel.text = item.content
         cell.timeLabel.text = Date(timeIntervalSince1970: Double((item.createTime ?? 0)) / 1000 ).toRelative(style: RelativeFormatter.twitterStyle())
+        cell.icon.image = UIImage(named: item.displayIcon())
         if item.status == 0 {
-            cell.dotLabel.text = "1"
-            cell.dotLabel.isHidden = false
+            cell.icon.qmui_shouldShowUpdatesIndicator = true
+            cell.icon.qmui_badgeInteger = 0
         } else {
-            cell.dotLabel.text = nil
-            cell.dotLabel.isHidden = true
+            cell.icon.qmui_shouldShowUpdatesIndicator = false
+            cell.icon.qmui_badgeInteger = 0
         }
         return cell
     }

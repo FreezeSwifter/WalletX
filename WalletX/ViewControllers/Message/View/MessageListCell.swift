@@ -10,13 +10,8 @@ import QMUIKit
 
 class MessageListCell: UITableViewCell {
 
-    @IBOutlet weak var dotLabel: QMUILabel! {
-        didSet {
-            dotLabel.contentEdgeInsets = UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
-            dotLabel.applyCornerRadius(dotLabel.height / 2)
-            dotLabel.isHidden = true
-        }
-    }
+    
+    @IBOutlet weak var icon: UIImageView!
     
     @IBOutlet weak var topTitleLabel: UILabel! {
         didSet {

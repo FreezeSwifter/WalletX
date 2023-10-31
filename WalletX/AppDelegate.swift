@@ -110,7 +110,6 @@ extension AppDelegate {
         autoLogin()
         checkFaceId()
         fetchAPPConfig()
-        fetchMessage()
     }
     
     func createTabBarItem(title: String, image: UIImage, selecteColor: UIColor, tag: Int) -> UITabBarItem {
@@ -130,16 +129,18 @@ extension AppDelegate {
             guard let this = self else { return }
             this.autoLogin()
         }).disposed(by: rx.disposeBag)
+        
     }
     
     func autoLogin() {
         let req: Observable<LoginModel?> = APIProvider.rx.request(.login(walletAddr: LocaleWalletManager.shared().TRON?.address ?? "")).mapModel()
-        req.subscribe(onNext: { model in
+        req.subscribe(onNext: {[weak self] model in
             
             guard let addressKey = LocaleWalletManager.shared().TRON?.address?.md5() else { return }
             guard let jsonString = model?.toJSONString() else { return }
             AppArchiveder.shared().mmkv?.set(jsonString, forKey: addressKey)
-            
+            self?.fetchMessage()
+            NotificationCenter.default.post(name: .loginSuccessful, object: nil)
         }).disposed(by: rx.disposeBag)
     }
     

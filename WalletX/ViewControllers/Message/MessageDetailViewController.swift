@@ -11,14 +11,11 @@ import RxSwift
 import QMUIKit
 import Then
 import NSObject_Rx
+import SwiftDate
 
 class MessageDetailViewController: UIViewController, HomeNavigationble {
     
-    var titleData: String? {
-        didSet {
-            headerView?.titleLabel.text = titleData
-        }
-    }
+    var item: MessageListModel?
     
     private lazy var tableView: UITableView = {
         let tv = UITableView.init(frame: .zero, style: .plain)
@@ -30,6 +27,8 @@ class MessageDetailViewController: UIViewController, HomeNavigationble {
         return tv
     }()
     
+    private var datasource: [MessageDetailModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +37,14 @@ class MessageDetailViewController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
-        
+        headerView?.titleLabel.text = item?.displayType()
+        if let id = item?.type {
+            let req: Observable<[MessageDetailModel]> = APIProvider.rx.request(.messageDetail(id: id)).mapModelArray()
+            req.subscribe(onNext: {[weak self] list in
+                self?.datasource = list
+                self?.tableView.reloadData()
+            }).disposed(by: rx.disposeBag)
+        }
     }
     
     private func setupView() {
@@ -63,17 +69,16 @@ class MessageDetailViewController: UIViewController, HomeNavigationble {
 extension MessageDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return datasource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageDetailCell", for: indexPath) as? MessageDetailCell
-        cell?.timeLabel.text = Date().description
-        if indexPath.row == 0 {
-            cell?.contentLabel.text = "刷卡机拉屎卡拉季哦忘记考拉手机打金娃i啊看收垃圾大了哇阿斯兰进度款拉数据打了可视角度考拉时间段立卡见识到了看见啊卢卡斯建档立卡阿斯卡来得及啦可视角度拉数据狄拉克久等啦看手机到啦可视角度啦可视对讲啦可视角度立卡见识到了卡加斯达克拉阿加莎电力科技阿卡丽受打击阿里可视对讲啦可视角度啦可视角度啦可视角度拉克丝较大来上课大家啊啦可视角度拉克丝较大拉卡萨较大"
-        } else {
-            cell?.contentLabel.text = "啦啦啦啦啦"
-        }
+        cell?.avatarImageView.image = UIImage(named: item?.displayIcon() ?? "")
+        let model = datasource[indexPath.row]
+        cell?.timeLabel.text = Date(timeIntervalSince1970: Double((model.createTime ?? 0)) / 1000 ).toRelative(style: RelativeFormatter.twitterStyle())
+        cell?.contentLabel.text = model.content
+        
         return cell ?? UITableViewCell()
     }
 }

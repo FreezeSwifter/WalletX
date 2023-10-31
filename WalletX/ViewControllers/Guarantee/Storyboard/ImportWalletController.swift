@@ -103,12 +103,11 @@ class ImportWalletController: UIViewController, HomeNavigationble {
             guard let res = this.textView.text else {
                 return
             }
-            let success = LocaleWalletManager.shared().importWallet(mnemonic: res, walletName: self?.textField.text ?? "Wallet 1")
-            if success {
+            let message = LocaleWalletManager.shared().importWallet(mnemonic: res, walletName: self?.textField.text ?? "Wallet 1")
+            if message.isNilOrEmpty {
                 this.navigationController?.popToRootViewController(animated: true)
             } else {
-                NotiAlterView.show(title: "助记词输入有误", content: nil, leftButtonTitle: nil, rightButtonTitle: "知道了").subscribe(onNext: { _ in
-                    
+                NotiAlterView.show(title: message, content: nil, leftButtonTitle: nil, rightButtonTitle: "知道啦".toMultilingualism()).subscribe(onNext: { _ in
                 }).disposed(by: this.rx.disposeBag)
             }
         }).disposed(by: rx.disposeBag)
