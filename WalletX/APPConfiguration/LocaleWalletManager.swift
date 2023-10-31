@@ -162,9 +162,13 @@ final class LocaleWalletManager {
         guard let list = fetchLocalWalletList(), list.count != 0 else { return }
         let currentModel = list[index]
         currentWallet = HDWallet(mnemonic: currentModel.mnemoic, passphrase: "")
+        TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
+        USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
         walletDidChangedSubject.onNext(())
-        fetchUserData()
-        fetchWalletBalanceData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+            self.fetchUserData()
+            self.fetchWalletBalanceData()
+        })
     }
     
     func deleteWalletModel(by model: WalletModel) {
