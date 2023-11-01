@@ -27,6 +27,8 @@ class MessageViewController: UIViewController, HomeNavigationble {
     
     private var datasource: [MessageListModel] = []
     
+    private let listEmptyView: MeListEmptyView = MeListEmptyView(frame: .zero)
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         NotificationCenter.default.rx.notification(.languageChanged).observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
@@ -68,10 +70,19 @@ class MessageViewController: UIViewController, HomeNavigationble {
             self?.navigationController?.pushViewController(shareVC, animated: true)
         }).disposed(by: rx.disposeBag)
         
+        headerView?.serverButton.rx.tap.subscribe(onNext: { _ in
+            let app = UIApplication.shared.delegate as? AppDelegate
+            app?.openTg()
+        }).disposed(by: rx.disposeBag)
         
         let app = UIApplication.shared.delegate as? AppDelegate
         app?.messageData.subscribe(onNext: { [weak self] list in
             self?.datasource = list ?? []
+            if self?.datasource.count == 0 {
+                self?.tableView.backgroundView = self?.listEmptyView
+            } else {
+                self?.tableView.backgroundView = nil
+            }
             self?.tableView.reloadData()
         }).disposed(by: rx.disposeBag)
     }
@@ -84,6 +95,13 @@ class MessageViewController: UIViewController, HomeNavigationble {
         tableView.snp.makeConstraints { make in
             make.top.equalTo(headerView!.snp.bottom)
             make.trailing.leading.bottom.equalToSuperview()
+        }
+        
+        listEmptyView.frame = tableView.frame
+        listEmptyView.label.text = "暂无数据".toMultilingualism()
+        listEmptyView.listEmptyImageView.snp.remakeConstraints { make in
+            make.centerY.equalToSuperview().offset(-20)
+            make.centerX.equalToSuperview()
         }
     }
 }

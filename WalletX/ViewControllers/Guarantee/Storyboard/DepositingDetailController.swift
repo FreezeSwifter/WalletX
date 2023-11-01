@@ -352,6 +352,7 @@ class DepositingDetailController: UIViewController {
         if let error = error {
             print("保存到相册出错: \(error.localizedDescription)")
         } else {
+            APPHUD.flash(text: "成功".toMultilingualism())
             print("成功保存到相册")
         }
     }

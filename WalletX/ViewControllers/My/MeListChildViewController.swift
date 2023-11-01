@@ -55,7 +55,7 @@ class MeListChildViewController: UIViewController, JXSegmentedListContainerViewL
             self?.fetchData()
         }
         header.lastUpdatedTimeLabel?.isHidden = true
-        header.setTitle("加载中…".toMultilingualism(), for: .idle)
+        header.setTitle("".toMultilingualism(), for: .idle)
         header.setTitle("加载中…".toMultilingualism(), for: .pulling)
         tableView.mj_header = header
         tableView.mj_header?.beginRefreshing()
@@ -65,11 +65,13 @@ class MeListChildViewController: UIViewController, JXSegmentedListContainerViewL
             self?.fetchData()
         }
         footer.setTitle("没有更多".toMultilingualism(), for: .noMoreData)
-        footer.setTitle("加载中…".toMultilingualism(), for: .idle)
+        footer.setTitle("".toMultilingualism(), for: .idle)
         footer.setTitle("加载中…".toMultilingualism(), for: .pulling)
         tableView.mj_footer = footer
         
-        LocaleWalletManager.shared().walletDidChanged.observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
+        LocaleWalletManager.shared().walletDidChanged
+            .delay(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] _ in
             self?.fetchData()
         }).disposed(by: rx.disposeBag)
         

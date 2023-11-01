@@ -88,6 +88,11 @@ class WalletViewController: UIViewController, HomeNavigationble {
             self?.navigationController?.pushViewController(shareVC, animated: true)
         }).disposed(by: rx.disposeBag)
         
+        headerView?.serverButton.rx.tap.subscribe(onNext: { _ in
+            let app = UIApplication.shared.delegate as? AppDelegate
+            app?.openTg()
+        }).disposed(by: rx.disposeBag)
+        
         topOperatedView.sendButton.rx.tap.subscribe(onNext: { _ in
             let vc: SelectedTokenController = ViewLoader.Storyboard.controller(from: "Wallet")
             vc.operationType = .send

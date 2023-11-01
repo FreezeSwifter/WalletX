@@ -84,7 +84,7 @@ class TokenDetailController: UIViewController, HomeNavigationble {
             self?.fetchData()
         }
         header.lastUpdatedTimeLabel?.isHidden = true
-        header.setTitle("加载中…".toMultilingualism(), for: .idle)
+        header.setTitle("".toMultilingualism(), for: .idle)
         header.setTitle("加载中…".toMultilingualism(), for: .pulling)
         tableView.mj_header = header
         tableView.mj_header?.beginRefreshing()
@@ -94,7 +94,7 @@ class TokenDetailController: UIViewController, HomeNavigationble {
             self?.fetchData()
         }
         footer.setTitle("没有更多".toMultilingualism(), for: .noMoreData)
-        footer.setTitle("加载中…".toMultilingualism(), for: .idle)
+        footer.setTitle("".toMultilingualism(), for: .idle)
         footer.setTitle("加载中…".toMultilingualism(), for: .pulling)
         tableView.mj_footer = footer
         
@@ -105,7 +105,9 @@ class TokenDetailController: UIViewController, HomeNavigationble {
         let req: Observable<[TokenTecordTransferModel]> = APIProvider.rx.request(.getTokenTecordTransfer(pageNumber: pageNum, symbolID: symbolID)).mapModelArray()
         
         req.subscribe(onNext: {[weak self] list in
-            self?.datasource = list
+            if list.count != 0 {
+                self?.datasource.append(contentsOf: list)
+            }
             self?.tableView.reloadData()
             self?.tableView.mj_header?.endRefreshing()
             self?.tableView.mj_footer?.endRefreshing()

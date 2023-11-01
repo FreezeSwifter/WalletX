@@ -810,18 +810,8 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CCt-hP-QJG">
                                                         <rect key="frame" x="16" y="384.33333333333331" width="361" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCG-ll-6rH">
-                                                                <rect key="frame" x="0.0" y="0.0" width="173" height="40"/>
-                                                                <color key="backgroundColor" red="1" green="0.34901960780000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="40" id="KoH-G7-R6z"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                <state key="normal" title="Button"/>
-                                                            </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHC-lc-9wP">
-                                                                <rect key="frame" x="188" y="0.0" width="173" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
                                                                 <color key="backgroundColor" red="1" green="0.34901960780000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="FZr-Ww-YuT"/>
@@ -888,7 +878,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contactOtherButton" destination="gCG-ll-6rH" id="PKa-So-fYr"/>
                         <outlet property="copyButton" destination="tob-0E-dwz" id="5Oq-RC-EZ1"/>
                         <outlet property="doneButton" destination="sHC-lc-9wP" id="kqW-yw-2Ex"/>
                         <outlet property="downButton" destination="Yp6-wj-mqd" id="QKU-Xn-HsI"/>

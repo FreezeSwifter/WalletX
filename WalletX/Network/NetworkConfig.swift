@@ -42,6 +42,7 @@ enum NetworkService {
     case messageList // 消息列表
     case readMessage(id: String) // 消息已读
     case messageDetail(id: Int) // 消息详情
+    case contactService // 联系客服
 
 }
 
@@ -112,6 +113,8 @@ extension NetworkService: TargetType {
             return "/api/user/message/read"
         case .messageDetail:
             return "/api/user/message/detail"
+        case .contactService:
+            return "/api/config/customer"
         }
     }
     

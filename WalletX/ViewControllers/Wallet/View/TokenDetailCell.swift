@@ -37,14 +37,16 @@ class TokenDetailCell: UITableViewCell {
     }
     
     func setupData(data: TokenTecordTransferModel) {
-        fromLabel.text = data.from
-        timeLabel.text = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 ).toFormat("yyyy-MM-dd HH:mm:ss")
-        if data.amount ?? 0 > 0 {
-            countLabel.textColor = UIColor(hex: "#16C784")
-        } else {
-            countLabel.textColor = UIColor(hex: "#FF5966")
-        }
-        countLabel.text = "\(data.amount ?? 0)"
         
+        timeLabel.text = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 ).toFormat("yyyy-MM-dd HH:mm:ss")
+        if data.from == LocaleWalletManager.shared().TRON?.address {
+            countLabel.textColor = UIColor(hex: "#FF5966")
+            countLabel.text = "-\(data.amount ?? 0)"
+            fromLabel.text = "to: \(data.to ?? "")"
+        } else if data.to == LocaleWalletManager.shared().TRON?.address {
+            countLabel.textColor = UIColor(hex: "#16C784")
+            countLabel.text = "+\(data.amount ?? 0)"
+            fromLabel.text = "from: \(data.from ?? "")"
+        }
     }
 }

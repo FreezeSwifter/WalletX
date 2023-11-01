@@ -76,6 +76,11 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
             self?.navigationController?.pushViewController(shareVC, animated: true)
         }).disposed(by: rx.disposeBag)
         
+        headerView?.serverButton.rx.tap.subscribe(onNext: { _ in
+            let app = UIApplication.shared.delegate as? AppDelegate
+            app?.openTg()
+        }).disposed(by: rx.disposeBag)
+        
         let bannerReq: Observable<[BannerModel]> = APIProvider.rx.request(.banner(type: 0)).mapModelArray()
         let totalCountReq = APIProvider.rx.request(.guaranteeDisplayData).mapJSON()
         let cartgoryListReq: Observable<[CategoryModel]> = APIProvider.rx.request(.serviceCategory).mapModelArray()

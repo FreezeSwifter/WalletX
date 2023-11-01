@@ -17,6 +17,7 @@ import NSObject_Rx
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    private var serviceInfo: String?
     
     private let tabBarViewController = QMUITabBarViewController()
     private let messageDataSubject = BehaviorRelay<[MessageListModel]?>(value: nil)
@@ -50,6 +51,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarViewController.children[2].tabBarItem.qmui_shouldShowUpdatesIndicator = false
     }
     
+    func openTg() {
+        guard let id = serviceInfo else {
+            APPHUD.flash(text: "Error")
+            return
+        }
+        let appURL = URL(string: "telegram://")!
+        if UIApplication.shared.canOpenURL(appURL) {
+            let appUrl = URL(string: "tg://resolve?domain=\(id)")
+            if let url = appUrl {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                APPHUD.flash(text: "Error")
+            }
+        } else {
+            APPHUD.flash(text: "Not Install Telegram")
+        }
+    }
 }
 
 private
@@ -110,6 +128,7 @@ extension AppDelegate {
         autoLogin()
         checkFaceId()
         fetchAPPConfig()
+        fetchContactServiceInfo()
     }
     
     func createTabBarItem(title: String, image: UIImage, selecteColor: UIColor, tag: Int) -> UITabBarItem {
@@ -168,6 +187,13 @@ extension AppDelegate {
                 self?.tabBarViewController.children[2].tabBarItem.qmui_shouldShowUpdatesIndicator = true
                 self?.tabBarViewController.children[2].tabBarItem.qmui_badgeInteger = 0
             }
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    func fetchContactServiceInfo() {
+        APIProvider.rx.request(.contactService).mapJSON().subscribe(onSuccess: {[weak self] obj in
+            let dict = obj as? [String: Any]
+            self?.serviceInfo = dict?["data"] as? String
         }).disposed(by: rx.disposeBag)
     }
     

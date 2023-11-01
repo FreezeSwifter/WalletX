@@ -72,17 +72,6 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var contactOtherButton: UIButton! {
-        didSet {
-            contactOtherButton.setTitle("联系对方".toMultilingualism(), for: .normal)
-            contactOtherButton.setTitleColor(ColorConfiguration.primary.toColor(), for: .normal)
-            contactOtherButton.layer.cornerRadius = 4
-            contactOtherButton.layer.borderWidth = 1
-            contactOtherButton.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
-            contactOtherButton.backgroundColor = .clear
-        }
-    }
-    
     @IBOutlet weak var doneButton: UIButton! {
         didSet {
             doneButton.setTitle("完成".toMultilingualism(), for: .normal)
@@ -118,15 +107,7 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
         doneButton.rx.tap.subscribe(onNext: {[weak self] in
             self?.navigationController?.popToRootViewController(animated: true)
         }).disposed(by: rx.disposeBag)
-        
-        contactOtherButton.rx.tap.subscribe(onNext: {[weak self] in
-            
-            let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
-            vc.partnerUser = self?.model?.partnerUser
-            self?.navigationController?.pushViewController(vc, animated: true)
-            
-        }).disposed(by: rx.disposeBag)
-        
+    
         downButton.rx.tap.subscribe(onNext: {[weak self] _ in
             self?.captureScreenshot()
         }).disposed(by: rx.disposeBag)
@@ -148,6 +129,7 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
         if let error = error {
             print("保存到相册出错: \(error.localizedDescription)")
         } else {
+            APPHUD.flash(text: "成功".toMultilingualism())
             print("成功保存到相册")
         }
     }

@@ -198,8 +198,15 @@ class MeTobeAddedCell: UITableViewCell {
     
     
     private func bind() {
-        contactButton.rx.tap.subscribe(onNext: { _ in
+        contactButton.rx.tap.subscribe(onNext: {[weak self] _ in
             let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+            
+            if self?.model?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+                vc.walletId = self?.model?.partnerUser
+            } else {
+                vc.walletId = self?.model?.sponsorUser
+            }
+    
             vc.hidesBottomBarWhenPushed = true
             UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
             
@@ -321,6 +328,7 @@ class MeTobeAddedCell: UITableViewCell {
             
         } else if data.assureStatus == 1 { // 待上押
             stateLabel.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
+            waitingDesLabel.text = "me_depositing".toMultilingualism()
             stateLabel.textColor = UIColor(hex: "#F0A158")
             stateLabel.text = "me_depositing".toMultilingualism()
             timeIcon.image = UIImage(named: "me_time")

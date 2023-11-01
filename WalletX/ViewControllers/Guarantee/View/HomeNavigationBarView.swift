@@ -85,5 +85,4 @@ class HomeNavigationBarView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
 }

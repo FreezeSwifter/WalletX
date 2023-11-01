@@ -10,9 +10,9 @@ import SnapKit
 
 class MeListEmptyView: UIView {
     
-    private lazy var listEmptyImageView: UIImageView = UIImageView(image: UIImage(named: "me_nodata"))
+    lazy var listEmptyImageView: UIImageView = UIImageView(image: UIImage(named: "me_nodata"))
     
-    private lazy var label: UILabel = {
+    lazy var label: UILabel = {
         let v = UILabel()
         v.textColor = ColorConfiguration.descriptionText.toColor()
         v.text = "me_nodata".toMultilingualism()
