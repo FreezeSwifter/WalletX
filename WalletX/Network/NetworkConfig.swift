@@ -140,6 +140,8 @@ extension NetworkService: TargetType {
     
     var headers: [String : String]? {
         var dict: [String: String] = ["Content-type": "application/json"]
+        let languageValue = LanguageManager.shared().currentCode == .cn ? "0" : "1"
+        dict.updateValue(languageValue, forKey: "lang")
         
         guard let addressKey = LocaleWalletManager.shared().TRON?.address?.md5() else {
             return dict
