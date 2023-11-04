@@ -17,6 +17,7 @@
                 <outlet property="linkLabel" destination="aRC-w7-teS" id="MlT-9A-CIu"/>
                 <outlet property="logoImageView" destination="GZc-UX-Nej" id="KRv-VG-ram"/>
                 <outlet property="qrCodeImageView" destination="fj4-kD-gXd" id="Gu4-jA-wYY"/>
+                <outlet property="shareButton" destination="Xz4-VT-Qx6" id="m1Z-Oc-yVe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -38,25 +39,41 @@
                                 <constraint firstAttribute="width" constant="182" id="sbR-ZT-4Or"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4WX-VZ-Mzp">
-                            <rect key="frame" x="160" y="222" width="41" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="Way-Yi-ah6"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="下载" image="share_download">
-                                <color key="titleColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="JW5-CO-l4S">
+                            <rect key="frame" x="136.66666666666666" y="222" width="88" height="30"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4WX-VZ-Mzp">
+                                    <rect key="frame" x="0.0" y="0.0" width="41" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="Way-Yi-ah6"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="下载" image="share_download">
+                                        <color key="titleColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xz4-VT-Qx6">
+                                    <rect key="frame" x="49" y="0.0" width="39" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="ieo-Rk-4cr"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="分享" image="share_share">
+                                        <color key="titleColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                        </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="链接" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNH-Ue-wdz">
                             <rect key="frame" x="20" y="272" width="30.666666666666671" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="ssssssssssss" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aRC-w7-teS">
-                            <rect key="frame" x="80.666666666666671" y="272" width="90.000000000000014" height="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aRC-w7-teS">
+                            <rect key="frame" x="80.666666666666671" y="272" width="14" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -80,17 +97,17 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="FNH-Ue-wdz" firstAttribute="leading" secondItem="wkP-3p-8M0" secondAttribute="leading" constant="20" id="2D0-FF-AZL"/>
-                        <constraint firstItem="4WX-VZ-Mzp" firstAttribute="top" secondItem="fj4-kD-gXd" secondAttribute="bottom" constant="15" id="6Jh-1h-iRs"/>
-                        <constraint firstItem="FNH-Ue-wdz" firstAttribute="top" secondItem="4WX-VZ-Mzp" secondAttribute="bottom" constant="20" id="9cG-yj-Yo5"/>
                         <constraint firstItem="fj4-kD-gXd" firstAttribute="centerX" secondItem="wkP-3p-8M0" secondAttribute="centerX" id="DJ2-Tl-c2G"/>
                         <constraint firstAttribute="trailing" secondItem="txN-JO-gZT" secondAttribute="trailing" constant="15" id="GdU-Y0-HEz"/>
+                        <constraint firstItem="aRC-w7-teS" firstAttribute="top" secondItem="JW5-CO-l4S" secondAttribute="bottom" constant="20" id="Xcg-6X-TDp"/>
                         <constraint firstItem="txN-JO-gZT" firstAttribute="leading" secondItem="wkP-3p-8M0" secondAttribute="leading" constant="15" id="YPH-YW-k5t"/>
                         <constraint firstItem="aRC-w7-teS" firstAttribute="centerY" secondItem="FNH-Ue-wdz" secondAttribute="centerY" id="ZBw-Qh-H28"/>
                         <constraint firstAttribute="trailing" secondItem="qHj-YY-aCK" secondAttribute="trailing" constant="20" id="btr-e7-Yzy"/>
                         <constraint firstItem="fj4-kD-gXd" firstAttribute="top" secondItem="wkP-3p-8M0" secondAttribute="top" constant="25" id="hmk-Q5-0ZN"/>
+                        <constraint firstItem="JW5-CO-l4S" firstAttribute="top" secondItem="fj4-kD-gXd" secondAttribute="bottom" constant="15" id="jHF-yA-GEx"/>
                         <constraint firstItem="txN-JO-gZT" firstAttribute="top" secondItem="FNH-Ue-wdz" secondAttribute="bottom" constant="30" id="jSb-lY-RoK"/>
                         <constraint firstItem="aRC-w7-teS" firstAttribute="leading" secondItem="FNH-Ue-wdz" secondAttribute="trailing" constant="30" id="jTR-2S-SMu"/>
-                        <constraint firstItem="4WX-VZ-Mzp" firstAttribute="centerX" secondItem="fj4-kD-gXd" secondAttribute="centerX" id="lJU-4S-vbh"/>
+                        <constraint firstItem="JW5-CO-l4S" firstAttribute="centerX" secondItem="fj4-kD-gXd" secondAttribute="centerX" id="l9R-e6-7SN"/>
                         <constraint firstItem="qHj-YY-aCK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aRC-w7-teS" secondAttribute="trailing" constant="30" id="pTr-AR-glb"/>
                         <constraint firstItem="qHj-YY-aCK" firstAttribute="centerY" secondItem="FNH-Ue-wdz" secondAttribute="centerY" id="qjZ-Nf-Ij7"/>
                     </constraints>
@@ -112,6 +129,7 @@
     <resources>
         <image name="share_download" width="14" height="14"/>
         <image name="share_image" width="337.33334350585938" height="149"/>
+        <image name="share_share" width="12" height="12"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

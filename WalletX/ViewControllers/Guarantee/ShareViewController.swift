@@ -31,6 +31,15 @@ class ShareViewController: UIViewController, HomeNavigationble {
         }
     }
     
+    @IBOutlet weak var shareButton: UIButton! {
+        didSet {
+            shareButton.setTitleColor(ColorConfiguration.primary.toColor(), for: .normal)
+            shareButton.setTitle("share_Share".toMultilingualism(), for: .normal)
+            shareButton.layer.borderWidth = 1
+            shareButton.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
+        }
+    }
+    
     @IBOutlet weak var linkDesLabel: UILabel! {
         didSet {
             linkDesLabel.textColor = ColorConfiguration.blackText.toColor()
@@ -84,6 +93,20 @@ class ShareViewController: UIViewController, HomeNavigationble {
             self?.captureScreenshot()
             
         }).disposed(by: rx.disposeBag)
+        
+        
+        shareButton.rx.tap.subscribe(onNext: {[unowned self] _ in
+            
+            UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, false, 0.0)
+            self.view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+            guard let screenshotImage = UIGraphicsGetImageFromCurrentImageContext() else {
+                return
+            }
+            UIGraphicsEndImageContext()
+            
+            self.shareImageToTelegram(image: screenshotImage)
+            
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {
@@ -103,6 +126,13 @@ class ShareViewController: UIViewController, HomeNavigationble {
         }
         downloadButton.layer.cornerRadius = downloadButton.height / 2
         downloadButton.centerTextAndImage(spacing: 8)
+        
+        shareButton.snp.remakeConstraints { make in
+            make.width.equalTo(shareButton.bounds.size.width + 32)
+            make.height.equalTo(40)
+        }
+        shareButton.layer.cornerRadius = downloadButton.height / 2
+        shareButton.centerTextAndImage(spacing: 8)
     }
     
     private func captureScreenshot() {
@@ -112,7 +142,7 @@ class ShareViewController: UIViewController, HomeNavigationble {
             return
         }
         UIGraphicsEndImageContext()
-
+        
         // 保存截图到相册
         UIImageWriteToSavedPhotosAlbum(screenshotImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
@@ -131,6 +161,34 @@ class ShareViewController: UIViewController, HomeNavigationble {
         
         NotiAlterView.show(title: "如何领取推荐奖励？", content: "分享二维码或链接给您的好友；\n获知您好友注册之后的钱包地址；\n联系客服凭好友的钱包地址申领；\n客服核实是真实注册后发放奖励。", leftButtonTitle: "联系客服", rightButtonTitle: "我知道了").subscribe(onNext: { index in
             
+            if index == 0 {
+                let app = UIApplication.shared.delegate as? AppDelegate
+                app?.openTg()
+            }
+            
         }).disposed(by: rx.disposeBag)
+    }
+    
+    private func shareImageToTelegram(image: UIImage) {
+        let activityItems: [Any] = [image]
+        
+        let activityController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        activityController.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            } else if completed {
+                print("Image shared successfully")
+            }
+        }
+        
+        // Exclude all activities except Telegram
+        activityController.excludedActivityTypes = []
+        if let popoverPresentationController = activityController.popoverPresentationController {
+            popoverPresentationController.sourceView = UIApplication.topViewController()?.view
+            popoverPresentationController.sourceRect = CGRect(x: 0, y: 0, width: 1, height: 1)
+            popoverPresentationController.permittedArrowDirections = []
+        }
+        
+        UIApplication.topViewController()?.present(activityController, animated: true, completion: nil)
     }
 }

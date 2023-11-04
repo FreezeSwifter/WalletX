@@ -217,8 +217,10 @@ class MeTobeAddedCell: UITableViewCell {
             GuaranteeYesNoView.showFromBottom(image: UIImage(named: "me_cancel_alter_img"), title: "取消担保弹窗标题".toMultilingualism(), titleIcon: nil, content: "取消担保弹窗内容".toMultilingualism(), leftButton: "立即取消".toMultilingualism(), rightButton: "稍后再说".toMultilingualism()).subscribe(onNext: {[weak self] index in
                 guard let this = self, let id = this.model?.assureId else { return }
                 if index == 0 {
-                    APIProvider.rx.request(.cancelGuarantee(assureId: id)).mapJSON().subscribe().disposed(by: this.rx.disposeBag)
-                    NotificationCenter.default.post(name: .orderDidChangeed, object: nil)
+                    APIProvider.rx.request(.cancelGuarantee(assureId: id)).mapJSON().subscribe(onSuccess: { _ in
+                        APPHUD.flash(text: "成功".toMultilingualism())
+                        NotificationCenter.default.post(name: .orderDidChangeed, object: nil)
+                    }).disposed(by: this.rx.disposeBag)
                 }
             }).disposed(by: self.rx.disposeBag)
             
@@ -231,9 +233,10 @@ class MeTobeAddedCell: UITableViewCell {
                 SettingModifyAlterView.show(title: "担保协议".toMultilingualism(), placeholder: self.model?.agreement, leftButtonTitle: "返回".toMultilingualism(), rightButtonTitle: "保存".toMultilingualism()).subscribe(onNext: {[weak self] str in
                     
                     guard let this = self, let updateText = str, let id = this.model?.assureId else { return }
-                    APIProvider.rx.request(.updateGuarantee(assureId: id, agreement: updateText)).mapJSON().subscribe().disposed(by: this.rx.disposeBag)
-                    NotificationCenter.default.post(name: .orderDidChangeed, object: nil)
-                    
+                    APIProvider.rx.request(.updateGuarantee(assureId: id, agreement: updateText)).mapJSON().subscribe(onSuccess: { _ in
+                        APPHUD.flash(text: "成功".toMultilingualism())
+                        NotificationCenter.default.post(name: .orderDidChangeed, object: nil)
+                    }).disposed(by: this.rx.disposeBag)
                 }).disposed(by: self.rx.disposeBag)
                 
             } else if modifyButton.titleLabel?.text == "我来上押".toMultilingualism() {
@@ -294,6 +297,7 @@ class MeTobeAddedCell: UITableViewCell {
             
             if timerLabel == nil {
                 timerLabel = MZTimerLabel(label: time, andTimerType: MZTimerLabelType(rawValue: 1))
+                timerLabel?.delegate = self
             }
             let createTime = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 )
             let timeout = Int(AppArchiveder.shared().getAPPConfig(by: "joinTimeout") ?? "0") ?? 0
@@ -345,13 +349,25 @@ class MeTobeAddedCell: UITableViewCell {
             
             if timerLabel == nil {
                 timerLabel = MZTimerLabel(label: time, andTimerType: MZTimerLabelType(rawValue: 1))
+                timerLabel?.delegate = self
             }
             let createTime = Date(timeIntervalSince1970: (data.multisigTime ?? 0) / 1000 )
             let timeout = Int(AppArchiveder.shared().getAPPConfig(by: "pushTimeout") ?? "0") ?? 0
             let endTime = createTime + timeout.minutes
             let countTime = endTime - Date()
-            timerLabel?.setCountDownTime(countTime.timeInterval)
-            timerLabel?.start()
+            
+            if endTime.isInPast {
+                timerLabel?.removeFromSuperview()
+                timerLabel = nil
+                time.text = "已超时".toMultilingualism()
+                time.textColor = UIColor(hex: "#FF5966")
+                buttonStackView.arrangedSubviews.forEach { v in
+                    v.removeFromSuperview()
+                }
+            } else {
+                timerLabel?.setCountDownTime(countTime.timeInterval)
+                timerLabel?.start()
+            }
             
         } else if data.assureStatus == 7 { // 上押超时
             buttonStackView.isHidden = true
@@ -364,6 +380,7 @@ class MeTobeAddedCell: UITableViewCell {
             buttonStackView.arrangedSubviews.forEach { v in
                 v.removeFromSuperview()
             }
+            timerLabel?.removeFromSuperview()
             timerLabel = nil
             
         } else if data.assureStatus == 4 { // 已取消
@@ -377,6 +394,7 @@ class MeTobeAddedCell: UITableViewCell {
             buttonStackView.arrangedSubviews.forEach { v in
                 v.removeFromSuperview()
             }
+            timerLabel?.removeFromSuperview()
             timerLabel = nil
         }
     }
@@ -411,5 +429,17 @@ class MeTobeAddedCell: UITableViewCell {
             
         }).disposed(by: rx.disposeBag)
         
+    }
+}
+
+
+extension MeTobeAddedCell: MZTimerLabelDelegate {
+    
+    func timerLabel(_ timerLabel: MZTimerLabel!, finshedCountDownTimerWithTime countTime: TimeInterval) {
+        timerLabel?.removeFromSuperview()
+        time.text = "已超时".toMultilingualism()
+        time.textColor = UIColor(hex: "#FF5966")
+        stateLabel.textColor = UIColor(hex: "#FF5966")
+        stateLabel.text = "已超时".toMultilingualism()
     }
 }

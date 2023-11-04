@@ -69,7 +69,7 @@ class SettingModifyAlterView: UIView {
                     it.rightButton.removeFromSuperview()
                 }
                 it.titleLabel.text = title
-                it.textField.placeholder = placeholder
+                it.textField.text = placeholder
                 it.leftButton.rx.tap.subscribe(onNext: {[weak it] _ in
                     if let oc = it?.oc {
                         topVc.view.dissmiss(overlay: oc)
