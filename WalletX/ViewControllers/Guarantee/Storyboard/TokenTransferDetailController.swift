@@ -19,8 +19,6 @@ class TokenTransferDetailController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var topLabel: UILabel!
     
-    @IBOutlet weak var topSubLabel: UILabel!
-    
     @IBOutlet weak var stackBg1: UIStackView!
     
     @IBOutlet weak var stackBg2: UIStackView!
@@ -101,7 +99,22 @@ class TokenTransferDetailController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
+        topLabel.text = "\(model?.amount ?? 0)"
+        valueLabel1.text = model?.assetName
+        valueLabel2.text = model?.from
+        valueLabel3.text = model?.to
+        valueLabel4.text = "--"
         
+        desLabel1.text = "资产".toMultilingualism()
+        desLabel2.text = "From"
+        desLabel3.text = "To"
+        desLabel3.text = "网络费用".toMultilingualism()
+        
+        APIProvider.rx.request(.getTXInfo(txId: model?.txid ?? "")).mapStringValue()
+            .delay(.seconds(5), scheduler: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] str in
+            self?.valueLabel4.text = str
+        }).disposed(by: rx.disposeBag)
     }
     
     private func setupView() {

@@ -200,7 +200,7 @@ class MeTobeAddedCell: UITableViewCell {
     private func bind() {
         contactButton.rx.tap.subscribe(onNext: {[weak self] _ in
             let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
-            
+            vc.orderInfoModel = self?.model
             if self?.model?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
                 vc.walletId = self?.model?.partnerUser
             } else {
@@ -230,7 +230,7 @@ class MeTobeAddedCell: UITableViewCell {
         modifyButton.rx.tap.subscribe(onNext: {[unowned self] in
             
             if modifyButton.titleLabel?.text == "修改信息".toMultilingualism() {
-                SettingModifyAlterView.show(title: "担保协议".toMultilingualism(), placeholder: self.model?.agreement, leftButtonTitle: "返回".toMultilingualism(), rightButtonTitle: "保存".toMultilingualism()).subscribe(onNext: {[weak self] str in
+                SettingModifyAlterView.show(title: "担保协议".toMultilingualism(), text: self.model?.agreement, placeholder: "请输入担保协议".toMultilingualism(), leftButtonTitle: "返回".toMultilingualism(), rightButtonTitle: "保存".toMultilingualism()).subscribe(onNext: {[weak self] str in
                     
                     guard let this = self, let updateText = str, let id = this.model?.assureId else { return }
                     APIProvider.rx.request(.updateGuarantee(assureId: id, agreement: updateText)).mapJSON().subscribe(onSuccess: { _ in
@@ -257,10 +257,11 @@ class MeTobeAddedCell: UITableViewCell {
     @objc
     private func moneyLabelTap() {
         
-        ChangeMoneyAlterVIew.show().subscribe(onNext: { index in
+        ChangeMoneyAlterVIew.show().subscribe(onNext: {[weak self] index in
             
             if index == 0 {
                 let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+                vc.orderInfoModel = self?.model
                 vc.hidesBottomBarWhenPushed = true
                 UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
             }

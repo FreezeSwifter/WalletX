@@ -173,7 +173,7 @@ class SettingViewController: UIViewController, HomeNavigationble {
             }
         }
         
-        SettingModifyAlterView.show(title: "home_setting_Nickname".toMultilingualism(), placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
+        SettingModifyAlterView.show(title: "home_setting_Nickname".toMultilingualism(), text: nil, placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
             
             guard let text = str, text.isNotEmpty else {
                 return Observable<Any>.empty()

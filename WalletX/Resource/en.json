@@ -237,4 +237,9 @@
     "钱包已存在本地": "Wallet already exists locally",
     "助记词输入有误": "Incorrect input of mnemonic words",
     "暂无数据": "No Data",
+    "6位小数提醒": "Please enter the exact amount including all decimals when you transfer money.\nThe decimal part is the verification code to confirm whether your payment is received.",
+    "正确6为小数": "Please enter the correct 6 decimal places.",
+    "关闭": "Back",
+    "同意仲裁": "Agree Arbitration",
+    "请输入担保协议": "Please enter the guarantee agreement.",
 }

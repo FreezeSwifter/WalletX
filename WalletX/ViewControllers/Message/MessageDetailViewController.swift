@@ -77,7 +77,22 @@ extension MessageDetailViewController: UITableViewDataSource {
         cell?.avatarImageView.image = UIImage(named: item?.displayIcon() ?? "")
         let model = datasource[indexPath.row]
         cell?.timeLabel.text = Date(timeIntervalSince1970: Double((model.createTime ?? 0)) / 1000 ).toRelative(style: RelativeFormatter.twitterStyle())
-        cell?.contentLabel.text = model.content
+        
+        let originStr = model.content ?? ""
+        let newStr = originStr.replacingOccurrences(of: "{{\("同意仲裁".toMultilingualism())}}", with: "同意仲裁".toMultilingualism())
+        cell?.contentLabel.text = newStr
+        let hasAgree = model.content?.contains("\("同意仲裁".toMultilingualism())") ?? true
+        cell?.operationButton.isHidden = !hasAgree
+        
+        if hasAgree {
+            let str = model.content ?? ""
+            let indexStart = 4
+            let indexEnd = 17
+            let startIndex = str.index(str.startIndex, offsetBy: indexStart)
+            let endIndex = str.index(str.startIndex, offsetBy: indexEnd)
+            let subStr = str[startIndex...endIndex]
+            cell?.id = subStr.description
+        }
         
         return cell ?? UITableViewCell()
     }

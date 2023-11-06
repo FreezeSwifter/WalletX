@@ -7,7 +7,9 @@
 
 import UIKit
 import QMUIKit
-
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 
 class ShareViewController: UIViewController, HomeNavigationble {
@@ -50,14 +52,6 @@ class ShareViewController: UIViewController, HomeNavigationble {
     @IBOutlet weak var linkLabel: UILabel! {
         didSet {
             linkLabel.textColor = ColorConfiguration.blackText.toColor()
-            
-            let text = "ask292j31827391h9"
-            let textRange = NSRange(location: 0, length: text.count)
-            let attributedText = NSMutableAttributedString(string: text)
-            attributedText.addAttribute(.underlineStyle,
-                                        value: NSUnderlineStyle.single.rawValue,
-                                        range: textRange)
-            linkLabel.attributedText = attributedText
         }
     }
     
@@ -76,13 +70,7 @@ class ShareViewController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
-        Task {
-            let image = await ScanViewController.generateQRCode(text: "测试数据", size: 182)
-            DispatchQueue.main.async {
-                self.qrCodeImageView.image = image
-            }
-        }
-        
+    
         copyButton.rx.tap.subscribe(onNext: {[weak self] _ in
             UIPasteboard.general.string = self?.linkLabel.text
             APPHUD.flash(text: "copy successful".toMultilingualism())
@@ -106,6 +94,23 @@ class ShareViewController: UIViewController, HomeNavigationble {
             
             self.shareImageToTelegram(image: screenshotImage)
             
+        }).disposed(by: rx.disposeBag)
+        
+        APIProvider.rx.request(.appDownload).mapJSON().subscribe(onSuccess: {[weak self] obj in
+            guard let this = self, let dict = obj as? [String: Any], let data = dict["data"] as? [String: Any] else { return }
+            let iOSDownloadURL = data["iosLink"] as? String ?? ""
+            let textRange = NSRange(location: 0, length: iOSDownloadURL.count)
+            let attributedText = NSMutableAttributedString(string: iOSDownloadURL)
+            attributedText.addAttribute(.underlineStyle,
+                                        value: NSUnderlineStyle.single.rawValue,
+                                        range: textRange)
+            this.linkLabel.attributedText = attributedText
+            Task {
+                let image = await ScanViewController.generateQRCode(text: iOSDownloadURL, size: 182)
+                DispatchQueue.main.async {
+                    this.qrCodeImageView.image = image
+                }
+            }
         }).disposed(by: rx.disposeBag)
     }
     

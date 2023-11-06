@@ -305,7 +305,11 @@ class DepositingDetailController: UIViewController {
      
         explainButton.rx.tap.subscribe(onNext: {[unowned self] _ in
             
-            NotiAlterView.show(title: "什么是2-3钱包".toMultilingualism(), content: "什么是2-3钱包内容".toMultilingualism(), leftButtonTitle: "联系客服".toMultilingualism(), rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { _ in
+            NotiAlterView.show(title: "什么是2-3钱包".toMultilingualism(), content: "什么是2-3钱包内容".toMultilingualism(), leftButtonTitle: "联系客服".toMultilingualism(), rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { index in
+                if index == 0 {
+                    let app = UIApplication.shared.delegate as? AppDelegate
+                    app?.openTg()
+                }
                 
             }).disposed(by: self.rx.disposeBag)
             
@@ -333,6 +337,11 @@ class DepositingDetailController: UIViewController {
         
         downloadButton.rx.tap.subscribe(onNext: {[weak self] _ in
             self?.captureScreenshot()
+        }).disposed(by: rx.disposeBag)
+        
+        addressCopyButton.rx.tap.subscribe(onNext: {[weak self] _ in
+            UIPasteboard.general.string = self?.addrtessField.text
+            APPHUD.flash(text: "成功".toMultilingualism())
         }).disposed(by: rx.disposeBag)
     }
     

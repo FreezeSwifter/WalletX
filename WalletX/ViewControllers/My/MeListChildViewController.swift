@@ -116,6 +116,9 @@ class MeListChildViewController: UIViewController, JXSegmentedListContainerViewL
         return view
     }
     
+    func listWillAppear() {
+        fetchData()
+    }
 }
 
 extension MeListChildViewController: UITableViewDelegate {

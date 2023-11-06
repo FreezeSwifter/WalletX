@@ -55,6 +55,7 @@ struct GuaranteeInfoModel: APPBaseModel {
         var reason: Int?
         var sponsorReleasedAmount: Double?
         var partnerReleasedAmount: Double?
+        var arbitrate: Int?
         
         func assureTypeToString() -> String {
             switch assureType {

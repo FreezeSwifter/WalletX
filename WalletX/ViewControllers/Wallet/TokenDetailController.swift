@@ -152,11 +152,7 @@ class TokenDetailController: UIViewController, HomeNavigationble {
 extension TokenDetailController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let vc: TokenTransferDetailController = ViewLoader.Storyboard.controller(from: "Wallet")
-        vc.item = item
-        vc.model = datasource[indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
+ 
     }
 }
 

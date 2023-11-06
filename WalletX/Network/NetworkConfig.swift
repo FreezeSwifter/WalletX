@@ -43,6 +43,9 @@ enum NetworkService {
     case readMessage(id: String) // 消息已读
     case messageDetail(id: Int) // 消息详情
     case contactService // 联系客服
+    case appDownload // app下载地址
+    case addressValidate(address: String) // 验证收款地址是否正确
+    case arbitrateAccept(assureId: String, key: String) // 同意仲裁
 
 }
 
@@ -115,6 +118,12 @@ extension NetworkService: TargetType {
             return "/api/user/message/detail"
         case .contactService:
             return "/api/config/customer"
+        case .appDownload:
+            return "/api/config/app/download"
+        case .addressValidate:
+            return "/api/user/address/validate"
+        case .arbitrateAccept:
+            return "/api/assureOrder/arbitrate/accept"
         }
     }
     
@@ -235,6 +244,12 @@ extension NetworkService: TargetType {
             
         case let .messageDetail(id):
             return ["type": id]
+            
+        case let .addressValidate(address):
+            return ["address": address]
+            
+        case let .arbitrateAccept(assureId, key):
+            return ["assureId": assureId, "pass": key]
             
         default:
             return nil

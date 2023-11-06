@@ -14,6 +14,8 @@ import NSObject_Rx
 
 class ContactOtherController: UIViewController, HomeNavigationble {
 
+    var orderInfoModel: GuaranteeInfoModel.Meta?
+    
     var partnerUser: String?
     
     // 被邀请人钱包id
@@ -152,6 +154,18 @@ class ContactOtherController: UIViewController, HomeNavigationble {
         tContactButton.rx.tap.subscribe(onNext: { [weak self] _ in
             self?.openTg()
         }).disposed(by: rx.disposeBag)
+        
+        telegramCopyButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            UIPasteboard.general.string = self?.userModel?.data?.tg
+            APPHUD.flash(text: "成功".toMultilingualism())
+        }).disposed(by: rx.disposeBag)
+     
+        telegramCopyButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            UIPasteboard.general.string = self?.userModel?.data?.email
+            APPHUD.flash(text: "成功".toMultilingualism())
+        }).disposed(by: rx.disposeBag)
+
+        recommendContentLabel.text = "\("担保ID".toMultilingualism()): \(orderInfoModel?.assureId ?? "--")\n\("担保类型".toMultilingualism()): \(orderInfoModel?.assureTypeToString() ?? "")\n\("担保金额".toMultilingualism()): \(orderInfoModel?.amount ?? 0)"
     }
     
     private func openTg() {

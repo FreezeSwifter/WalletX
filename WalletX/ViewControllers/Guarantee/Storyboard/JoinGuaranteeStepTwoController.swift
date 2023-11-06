@@ -183,10 +183,16 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
                         UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
                         
                     } else if index == 0 {
-                        //TPDO
-//                        let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
-//                        vc.partnerUser = self?.model?.data?.partnerUser
-//                        self?.navigationController?.pushViewController(vc, animated: true)
+                        
+                        let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+                        
+                        if self?.model?.data?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+                            vc.walletId = self?.model?.data?.sponsorUser
+                        } else {
+                            vc.walletId = self?.model?.data?.sponsorUser
+                        }
+                        
+                        self?.navigationController?.pushViewController(vc, animated: true)
                     }
                 }).disposed(by: this.rx.disposeBag)
             } else {

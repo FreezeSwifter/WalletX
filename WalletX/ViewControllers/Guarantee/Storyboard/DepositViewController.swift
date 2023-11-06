@@ -89,14 +89,15 @@ class DepositViewController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var desLabel4: UILabel! {
         didSet {
-            desLabel4.text = "担保金额没有1".toMultilingualism()
+            desLabel4.text = "请输入担保金额".toMultilingualism()
         }
     }
     
     @IBOutlet weak var valueLabel4: UITextField! {
         didSet {
-            valueLabel4.isUserInteractionEnabled = false
+            valueLabel4.isUserInteractionEnabled = true
             valueLabel4.textColor = ColorConfiguration.lightBlue.toColor()
+            valueLabel4.keyboardType = .phonePad
         }
     }
     
@@ -130,7 +131,8 @@ class DepositViewController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var waringLabel: UILabel! {
         didSet {
-            waringLabel.text = "上押温馨提示".toMultilingualism()
+            let text = LanguageManager.shared().replaceBraces(inString: "上押温馨提示".toMultilingualism(), with: LocaleWalletManager.shared().walletBalanceModel?.data?.TRX ?? "--")
+            waringLabel.text = text
         }
     }
     
@@ -150,8 +152,37 @@ class DepositViewController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var sixTextField: UITextField! {
         didSet {
-            sixTextField.isUserInteractionEnabled = false
+            sixTextField.isUserInteractionEnabled = true
             sixTextField.textColor = ColorConfiguration.lightBlue.toColor()
+            sixTextField.keyboardType = .numberPad
+        }
+    }
+    
+    @IBOutlet weak var sixNitoLabel: UILabel! {
+        didSet {
+            sixNitoLabel.numberOfLines = 2
+            sixNitoLabel.adjustsFontSizeToFitWidth = true
+            sixNitoLabel.minimumScaleFactor = 0.5
+            sixNitoLabel.text = "6位小数提醒".toMultilingualism()
+        }
+    }
+    
+    @IBOutlet weak var sixNnotiStack: UIStackView! {
+        didSet {
+            sixNnotiStack.isLayoutMarginsRelativeArrangement = true
+            sixNnotiStack.layoutMargins = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
+        }
+    }
+    
+    @IBOutlet weak var addressDesLabel: UILabel! {
+        didSet {
+            addressDesLabel.text = "钱包地址".toMultilingualism()
+        }
+    }
+    
+    @IBOutlet weak var addressTextField: UITextField! {
+        didSet {
+            addressTextField.isUserInteractionEnabled = false
         }
     }
     
@@ -182,6 +213,8 @@ class DepositViewController: UIViewController, HomeNavigationble {
             sixTextField.text = item.pushDecimalPartner
         }
         
+        addressTextField.text = item.pushAddress
+        
     }
     
     private func bind() {
@@ -190,15 +223,64 @@ class DepositViewController: UIViewController, HomeNavigationble {
             self?.valueLabel5Sub2.text = "\(obj?.data?.USDT ?? "--")"
         }).disposed(by: rx.disposeBag)
         
-        nextButton.rx.tap.subscribe(onNext: {[weak self] in
+        nextButton.rx.tap.subscribe(onNext: {[unowned self] in
             
-            let vc: SelectedTokenController = ViewLoader.Storyboard.controller(from: "Wallet")
-            vc.operationType = .send
-            vc.hidesBottomBarWhenPushed = true
-            self?.navigationController?.pushViewController(vc, animated: true)
+            if self.sixTextField.text?.count == 6 {
+                
+                let addressValidateReq = APIProvider.rx.request(.addressValidate(address: self.currentItem?.pushAddress ?? "")).mapJSON()
             
+                addressValidateReq.subscribe(onSuccess: {[weak self] obj in
+                    
+                    guard let this = self, let dict = obj as? [String: Any], let data = dict["data"] as? Bool else { return }
+                    if data {
+                        
+                        let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
+                        faceIdVC.modalPresentationStyle = .fullScreen
+                        this.present(faceIdVC, animated: true)
+                        
+                        faceIdVC.resultBlock = {[weak self] res in
+                            guard let this2 = self else { return }
+                            if res {
+                                let address = this2.currentItem?.pushAddress ?? ""
+                                let amount = Int64(this2.valueLabel4.text ?? "0") ?? 0
+                                LocaleWalletManager.shared().sendToken(toAddress: address, amount: amount, coinType: .usdt(nil)).subscribe(onNext: {[weak self] tuple in
+                                    guard let this3 = self else { return }
+                                    if !tuple.0 {
+                                        return
+                                    }
+                                    
+                                    APIProvider.rx.request(.finiedOrder(assureId: this3.currentItem?.assureId ?? "")).mapStringValue().subscribe(onNext: {[weak self] res4 in
+                                        
+                                        if res4?.count ?? 0 > 0 {
+                                            
+                                            let vc: TokenTransferDetailController = ViewLoader.Storyboard.controller(from: "Wallet")
+                                            var m = TokenTecordTransferModel()
+                                            m.amount = Double(amount) 
+                                            m.assetName = "USDT"
+                                            m.from = LocaleWalletManager.shared().USDT?.address
+                                            m.to = address
+                                            m.txid = tuple.1
+                                            vc.model = m
+                                            self?.navigationController?.pushViewController(vc, animated: true)
+                                            
+                                        }
+                                        
+                                    }).disposed(by: this3.rx.disposeBag)
+         
+                                }).disposed(by: this2.rx.disposeBag)
+                            }
+                        }
+                    }
+                    
+                }).disposed(by: self.rx.disposeBag)
+                
+    
+            } else {
+                APPHUD.flash(text: "正确6为小数".toMultilingualism())
+            }
         }).disposed(by: rx.disposeBag)
     }
+
     
     @objc
     private func protocolTap() {

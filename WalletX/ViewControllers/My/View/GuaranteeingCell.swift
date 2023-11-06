@@ -247,6 +247,37 @@ class GuaranteeingCell: UITableViewCell {
                 address = str
             }
             UIPasteboard.general.string = address
+            APPHUD.flash(text: "成功".toMultilingualism())
+        }).disposed(by: rx.disposeBag)
+        
+        button1.rx.tap.subscribe(onNext: {[unowned self] in
+            if self.button1.titleLabel?.text == "联系对方".toMultilingualism() {
+                let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+                vc.orderInfoModel = self.model
+                if self.model?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+                    vc.walletId = self.model?.partnerUser
+                } else {
+                    vc.walletId = self.model?.sponsorUser
+                }
+                vc.hidesBottomBarWhenPushed = true
+                UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+        }).disposed(by: rx.disposeBag)
+        
+        button2.rx.tap.subscribe(onNext: {[unowned self] in
+            if self.button2.titleLabel?.text == "联系对方".toMultilingualism() {
+                let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+                vc.orderInfoModel = self.model
+                if self.model?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+                    vc.walletId = self.model?.partnerUser
+                } else {
+                    vc.walletId = self.model?.sponsorUser
+                }
+                vc.hidesBottomBarWhenPushed = true
+                UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+            }
+            
         }).disposed(by: rx.disposeBag)
         
     }
@@ -262,6 +293,8 @@ class GuaranteeingCell: UITableViewCell {
         valueLabel3.attributedText = amount
         valueLabel4.text = data.sponsorUserName ?? "--"
         valueLabel5.text = data.partnerUserName ?? "--"
+        valueLabel4sub.text = "\(data.sponsorAmount ?? 0)"
+        valueLabel5sub.text = "\(data.partnerAmount ?? 0)"
         
         if data.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
             desLabel4Me.isHidden = false
@@ -307,16 +340,17 @@ class GuaranteeingCell: UITableViewCell {
             buttonStackView.arrangedSubviews.forEach { v in
                 v.removeFromSuperview()
             }
-            buttonStackView.addArrangedSubview(button1)
             buttonStackView.addArrangedSubview(button2)
-            buttonStackView.addArrangedSubview(button3)
-            button1.setupAPPUIHollowStyle(title: "联系客服".toMultilingualism())
             button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
         
             if data.releaseSponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+                buttonStackView.addArrangedSubview(button3)
                 button3.setupAPPUISolidStyle(title: "撤销申请".toMultilingualism())
             } else {
-                button3.setupAPPUISolidStyle(title: "处理解押".toMultilingualism())
+                if data.arbitrate == 0 {
+                    buttonStackView.addArrangedSubview(button3)
+                    button3.setupAPPUISolidStyle(title: "处理解押".toMultilingualism())
+                }
             }
             
         } else if data.assureStatus == 3 { // 已退押
@@ -328,7 +362,7 @@ class GuaranteeingCell: UITableViewCell {
             buttonStackView.addArrangedSubview(button2)
             button1.setupAPPUIHollowStyle(title: "联系客服".toMultilingualism())
             button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
-
+            
         } else if data.assureStatus == 8 { // 已删除, 已取消
             buttonStackView.isHidden = true
             buttonStackView.arrangedSubviews.forEach { v in

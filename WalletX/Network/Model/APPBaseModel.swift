@@ -60,4 +60,6 @@ struct TokenTecordTransferModel: HandyJSON {
     var amount: Double?
     var blockNum: Int64?
     var createTime: Double?
+    var fee: String?
+    var assetName: String?
 }

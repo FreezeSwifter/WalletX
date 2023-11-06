@@ -102,6 +102,7 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
         
         copyButton.rx.tap.subscribe(onNext: {[weak self] in
             UIPasteboard.general.string = self?.model?.assureId
+            APPHUD.flash(text: "成功".toMultilingualism())
         }).disposed(by: rx.disposeBag)
         
         doneButton.rx.tap.subscribe(onNext: {[weak self] in

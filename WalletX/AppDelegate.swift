@@ -68,6 +68,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             APPHUD.flash(text: "Not Install Telegram")
         }
     }
+    
+    func fetchMessage() {
+        let req: Observable<[MessageListModel]> = APIProvider.rx.request(.messageList).mapModelArray()
+        req.subscribe(onNext: {[weak self] list in
+            self?.messageDataSubject.accept(list)
+            let unread = list.filter { $0.status == 0 }
+            if unread.count > 0 {
+                self?.tabBarViewController.children[2].tabBarItem.qmui_shouldShowUpdatesIndicator = true
+                self?.tabBarViewController.children[2].tabBarItem.qmui_badgeInteger = 0
+            }
+        }).disposed(by: rx.disposeBag)
+    }
 }
 
 private
@@ -175,18 +187,6 @@ extension AppDelegate {
         let req: Observable<[AppSystemConfigModel]> = APIProvider.rx.request(.systemConfigFind).mapModelArray()
         req.subscribe(onNext: { list in
             AppArchiveder.shared().setupAppConfigs(data: list)
-        }).disposed(by: rx.disposeBag)
-    }
-    
-    func fetchMessage() {
-        let req: Observable<[MessageListModel]> = APIProvider.rx.request(.messageList).mapModelArray()
-        req.subscribe(onNext: {[weak self] list in
-            self?.messageDataSubject.accept(list)
-            let unread = list.filter { $0.status == 0 }
-            if unread.count > 0 {
-                self?.tabBarViewController.children[2].tabBarItem.qmui_shouldShowUpdatesIndicator = true
-                self?.tabBarViewController.children[2].tabBarItem.qmui_badgeInteger = 0
-            }
         }).disposed(by: rx.disposeBag)
     }
     

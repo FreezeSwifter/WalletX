@@ -272,25 +272,34 @@ final class LocaleWalletManager {
     }
     
     // 发送token
-    func sendToken(toAddress: String, amount: Int64, coinType: WalletToken) {
+    func sendToken(toAddress: String, amount: Int64, coinType: WalletToken) -> Observable<(Bool, String)> {
        
-        if coinType == .tron(nil) {
-            // 1 This value is 0.000001
-            let amountText = amount * 100000
-            tronWeb.trxTransfer(toAddress: toAddress, amount: amountText.description) { (state, txid) in
+        return Observable.create {[unowned self] o in
+            
+            if coinType == .tron(nil) {
+                // 1 This value is 0.000001
+                let amountText = amount * 1000000
+                self.tronWeb.trxTransfer(toAddress: toAddress, amount: amountText.description) { (state, txid) in
+                    o.onNext((state, txid))
+                    o.onCompleted()
+                    print("state = \(state)")
+                    print("txid = \(txid)")
+                }
                 
-                print("state = \(state)")
-                print("txid = \(txid)")
+            } else {
+                let amountText = amount.description
+                self.tronWeb.trc20TokenTransfer(toAddress: toAddress, trc20ContractAddress: usdtContractAddress, amount: amountText, remark: "") {(state, txid) in
+                    o.onNext((state, txid))
+                    o.onCompleted()
+                    print("state = \(state)")
+                    print("txid = \(txid)")
+                }
             }
             
-        } else {
-            let amountText = amount.description
-            tronWeb.trc20TokenTransfer(toAddress: toAddress, trc20ContractAddress: usdtContractAddress, amount: amountText, remark: "") {(state, txid) in
-                
-                print("state = \(state)")
-                print("txid = \(txid)")
-            }
+            return Disposables.create {}
         }
+        
+      
     }
 }
 

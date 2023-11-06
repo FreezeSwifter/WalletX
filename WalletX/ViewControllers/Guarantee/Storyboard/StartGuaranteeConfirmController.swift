@@ -169,6 +169,7 @@ class StartGuaranteeConfirmController: UIViewController, HomeNavigationble {
         
         addressCopyButton.rx.tap.subscribe(onNext: {[weak self] in
             UIPasteboard.general.string = self?.addressTextField.text
+            APPHUD.flash(text: "成功".toMultilingualism())
         }).disposed(by: rx.disposeBag)
         
         downloadButton.rx.tap.subscribe(onNext: {[weak self] _ in

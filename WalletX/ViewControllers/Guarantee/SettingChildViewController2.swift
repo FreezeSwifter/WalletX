@@ -69,7 +69,7 @@ class SettingChildViewController2: UIViewController, HomeNavigationble {
     
     @IBAction func changeTelegramTap(_ sender: UIControl) {
         
-        SettingModifyAlterView.show(title: "home_setting_telegram".toMultilingualism(), placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
+        SettingModifyAlterView.show(title: "home_setting_telegram".toMultilingualism(), text: nil, placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
             
             guard let text = str, text.isNotEmpty else {
                 return Observable<Any>.empty()
@@ -86,7 +86,7 @@ class SettingChildViewController2: UIViewController, HomeNavigationble {
     
     @IBAction func changeEmailTap(_ sender: UIControl) {
         
-        SettingModifyAlterView.show(title: "home_setting_email".toMultilingualism(), placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
+        SettingModifyAlterView.show(title: "home_setting_email".toMultilingualism(), text: nil, placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
             
             guard let text = str, text.isNotEmpty else {
                 return Observable<Any>.empty()

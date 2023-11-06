@@ -41,6 +41,12 @@ class MessageViewController: UIViewController, HomeNavigationble {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let app = UIApplication.shared.delegate as? AppDelegate
+        app?.fetchMessage()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +57,9 @@ class MessageViewController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
+        
+        fetchData()
+        
         headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
             let settingVC: SettingViewController = ViewLoader.Xib.controller()
             settingVC.hidesBottomBarWhenPushed = true
@@ -75,6 +84,13 @@ class MessageViewController: UIViewController, HomeNavigationble {
             app?.openTg()
         }).disposed(by: rx.disposeBag)
         
+        NotificationCenter.default.rx.notification(.languageChanged).observe(on: MainScheduler.instance).subscribe(onNext: { _ in
+            let app = UIApplication.shared.delegate as? AppDelegate
+            app?.fetchMessage()
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    private func fetchData() {
         let app = UIApplication.shared.delegate as? AppDelegate
         app?.messageData.subscribe(onNext: { [weak self] list in
             self?.datasource = list ?? []

@@ -43,7 +43,7 @@ class SettingModifyAlterView: UIView {
         backgroundColor = .white
     }
     
-    static func show(title: String?, placeholder: String?, leftButtonTitle: String?, rightButtonTitle: String?) -> Observable<String?> {
+    static func show(title: String?, text: String?, placeholder: String?, leftButtonTitle: String?, rightButtonTitle: String?) -> Observable<String?> {
         return Observable<String?>.create { o in
             guard let topVc = AppDelegate.topViewController() else {
                 return Disposables.create {}
@@ -69,7 +69,8 @@ class SettingModifyAlterView: UIView {
                     it.rightButton.removeFromSuperview()
                 }
                 it.titleLabel.text = title
-                it.textField.text = placeholder
+                it.textField.text = text
+                it.textField.placeholder = placeholder
                 it.leftButton.rx.tap.subscribe(onNext: {[weak it] _ in
                     if let oc = it?.oc {
                         topVc.view.dissmiss(overlay: oc)

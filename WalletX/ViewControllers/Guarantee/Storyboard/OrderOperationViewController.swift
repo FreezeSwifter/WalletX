@@ -395,6 +395,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         
         addressCopyButton.rx.tap.subscribe(onNext: {[weak self] in
             UIPasteboard.general.string = self?.walletTextField.text
+            APPHUD.flash(text: "成功".toMultilingualism())
         }).disposed(by: rx.disposeBag)
         
         tradeCompletedButton.rx.tap.subscribe(onNext: {[weak self] in

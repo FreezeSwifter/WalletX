@@ -218,7 +218,11 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
         helpButton.rx.tap.subscribe(onNext: {[unowned self] _ in
             
             NotiAlterView.show(title: "什么是多签手续费".toMultilingualism(), content: "多签手续费内容".toMultilingualism(), leftButtonTitle: "联系客服".toMultilingualism(), rightButtonTitle: "知道啦".toMultilingualism()).subscribe(onNext: { index in
-                print(index)
+                
+                if index == 0 {
+                    let app = UIApplication.shared.delegate as? AppDelegate
+                    app?.openTg()
+                }
                 
             }).disposed(by: self.rx.disposeBag)
             
@@ -265,7 +269,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
             guard let this = self else { return }
             this.multipleButton.isSelected = true
             this.normalButton.isSelected = false
-            this.parameter.assureType = 1
+            this.parameter.assureType = 0
             
         }).disposed(by: rx.disposeBag)
         
@@ -273,7 +277,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
             guard let this = self else { return }
             this.multipleButton.isSelected = false
             this.normalButton.isSelected = true
-            this.parameter.assureType = 0
+            this.parameter.assureType = 1
             
         }).disposed(by: rx.disposeBag)
     }
