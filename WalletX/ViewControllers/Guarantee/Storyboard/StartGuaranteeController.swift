@@ -241,7 +241,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
                     guard let this2 = self, let dict = obj as? [String: Any], let data = dict["data"] as? [String: Any] else { return }
                     let assureId = data["assureId"] as? String ?? ""
                     let amount = data["amount"] as? Double ?? 0
-                    if this2.parameter.assureType == 0 { // 普通
+                    if this2.parameter.assureType == 1 { // 普通
                         let vc: InviteGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
                         var m =  GuaranteeInfoModel.Meta()
                         m.amount = amount

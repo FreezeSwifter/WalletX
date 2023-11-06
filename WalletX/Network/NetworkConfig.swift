@@ -46,6 +46,7 @@ enum NetworkService {
     case appDownload // app下载地址
     case addressValidate(address: String) // 验证收款地址是否正确
     case arbitrateAccept(assureId: String, key: String) // 同意仲裁
+    case releaseInfo(assureId: String) // 申请解押查询
 
 }
 
@@ -124,6 +125,8 @@ extension NetworkService: TargetType {
             return "/api/user/address/validate"
         case .arbitrateAccept:
             return "/api/assureOrder/arbitrate/accept"
+        case .releaseInfo:
+            return "/api/assureOrder/release/info"
         }
     }
     
@@ -225,7 +228,8 @@ extension NetworkService: TargetType {
             return ["assureId": assureId]
             
         case let .assureReleaseApply(assureId, reason, sponsorReleasedAmount, partnerReleasedAmount):
-            return ["assureId": assureId, "reason": reason, "sponsorReleasedAmount": sponsorReleasedAmount, "partnerReleasedAmount": partnerReleasedAmount]
+            let key = LocaleWalletManager.shared().currentWallet?.getKeyForCoin(coin: .tron).data.hexString ?? ""
+            return ["assureId": assureId, "reason": reason, "sponsorReleasedAmount": sponsorReleasedAmount, "partnerReleasedAmount": partnerReleasedAmount, "pass": key]
             
         case let .revokeAssureApply(assureId):
             return ["assureId": assureId]
@@ -250,6 +254,9 @@ extension NetworkService: TargetType {
             
         case let .arbitrateAccept(assureId, key):
             return ["assureId": assureId, "pass": key]
+            
+        case let .releaseInfo(assureId):
+            return ["assureId": assureId]
             
         default:
             return nil

@@ -229,12 +229,16 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
     @IBOutlet weak var textField1: UITextField! {
         didSet {
             textField1.placeholder = "请输入金额".toMultilingualism()
+            textField1.keyboardType = .decimalPad
+            textField1.isUserInteractionEnabled = false
         }
     }
     
     @IBOutlet weak var textField2: UITextField! {
         didSet {
-            textField1.placeholder = "请输入金额".toMultilingualism()
+            textField2.placeholder = "请输入金额".toMultilingualism()
+            textField2.keyboardType = .decimalPad
+            textField2.isUserInteractionEnabled = false
         }
     }
     
@@ -320,7 +324,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         desLabel10.text = "收款账户".toMultilingualism()
         
         if let id = assureId {
-            let req: Observable<GuaranteeInfoModel?> = APIProvider.rx.request(.getAssureOrderDetail(assureId: id)).mapModel()
+            let req: Observable<GuaranteeInfoModel?> = APIProvider.rx.request(.releaseInfo(assureId: id)).mapModel()
             req.subscribe(onNext: {[weak self] obj in
                 self?.model = obj
                 self?.valueLabel1.text = id
@@ -343,14 +347,14 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 partnerReleasedAmount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
                 self?.valueLabel5Sub.attributedText = partnerReleasedAmount
                 
-                self?.valueLabel6.text = "\(Date(timeIntervalSince1970: (obj?.data?.duration ?? 0) / 1000 ).minutes(since: Date()))"
+                self?.valueLabel6.text = "\(Date(timeIntervalSince1970: (obj?.data?.duration ?? 0) / 1000 ).days(since: Date()))"
                 self?.valueLabel7.text = "\(obj?.data?.assureFee ?? 0)"
                 self?.valueLabel8.text = "\(obj?.data?.releaseAmountCan ?? 0)"
-                if obj?.data?.reason == 0 {
-                    self?.tradeCompletedButton.isSelected = true
-                } else {
-                    self?.tradeCancelButton.isSelected = true
-                }
+                
+                self?.valueLabel4Sub.text = "\(obj?.data?.sponsorAmount ?? 0)"
+                self?.valueLabel5Sub.text = "\(obj?.data?.partnerAmount ?? 0)"
+    
+                self?.tradeCancelButton.isSelected = true
                 
                 self?.accountButton1.setTitle(obj?.data?.sponsorUserName, for: .normal)
                 self?.accountButton2.setTitle(obj?.data?.partnerUserName, for: .normal)
@@ -358,25 +362,20 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 self?.textField2.text = "\(obj?.data?.partnerReleasedAmount ?? 0)"
                 
                 if obj?.data?.assureType == 0 {
-                    self?.walletTextField.text = obj?.data?.pushAddress
+                    self?.walletBg.isHidden = true
+                    self?.walletDesLabel.isHidden = true
                 } else {
+                    self?.walletBg.isHidden = false
                     self?.walletTextField.text = obj?.data?.multisigAddress
                 }
                 
                 if obj?.data?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
                     self?.desLabel4Me.isHidden = false
                     self?.desLabel5Me.isHidden = true
-                    self?.accountButton1.isSelected = true
-                    self?.accountButton2.isSelected = false
-                    self?.textField1.isUserInteractionEnabled = true
-                    self?.textField2.isUserInteractionEnabled = false
+                    
                 } else {
                     self?.desLabel4Me.isHidden = true
                     self?.desLabel5Me.isHidden = false
-                    self?.accountButton1.isSelected = false
-                    self?.accountButton2.isSelected = true
-                    self?.textField1.isUserInteractionEnabled = false
-                    self?.textField2.isUserInteractionEnabled = true
                 }
                 
                 if obj?.data?.assureStatus == 2 {
@@ -389,6 +388,8 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                     self?.valueLabel1State.textColor = UIColor(hex: "#7241FF")
                     self?.valueLabel1State.text = "me_releasing".toMultilingualism()
                 }
+                
+                
                 
             }).disposed(by: rx.disposeBag)
         }
@@ -415,17 +416,23 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 let reason = this.tradeCompletedButton.isSelected ? 0 : 1
                 let sponsorReleasedAmount = this.textField1.text ?? ""
                 let partnerReleasedAmount = this.textField2.text ?? ""
+                let add = (Double(sponsorReleasedAmount) ?? 0) + (Double(partnerReleasedAmount) ?? 0)
+                if this.model?.data?.releaseAmountCan != add && this.accountButton1.isSelected && this.accountButton2.isSelected {
+                    APPHUD.flash(text: "请检查输入项".toMultilingualism())
+                    return
+                }
+                
                 APIProvider.rx.request(.assureReleaseApply(assureId: id, reason: reason, sponsorReleasedAmount: sponsorReleasedAmount, partnerReleasedAmount: partnerReleasedAmount)).mapJSON().subscribe(onSuccess: {[weak self] obj in
                     guard let dict = obj as? [String: Any], let this = self else { return }
-                    let message = dict["message"] as? String
-                    if message.isNilOrEmpty {
+                    let code = dict["code"] as? Int
+                    if code == 0 {
                         let titleIcon = UIImage(named: "wallet_noti2")?.qmui_image(withTintColor: ColorConfiguration.primary.toColor())
                         GuaranteeYesNoView.showFromBottom(image: UIImage(named: "me_release_apply"), title: "解押通知".toMultilingualism(), titleIcon: titleIcon, content: "解押通知内容".toMultilingualism(), leftButton: "通知对方".toMultilingualism(), rightButton: "完成".toMultilingualism()).subscribe(onNext: { index in
                             
                         }).disposed(by: this.rx.disposeBag)
                         
                     } else {
-                        APPHUD.flash(text: message)
+                        APPHUD.flash(text: dict["code"] as? String)
                     }
                 }).disposed(by: this.rx.disposeBag)
                 
@@ -460,6 +467,35 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 
             }
             
+        }).disposed(by: rx.disposeBag)
+        
+        buttonLeftButton.rx.tap.subscribe(onNext: {[weak self] _ in
+           
+            let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+            if self?.model?.data?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+                vc.walletId = self?.model?.data?.partnerUser
+            } else {
+                vc.walletId = self?.model?.data?.sponsorUser
+            }
+            self?.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
+        
+        accountButton1.rx.tap.subscribe(onNext: {[unowned self] _ in
+            self.accountButton1.isSelected = !self.accountButton1.isSelected
+            if !self.accountButton1.isSelected {
+                self.textField1.text = nil
+            }
+            self.textField1.isUserInteractionEnabled = self.accountButton1.isSelected
+        }).disposed(by: rx.disposeBag)
+        
+        accountButton2.rx.tap.subscribe(onNext: {[unowned self] _ in
+            self.accountButton2.isSelected = !self.accountButton2.isSelected
+            
+            if !self.accountButton2.isSelected {
+                self.textField2.text = nil
+            }
+            self.textField2.isUserInteractionEnabled = self.accountButton2.isSelected
         }).disposed(by: rx.disposeBag)
     }
     
