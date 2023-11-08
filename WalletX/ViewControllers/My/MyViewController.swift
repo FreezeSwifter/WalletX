@@ -15,7 +15,7 @@ import NSObject_Rx
 
 class MyViewController: UIViewController, HomeNavigationble {
     
-    private static let titleData = ["me_all".toMultilingualism(), "me_pending".toMultilingualism(), "me_depositing".toMultilingualism(), "me_guaranteeing".toMultilingualism(), "me_releasing".toMultilingualism(), "me_released".toMultilingualism()]
+    private var titleData: [String] = ["me_all".toMultilingualism(), "me_pending".toMultilingualism(), "me_depositing".toMultilingualism(), "me_guaranteeing".toMultilingualism(), "me_releasing".toMultilingualism(), "me_released".toMultilingualism()]
     
     private let infoView: MeInfoView = ViewLoader.Xib.view()
     
@@ -50,7 +50,7 @@ class MyViewController: UIViewController, HomeNavigationble {
         ds.titleNormalFont = UIFont.systemFont(ofSize: 15, weight: .medium)
         ds.isTitleZoomEnabled = false
         ds.titleSelectedZoomScale = 1
-        ds.titles = MyViewController.titleData
+        ds.titles = titleData
         return ds
     }()
     
@@ -62,7 +62,7 @@ class MyViewController: UIViewController, HomeNavigationble {
         return segContainerView
     }()
     
-    private lazy var childVC: [JXSegmentedListContainerViewListDelegate] = MyViewController.titleData.enumerated().map { index, str -> JXSegmentedListContainerViewListDelegate in
+    private lazy var childVC: [JXSegmentedListContainerViewListDelegate] = (0...6).enumerated().map { index, str -> JXSegmentedListContainerViewListDelegate in
         let vc = MeListChildViewController()
         vc.delegate = self
         switch index {
@@ -87,6 +87,10 @@ class MyViewController: UIViewController, HomeNavigationble {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         NotificationCenter.default.rx.notification(.languageChanged).observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
             self?.tabBarItem.title = "tab_me".toMultilingualism()
+            self?.titleData.removeAll()
+            self?.titleData = ["me_all".toMultilingualism(), "me_pending".toMultilingualism(), "me_depositing".toMultilingualism(), "me_guaranteeing".toMultilingualism(), "me_releasing".toMultilingualism(), "me_released".toMultilingualism()]
+            self?.segmentedDataSource.titles = self?.titleData ?? []
+            self?.segmentedView.reloadData()
         }).disposed(by: rx.disposeBag)
     }
     

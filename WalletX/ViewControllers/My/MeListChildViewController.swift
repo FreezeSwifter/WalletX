@@ -79,6 +79,12 @@ class MeListChildViewController: UIViewController, JXSegmentedListContainerViewL
             .subscribe(onNext: {[weak self] _ in
                 self?.fetchData()
         }).disposed(by: rx.disposeBag)
+        
+        NotificationCenter.default.rx.notification(.languageChanged)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] _ in
+                self?.fetchData()
+        }).disposed(by: rx.disposeBag)
     }
     
     @objc

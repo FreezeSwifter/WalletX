@@ -143,6 +143,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         contactButton.rx.tap.subscribe(onNext: { [weak self] _ in
             let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
             vc.walletId = self?.model?.data?.sponsorUser
+            vc.orderInfoModel = self?.model?.data
             self?.navigationController?.pushViewController(vc, animated: true)
             
         }).disposed(by: rx.disposeBag)

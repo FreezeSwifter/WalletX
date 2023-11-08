@@ -138,7 +138,7 @@ class DepositViewController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var nextButton: UIButton! {
         didSet {
-            nextButton.setupAPPUISolidStyle(title: "下一步".toMultilingualism())
+            nextButton.setupAPPUISolidStyle(title: "上传押金".toMultilingualism())
         }
     }
     
@@ -246,6 +246,7 @@ class DepositViewController: UIViewController, HomeNavigationble {
                                 LocaleWalletManager.shared().sendToken(toAddress: address, amount: amount, coinType: .usdt(nil)).subscribe(onNext: {[weak self] tuple in
                                     guard let this3 = self else { return }
                                     if !tuple.0 {
+                                        APPHUD.flash(text: "链上转账失败".toMultilingualism())
                                         return
                                     }
                                     

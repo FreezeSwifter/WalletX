@@ -65,6 +65,8 @@ class JoinGuaranteeController: UIViewController, HomeNavigationble {
     @IBOutlet weak var queryButton: UIButton! {
         didSet {
             queryButton.setTitle("查询".toMultilingualism(), for: .normal)
+            queryButton.titleLabel?.adjustsFontSizeToFitWidth = true
+            queryButton.titleLabel?.minimumScaleFactor = 0.5
         }
     }
     

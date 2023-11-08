@@ -163,6 +163,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
             tradeCancelButton.setImage(UIImage(named: "me_checkbox2"), for: .selected)
             tradeCancelButton.setTitle("交易取消".toMultilingualism(), for: .normal)
             tradeCancelButton.spacingBetweenImageAndTitle = 10
+            
         }
     }
     
@@ -267,6 +268,8 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
     @IBOutlet weak var addressCopyButton: UIButton! {
         didSet {
             addressCopyButton.setTitle("share_Copy".toMultilingualism(), for: .normal)
+            addressCopyButton.titleLabel?.adjustsFontSizeToFitWidth = true
+            addressCopyButton.titleLabel?.minimumScaleFactor = 0.5
         }
     }
     
@@ -292,8 +295,6 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
     private func bind() {
         switch state {
         case .applyRelease:
-            textField1.isUserInteractionEnabled = true
-            textField2.isUserInteractionEnabled = true
             buttonLeftButton.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
             bottomRightButton.setupAPPUISolidStyle(title: "立即申请".toMultilingualism())
             
@@ -354,12 +355,11 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 self?.valueLabel4Sub.text = "\(obj?.data?.sponsorAmount ?? 0)"
                 self?.valueLabel5Sub.text = "\(obj?.data?.partnerAmount ?? 0)"
     
-                self?.tradeCancelButton.isSelected = true
+                self?.tradeCompletedButton.isSelected = true
                 
                 self?.accountButton1.setTitle(obj?.data?.sponsorUserName, for: .normal)
                 self?.accountButton2.setTitle(obj?.data?.partnerUserName, for: .normal)
-                self?.textField1.text = "\(obj?.data?.sponsorReleasedAmount ?? 0)"
-                self?.textField2.text = "\(obj?.data?.partnerReleasedAmount ?? 0)"
+    
                 
                 if obj?.data?.assureType == 0 {
                     self?.walletBg.isHidden = true
@@ -414,8 +414,8 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
             
             if this.bottomRightButton.titleLabel?.text == "立即申请".toMultilingualism() {
                 let reason = this.tradeCompletedButton.isSelected ? 0 : 1
-                let sponsorReleasedAmount = this.textField1.text ?? ""
-                let partnerReleasedAmount = this.textField2.text ?? ""
+                let sponsorReleasedAmount = this.textField1.text ?? "0"
+                let partnerReleasedAmount = this.textField2.text ?? "0"
                 let add = (Double(sponsorReleasedAmount) ?? 0) + (Double(partnerReleasedAmount) ?? 0)
                 if this.model?.data?.releaseAmountCan != add && this.accountButton1.isSelected && this.accountButton2.isSelected {
                     APPHUD.flash(text: "请检查输入项".toMultilingualism())
@@ -432,7 +432,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                         }).disposed(by: this.rx.disposeBag)
                         
                     } else {
-                        APPHUD.flash(text: dict["code"] as? String)
+                        APPHUD.flash(text: dict["message"] as? String)
                     }
                 }).disposed(by: this.rx.disposeBag)
                 

@@ -85,13 +85,24 @@ extension MessageDetailViewController: UITableViewDataSource {
         cell?.operationButton.isHidden = !hasAgree
         
         if hasAgree {
-            let str = model.content ?? ""
-            let indexStart = 4
-            let indexEnd = 17
-            let startIndex = str.index(str.startIndex, offsetBy: indexStart)
-            let endIndex = str.index(str.startIndex, offsetBy: indexEnd)
-            let subStr = str[startIndex...endIndex]
-            cell?.id = subStr.description
+            if LanguageManager.shared().currentCode == .cn {
+                let str = model.content ?? ""
+                let indexStart = 4
+                let indexEnd = 17
+                let startIndex = str.index(str.startIndex, offsetBy: indexStart)
+                let endIndex = str.index(str.startIndex, offsetBy: indexEnd)
+                let subStr = str[startIndex...endIndex]
+                cell?.id = subStr.description
+                
+            } else {
+                let str = model.content ?? ""
+                let indexStart = 15
+                let indexEnd = 28
+                let startIndex = str.index(str.startIndex, offsetBy: indexStart)
+                let endIndex = str.index(str.startIndex, offsetBy: indexEnd)
+                let subStr = str[startIndex...endIndex]
+                cell?.id = subStr.description
+            }
         }
         
         return cell ?? UITableViewCell()

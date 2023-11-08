@@ -45,7 +45,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
     @IBOutlet weak var moneyTextField: UITextField! {
         didSet {
             moneyTextField.placeholder = "请输入担保金额".toMultilingualism()
-            moneyTextField.keyboardType = .decimalPad
+            moneyTextField.keyboardType = .numberPad
         }
     }
     
@@ -135,7 +135,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
     @IBOutlet weak var nextButton: UIButton! {
         didSet {
             nextButton.backgroundColor = ColorConfiguration.primary.toColor()
-            nextButton.setTitle("下一步".toMultilingualism(), for: .normal)
+            nextButton.setTitle("创建担保".toMultilingualism(), for: .normal)
             nextButton.layer.cornerRadius = 10
         }
     }
@@ -241,19 +241,13 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
                     guard let this2 = self, let dict = obj as? [String: Any], let data = dict["data"] as? [String: Any] else { return }
                     let assureId = data["assureId"] as? String ?? ""
                     let amount = data["amount"] as? Double ?? 0
-                    if this2.parameter.assureType == 1 { // 普通
-                        let vc: InviteGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
-                        var m =  GuaranteeInfoModel.Meta()
-                        m.amount = amount
-                        m.assureId = assureId
-                        vc.model = m
-                        this2.navigationController?.pushViewController(vc, animated: true)
-                        NotificationCenter.default.post(name: .orderDidChangeed, object: nil)
-                    } else { // 多钱手续费
-                        let vc: StartGuaranteeConfirmController = ViewLoader.Storyboard.controller(from: "Guarantee")
-                        vc.parameter = self?.parameter
-                        self?.navigationController?.pushViewController(vc, animated: true)
-                    }
+                    let vc: InviteGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
+                    var m =  GuaranteeInfoModel.Meta()
+                    m.amount = amount
+                    m.assureId = assureId
+                    vc.model = m
+                    this2.navigationController?.pushViewController(vc, animated: true)
+                    NotificationCenter.default.post(name: .orderDidChangeed, object: nil)
                     
                     if dict["message"] as? String != "Success" {
                         APPHUD.flash(text: dict["message"] as? String)
@@ -263,7 +257,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
             
         }).disposed(by: rx.disposeBag)
         
-        parameter.assureType = 0
+        parameter.assureType = 1
         
         multipleButton.rx.tap.subscribe(onNext: {[weak self] in
             guard let this = self else { return }

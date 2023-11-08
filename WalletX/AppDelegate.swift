@@ -77,31 +77,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if unread.count > 0 {
                 self?.tabBarViewController.children[2].tabBarItem.qmui_shouldShowUpdatesIndicator = true
                 self?.tabBarViewController.children[2].tabBarItem.qmui_badgeInteger = 0
+            } else {
+                self?.tabBarViewController.children[2].tabBarItem.qmui_shouldShowUpdatesIndicator = false
             }
         }).disposed(by: rx.disposeBag)
     }
-}
-
-private
-extension AppDelegate {
     
-    func commonInit() {
-        
-        AppArchiveder.shared()
-        
-        LocaleWalletManager.shared()
-        
-        SwiftDate.defaultRegion = Region.current
-        
-        QMUIThemeManagerCenter.defaultThemeManager.themeGenerator = { identifier -> NSObject in
-            return QMUIConfigurationTemplate.init()
-        }
-        
-        IQKeyboardManager.shared().isEnabled = true
-        IQKeyboardManager.shared().shouldPlayInputClicks = true
-        IQKeyboardManager.shared().shouldResignOnTouchOutside = true
-        IQKeyboardManager.shared().shouldShowToolbarPlaceholder = false
-        
+    func setupWindow() {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         // 担保
@@ -133,6 +115,30 @@ extension AppDelegate {
         window?.rootViewController = tabBarViewController
         window?.backgroundColor = .white
         window?.makeKeyAndVisible()
+    }
+}
+
+private
+extension AppDelegate {
+    
+    func commonInit() {
+        
+        AppArchiveder.shared()
+        
+        LocaleWalletManager.shared()
+        
+        SwiftDate.defaultRegion = Region.current
+        
+        QMUIThemeManagerCenter.defaultThemeManager.themeGenerator = { identifier -> NSObject in
+            return QMUIConfigurationTemplate.init()
+        }
+        
+        IQKeyboardManager.shared().isEnabled = true
+        IQKeyboardManager.shared().shouldPlayInputClicks = true
+        IQKeyboardManager.shared().shouldResignOnTouchOutside = true
+        IQKeyboardManager.shared().shouldShowToolbarPlaceholder = false
+        
+        setupWindow()
         
         LocaleWalletManager.shared()
         

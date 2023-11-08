@@ -20,7 +20,7 @@ class FaceIDViewController: UIViewController {
     
     @IBOutlet weak var closeButton: UIButton! {
         didSet {
-            lockButton.setTitle("关闭".toMultilingualism(), for: .normal)
+            closeButton.setTitle("关闭".toMultilingualism(), for: .normal)
         }
     }
     

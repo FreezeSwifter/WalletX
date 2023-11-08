@@ -152,7 +152,7 @@ class GuaranteeYesNoView: UIView {
             guard let topVc = AppDelegate.topViewController() else {
                 return Disposables.create {}
             }
-            var baseHeight: CGFloat = 380
+            var baseHeight: CGFloat = 400
             let width = topVc.view.bounds.width - 82
             
             let calculateHeightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width - 30 - 82, height: .greatestFiniteMagnitude))

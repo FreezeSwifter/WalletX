@@ -160,8 +160,13 @@ class ContactOtherController: UIViewController, HomeNavigationble {
             APPHUD.flash(text: "成功".toMultilingualism())
         }).disposed(by: rx.disposeBag)
      
-        telegramCopyButton.rx.tap.subscribe(onNext: { [weak self] _ in
+        eamilCopyButton.rx.tap.subscribe(onNext: { [weak self] _ in
             UIPasteboard.general.string = self?.userModel?.data?.email
+            APPHUD.flash(text: "成功".toMultilingualism())
+        }).disposed(by: rx.disposeBag)
+
+        pasteButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            UIPasteboard.general.string = self?.recommendContentLabel.text
             APPHUD.flash(text: "成功".toMultilingualism())
         }).disposed(by: rx.disposeBag)
 

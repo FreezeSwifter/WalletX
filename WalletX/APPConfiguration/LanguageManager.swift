@@ -110,10 +110,9 @@ class LanguageManager: NSObject {
         }
         currentCode = languageCode
         languageDict = jsonDict
-        
         AppArchiveder.shared().mmkv?.set(languageCode.rawValue, forKey: ArchivedKey.language.rawValue)
-        NotificationCenter.default.post(name: .languageChanged, object: nil)
         languageChangedSubject.onNext(currentCode)
+        NotificationCenter.default.post(name: .languageChanged, object: nil)
     }
     
 }

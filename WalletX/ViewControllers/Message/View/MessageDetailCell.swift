@@ -52,19 +52,21 @@ class MessageDetailCell: UITableViewCell {
         
         let assureId = id ?? ""
         let key = LocaleWalletManager.shared().currentWallet?.getKeyForCoin(coin: .tron).data.hexString ?? ""
+
+        GuaranteeYesNoView.showFromCenter(image: UIImage(named: "guarantee_yes_no"), title: "您同意这个仲裁方法吗".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "仲裁弹窗内容".toMultilingualism(), leftButton: "取消".toMultilingualism(), rightButton: "确定".toMultilingualism()).subscribe(onNext: {[unowned self] index in
         
-        operationButton.rx.tap.subscribe(onNext: {[weak self] in
-            guard let this = self else { return}
-            APIProvider.rx.request(.arbitrateAccept(assureId: assureId, key: key)).mapJSON().subscribe(onSuccess: { obj in
-                
-                guard let dict = obj as? [String: Any], let code = dict["code"] as? Int else { return }
-                if code != 0 {
-                    APPHUD.flash(text: dict["message"] as? String)
-                } else {
-                    APPHUD.flash(text: "成功".toMultilingualism())
-                }
-                
-            }).disposed(by: this.rx.disposeBag)
+            if index == 1 {
+                APIProvider.rx.request(.arbitrateAccept(assureId: assureId, key: key)).mapJSON().subscribe(onSuccess: { obj in
+                    
+                    guard let dict = obj as? [String: Any], let code = dict["code"] as? Int else { return }
+                    if code != 0 {
+                        APPHUD.flash(text: dict["message"] as? String)
+                    } else {
+                        APPHUD.flash(text: "成功".toMultilingualism())
+                    }
+                }).disposed(by: self.rx.disposeBag)
+            }
+            
         }).disposed(by: rx.disposeBag)
         
     }

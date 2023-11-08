@@ -242,4 +242,8 @@
     "关闭": "Back",
     "同意仲裁": "Agree Arbitration",
     "请输入担保协议": "Please enter the guarantee agreement.",
+    "链上转账失败": "On chain transfer failed",
+    "您同意这个仲裁方法吗": "Do you agree to this arbitration method?",
+    "仲裁弹窗内容": "If confirmed, please indicate that you agree to the platform's plan to release the guarantee funds",
+    "创建担保": "Create Guarantee",
 }
