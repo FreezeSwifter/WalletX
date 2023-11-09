@@ -292,14 +292,8 @@ class DepositViewController: UIViewController, HomeNavigationble {
     
     private func setupView() {
         view.layoutIfNeeded()
-        view.backgroundColor = ColorConfiguration.listBg.toColor()
-        setupNavigationbar()
-        setupChildVCStyle()
-        headerView?.backgroundColor = ColorConfiguration.wihteText.toColor()
-        headerView?.titleLabel.text = "wallet_deposit".toMultilingualism()
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
+        title = "wallet_deposit".toMultilingualism()
+        navigationController?.navigationBar.backgroundColor = .white
     }
     
     @objc

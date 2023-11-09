@@ -119,8 +119,9 @@ class JoinGuaranteeController: UIViewController, HomeNavigationble {
         
         let req: Observable<GuaranteeInfoModel?> = APIProvider.rx.request(.getWaitJoinInfo(assureId: id)).mapModel()
         req.subscribe(onNext: {[weak self] obj in
-            if obj?.message == "Failure" {
+            if obj?.code != 0 {
                 self?.redDesLabel.isHidden = false
+                self?.redDesLabel.text = obj?.message
             } else {
                 let vc: JoinGuaranteeStepTwoController = ViewLoader.Storyboard.controller(from: "Guarantee")
                 vc.model = obj

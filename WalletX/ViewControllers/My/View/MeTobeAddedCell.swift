@@ -176,12 +176,15 @@ class MeTobeAddedCell: UITableViewCell {
     
     @IBOutlet weak var buttonStackView: UIStackView!
     
-    var timerLabel: MZTimerLabel?
+    var timerLabel: MZTimerLabel!
     
     private(set) var model: GuaranteeInfoModel.Meta?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        timerLabel = MZTimerLabel(label: time, andTimerType: MZTimerLabelType(rawValue: 1))!
+        timerLabel.delegate = self
         
         meDesLabel.snp.remakeConstraints { make in
             make.width.height.equalTo(26)
@@ -296,10 +299,6 @@ class MeTobeAddedCell: UITableViewCell {
             time.text = "待加入".toMultilingualism()
             buttonStackView.isHidden = false
             
-            if timerLabel == nil {
-                timerLabel = MZTimerLabel(label: time, andTimerType: MZTimerLabelType(rawValue: 1))
-                timerLabel?.delegate = self
-            }
             let createTime = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 )
             let timeout = Int(AppArchiveder.shared().getAPPConfig(by: "joinTimeout") ?? "0") ?? 0
             let endTime = createTime + timeout.minutes
@@ -329,7 +328,6 @@ class MeTobeAddedCell: UITableViewCell {
             buttonStackView.arrangedSubviews.forEach { v in
                 v.removeFromSuperview()
             }
-            timerLabel = nil
             
         } else if data.assureStatus == 1 { // 待上押
             stateLabel.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
@@ -348,18 +346,12 @@ class MeTobeAddedCell: UITableViewCell {
             modifyButton.setupAPPUISolidStyle(title: "我来上押".toMultilingualism())
             contactButton.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
             
-            if timerLabel == nil {
-                timerLabel = MZTimerLabel(label: time, andTimerType: MZTimerLabelType(rawValue: 1))
-                timerLabel?.delegate = self
-            }
             let createTime = Date(timeIntervalSince1970: (data.multisigTime ?? 0) / 1000 )
             let timeout = Int(AppArchiveder.shared().getAPPConfig(by: "pushTimeout") ?? "0") ?? 0
             let endTime = createTime + timeout.minutes
             let countTime = endTime - Date()
             
             if endTime.isInPast {
-                timerLabel?.removeFromSuperview()
-                timerLabel = nil
                 time.text = "已超时".toMultilingualism()
                 time.textColor = UIColor(hex: "#FF5966")
                 buttonStackView.arrangedSubviews.forEach { v in
@@ -381,8 +373,6 @@ class MeTobeAddedCell: UITableViewCell {
             buttonStackView.arrangedSubviews.forEach { v in
                 v.removeFromSuperview()
             }
-            timerLabel?.removeFromSuperview()
-            timerLabel = nil
             
         } else if data.assureStatus == 4 { // 已取消
             buttonStackView.isHidden = true
@@ -395,8 +385,6 @@ class MeTobeAddedCell: UITableViewCell {
             buttonStackView.arrangedSubviews.forEach { v in
                 v.removeFromSuperview()
             }
-            timerLabel?.removeFromSuperview()
-            timerLabel = nil
         }
     }
     
