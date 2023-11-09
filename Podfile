@@ -26,7 +26,6 @@ target 'WalletX' do
   pod 'MBProgressHUD', '1.2.0'
   pod 'ZLPhotoBrowser', '4.4.3.2'
   pod 'MZTimerLabel', '0.5.4'
-  pod 'CountdownLabel', '4.0.1'
   
   # WalletCore
   pod 'TrustWalletCore', '2.5.6'

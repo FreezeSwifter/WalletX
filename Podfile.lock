@@ -3,7 +3,6 @@ PODS:
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
   - Alamofire (5.8.0)
-  - CountdownLabel (4.0.1)
   - Differentiator (5.0.0)
   - HandyJSON (5.0.2)
   - IGListDiffKit (4.0.0)
@@ -350,7 +349,6 @@ PODS:
 DEPENDENCIES:
   - Action (= 5.0.0)
   - Alamofire (= 5.8.0)
-  - CountdownLabel
   - HandyJSON (= 5.0.2)
   - IGListKit (= 4.0.0)
   - IQKeyboardManager (= 6.5.12)
@@ -378,7 +376,6 @@ SPEC REPOS:
   trunk:
     - Action
     - Alamofire
-    - CountdownLabel
     - Differentiator
     - HandyJSON
     - IGListDiffKit
@@ -410,7 +407,6 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Action: 47f1825511907b4fcd79dd7a7db9526c20f78018
   Alamofire: 0e92e751b3e9e66d7982db43919d01f313b8eb91
-  CountdownLabel: c9975e3f329140b5e7d1f45cd63b1300badd1712
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   IGListDiffKit: 665d6cf43ce726e676013db9c7d6c4294259b6b2
@@ -439,6 +435,6 @@ SPEC CHECKSUMS:
   TrustWalletCore: 77ed44e6965e5121245d7fafc58c56a03bf13490
   ZLPhotoBrowser: 0563c2bfc7b247b65d023d646012f46cba94101b
 
-PODFILE CHECKSUM: 0a5070d2ef8e4267b0230fb0c10422f1a3556ce2
+PODFILE CHECKSUM: c2b055bfde48b2527c4864caeb8f0adccebd5093
 
 COCOAPODS: 1.11.3
