@@ -251,7 +251,6 @@ class DepositViewController: UIViewController, HomeNavigationble {
                             if res {
                                 let address = this2.currentItem?.pushAddress ?? ""
                                 let amount = Int64(this2.valueLabel4.text ?? "0") ?? 0
-                                LocaleWalletManager.shared().sendToken(toAddress: address, amount: amount, coinType: .usdt(nil)).subscribe(onNext: {[weak self] tuple in
                                 APPHUD.showLoading(text: "处理中".toMultilingualism())
                                 LocaleWalletManager.shared().sendToken(toAddress: address, amount: Double(amount), coinType: .usdt(nil)).subscribe(onNext: {[weak self] tuple in
                                     guard let this3 = self else { return }
@@ -274,7 +273,6 @@ class DepositViewController: UIViewController, HomeNavigationble {
                                             vc.model = m
                                             self?.navigationController?.pushViewController(vc, animated: true)
                                         }
-                                        
                                     }).disposed(by: this3.rx.disposeBag)
                                 }).disposed(by: this2.rx.disposeBag)
                             }
