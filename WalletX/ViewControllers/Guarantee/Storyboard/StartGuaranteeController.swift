@@ -257,13 +257,13 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
             
         }).disposed(by: rx.disposeBag)
         
-        parameter.assureType = 1
+        parameter.assureType = 0
         
         multipleButton.rx.tap.subscribe(onNext: {[weak self] in
             guard let this = self else { return }
             this.multipleButton.isSelected = true
             this.normalButton.isSelected = false
-            this.parameter.assureType = 0
+            this.parameter.assureType = 1
             
         }).disposed(by: rx.disposeBag)
         
@@ -271,7 +271,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
             guard let this = self else { return }
             this.multipleButton.isSelected = false
             this.normalButton.isSelected = true
-            this.parameter.assureType = 1
+            this.parameter.assureType = 0
             
         }).disposed(by: rx.disposeBag)
     }

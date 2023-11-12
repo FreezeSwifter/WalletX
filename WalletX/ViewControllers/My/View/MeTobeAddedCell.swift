@@ -136,7 +136,7 @@ class MeTobeAddedCell: UITableViewCell {
     
     @IBOutlet weak var waitingDesLabel: UILabel! {
         didSet {
-            waitingDesLabel.text = "等待加入中".toMultilingualism()
+            waitingDesLabel.text = "--"
             waitingDesLabel.minimumScaleFactor = 0.5
             waitingDesLabel.adjustsFontSizeToFitWidth = true
         }
@@ -144,7 +144,7 @@ class MeTobeAddedCell: UITableViewCell {
     
     @IBOutlet weak var time: UILabel! {
         didSet {
-            time.text = "等待加入中".toMultilingualism()
+            time.text = "aaaa"//"等待加入中".toMultilingualism()
             time.minimumScaleFactor = 0.5
             time.adjustsFontSizeToFitWidth = true
         }
@@ -290,88 +290,127 @@ class MeTobeAddedCell: UITableViewCell {
             meDesLabel.isHidden = false
         }
         
-        if data.assureStatus == 0 { // 待加入
-            stateLabel.backgroundColor = UIColor(hex: "#40BCFC").withAlphaComponent(0.1)
-            stateLabel.textColor = UIColor(hex: "#40BCFC")
-            stateLabel.text = "me_pending".toMultilingualism()
-            timeIcon.image = UIImage(named: "me_time")
-            time.textColor = ColorConfiguration.descriptionText.toColor()
-            time.text = "待加入".toMultilingualism()
-            buttonStackView.isHidden = false
+        if data.assureStatus == 0 || data.assureStatus == 5 { // 待加入
             
-            let createTime = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 )
-            let timeout = Int(AppArchiveder.shared().getAPPConfig(by: "joinTimeout") ?? "0") ?? 0
-            let endTime = createTime + timeout.minutes
-            let countTime = endTime - Date()
-            timerLabel?.setCountDownTime(countTime.timeInterval)
-            timerLabel?.start()
-            
-            buttonStackView.arrangedSubviews.forEach { v in
-                v.removeFromSuperview()
-            }
-            
-            buttonStackView.addArrangedSubview(cancelButton)
-            buttonStackView.addArrangedSubview(modifyButton)
-            buttonStackView.addArrangedSubview(inviteButton)
-            cancelButton.setupAPPUIHollowStyle(title: "取消担保".toMultilingualism())
-            modifyButton.setupAPPUISolidStyle(title: "修改信息".toMultilingualism())
-            inviteButton.setupAPPUISolidStyle(title: "邀请对方".toMultilingualism())
-            
-        } else if data.assureStatus == 5 { // 加入超时
-            buttonStackView.isHidden = true
-            stateLabel.backgroundColor = UIColor(hex: "#FF5966").withAlphaComponent(0.1)
-            stateLabel.textColor = UIColor(hex: "#FF5966")
-            stateLabel.text = "已超时".toMultilingualism()
-            timeIcon.image = UIImage(named: "me_overtime")
-            time.textColor = UIColor(hex: "#FF5966")
-            time.text = "已超时".toMultilingualism()
-            buttonStackView.arrangedSubviews.forEach { v in
-                v.removeFromSuperview()
-            }
-            
-        } else if data.assureStatus == 1 { // 待上押
-            stateLabel.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
-            waitingDesLabel.text = "me_depositing".toMultilingualism()
-            stateLabel.textColor = UIColor(hex: "#F0A158")
-            stateLabel.text = "me_depositing".toMultilingualism()
-            timeIcon.image = UIImage(named: "me_time")
-            time.textColor = ColorConfiguration.descriptionText.toColor()
-            time.text = "创建钱包中".toMultilingualism()
-            buttonStackView.isHidden = false
-            buttonStackView.arrangedSubviews.forEach { v in
-                v.removeFromSuperview()
-            }
-            buttonStackView.addArrangedSubview(contactButton)
-            buttonStackView.addArrangedSubview(modifyButton)
-            modifyButton.setupAPPUISolidStyle(title: "我来上押".toMultilingualism())
-            contactButton.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
-            
-            let createTime = Date(timeIntervalSince1970: (data.multisigTime ?? 0) / 1000 )
-            let timeout = Int(AppArchiveder.shared().getAPPConfig(by: "pushTimeout") ?? "0") ?? 0
-            let endTime = createTime + timeout.minutes
-            let countTime = endTime - Date()
-            
-            if endTime.isInPast {
-                time.text = "已超时".toMultilingualism()
+            if data.assureStatus == 5 { // 待加入超时
+                buttonStackView.isHidden = true
+                stateLabel.backgroundColor = UIColor(hex: "#FF5966").withAlphaComponent(0.1)
+                stateLabel.textColor = UIColor(hex: "#FF5966")
+                stateLabel.text = "已超时".toMultilingualism()
+                timeIcon.image = UIImage(named: "me_overtime")
                 time.textColor = UIColor(hex: "#FF5966")
+                time.text = "已超时".toMultilingualism()
+                waitingDesLabel.text = "等待加入中".toMultilingualism()
                 buttonStackView.arrangedSubviews.forEach { v in
                     v.removeFromSuperview()
                 }
+                timerLabel?.removeFromSuperview()
+                
             } else {
+                stateLabel.backgroundColor = UIColor(hex: "#40BCFC").withAlphaComponent(0.1)
+                stateLabel.textColor = UIColor(hex: "#40BCFC")
+                stateLabel.text = "me_pending".toMultilingualism()
+                timeIcon.image = UIImage(named: "me_time")
+                time.textColor = ColorConfiguration.descriptionText.toColor()
+                time.text = "待加入".toMultilingualism()
+                waitingDesLabel.text = "等待加入中".toMultilingualism()
+                buttonStackView.isHidden = false
+                let createTime = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 )
+                let timeout = Int(AppArchiveder.shared().getAPPConfig(by: "joinTimeout") ?? "0") ?? 0
+                let endTime = createTime + timeout.minutes
+                let countTime = endTime - Date()
                 timerLabel?.setCountDownTime(countTime.timeInterval)
                 timerLabel?.start()
+                
+                buttonStackView.arrangedSubviews.forEach { v in
+                    v.removeFromSuperview()
+                }
+                buttonStackView.addArrangedSubview(cancelButton)
+                buttonStackView.addArrangedSubview(modifyButton)
+                buttonStackView.addArrangedSubview(inviteButton)
+                cancelButton.setupAPPUIHollowStyle(title: "取消担保".toMultilingualism())
+                modifyButton.setupAPPUISolidStyle(title: "修改信息".toMultilingualism())
+                inviteButton.setupAPPUISolidStyle(title: "邀请对方".toMultilingualism())
             }
             
-        } else if data.assureStatus == 7 { // 上押超时
-            buttonStackView.isHidden = true
-            stateLabel.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
-            stateLabel.textColor = UIColor(hex: "#F0A158")
-            stateLabel.text = "已超时".toMultilingualism()
-            timeIcon.image = UIImage(named: "me_overtime")
-            time.textColor = UIColor(hex: "#FF5966")
-            time.text = "已超时".toMultilingualism()
-            buttonStackView.arrangedSubviews.forEach { v in
-                v.removeFromSuperview()
+        }  else if data.assureStatus == 1 || data.assureStatus == 6 || data.assureStatus == 7 { // 待上押
+            
+            if data.assureStatus == 6 { // 创建钱包已超时
+                buttonStackView.isHidden = true
+                stateLabel.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
+                stateLabel.textColor = UIColor(hex: "#F0A158")
+                stateLabel.text = "已超时".toMultilingualism()
+                timeIcon.image = UIImage(named: "me_overtime")
+                time.textColor = UIColor(hex: "#FF5966")
+                time.text = "已超时".toMultilingualism()
+                waitingDesLabel.text = "钱包创建中".toMultilingualism()
+                buttonStackView.arrangedSubviews.forEach { v in
+                    v.removeFromSuperview()
+                }
+                timerLabel?.removeFromSuperview()
+                
+            } else if data.assureStatus == 7 { // 多签已超时
+                buttonStackView.isHidden = true
+                stateLabel.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
+                stateLabel.textColor = UIColor(hex: "#F0A158")
+                stateLabel.text = "已超时".toMultilingualism()
+                timeIcon.image = UIImage(named: "me_overtime")
+                time.textColor = UIColor(hex: "#FF5966")
+                time.text = "已超时".toMultilingualism()
+                waitingDesLabel.text = "等待上押中".toMultilingualism()
+                buttonStackView.arrangedSubviews.forEach { v in
+                    v.removeFromSuperview()
+                }
+                timerLabel?.removeFromSuperview()
+                
+            } else {
+                
+                stateLabel.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
+                waitingDesLabel.text = "me_depositing".toMultilingualism()
+                stateLabel.textColor = UIColor(hex: "#F0A158")
+                stateLabel.text = "me_depositing".toMultilingualism()
+                timeIcon.image = UIImage(named: "me_time")
+                time.textColor = ColorConfiguration.descriptionText.toColor()
+                buttonStackView.isHidden = false
+                buttonStackView.arrangedSubviews.forEach { v in
+                    v.removeFromSuperview()
+                }
+                buttonStackView.addArrangedSubview(contactButton)
+                buttonStackView.addArrangedSubview(modifyButton)
+                modifyButton.setupAPPUISolidStyle(title: "我来上押".toMultilingualism())
+                contactButton.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
+                
+                var createTime: Date
+                var timeout: Int
+                if data.assureType == 0  { // 普通担保
+                    createTime = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 )
+                    timeout = Int(AppArchiveder.shared().getAPPConfig(by: "pushTimeout") ?? "0") ?? 0
+                    waitingDesLabel.text = "等待上押中".toMultilingualism()
+                } else { // 多签担保
+                    createTime = Date(timeIntervalSince1970: (data.multisigTime ?? 0) / 1000 )
+                    if data.multisigStatus == 0 { // 多签钱包创建中
+                        timeout = Int(AppArchiveder.shared().getAPPConfig(by: "multisigTimeout") ?? "0") ?? 0
+                        waitingDesLabel.text = "等待上押中".toMultilingualism()
+                    } else {
+                        timeout = Int(AppArchiveder.shared().getAPPConfig(by: "pushTimeout") ?? "0") ?? 0
+                        waitingDesLabel.text = "创建钱包中".toMultilingualism()
+                    }
+                }
+                
+                let endTime = createTime + timeout.minutes
+                let countTime = endTime - Date()
+                
+                if endTime.isInPast {
+                    time.text = "已超时".toMultilingualism()
+                    time.textColor = UIColor(hex: "#FF5966")
+                    buttonStackView.arrangedSubviews.forEach { v in
+                        v.removeFromSuperview()
+                    }
+                    timerLabel?.removeFromSuperview()
+                } else {
+                    timerLabel?.setCountDownTime(countTime.timeInterval)
+                    timerLabel?.start()
+                }
             }
             
         } else if data.assureStatus == 4 { // 已取消
@@ -381,10 +420,11 @@ class MeTobeAddedCell: UITableViewCell {
             stateLabel.text = "交易取消".toMultilingualism()
             timeIcon.image = UIImage(named: "me_overtime")
             time.textColor = UIColor(hex: "#FF5966")
-            time.text = "交易取消".toMultilingualism()
+            waitingDesLabel.text = "交易已取消".toMultilingualism()
             buttonStackView.arrangedSubviews.forEach { v in
                 v.removeFromSuperview()
             }
+            timerLabel?.removeFromSuperview()
         }
     }
     

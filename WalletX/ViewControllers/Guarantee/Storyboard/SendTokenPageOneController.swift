@@ -58,7 +58,7 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
     @IBOutlet weak var textField2: UITextField! {
         didSet {
             textField2.placeholder = "0.00"
-            textField2.keyboardType = .numberPad
+            textField2.keyboardType = .decimalPad
         }
     }
     
@@ -76,7 +76,7 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var nextButton: UIButton! {
         didSet {
-            nextButton.setupAPPUISolidStyle(title: "下一步".toMultilingualism())
+            nextButton.setupAPPUISolidStyle(title: "确定".toMultilingualism())
         }
     }
     
@@ -97,7 +97,11 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
         }).disposed(by: rx.disposeBag)
         
         allButton.rx.tap.subscribe(onNext: {[weak self] _ in
-         
+            if self?.model == .usdt(nil) {
+                self?.textField2.text = LocaleWalletManager.shared().walletBalanceModel?.data?.USDT
+            } else {
+                self?.textField2.text = LocaleWalletManager.shared().walletBalanceModel?.data?.TRX
+            }
         }).disposed(by: rx.disposeBag)
         
         scanButton.rx.tap.subscribe(onNext: {[weak self] _ in
@@ -108,13 +112,44 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
             }
         }).disposed(by: rx.disposeBag)
         
-        nextButton.rx.tap.subscribe(onNext: {[weak self] _ in
-            let vc: SendTokenPageTwoController = ViewLoader.Storyboard.controller(from: "Wallet")
-            vc.model = self?.model
-            vc.toAddress = self?.textField.text
-            vc.sendCount = self?.textField2.text
-            self?.navigationController?.pushViewController(vc, animated: true)
+        nextButton.rx.tap.subscribe(onNext: {[unowned self] _ in
+            self.sendTokenAction()
         }).disposed(by: rx.disposeBag)
+    }
+    
+    private func sendTokenAction() {
+        guard let m = model else { return }
+        let toAddress = textField.text ?? ""
+        let sendAmount = textField2.text ?? ""
+        
+        
+        
+        let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
+        faceIdVC.modalPresentationStyle = .fullScreen
+        present(faceIdVC, animated: true)
+        
+        faceIdVC.resultBlock = {[unowned self] isPass in
+            if isPass {
+                APPHUD.showLoading(text: "处理中".toMultilingualism())
+                LocaleWalletManager.shared().sendToken(toAddress: toAddress, amount: Double(sendAmount) ?? 0.0, coinType: m).subscribe(onNext: {[weak self] tuple in
+                    if tuple.0 {
+                        let vc: TokenTransferDetailController = ViewLoader.Storyboard.controller(from: "Wallet")
+                        var m = TokenTecordTransferModel()
+                        m.amount = Double(sendAmount)
+                        m.assetName = self?.model?.tokenName
+                        m.from = LocaleWalletManager.shared().USDT?.address
+                        m.to = toAddress
+                        m.txid = tuple.1
+                        vc.model = m
+                        vc.item = self?.model
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    } else {
+                        APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
+                    }
+                }).disposed(by: self.rx.disposeBag)
+            }
+        }
+        
     }
     
     private func setupView() {

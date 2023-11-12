@@ -187,7 +187,7 @@ extension MeListChildViewController {
     
     func configureAllCell(data: GuaranteeInfoModel.Meta, path: IndexPath) -> UITableViewCell {
         switch data.assureStatus {
-        case 0, 1, 5, 7, 4:
+        case 0, 1, 5, 6, 7, 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "MeTobeAddedCell", for: path)
             as! MeTobeAddedCell
             cell.setupData(data: data)

@@ -1015,7 +1015,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JQs-Wq-Rax">
                                                         <rect key="frame" x="88.333333333333343" y="163.66666666666669" width="288.66666666666663" height="50"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入担保金额" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kPo-Di-lZt">
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入担保金额" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kPo-Di-lZt">
                                                                 <rect key="frame" x="20" y="15.666666666666631" width="180" height="18.666666666666679"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="180" id="dWe-tF-lo1"/>
@@ -1064,7 +1064,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bR6-eB-XAV">
                                                         <rect key="frame" x="88.333333333333343" y="251.66666666666663" width="288.66666666666663" height="50"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入担保金额" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Uju-cR-hU6">
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入担保金额" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Uju-cR-hU6">
                                                                 <rect key="frame" x="20" y="15.666666666666744" width="180" height="18.666666666666679"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="180" id="cAm-gf-Lcw"/>

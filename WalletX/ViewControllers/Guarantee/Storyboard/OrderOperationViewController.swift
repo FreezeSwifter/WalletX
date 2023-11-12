@@ -310,6 +310,8 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
             textField2.isUserInteractionEnabled = false
             tradeCancelButton.isUserInteractionEnabled = false
             tradeCompletedButton.isUserInteractionEnabled = false
+            accountButton1.isEnabled = false
+            accountButton2.isEnabled = false
             bottomRightButton.setupAPPUISolidStyle(title: "撤销申请".toMultilingualism())
         }
         
@@ -348,7 +350,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 partnerReleasedAmount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
                 self?.valueLabel5Sub.attributedText = partnerReleasedAmount
                 
-                self?.valueLabel6.text = "\(Date(timeIntervalSince1970: (obj?.data?.duration ?? 0) / 1000 ).days(since: Date()))"
+                self?.valueLabel6.text = obj?.data?.duration?.description
                 self?.valueLabel7.text = "\(obj?.data?.assureFee ?? 0)"
                 self?.valueLabel8.text = "\(obj?.data?.releaseAmountCan ?? 0)"
                 
@@ -389,8 +391,6 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                     self?.valueLabel1State.text = "me_releasing".toMultilingualism()
                 }
                 
-                
-                
             }).disposed(by: rx.disposeBag)
         }
         
@@ -418,7 +418,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 let partnerReleasedAmount = this.textField2.text ?? "0"
                 let add = (Double(sponsorReleasedAmount) ?? 0) + (Double(partnerReleasedAmount) ?? 0)
                 if this.model?.data?.releaseAmountCan != add && this.accountButton1.isSelected && this.accountButton2.isSelected {
-                    APPHUD.flash(text: "请检查输入项".toMultilingualism())
+                    APPHUD.flash(text: "发起人和参与人输入的金额之和必须等于可解押金额".toMultilingualism())
                     return
                 }
                 
@@ -427,8 +427,21 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                     let code = dict["code"] as? Int
                     if code == 0 {
                         let titleIcon = UIImage(named: "wallet_noti2")?.qmui_image(withTintColor: ColorConfiguration.primary.toColor())
-                        GuaranteeYesNoView.showFromBottom(image: UIImage(named: "me_release_apply"), title: "解押通知".toMultilingualism(), titleIcon: titleIcon, content: "解押通知内容".toMultilingualism(), leftButton: "通知对方".toMultilingualism(), rightButton: "完成".toMultilingualism()).subscribe(onNext: { index in
+                        GuaranteeYesNoView.showFromBottom(image: UIImage(named: "me_release_apply"), title: "解押通知".toMultilingualism(), titleIcon: titleIcon, content: "解押通知内容".toMultilingualism(), leftButton: "通知对方".toMultilingualism(), rightButton: "完成".toMultilingualism()).subscribe(onNext: {[weak self] index in
                             
+                            if index == 0 {
+                                let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+                                if self?.model?.data?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+                                    vc.walletId = self?.model?.data?.partnerUser
+                                } else {
+                                    vc.walletId = self?.model?.data?.sponsorUser
+                                }
+                                self?.navigationController?.pushViewController(vc, animated: true)
+                            }
+                            
+                            if index == 1 {
+                                self?.navigationController?.popViewController(animated: true)
+                            }
                         }).disposed(by: this.rx.disposeBag)
                         
                     } else {
@@ -496,6 +509,18 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 self.textField2.text = nil
             }
             self.textField2.isUserInteractionEnabled = self.accountButton2.isSelected
+        }).disposed(by: rx.disposeBag)
+        
+        explainButton.rx.tap.subscribe(onNext: {[unowned self] in
+           
+            NotiAlterView.show(title: "担保费用收费标准".toMultilingualism(), content: "担保费用收费标准内容".toMultilingualism(), leftButtonTitle: "联系客服".toMultilingualism(), rightButtonTitle: "知道啦".toMultilingualism())
+                .subscribe(onNext: { index in
+                    if index == 0 {
+                        let app = UIApplication.shared.delegate as? AppDelegate
+                        app?.openTg()
+                    }
+                }).disposed(by: rx.disposeBag)
+            
         }).disposed(by: rx.disposeBag)
     }
     

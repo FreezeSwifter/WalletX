@@ -141,7 +141,6 @@ class MyViewController: UIViewController, HomeNavigationble {
         
         NotificationCenter.default.rx.notification(.userInfoDidChangeed)
             .observe(on: MainScheduler.instance)
-            .take(until: self.rx.methodInvoked(#selector(MyViewController.viewDidDisappear(_:))))
             .subscribe(onNext: {[weak self] _ in
                 self?.fetchData()
         }).disposed(by: rx.disposeBag)

@@ -97,7 +97,7 @@ class DepositViewController: UIViewController, HomeNavigationble {
         didSet {
             valueLabel4.isUserInteractionEnabled = true
             valueLabel4.textColor = ColorConfiguration.lightBlue.toColor()
-            valueLabel4.keyboardType = .phonePad
+            valueLabel4.keyboardType = .decimalPad
         }
     }
     
@@ -152,7 +152,7 @@ class DepositViewController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var sixTextField: UITextField! {
         didSet {
-            sixTextField.isUserInteractionEnabled = true
+            sixTextField.isUserInteractionEnabled = false
             sixTextField.textColor = ColorConfiguration.lightBlue.toColor()
             sixTextField.keyboardType = .numberPad
         }
@@ -176,13 +176,21 @@ class DepositViewController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var addressDesLabel: UILabel! {
         didSet {
-            addressDesLabel.text = "钱包地址".toMultilingualism()
+            addressDesLabel.text = "收款地址".toMultilingualism()
         }
     }
     
     @IBOutlet weak var addressTextField: UITextField! {
         didSet {
             addressTextField.isUserInteractionEnabled = false
+        }
+    }
+    
+    @IBOutlet weak var copyAddressButton: UIButton! {
+        didSet {
+            copyAddressButton.setTitle("share_Copy".toMultilingualism(), for: .normal)
+            copyAddressButton.titleLabel?.adjustsFontSizeToFitWidth = true
+            copyAddressButton.titleLabel?.minimumScaleFactor = 0.5
         }
     }
     
@@ -244,6 +252,8 @@ class DepositViewController: UIViewController, HomeNavigationble {
                                 let address = this2.currentItem?.pushAddress ?? ""
                                 let amount = Int64(this2.valueLabel4.text ?? "0") ?? 0
                                 LocaleWalletManager.shared().sendToken(toAddress: address, amount: amount, coinType: .usdt(nil)).subscribe(onNext: {[weak self] tuple in
+                                APPHUD.showLoading(text: "处理中".toMultilingualism())
+                                LocaleWalletManager.shared().sendToken(toAddress: address, amount: Double(amount), coinType: .usdt(nil)).subscribe(onNext: {[weak self] tuple in
                                     guard let this3 = self else { return }
                                     if !tuple.0 {
                                         APPHUD.flash(text: "链上转账失败".toMultilingualism())
@@ -263,26 +273,25 @@ class DepositViewController: UIViewController, HomeNavigationble {
                                             m.txid = tuple.1
                                             vc.model = m
                                             self?.navigationController?.pushViewController(vc, animated: true)
-                                            
                                         }
                                         
                                     }).disposed(by: this3.rx.disposeBag)
-         
                                 }).disposed(by: this2.rx.disposeBag)
                             }
                         }
                     }
-                    
                 }).disposed(by: self.rx.disposeBag)
-                
-    
             } else {
                 APPHUD.flash(text: "正确6为小数".toMultilingualism())
             }
         }).disposed(by: rx.disposeBag)
+        
+        copyAddressButton.rx.tap.subscribe(onNext: {[weak self] in
+            UIPasteboard.general.string = self?.addressTextField.text
+            APPHUD.flash(text: "完成".toMultilingualism())
+        }).disposed(by: rx.disposeBag)
     }
 
-    
     @objc
     private func protocolTap() {
         NotiAlterView.show(title: "协议".toMultilingualism(), content: currentItem?.agreement, leftButtonTitle: nil, rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { _ in

@@ -55,24 +55,32 @@ class TokenTransferDetailController: UIViewController, HomeNavigationble {
     @IBOutlet weak var desLabel1: UILabel! {
         didSet {
             desLabel1.text = "日期".toMultilingualism()
+            desLabel1.minimumScaleFactor = 0.8
+            desLabel1.adjustsFontSizeToFitWidth = true
         }
     }
     
     @IBOutlet weak var desLabel2: UILabel! {
         didSet {
             desLabel2.text = "状态".toMultilingualism()
+            desLabel2.minimumScaleFactor = 0.8
+            desLabel2.adjustsFontSizeToFitWidth = true
         }
     }
     
     @IBOutlet weak var desLabel3: UILabel! {
         didSet {
             desLabel3.text = "接收者".toMultilingualism()
+            desLabel3.minimumScaleFactor = 0.8
+            desLabel3.adjustsFontSizeToFitWidth = true
         }
     }
     
     @IBOutlet weak var desLabel4: UILabel! {
         didSet {
             desLabel4.text = "网络费用".toMultilingualism()
+            desLabel4.minimumScaleFactor = 0.8
+            desLabel4.adjustsFontSizeToFitWidth = true
         }
     }
     
@@ -90,6 +98,7 @@ class TokenTransferDetailController: UIViewController, HomeNavigationble {
         }
     }
     
+    @IBOutlet weak var unitLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,6 +118,8 @@ class TokenTransferDetailController: UIViewController, HomeNavigationble {
         desLabel2.text = "From"
         desLabel3.text = "To"
         desLabel3.text = "网络费用".toMultilingualism()
+        
+        unitLabel.text = model?.assetName
         
         APIProvider.rx.request(.getTXInfo(txId: model?.txid ?? "")).mapStringValue()
             .delay(.seconds(5), scheduler: MainScheduler.instance)

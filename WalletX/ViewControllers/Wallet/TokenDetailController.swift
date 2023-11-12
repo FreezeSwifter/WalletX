@@ -81,7 +81,7 @@ class TokenDetailController: UIViewController, HomeNavigationble {
       
         let header = MJRefreshGifHeader {[weak self] in
             self?.pageNum = 1
-            self?.fetchData()
+            self?.fetchData(isHeaderRefresh: true)
         }
         header.lastUpdatedTimeLabel?.isHidden = true
         header.setTitle("".toMultilingualism(), for: .idle)
@@ -91,7 +91,7 @@ class TokenDetailController: UIViewController, HomeNavigationble {
         
         let footer = MJRefreshAutoGifFooter {[weak self] in
             self?.pageNum += 1
-            self?.fetchData()
+            self?.fetchData(isHeaderRefresh: false)
         }
         footer.setTitle("没有更多".toMultilingualism(), for: .noMoreData)
         footer.setTitle("".toMultilingualism(), for: .idle)
@@ -100,11 +100,17 @@ class TokenDetailController: UIViewController, HomeNavigationble {
         
     }
     
-    private func fetchData() {
+    private func fetchData(isHeaderRefresh: Bool = false) {
         let symbolID = item?.tokenName ?? "USDT"
         let req: Observable<[TokenTecordTransferModel]> = APIProvider.rx.request(.getTokenTecordTransfer(pageNumber: pageNum, symbolID: symbolID)).mapModelArray()
         
         req.subscribe(onNext: {[weak self] list in
+            
+            if isHeaderRefresh {
+                self?.tableView.mj_footer?.resetNoMoreData()
+                self?.datasource.removeAll()
+            }
+            
             if list.count != 0 {
                 self?.datasource.append(contentsOf: list)
             }
@@ -126,7 +132,7 @@ class TokenDetailController: UIViewController, HomeNavigationble {
         setupNavigationbar()
         setupChildVCStyle()
         view.backgroundColor = ColorConfiguration.listBg.toColor()
-        headerView?.titleLabel.text = item?.tokenName
+        headerView?.titleLabel.text = "\(item?.tokenName ?? "")(\(item?.companyName ?? ""))"
         headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
             self?.navigationController?.popViewController(animated: true)
         }).disposed(by: rx.disposeBag)

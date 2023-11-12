@@ -170,7 +170,7 @@ class ContactOtherController: UIViewController, HomeNavigationble {
             APPHUD.flash(text: "成功".toMultilingualism())
         }).disposed(by: rx.disposeBag)
 
-        recommendContentLabel.text = "\("担保ID".toMultilingualism()): \(orderInfoModel?.assureId ?? "--")\n\("担保类型".toMultilingualism()): \(orderInfoModel?.assureTypeToString() ?? "")\n\("担保金额".toMultilingualism()): \(orderInfoModel?.amount ?? 0)"
+        recommendContentLabel.text = "\("担保金额没有1".toMultilingualism()): \(orderInfoModel?.assureId ?? "--")\n\("担保类型没有3".toMultilingualism()): \(orderInfoModel?.assureTypeToString() ?? "")\n\("担保金额没有1".toMultilingualism()): \(orderInfoModel?.amount ?? 0)USDT"
     }
     
     private func openTg() {

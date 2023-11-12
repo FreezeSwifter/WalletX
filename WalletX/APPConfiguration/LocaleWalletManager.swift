@@ -56,7 +56,10 @@ final class LocaleWalletManager {
     }
     private(set) var TRON: WalletToken? = .tron(nil)
     private(set) var USDT: WalletToken? = .usdt(nil)
-    private let usdtContractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+//    TAwtf3SDKc3k4j5Pg6cs1cUngXuhzVbarT 测试网
+//    TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t 主网
+    // TEpkBH2Yb9NG3xgXUW6UbudakyuCHZ7ZVF n网合约地址
+    private let usdtContractAddress = "TEpkBH2Yb9NG3xgXUW6UbudakyuCHZ7ZVF"
     private let walletDidChangedSubject: BehaviorSubject<Void?> = BehaviorSubject(value: nil)
     private var wallets: [WalletModel] = []
     private(set) var userInfo: UserInfoModel?
@@ -85,7 +88,7 @@ final class LocaleWalletManager {
         
         if tronWeb.isGenerateTronWebInstanceSuccess != true {
             if let privateKeyData = currentWallet?.getKeyForCoin(coin: .tron) {
-                tronWeb.setup(privateKey: privateKeyData.data.toHexString(), node: TRONMainNet) { setupResult in
+                tronWeb.setup(privateKey: privateKeyData.data.toHexString(), node: TRONNileNet) { setupResult in
                     print(setupResult)
                 }
             }
@@ -272,7 +275,7 @@ final class LocaleWalletManager {
     }
     
     // 发送token
-    func sendToken(toAddress: String, amount: Int64, coinType: WalletToken) -> Observable<(Bool, String)> {
+    func sendToken(toAddress: String, amount: Double, coinType: WalletToken) -> Observable<(Bool, String)> {
        
         return Observable.create {[unowned self] o in
             
@@ -287,8 +290,8 @@ final class LocaleWalletManager {
                 }
                 
             } else {
-                let amountText = amount.description
-                self.tronWeb.trc20TokenTransfer(toAddress: toAddress, trc20ContractAddress: usdtContractAddress, amount: amountText, remark: "") {(state, txid) in
+                let amountText = amount
+                self.tronWeb.trc20TokenTransfer(toAddress: toAddress, trc20ContractAddress: usdtContractAddress, amount: amountText.description, remark: "transfer") {(state, txid) in
                     o.onNext((state, txid))
                     o.onCompleted()
                     print("state = \(state)")
@@ -345,7 +348,7 @@ enum WalletToken: Equatable {
         case .tron:
             return "Tron"
         case .usdt:
-            return "Tether"
+            return "Tron|TRC20"
         }
     }
     
