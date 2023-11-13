@@ -264,6 +264,11 @@ class MeTobeAddedCell: UITableViewCell {
             
             if index == 0 {
                 let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+                if self?.model?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+                    vc.walletId = self?.model?.partnerUser
+                } else {
+                    vc.walletId = self?.model?.sponsorUser
+                }
                 vc.orderInfoModel = self?.model
                 vc.hidesBottomBarWhenPushed = true
                 UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)

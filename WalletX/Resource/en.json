@@ -254,4 +254,7 @@
     "交易已取消": "Canceled",
     "钱包创建中": "Creating Wallet",
     "处理中": "Processing...",
+    "请勾选条款": "Please check the clause",
+    "请输入钱包收款地址": "Please enter the wallet payment address",
+    "请输入转账数量": "Please enter the transfer quantity",
 }

@@ -122,7 +122,15 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
         let toAddress = textField.text ?? ""
         let sendAmount = textField2.text ?? ""
         
+        if toAddress.count == 0 {
+            APPHUD.flash(text: "请输入钱包收款地址".toMultilingualism())
+            return
+        }
         
+        if sendAmount.count == 0 {
+            APPHUD.flash(text: "请输入转账数量".toMultilingualism())
+            return
+        }
         
         let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
         faceIdVC.modalPresentationStyle = .fullScreen

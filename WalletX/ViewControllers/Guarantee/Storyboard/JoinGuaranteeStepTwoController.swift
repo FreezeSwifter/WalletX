@@ -14,7 +14,12 @@ import NSObject_Rx
 
 class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
 
-    var model: GuaranteeInfoModel?
+    var model: GuaranteeInfoModel? {
+        didSet {
+            fetchData(walletId: model?.data?.walletId ?? "")
+        }
+    }
+    var userModel: UserInfoModel?
     
     @IBOutlet weak var desLabel1: UILabel! {
         didSet {
@@ -122,6 +127,13 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         bind()
     }
     
+    private func fetchData(walletId: String) {
+        let req: Observable<UserInfoModel?> = APIProvider.rx.request(.queryContactInfo(walletId: walletId)).mapModel()
+        req.subscribe(onNext: {[weak self] info in
+            self?.userModel = info
+        }).disposed(by: rx.disposeBag)
+    }
+    
     private func bind() {
         agreeButton.rx.tap.subscribe(onNext: {[unowned self] in
             
@@ -141,11 +153,13 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         textView.text = model?.data?.agreement
         
         contactButton.rx.tap.subscribe(onNext: { [weak self] _ in
-            let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
-            vc.walletId = self?.model?.data?.sponsorUser
-            vc.orderInfoModel = self?.model?.data
-            self?.navigationController?.pushViewController(vc, animated: true)
+            self?.openTg()
             
+        }).disposed(by: rx.disposeBag)
+        
+        pasteButton.rx.tap.subscribe(onNext: {[unowned self] in
+            UIPasteboard.general.string = self.textView.text
+            APPHUD.flash(text: "成功".toMultilingualism())
         }).disposed(by: rx.disposeBag)
     }
 
@@ -161,9 +175,28 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         }).disposed(by: rx.disposeBag)
     }
     
+    private func openTg() {
+        guard let id = userModel?.data?.tg else { return }
+        let appURL = URL(string: "telegram://")!
+        if UIApplication.shared.canOpenURL(appURL) {
+            let appUrl = URL(string: "tg://resolve?domain=\(id)")
+            if let url = appUrl {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                APPHUD.flash(text: "Error")
+            }
+        } else {
+            APPHUD.flash(text: "Not Install Telegram")
+        }
+    }
+    
     private func joinAssure() {
         guard let id = model?.data?.assureId else {
             return
+        }
+        
+        if !agreeButton.isSelected {
+            APPHUD.flash(text: "请勾选条款".toMultilingualism())
         }
         
         APIProvider.rx.request(.assureOrderJoin(assureId: id, agreeFlag: agreeButton.isSelected)).mapJSON().subscribe(onSuccess: {[weak self] obj in

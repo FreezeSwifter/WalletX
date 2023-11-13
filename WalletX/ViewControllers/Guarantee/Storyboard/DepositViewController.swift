@@ -205,6 +205,7 @@ class DepositViewController: UIViewController, HomeNavigationble {
         
         setupView()
         bind()
+        fetchFirstAssure()
     }
     
     private func updateData() {
@@ -326,4 +327,10 @@ class DepositViewController: UIViewController, HomeNavigationble {
         popContainer.showWith(animated: true)
     }
     
+    private func fetchFirstAssure() {
+        let req: Observable<[GuaranteeInfoModel.Meta]> = APIProvider.rx.request(.queryAssureOrderList(assureStatus: 1, pageNum: 1)).mapModelArray()
+        req.subscribe(onNext: {[weak self] list in
+            self?.currentItem = list.first
+        }).disposed(by: rx.disposeBag)
+    }
 }

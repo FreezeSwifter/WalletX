@@ -362,6 +362,8 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 self?.accountButton1.setTitle(obj?.data?.sponsorUserName, for: .normal)
                 self?.accountButton2.setTitle(obj?.data?.partnerUserName, for: .normal)
     
+                self?.textField1.text = "\(obj?.data?.sponsorReleasedAmount ?? 0.0)"
+                self?.textField2.text = "\(obj?.data?.partnerReleasedAmount ?? 0.0)"
                 
                 if obj?.data?.assureType == 0 {
                     self?.walletBg.isHidden = true
@@ -431,6 +433,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                             
                             if index == 0 {
                                 let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+                                vc.orderInfoModel = self?.model?.data
                                 if self?.model?.data?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
                                     vc.walletId = self?.model?.data?.partnerUser
                                 } else {
@@ -454,16 +457,30 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 APIProvider.rx.request(.revokeAssureApply(assureId: id)).mapJSON().subscribe(onSuccess: { [weak self] obj in
                     
                     guard let dict = obj as? [String: Any], let this = self else { return }
-                    let message = dict["message"] as? String
-                    if message.isNilOrEmpty {
+                    let code = dict["code"] as? Int
+                    if code == 0 {
                         
                         let titleIcon = UIImage(named: "me_revoke_img")?.qmui_image(withTintColor: ColorConfiguration.primary.toColor())
                         GuaranteeYesNoView.showFromBottom(image: UIImage(named: "me_revoke_img"), title: "您已成功取消解押申请".toMultilingualism(), titleIcon: titleIcon, content: "您已成功取消解押申请内容".toMultilingualism(), leftButton: "通知对方".toMultilingualism(), rightButton: "完成".toMultilingualism()).subscribe(onNext: { index in
                             
+                            if index == 0 {
+                                let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+                                vc.orderInfoModel = self?.model?.data
+                                if self?.model?.data?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+                                    vc.walletId = self?.model?.data?.sponsorUser
+                                } else {
+                                    vc.walletId = self?.model?.data?.sponsorUser
+                                }
+                                self?.navigationController?.pushViewController(vc, animated: true)
+                                
+                            } else {
+                                self?.navigationController?.popViewController(animated: true)
+                            }
+                            
                         }).disposed(by: this.rx.disposeBag)
                         
                     } else {
-                        APPHUD.flash(text: message)
+                        APPHUD.flash(text: dict["message"] as? String)
                     }
                     
                 }).disposed(by: this.rx.disposeBag)
@@ -485,6 +502,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         buttonLeftButton.rx.tap.subscribe(onNext: {[weak self] _ in
            
             let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+            vc.orderInfoModel = self?.model?.data
             if self?.model?.data?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
                 vc.walletId = self?.model?.data?.partnerUser
             } else {

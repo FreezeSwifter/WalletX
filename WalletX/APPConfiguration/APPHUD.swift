@@ -39,6 +39,8 @@ final class APPHUD {
         hud = MBProgressHUD.showAdded(to: view, animated: true)
         hud?.mode = .text
         hud?.label.text = text
+        hud?.label.adjustsFontSizeToFitWidth = true
+        hud?.label.minimumScaleFactor = 0.8
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
             hud?.hide(animated: true)
         })

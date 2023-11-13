@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func openTg() {
         guard let id = serviceInfo else {
-            APPHUD.flash(text: "Error")
+            APPHUD.flash(text: "Error".toMultilingualism())
             return
         }
         let appURL = URL(string: "telegram://")!
