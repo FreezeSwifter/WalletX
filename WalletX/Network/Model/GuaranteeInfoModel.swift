@@ -49,7 +49,7 @@ struct GuaranteeInfoModel: APPBaseModel {
         var pushAddress: String?
         var pushAddressQrCode: String?
         var sponsorUserName: String?
-        var duration: Double?
+        var duration: String?
         var releaseAmountCan: Double?
         var multisigAddress: String?
         var reason: Int?

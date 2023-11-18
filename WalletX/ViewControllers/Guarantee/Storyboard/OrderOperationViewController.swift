@@ -297,6 +297,8 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         case .applyRelease:
             buttonLeftButton.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
             bottomRightButton.setupAPPUISolidStyle(title: "立即申请".toMultilingualism())
+            textField1.text = nil
+            textField2.text = nil
             
         case .handling:
             textField1.isUserInteractionEnabled = false
@@ -362,9 +364,11 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 self?.accountButton1.setTitle(obj?.data?.sponsorUserName, for: .normal)
                 self?.accountButton2.setTitle(obj?.data?.partnerUserName, for: .normal)
     
-                self?.textField1.text = "\(obj?.data?.sponsorReleasedAmount ?? 0.0)"
-                self?.textField2.text = "\(obj?.data?.partnerReleasedAmount ?? 0.0)"
-                
+                if !(self?.state == .applyRelease) {
+                    self?.textField1.text = "\(obj?.data?.sponsorReleasedAmount ?? 0.0)"
+                    self?.textField2.text = "\(obj?.data?.partnerReleasedAmount ?? 0.0)"
+                }
+             
                 if obj?.data?.assureType == 0 {
                     self?.walletBg.isHidden = true
                     self?.walletDesLabel.isHidden = true

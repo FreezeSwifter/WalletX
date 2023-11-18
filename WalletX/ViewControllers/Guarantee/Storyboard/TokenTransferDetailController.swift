@@ -122,7 +122,7 @@ class TokenTransferDetailController: UIViewController, HomeNavigationble {
         unitLabel.text = model?.assetName
         
         APIProvider.rx.request(.getTXInfo(txId: model?.txid ?? "")).mapStringValue()
-            .delay(.seconds(5), scheduler: MainScheduler.instance)
+            .delaySubscription(.seconds(3), scheduler: MainScheduler.instance)
             .subscribe(onNext: {[weak self] str in
             self?.valueLabel4.text = str
         }).disposed(by: rx.disposeBag)

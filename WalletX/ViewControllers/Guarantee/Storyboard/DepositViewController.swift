@@ -243,41 +243,28 @@ class DepositViewController: UIViewController, HomeNavigationble {
                     guard let this = self, let dict = obj as? [String: Any], let data = dict["data"] as? Bool else { return }
                     if data {
                         
-                        let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
-                        faceIdVC.modalPresentationStyle = .fullScreen
-                        this.present(faceIdVC, animated: true)
+                        let address = this.currentItem?.pushAddress ?? ""
+                        let amount = Double(this.valueLabel4.text ?? "") ?? 0.0
                         
-                        faceIdVC.resultBlock = {[weak self] res in
-                            guard let this2 = self else { return }
-                            if res {
-                                let address = this2.currentItem?.pushAddress ?? ""
-                                let amount = Int64(this2.valueLabel4.text ?? "0") ?? 0
-                                APPHUD.showLoading(text: "处理中".toMultilingualism())
-                                LocaleWalletManager.shared().sendToken(toAddress: address, amount: Double(amount), coinType: .usdt(nil)).subscribe(onNext: {[weak self] tuple in
-                                    guard let this3 = self else { return }
-                                    if !tuple.0 {
-                                        APPHUD.flash(text: "链上转账失败".toMultilingualism())
-                                        return
-                                    }
-                                    
-                                    APIProvider.rx.request(.finiedOrder(assureId: this3.currentItem?.assureId ?? "")).mapStringValue().subscribe(onNext: {[weak self] res4 in
-                                        
-                                        if res4?.count ?? 0 > 0 {
-                                            
-                                            let vc: TokenTransferDetailController = ViewLoader.Storyboard.controller(from: "Wallet")
-                                            var m = TokenTecordTransferModel()
-                                            m.amount = Double(amount) 
-                                            m.assetName = "USDT"
-                                            m.from = LocaleWalletManager.shared().USDT?.address
-                                            m.to = address
-                                            m.txid = tuple.1
-                                            vc.model = m
-                                            self?.navigationController?.pushViewController(vc, animated: true)
-                                        }
-                                    }).disposed(by: this3.rx.disposeBag)
-                                }).disposed(by: this2.rx.disposeBag)
+                        APPHUD.showLoading(text: "处理中".toMultilingualism())
+                        LocaleWalletManager.shared().sendToken(toAddress: address, amount: Double(amount), coinType: .usdt(nil)).subscribe(onNext: {[weak self] tuple in
+                            guard let this3 = self else { return }
+                            if !tuple.0 {
+                                APPHUD.flash(text: "链上转账失败".toMultilingualism())
+                                return
                             }
-                        }
+                            APPHUD.hide()
+                            let vc: TokenTransferDetailController = ViewLoader.Storyboard.controller(from: "Wallet")
+                            var m = TokenTecordTransferModel()
+                            m.amount = Double(amount)
+                            m.assetName = "USDT"
+                            m.from = LocaleWalletManager.shared().USDT?.address
+                            m.to = address
+                            m.txid = tuple.1
+                            vc.model = m
+                            this3.navigationController?.pushViewController(vc, animated: true)
+                            
+                        }).disposed(by: this.rx.disposeBag)
                     }
                 }).disposed(by: self.rx.disposeBag)
             } else {

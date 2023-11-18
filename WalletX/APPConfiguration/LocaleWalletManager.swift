@@ -282,7 +282,9 @@ final class LocaleWalletManager {
             if coinType == .tron(nil) {
                 // 1 This value is 0.000001
                 let amountText = amount * 1000000
-                self.tronWeb.trxTransfer(toAddress: toAddress, amount: amountText.description) { (state, txid) in
+                let num = Int64(amountText).description
+                
+                self.tronWeb.trxTransfer(toAddress: toAddress, amount: num) { (state, txid) in
                     o.onNext((state, txid))
                     o.onCompleted()
                     print("state = \(state)")
@@ -290,8 +292,10 @@ final class LocaleWalletManager {
                 }
                 
             } else {
-                let amountText = amount
-                self.tronWeb.trc20TokenTransfer(toAddress: toAddress, trc20ContractAddress: usdtContractAddress, amount: amountText.description, remark: "transfer") {(state, txid) in
+                let amountText = amount * 1000000
+                let num = Int64(amountText).description
+                
+                self.tronWeb.trc20TokenTransfer(toAddress: toAddress, trc20ContractAddress: usdtContractAddress, amount: num, remark: "transfer") {(state, txid) in
                     o.onNext((state, txid))
                     o.onCompleted()
                     print("state = \(state)")
