@@ -197,6 +197,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         
         if !agreeButton.isSelected {
             APPHUD.flash(text: "请勾选条款".toMultilingualism())
+            return
         }
         
         APIProvider.rx.request(.assureOrderJoin(assureId: id, agreeFlag: agreeButton.isSelected)).mapJSON().subscribe(onSuccess: {[weak self] obj in

@@ -464,7 +464,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                     let code = dict["code"] as? Int
                     if code == 0 {
                         
-                        let titleIcon = UIImage(named: "me_revoke_img")?.qmui_image(withTintColor: ColorConfiguration.primary.toColor())
+                        let titleIcon = UIImage(named: "guarantee_bulb")?.qmui_image(withTintColor: ColorConfiguration.primary.toColor())
                         GuaranteeYesNoView.showFromBottom(image: UIImage(named: "me_revoke_img"), title: "您已成功取消解押申请".toMultilingualism(), titleIcon: titleIcon, content: "您已成功取消解押申请内容".toMultilingualism(), leftButton: "通知对方".toMultilingualism(), rightButton: "完成".toMultilingualism()).subscribe(onNext: { index in
                             
                             if index == 0 {

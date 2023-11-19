@@ -87,7 +87,6 @@ class GuaranteeingCell: UITableViewCell {
             valueLabel1Status.applyCornerRadius(8)
             valueLabel1Status.backgroundColor = UIColor(hex: "#28C445").withAlphaComponent(0.1)
             valueLabel1Status.textColor = UIColor(hex: "#28C445")
-            valueLabel1Status.text = "me_guaranteeing".toMultilingualism()
         }
     }
 
@@ -174,6 +173,7 @@ class GuaranteeingCell: UITableViewCell {
     private lazy var button2: UIButton = {
         let v = UIButton(type: .custom)
         v.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        v.setTitleColor(.white, for: .normal)
         return v
     }()
     
@@ -344,6 +344,7 @@ class GuaranteeingCell: UITableViewCell {
             buttonStackView.addArrangedSubview(button2)
             button1.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
             button2.setupAPPUISolidStyle(title: "申请解押".toMultilingualism())
+            valueLabel1Status.text = "担保中".toMultilingualism()
             
         } else if data.assureStatus == 9 { // 退押中
             buttonStackView.isHidden = false
@@ -352,7 +353,10 @@ class GuaranteeingCell: UITableViewCell {
             }
             buttonStackView.addArrangedSubview(button2)
             button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
-        
+            valueLabel1Status.text = "退押中".toMultilingualism()
+            valueLabel1Status.textColor = UIColor(hex: "#F0A158")
+            valueLabel1Status.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
+            
             if data.releaseSponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
                 buttonStackView.addArrangedSubview(button3)
                 button3.setupAPPUISolidStyle(title: "撤销申请".toMultilingualism())
@@ -372,12 +376,18 @@ class GuaranteeingCell: UITableViewCell {
             buttonStackView.addArrangedSubview(button2)
             button1.setupAPPUIHollowStyle(title: "联系客服".toMultilingualism())
             button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
+            valueLabel1Status.text = "已退押".toMultilingualism()
+            valueLabel1Status.textColor = UIColor(hex: "#FF5966")
+            valueLabel1Status.backgroundColor = UIColor(hex: "#FF5966").withAlphaComponent(0.1)
             
         } else if data.assureStatus == 8 { // 已删除, 已取消
             buttonStackView.isHidden = true
             buttonStackView.arrangedSubviews.forEach { v in
                 v.removeFromSuperview()
             }
+            valueLabel1Status.textColor = UIColor(hex: "#FF5966")
+            valueLabel1Status.backgroundColor = UIColor(hex: "#FF5966").withAlphaComponent(0.1)
+            valueLabel1Status.text = "已取消".toMultilingualism()
         }
     }
     
