@@ -306,6 +306,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
             tradeCancelButton.isUserInteractionEnabled = false
             tradeCompletedButton.isUserInteractionEnabled = false
             bottomRightButton.setupAPPUISolidStyle(title: "同意解押".toMultilingualism())
+            buttonLeftButton.setupAPPUIHollowStyle(title: "拒绝解押".toMultilingualism())
             
         case .revoke:
             textField1.isUserInteractionEnabled = false
@@ -504,16 +505,29 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         }).disposed(by: rx.disposeBag)
         
         buttonLeftButton.rx.tap.subscribe(onNext: {[weak self] _ in
-           
-            let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
-            vc.orderInfoModel = self?.model?.data
-            if self?.model?.data?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
-                vc.walletId = self?.model?.data?.partnerUser
-            } else {
-                vc.walletId = self?.model?.data?.sponsorUser
+            guard let this = self else { return }
+            if self?.buttonLeftButton.titleLabel?.text == "拒绝解押".toMultilingualism() {
+                guard let id = self?.model?.data?.assureId else { return }
+                APIProvider.rx.request(.assureOrderReleaseReject(assureId: id)).mapJSON().subscribe(onSuccess: { obj in
+                    
+                    guard let dict = obj as? [String: Any], let code = dict["code"] as? Int else { return }
+                    if code != 0 {
+                        APPHUD.flash(text: dict["message"] as? String)
+                    } else {
+                        APPHUD.flash(text: "成功".toMultilingualism())
+                    }
+                }).disposed(by: this.rx.disposeBag)
+                
+            } else if self?.buttonLeftButton.titleLabel?.text == "联系对方".toMultilingualism() {
+                let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+                vc.orderInfoModel = self?.model?.data
+                if self?.model?.data?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+                    vc.walletId = self?.model?.data?.partnerUser
+                } else {
+                    vc.walletId = self?.model?.data?.sponsorUser
+                }
+                self?.navigationController?.pushViewController(vc, animated: true)
             }
-            self?.navigationController?.pushViewController(vc, animated: true)
-            
         }).disposed(by: rx.disposeBag)
         
         accountButton1.rx.tap.subscribe(onNext: {[unowned self] _ in
@@ -579,7 +593,8 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
     
     private func agreeRelease() {
         guard let id = model?.data?.assureId else { return }
-        APIProvider.rx.request(.releaseAgree(assureId: id)).mapJSON().subscribe(onSuccess: {[weak self] obj in
+        let key = LocaleWalletManager.shared().currentWallet?.getKeyForCoin(coin: .tron).data.hexString ?? ""
+        APIProvider.rx.request(.releaseAgree(assureId: id, privateKey: key)).mapJSON().subscribe(onSuccess: {[weak self] obj in
             
             guard let dict = obj as? [String: Any], let this = self else { return }
             let message = dict["message"] as? String

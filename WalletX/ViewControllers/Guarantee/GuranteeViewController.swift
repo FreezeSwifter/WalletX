@@ -15,11 +15,13 @@ import RxSwift
 import NSObject_Rx
 
 class GuranteeViewController: UIViewController, HomeNavigationble {
-
+    
     private var adapter: ListAdapter!
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     private var dataSource: [ListDiffable] = [HomeBannerSection.Model(), HomeQuickAccessSecion.Model(), HomeServiceProviderSecion.Model()]
+    
+    private let timer: Observable<Int> = Observable.timer(.seconds(1), period: .seconds(60), scheduler: MainScheduler.instance)
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -34,7 +36,7 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .white
         setupView()
         bind()
@@ -108,7 +110,23 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
             self?.dataSource[2] = model
             self?.adapter.performUpdates(animated: true)
         }).disposed(by: rx.disposeBag)
-                
+        
+        timer.subscribe(onNext: {[unowned self] i in
+            refreshTotalCountData()
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    private func refreshTotalCountData() {
+        let totalCountReq = APIProvider.rx.request(.guaranteeDisplayData).mapJSON()
+        totalCountReq.subscribe(onSuccess: {[weak self] obj in
+            let json = obj as? [String: Any]
+            let data = json?["data"] as? [String: Any]
+            let model = HomeQuickAccessSecion.Model()
+            model.assureAmount = data?["assureAmount"] as? Int64
+            model.assureNum = data?["assureNum"] as? Int64
+            self?.dataSource[1] = model
+            self?.adapter.performUpdates(animated: true)
+        }).disposed(by: rx.disposeBag)
     }
 }
 
