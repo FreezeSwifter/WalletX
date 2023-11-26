@@ -90,7 +90,7 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
     private func bind() {
     
         tokenLabel.text = model?.tokenName
-        headerView?.titleLabel.text = model?.tokenName
+        headerView?.titleLabel.text = model?.companyName
         
         pasteButton.rx.tap.subscribe(onNext: {[weak self] _ in
             self?.textField.text = UIPasteboard.general.string
@@ -136,28 +136,40 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
         faceIdVC.modalPresentationStyle = .fullScreen
         present(faceIdVC, animated: true)
         
+        
+        
         faceIdVC.resultBlock = {[unowned self] isPass in
             if isPass {
                 APPHUD.showLoading(text: "处理中".toMultilingualism())
-                LocaleWalletManager.shared().sendToken(toAddress: toAddress, amount: Double(sendAmount) ?? 0.0, coinType: m).subscribe(onNext: {[weak self] tuple in
-                    if tuple.0 {
-                        let vc: TokenTransferDetailController = ViewLoader.Storyboard.controller(from: "Wallet")
-                        var m = TokenTecordTransferModel()
-                        m.amount = Double(sendAmount)
-                        m.assetName = self?.model?.tokenName
-                        m.from = LocaleWalletManager.shared().USDT?.address
-                        m.to = toAddress
-                        m.txid = tuple.1
-                        vc.model = m
-                        vc.item = self?.model
-                        self?.navigationController?.pushViewController(vc, animated: true)
-                    } else {
+                let addressValidateReq = APIProvider.rx.request(.addressValidate(address: toAddress)).mapJSON()
+                addressValidateReq.subscribe { [unowned self] obj in
+                    guard let dict = obj as? [String: Any], let data = dict["data"] as? Bool else {
                         APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
+                        return
                     }
-                }).disposed(by: self.rx.disposeBag)
+                    if data {
+                        LocaleWalletManager.shared().sendToken(toAddress: toAddress, amount: Double(sendAmount) ?? 0.0, coinType: m).subscribe(onNext: {[weak self] tuple in
+                            APPHUD.hide()
+                            if tuple.0 {
+                                let vc: SendTokenPageTwoController = ViewLoader.Storyboard.controller(from: "Wallet")
+                                vc.model = self?.model
+                                vc.toAddress = toAddress
+                                vc.txid = tuple.1
+                                vc.sendCount = sendAmount
+                                self?.navigationController?.pushViewController(vc, animated: true)
+                            } else {
+                                APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
+                            }
+                        }).disposed(by: self.rx.disposeBag)
+                        
+                    } else {
+                        APPHUD.showLoading(text: "处理中".toMultilingualism())
+                    }
+                } onFailure: { error in
+                    APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
+                }.disposed(by: rx.disposeBag)
             }
         }
-        
     }
     
     private func setupView() {

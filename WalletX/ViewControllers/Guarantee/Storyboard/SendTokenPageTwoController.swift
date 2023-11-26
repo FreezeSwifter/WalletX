@@ -17,6 +17,7 @@ class SendTokenPageTwoController: UIViewController, HomeNavigationble {
     var model: WalletToken?
     var toAddress: String?
     var sendCount: String?
+    var txid: String?
     
     @IBOutlet weak var topLabel: UILabel! {
         didSet {
@@ -151,15 +152,20 @@ class SendTokenPageTwoController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
-        valueLabel1.text = model?.tokenName
+        headerView?.titleLabel.text = model?.companyName
+        valueLabel1.text = model?.companyName
         valueLabel2.text = LocaleWalletManager.shared().TRON?.address
         valueLabel3.text = toAddress
-        valueLabel5.text = sendCount
+        valueLabel5.text = "\(sendCount ?? "--") USDT"
+        
+        APIProvider.rx.request(.getTXInfo(txId: txid ?? "")).mapStringValue()
+            .delaySubscription(.seconds(3), scheduler: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] str in
+            self?.valueLabel4.text = "\(str ?? "--") TRX"
+        }).disposed(by: rx.disposeBag)
         
         bottomButton.rx.tap.subscribe(onNext: {[weak self] _ in
-            guard let this = self, let amount = Int64(this.sendCount ?? "0"), let address = this.toAddress, let type = this.model else {
-                return
-            }
+            self?.navigationController?.popToRootViewController(animated: true)
         }).disposed(by: rx.disposeBag)
     }
     
@@ -167,7 +173,6 @@ class SendTokenPageTwoController: UIViewController, HomeNavigationble {
         view.layoutIfNeeded()
         setupNavigationbar()
         setupChildVCStyle()
-        headerView?.titleLabel.text = "Token Name".toMultilingualism()
         headerView?.backgroundColor = .white
         headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
             self?.navigationController?.popViewController(animated: true)

@@ -16,7 +16,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
 
     var model: GuaranteeInfoModel? {
         didSet {
-            fetchData(walletId: model?.data?.walletId ?? "")
+            fetchData(walletId: model?.data?.sponsorUser ?? "")
         }
     }
     var userModel: UserInfoModel?
@@ -176,7 +176,10 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
     }
     
     private func openTg() {
-        guard let id = userModel?.data?.tg else { return }
+        guard let id = userModel?.data?.tg else {
+            APPHUD.flash(text: "No Telegram ID")
+            return
+        }
         let appURL = URL(string: "telegram://")!
         if UIApplication.shared.canOpenURL(appURL) {
             let appUrl = URL(string: "tg://resolve?domain=\(id)")
