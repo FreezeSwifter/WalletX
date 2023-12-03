@@ -47,8 +47,11 @@ extension HomeNavigationble where Self: UIViewController {
         
         LocaleWalletManager.shared().walletDidChanged.observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
             guard let this = self, let accountButton = this.headerView?.accountButton else { return }
-          
-            accountButton.setTitle(LocaleWalletManager.shared().currentWalletModel?.name ?? "未登录".toMultilingualism(), for: .normal)
+            if let _ = LocaleWalletManager.shared().currentWalletModel {
+                accountButton.setTitle("未登录".toMultilingualism(), for: .normal)
+            } else {
+                accountButton.setTitle(LocaleWalletManager.shared().currentWalletModel?.name, for: .normal)
+            }
         }).disposed(by: rx.disposeBag)
         
         headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
