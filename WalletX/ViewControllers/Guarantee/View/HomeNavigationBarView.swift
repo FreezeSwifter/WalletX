@@ -40,16 +40,8 @@ extension HomeNavigationble where Self: UIViewController {
         headerView?.backgroundColor = .clear
         
         LocaleWalletManager.shared().walletDidChanged.observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
-            guard let this = self, let accountButton = this.headerView?.accountButton else { return }
-            if LocaleWalletManager.shared().currentWallet == nil {
-                accountButton.setTitle("未登录".toMultilingualism(), for: .normal)
-            } else {
-                if LocaleWalletManager.shared().currentWalletModel?.name.count ?? 0 > 0 {
-                    accountButton.setTitle(LocaleWalletManager.shared().currentWalletModel?.name, for: .normal)
-                } else {
-                    accountButton.setTitle(LocaleWalletManager.shared().userInfo?.data?.walletId, for: .normal)
-                }
-            }
+            guard let this = self else { return }
+            this.updateAccountInfo()
         }).disposed(by: rx.disposeBag)
         
         headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
@@ -58,6 +50,8 @@ extension HomeNavigationble where Self: UIViewController {
             self?.navigationController?.pushViewController(settingVC, animated: true)
             
         }).disposed(by: rx.disposeBag)
+        
+        updateAccountInfo()
     }
     
     func setupChildVCStyle() {
@@ -73,6 +67,21 @@ extension HomeNavigationble where Self: UIViewController {
             self?.navigationController?.popViewController(animated: true)
         }).disposed(by: rx.disposeBag)
         headerView?.accountButton.setTitle(nil, for: .normal)
+    }
+    
+    private func updateAccountInfo() {
+        guard let accountButton = headerView?.accountButton else {
+            return
+        }
+        if LocaleWalletManager.shared().currentWallet == nil {
+            accountButton.setTitle("未登录".toMultilingualism(), for: .normal)
+        } else {
+            if LocaleWalletManager.shared().currentWalletModel?.name.count ?? 0 > 0 {
+                accountButton.setTitle(LocaleWalletManager.shared().currentWalletModel?.name, for: .normal)
+            } else {
+                accountButton.setTitle(LocaleWalletManager.shared().userInfo?.data?.walletId, for: .normal)
+            }
+        }
     }
 }
 

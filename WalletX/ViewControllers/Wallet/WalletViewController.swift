@@ -70,9 +70,11 @@ class WalletViewController: UIViewController, HomeNavigationble {
     
     private func bind() {
         headerView?.accountButton.rx.tap.subscribe(onNext: { _ in
-            let vc: WalletManagementController = WalletManagementController()
-            vc.hidesBottomBarWhenPushed = true
-            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+            LocaleWalletManager.checkLogin {
+                let vc: WalletManagementController = WalletManagementController()
+                vc.hidesBottomBarWhenPushed = true
+                UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+            }
         }).disposed(by: rx.disposeBag)
 
         headerView?.shareButton.rx.tap.subscribe(onNext: {[weak self] in

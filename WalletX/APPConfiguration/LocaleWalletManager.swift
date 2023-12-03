@@ -368,3 +368,18 @@ enum WalletToken: Equatable {
     }
 }
 
+extension LocaleWalletManager {
+    static func checkLogin(callback: @escaping () -> Void) {
+        if LocaleWalletManager.shared().currentWallet != nil {
+            callback()
+        } else {
+            GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_yes_no"), title: "需要先创建或导入钱包".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "首页弹窗1".toMultilingualism(), leftButton: "home_after_button".toMultilingualism(), rightButton: "home_gonow_button".toMultilingualism()).subscribe { index in
+                if index == 1 {
+                    let app = UIApplication.shared.delegate as? AppDelegate
+                    app?.tabBarSelecte(index: 1)
+                }
+            }.disposed(by: LocaleWalletManager.shared().disposeBag)
+        }
+    }
+}
+

@@ -112,10 +112,13 @@ class MyViewController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
-        headerView?.accountButton.rx.tap.subscribe(onNext: { _ in
-            let vc: WalletManagementController = WalletManagementController()
-            vc.hidesBottomBarWhenPushed = true
-            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+        headerView?.accountButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+            LocaleWalletManager.checkLogin {
+                self.toWalletManagementVC()
+            }
         }).disposed(by: rx.disposeBag)
         
         headerView?.shareButton.rx.tap.subscribe(onNext: {[weak self] in
@@ -137,6 +140,12 @@ class MyViewController: UIViewController, HomeNavigationble {
                 self?.fetchData()
         }).disposed(by: rx.disposeBag)
 
+    }
+    
+    private func toWalletManagementVC() {
+        let vc: WalletManagementController = WalletManagementController()
+        vc.hidesBottomBarWhenPushed = true
+        UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func fetchData() {
