@@ -98,6 +98,12 @@ class MyViewController: UIViewController, HomeNavigationble {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        infoView.walletAddressDes.text = "\("Gmail邮箱".toMultilingualism()): \(LocaleWalletManager.shared().userInfo?.data?.email ?? "--")"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -125,21 +131,12 @@ class MyViewController: UIViewController, HomeNavigationble {
         
         fetchData()
         
-        LocaleWalletManager.shared().walletDidChanged
-            .delay(.seconds(1), scheduler: MainScheduler.instance)
-            .subscribe(onNext: {[weak self] _ in
-            self?.fetchData()
-            self?.infoView.walletAddressValue.text = LocaleWalletManager.shared().TRON?.address
-        }).disposed(by: rx.disposeBag)
-        
         NotificationCenter.default.rx.notification(.userInfoDidChangeed)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: {[weak self] _ in
                 self?.fetchData()
         }).disposed(by: rx.disposeBag)
-        
-        infoView.walletAddressValue.text = LocaleWalletManager.shared().TRON?.address
-        
+
     }
     
     private func fetchData() {

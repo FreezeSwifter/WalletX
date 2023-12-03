@@ -64,15 +64,7 @@ class MeInfoView: UIView {
     @IBOutlet weak var walletAddressDes: UILabel! {
         didSet {
             walletAddressDes.textColor = ColorConfiguration.descriptionText.toColor()
-            walletAddressDes.text = "钱包地址".toMultilingualism()
-        }
-    }
-    
-    @IBOutlet weak var walletAddressValue: QMUILabel! {
-        didSet {
-            walletAddressValue.text = "--"
-            walletAddressValue.textColor = ColorConfiguration.descriptionText.toColor()
-            walletAddressValue.canPerformCopyAction = true
+            walletAddressDes.text = nil
         }
     }
     
