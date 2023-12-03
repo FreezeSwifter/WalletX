@@ -32,7 +32,7 @@ class SectionItem: UIControl {
     }
     
     private lazy var rightIcon: UIImageView = UIImageView().then { it in
-        it.contentMode = .scaleAspectFit
+        it.contentMode = .scaleAspectFill
     }
     
     private lazy var lineView: UIView = UIView().then { it in
@@ -149,7 +149,7 @@ class AccountSettingViewController: UIViewController, HomeNavigationble {
     }
     
     private lazy var systemIDItem: SectionItem = SectionItem().then { it in
-        it.configItem(iconName: "", title: "账户ID", rightIconName: "")
+        it.configItem(iconName: "ic_black_message", title: "账户ID", rightIconName: "ic_join_guarantee_copy")
     }
     
     private lazy var nickNameItem: SectionItem = SectionItem().then { it in
