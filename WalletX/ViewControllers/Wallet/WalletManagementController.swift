@@ -129,19 +129,9 @@ extension WalletManagementController: UITableViewDataSource, UITableViewDelegate
         cell.button1.rx.tap.subscribe(onNext: {[weak self] in
             guard let this = self else { return }
             
-            
             let accountSettingVC = AccountSettingViewController()
             this.navigationController?.pushViewController(accountSettingVC, animated: true)
-            
-//            let item = this.datasouce[indexPath.row]
-//            let vc: ChangeNameController = ViewLoader.Storyboard.controller(from: "Wallet")
-//            vc.changeWalletModel = item
-//            vc.didSaveBlock = { m in
-//                if let m1 = m {
-//                    LocaleWalletManager.shared().updateWalletModel(model: m1)
-//                }
-//            }
-//            this.navigationController?.pushViewController(vc, animated: true)
+
             
         }).disposed(by: cell.rx.disposeBag)
         

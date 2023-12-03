@@ -8,8 +8,10 @@
 import UIKit
 import Then
 import SnapKit
+import RxSwift
+import RxCocoa
 
-class SectionItem: UIControl {
+private class SectionItem: UIControl {
     
     private lazy var containerView: UIView = UIView().then { it in
         it.backgroundColor = .white
@@ -38,6 +40,8 @@ class SectionItem: UIControl {
     private lazy var lineView: UIView = UIView().then { it in
         it.backgroundColor = UIColor(white: 0, alpha: 0.2)
     }
+    
+    let button: UIButton = UIButton(type: .custom)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -91,6 +95,11 @@ class SectionItem: UIControl {
             make.left.right.bottom.equalToSuperview()
             make.height.equalTo(1)
         }
+        
+        addSubview(button)
+        button.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     func configItem(iconName: String, title:String, rightIconName: String) {
@@ -99,7 +108,7 @@ class SectionItem: UIControl {
         rightIcon.image = UIImage(named: rightIconName)
     }
     
-    func updateItem(with desTitle: String) {
+    func updateItem(with desTitle: String?) {
         descLabel.text = desTitle
     }
 }
@@ -136,7 +145,11 @@ class SectionItemView: UIView {
 }
 
 class AccountSettingViewController: UIViewController, HomeNavigationble {
-
+    
+    private var newNickname: String?
+    private var newEmail: String?
+    private var newTG: String?
+    
     private lazy var accountInfoSectionTitle: SectionItemView = SectionItemView().then { it in
         it.updateView(with: "账户信息".toMultilingualism())
     }
@@ -149,7 +162,7 @@ class AccountSettingViewController: UIViewController, HomeNavigationble {
     }
     
     private lazy var systemIDItem: SectionItem = SectionItem().then { it in
-        it.configItem(iconName: "ic_black_message", title: "账户ID", rightIconName: "ic_join_guarantee_copy")
+        it.configItem(iconName: "ic_black_message", title: "账户ID".toMultilingualism(), rightIconName: "ic_join_guarantee_copy")
     }
     
     private lazy var nickNameItem: SectionItem = SectionItem().then { it in
@@ -234,5 +247,91 @@ class AccountSettingViewController: UIViewController, HomeNavigationble {
         emailItem.snp.makeConstraints { make in
             make.height.equalTo(52)
         }
+        
+        systemIDItem.updateItem(with: LocaleWalletManager.shared().userInfo?.data?.walletId ?? "--")
+        nickNameItem.updateItem(with: LocaleWalletManager.shared().userInfo?.data?.nickName ?? "--")
+        emailItem.updateItem(with: LocaleWalletManager.shared().userInfo?.data?.email ?? "--")
+        telegramItem.updateItem(with: LocaleWalletManager.shared().userInfo?.data?.tg ?? "--")
+        
+        systemIDItem.button.rx.controlEvent(.touchUpInside).subscribe(onNext: {
+            UIPasteboard.general.string = LocaleWalletManager.shared().userInfo?.data?.walletId
+            APPHUD.flash(text: "成功".toMultilingualism())
+        }).disposed(by: rx.disposeBag)
+        
+        nickNameItem.button.rx.controlEvent(.touchUpInside).subscribe(onNext: {[unowned self] in
+            func filterSpecialCharactersAndEmojis(from string: String) -> String {
+                do {
+                    let regex = try NSRegularExpression(pattern: "[^a-zA-Z0-9\\s]", options: .caseInsensitive)
+                    let range = NSMakeRange(0, string.count)
+                    let filteredString = regex.stringByReplacingMatches(in: string, options: [], range: range, withTemplate: "")
+                    return filteredString
+                } catch {
+                    print("Error creating regular expression: \(error)")
+                    return string
+                }
+            }
+            
+            SettingModifyAlterView.show(title: "home_setting_Nickname".toMultilingualism(), text: nil, placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest {[weak self] str in
+                
+                guard let text = str, text.isNotEmpty else {
+                    return Observable<Any>.empty()
+                }
+                let filteredString = filterSpecialCharactersAndEmojis(from: text)
+                self?.newNickname = filteredString
+                let dict: [String: Any] = ["nickName": filteredString]
+                return APIProvider.rx.request(.userInfoSetting(info: dict)).mapJSON().asObservable()
+                
+            }.subscribe(onNext: {[weak self] _ in
+                self?.nickNameItem.updateItem(with: self?.newNickname)
+                APPHUD.flash(text: "成功".toMultilingualism())
+                NotificationCenter.default.post(name: .userInfoDidChangeed, object: nil)
+            }).disposed(by: rx.disposeBag)
+            
+        }).disposed(by: rx.disposeBag)
+        
+        emailItem.button.rx.controlEvent(.touchUpInside).subscribe(onNext: {[unowned self] _ in
+            SettingModifyAlterView.show(title: "home_setting_email".toMultilingualism(), text: nil, placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest {[weak self] str in
+                
+                guard let text = str, text.isNotEmpty else {
+                    return Observable<Any>.empty()
+                }
+                func isValidEmail(email: String) -> Bool {
+                    let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+                    let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+                    return emailPred.evaluate(with: email)
+                }
+                if !isValidEmail(email: text) {
+                    APPHUD.flash(text: "请填写有效邮箱".toMultilingualism())
+                    return Observable<Any>.empty()
+                }
+                self?.newEmail = text
+                let dict: [String: Any] = ["email": text]
+                return APIProvider.rx.request(.userInfoSetting(info: dict)).mapJSON().asObservable()
+                
+            }.subscribe(onNext: {[weak self] _ in
+                self?.emailItem.updateItem(with: self?.newEmail)
+                APPHUD.flash(text: "成功".toMultilingualism())
+                NotificationCenter.default.post(name: .userInfoDidChangeed, object: nil)
+            }).disposed(by: rx.disposeBag)
+            
+        }).disposed(by: rx.disposeBag)
+        
+        telegramItem.button.rx.controlEvent(.touchUpInside).subscribe(onNext: {[unowned self] _ in
+            SettingModifyAlterView.show(title: "home_setting_telegram".toMultilingualism(), text: nil, placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest {[weak self] str in
+                
+                guard let text = str, text.isNotEmpty else {
+                    return Observable<Any>.empty()
+                }
+                self?.newTG = text
+                let dict: [String: Any] = ["tg": text]
+                return APIProvider.rx.request(.userInfoSetting(info: dict)).mapJSON().asObservable()
+                
+            }.subscribe(onNext: {[weak self] _ in
+                self?.telegramItem.updateItem(with: self?.newTG)
+                APPHUD.flash(text: "成功".toMultilingualism())
+                NotificationCenter.default.post(name: .userInfoDidChangeed, object: nil)
+            }).disposed(by: rx.disposeBag)
+        }).disposed(by: rx.disposeBag)
+        
     }
 }

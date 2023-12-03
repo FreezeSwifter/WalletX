@@ -39,18 +39,16 @@ extension HomeNavigationble where Self: UIViewController {
         }
         headerView?.backgroundColor = .clear
         
-//        headerView?.accountButton.rx.tap.subscribe(onNext: { _ in
-//            let vc: WalletManagementController = WalletManagementController()
-//            vc.hidesBottomBarWhenPushed = true
-//            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
-//        }).disposed(by: rx.disposeBag)
-        
         LocaleWalletManager.shared().walletDidChanged.observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
             guard let this = self, let accountButton = this.headerView?.accountButton else { return }
-            if let _ = LocaleWalletManager.shared().currentWalletModel {
+            if LocaleWalletManager.shared().currentWallet == nil {
                 accountButton.setTitle("未登录".toMultilingualism(), for: .normal)
             } else {
-                accountButton.setTitle(LocaleWalletManager.shared().currentWalletModel?.name, for: .normal)
+                if LocaleWalletManager.shared().currentWalletModel?.name.count ?? 0 > 0 {
+                    accountButton.setTitle(LocaleWalletManager.shared().currentWalletModel?.name, for: .normal)
+                } else {
+                    accountButton.setTitle(LocaleWalletManager.shared().userInfo?.data?.walletId, for: .normal)
+                }
             }
         }).disposed(by: rx.disposeBag)
         
