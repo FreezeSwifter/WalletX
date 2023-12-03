@@ -53,16 +53,11 @@ class MessageDetailViewController: UIViewController, HomeNavigationble {
         setupNavigationbar()
         setupChildVCStyle()
         headerView?.backgroundColor = .white
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
-        
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(headerView!.snp.bottom).offset(1)
         }
-        
     }
 }
 

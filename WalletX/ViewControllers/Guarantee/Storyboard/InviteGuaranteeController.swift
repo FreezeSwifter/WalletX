@@ -144,8 +144,5 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         headerView?.titleLabel.text = "邀请对方加入".toMultilingualism()
         headerView?.backgroundColor = .white
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
     }
 }

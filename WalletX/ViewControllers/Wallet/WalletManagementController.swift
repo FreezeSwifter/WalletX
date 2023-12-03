@@ -51,9 +51,6 @@ class WalletManagementController: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         headerView?.titleLabel.text = "钱包管理".toMultilingualism()
         headerView?.backgroundColor = .white
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
@@ -61,9 +58,9 @@ class WalletManagementController: UIViewController, HomeNavigationble {
             make.leading.trailing.bottom.equalToSuperview()
         }
         
-        headerView?.stackView.addArrangedSubview(headerView!.linkButton)
-        headerView?.linkButton.setImage(UIImage(named: "wallet_add_new"), for: .normal)
-        headerView?.linkButton.rx.tap.subscribe(onNext: { _ in
+        headerView?.stackView.addArrangedSubview(headerView!.shareButton)
+        headerView?.shareButton.setImage(UIImage(named: "wallet_add_new"), for: .normal)
+        headerView?.shareButton.rx.tap.subscribe(onNext: { _ in
       
             guard let topVc = AppDelegate.topViewController() else {
                 return

@@ -596,9 +596,6 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         headerView?.titleLabel.text = state.title
         headerView?.backgroundColor = .white
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
         
         desLabel5Me.snp.remakeConstraints { make in
             make.width.height.equalTo(26)

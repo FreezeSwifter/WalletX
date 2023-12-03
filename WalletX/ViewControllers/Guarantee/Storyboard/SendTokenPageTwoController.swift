@@ -174,8 +174,5 @@ class SendTokenPageTwoController: UIViewController, HomeNavigationble {
         setupNavigationbar()
         setupChildVCStyle()
         headerView?.backgroundColor = .white
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
     }
 }

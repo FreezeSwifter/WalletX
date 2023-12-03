@@ -121,10 +121,7 @@ class ShareViewController: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         headerView?.titleLabel.text = "share_friend".toMultilingualism()
         headerView?.backgroundColor = .white
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
-        
+
         downloadButton.snp.remakeConstraints { make in
             make.width.equalTo(downloadButton.bounds.size.width + 32)
             make.height.equalTo(40)

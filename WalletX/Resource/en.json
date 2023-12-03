@@ -257,4 +257,6 @@
     "请勾选条款": "Please check the clause",
     "请输入钱包收款地址": "Please enter the wallet payment address",
     "请输入转账数量": "Please enter the transfer quantity",
+    "未登录": "Not Logged In",
+    "账户信息": "Account Information",
 }

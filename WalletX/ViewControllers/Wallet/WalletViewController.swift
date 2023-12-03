@@ -69,19 +69,12 @@ class WalletViewController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            let settingVC: SettingViewController = ViewLoader.Xib.controller()
-            settingVC.hidesBottomBarWhenPushed = true
-            self?.navigationController?.pushViewController(settingVC, animated: true)
-            
+        headerView?.accountButton.rx.tap.subscribe(onNext: { _ in
+            let vc: WalletManagementController = WalletManagementController()
+            vc.hidesBottomBarWhenPushed = true
+            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: rx.disposeBag)
-        
-        headerView?.scanButton.rx.tap.subscribe(onNext: {[weak self] in
-            let sancVC: ScanViewController = ViewLoader.Xib.controller()
-            sancVC.hidesBottomBarWhenPushed = true
-            self?.navigationController?.pushViewController(sancVC, animated: true)
-        }).disposed(by: rx.disposeBag)
-        
+
         headerView?.shareButton.rx.tap.subscribe(onNext: {[weak self] in
             let shareVC: ShareViewController = ViewLoader.Xib.controller()
             shareVC.hidesBottomBarWhenPushed = true
@@ -147,6 +140,7 @@ class WalletViewController: UIViewController, HomeNavigationble {
     private func setupView() {
         view.backgroundColor = ColorConfiguration.homeItemBg.toColor()
         setupNavigationbar()
+        
         view.addSubview(topOperatedView)
         topOperatedView.snp.makeConstraints { make in
             make.top.equalTo(headerView!.snp.bottom).offset(10)

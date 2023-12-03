@@ -61,10 +61,6 @@ class SettingChildViewController2: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         headerView?.backgroundColor = .white
         headerView?.titleLabel.text = "home_setting_Contact".toMultilingualism()
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
-        
     }
     
     @IBAction func changeTelegramTap(_ sender: UIControl) {

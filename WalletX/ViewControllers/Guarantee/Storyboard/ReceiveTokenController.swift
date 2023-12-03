@@ -138,9 +138,6 @@ class ReceiveTokenController: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         headerView?.titleLabel.text = model?.tokenName
         headerView?.backgroundColor = .white
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
     }
     
     private func saveImageToAlbum(image: UIImage) {

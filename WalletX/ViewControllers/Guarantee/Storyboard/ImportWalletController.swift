@@ -119,8 +119,5 @@ class ImportWalletController: UIViewController, HomeNavigationble {
         setupNavigationbar()
         setupChildVCStyle()
         headerView?.titleLabel.text = "wallet_i_have_wallet2".toMultilingualism()
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
     }
 }

@@ -133,10 +133,7 @@ class TokenDetailController: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         view.backgroundColor = ColorConfiguration.listBg.toColor()
         headerView?.titleLabel.text = "\(item?.tokenName ?? "")(\(item?.companyName ?? ""))"
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
-        
+
         view.addSubview(topOperatedView)
         topOperatedView.snp.makeConstraints { make in
             make.top.equalTo(headerView!.snp.bottom).offset(10)
