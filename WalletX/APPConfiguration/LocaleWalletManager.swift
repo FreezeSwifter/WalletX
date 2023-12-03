@@ -108,8 +108,8 @@ final class LocaleWalletManager {
             USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
             wallets.append(WalletModel(name: walletName, mnemoic: mnemonic))
             save()
+            fetchUserData()
             walletDidChangedSubject.onNext(())
-    
             return nil
         } else {
             return "助记词输入有误".toMultilingualism()
