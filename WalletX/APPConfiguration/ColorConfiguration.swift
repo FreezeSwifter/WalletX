@@ -24,7 +24,7 @@ enum ColorConfiguration {
     case originNotiBg //
     case listBg // 列表的背景色 F6F8FE
     case shareBg // 分享page的背景色 236 240 254
-    
+    case lightGray
     
     func toColor() -> UIColor {
         switch self {
@@ -69,8 +69,9 @@ enum ColorConfiguration {
             
         case .shareBg:
             return UIColor.qmui_color(withHexString: "#ECF0FE") ?? .purple
+        case .lightGray:
+            return UIColor.qmui_color(withHexString: "#666666") ?? .lightGray
         }
-        
     }
 }
 

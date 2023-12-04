@@ -62,7 +62,11 @@ final class LocaleWalletManager {
     private let usdtContractAddress = "TEpkBH2Yb9NG3xgXUW6UbudakyuCHZ7ZVF"
     private let walletDidChangedSubject: BehaviorSubject<Void?> = BehaviorSubject(value: nil)
     private var wallets: [WalletModel] = []
-    private(set) var userInfo: UserInfoModel?
+    private(set) var userInfo: UserInfoModel? {
+        didSet{
+            
+        }
+    }
     private(set) var walletBalanceModel: TokenModel?
     private let walletBalanceSubject: BehaviorSubject<TokenModel?> = BehaviorSubject(value: nil)
     private let disposeBag = DisposeBag()

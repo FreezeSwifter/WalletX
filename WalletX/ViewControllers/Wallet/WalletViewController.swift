@@ -111,13 +111,6 @@ class WalletViewController: UIViewController, HomeNavigationble {
             
         }).disposed(by: rx.disposeBag)
         
-        
-        topOperatedView.topButton2.rx.tap.subscribe(onNext: { _ in
-            let vc: WalletManagementController = WalletManagementController()
-            vc.hidesBottomBarWhenPushed = true
-            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
-        }).disposed(by: rx.disposeBag)
-        
         LanguageManager.shared().languageDidChanged.subscribe(onNext: {[weak self] _ in
             self?.segmentedDataSource.titles = self?.titleData ?? []
             self?.segmentedView.reloadData()
@@ -132,7 +125,7 @@ class WalletViewController: UIViewController, HomeNavigationble {
                 this.view.bringSubviewToFront(this.noWalletView)
                 this.noWalletView.alpha = 1
             }
-            this.topOperatedView.topButton2.setTitle(LocaleWalletManager.shared().currentWalletModel?.name ?? "Wallet", for: .normal)
+            
             this.updateBalance()
             
         }).disposed(by: rx.disposeBag)
@@ -147,7 +140,7 @@ class WalletViewController: UIViewController, HomeNavigationble {
         topOperatedView.snp.makeConstraints { make in
             make.top.equalTo(headerView!.snp.bottom).offset(10)
             make.trailing.leading.equalToSuperview().inset(42)
-            make.height.equalTo(220)
+            make.height.equalTo(176)
         }
         
         topOperatedView.topButton1.setTitle("$0.00", for: UIControl.State())
@@ -155,14 +148,6 @@ class WalletViewController: UIViewController, HomeNavigationble {
         topOperatedView.topButton1.titleLabel?.minimumScaleFactor = 0.5
         topOperatedView.topButton1.titleLabel?.adjustsFontSizeToFitWidth = true
         topOperatedView.topButton1.setTitleColor(ColorConfiguration.blodText.toColor(), for: UIControl.State())
-        
-        topOperatedView.topButton2.setTitle("Wallet Name", for: UIControl.State())
-        topOperatedView.topButton2.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        topOperatedView.topButton2.setTitleColor(ColorConfiguration.descriptionText.toColor(), for: UIControl.State())
-        topOperatedView.topButton2.setImage(UIImage(named: "wallet_down_arrow"), for: UIControl.State())
-        topOperatedView.topButton2.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        topOperatedView.topButton2.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        topOperatedView.topButton2.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         
         segmentedView.dataSource = segmentedDataSource
         segmentedView.delegate = self

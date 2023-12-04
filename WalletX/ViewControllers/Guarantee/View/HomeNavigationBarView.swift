@@ -76,8 +76,8 @@ extension HomeNavigationble where Self: UIViewController {
         if LocaleWalletManager.shared().currentWallet == nil {
             accountButton.setTitle("未登录".toMultilingualism(), for: .normal)
         } else {
-            if LocaleWalletManager.shared().currentWalletModel?.name.count ?? 0 > 0 {
-                accountButton.setTitle(LocaleWalletManager.shared().currentWalletModel?.name, for: .normal)
+            if let nickName = LocaleWalletManager.shared().userInfo?.data?.nickName, !nickName.isEmpty {
+                accountButton.setTitle(nickName, for: .normal)
             } else {
                 accountButton.setTitle(LocaleWalletManager.shared().userInfo?.data?.walletId, for: .normal)
             }
@@ -93,7 +93,11 @@ class HomeNavigationBarView: UIView {
             accountButton.setImage(UIImage(named: "导航栏下箭头"), for: .normal)
             accountButton.imagePosition = .right
             accountButton.spacingBetweenImageAndTitle = 6
-            accountButton.setTitleColor(ColorConfiguration.blodText.toColor(), for: .normal)
+            accountButton.setTitleColor(ColorConfiguration.lightGray.toColor(), for: .normal)
+            accountButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+            accountButton.cornerRadius = 4
+            accountButton.layer.borderWidth = 1
+            accountButton.layer.borderColor = ColorConfiguration.lightGray.toColor().cgColor
         }
     }
     
