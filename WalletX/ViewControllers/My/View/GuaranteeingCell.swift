@@ -16,6 +16,16 @@ import SwiftDate
 
 class GuaranteeingCell: UITableViewCell {
     
+    @IBOutlet weak var tagLabel: UILabel!
+    @IBOutlet weak var concact: UIStackView! {
+        didSet {
+            concact.isLayoutMarginsRelativeArrangement = true
+            concact.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+            concact.applyCornerRadius(concact.height / 2, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+//            let ges = UITapGestureRecognizer(target: self, action: #selector(MeTobeAddedCell.protocolTap))
+//            concact.addGestureRecognizer(ges)
+        }
+    }
     @IBOutlet weak var desLabel1: UILabel! {
         didSet {
             desLabel1.text = "担保ID".toMultilingualism()
@@ -313,7 +323,7 @@ class GuaranteeingCell: UITableViewCell {
             desLabel4Me.isHidden = true
             desLabel5Me.isHidden = false
         }
-        
+        tagLabel.text = data.assureTypeToString()
         var address: String = ""
         if let str = data.pushAddress {
             address = str

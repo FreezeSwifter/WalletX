@@ -15,6 +15,16 @@ import NSObject_Rx
 
 class MeTobeAddedCell: UITableViewCell {
     
+    @IBOutlet weak var tagLabel: UILabel!
+    @IBOutlet weak var concat: UIStackView! {
+        didSet {
+            concat.isLayoutMarginsRelativeArrangement = true
+            concat.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+            concat.applyCornerRadius(concat.height / 2, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+//            let ges = UITapGestureRecognizer(target: self, action: #selector(MeTobeAddedCell.protocolTap))
+//            concat.addGestureRecognizer(ges)
+        }
+    }
     @IBOutlet weak var guaranteeIdDesLabel: UILabel! {
         didSet {
             guaranteeIdDesLabel.text = "担保ID".toMultilingualism()
@@ -294,7 +304,7 @@ class MeTobeAddedCell: UITableViewCell {
             meDes2Label.isHidden = true
             meDesLabel.isHidden = false
         }
-        
+        tagLabel.text = data.assureTypeToString()
         if data.assureStatus == 0 || data.assureStatus == 5 { // 待加入
             
             if data.assureStatus == 5 { // 待加入超时
@@ -382,13 +392,17 @@ class MeTobeAddedCell: UITableViewCell {
                 }
                 buttonStackView.addArrangedSubview(contactButton)
                 buttonStackView.addArrangedSubview(modifyButton)
-                modifyButton.setupAPPUISolidStyle(title: "我来上押".toMultilingualism())
+                if data.assureType == 1 && data.hcPay == 0 {
+                    modifyButton.setupAPPUISolidStyle(title: "付手续费".toMultilingualism())
+                } else {
+                    modifyButton.setupAPPUISolidStyle(title: "我来上押".toMultilingualism())
+                }
                 contactButton.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
                 
                 var createTime: Date
                 var timeout: Int
                 if data.assureType == 0  { // 普通担保
-                    createTime = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 )
+                    createTime = Date(timeIntervalSince1970: (data.multisigTime ?? 0) / 1000 )
                     timeout = Int(AppArchiveder.shared().getAPPConfig(by: "pushTimeout") ?? "0") ?? 0
                     waitingDesLabel.text = "等待上押中".toMultilingualism()
                 } else { // 多签担保
