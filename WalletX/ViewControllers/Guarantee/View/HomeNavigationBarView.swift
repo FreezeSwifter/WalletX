@@ -67,13 +67,17 @@ extension HomeNavigationble where Self: UIViewController {
             self?.navigationController?.popViewController(animated: true)
         }).disposed(by: rx.disposeBag)
         headerView?.accountButton.setTitle(nil, for: .normal)
+        headerView?.accountButton.layer.borderColor = UIColor.clear.cgColor
     }
     
     private func updateAccountInfo() {
+        
         guard let accountButton = headerView?.accountButton else {
             return
         }
-        if LocaleWalletManager.shared().currentWallet == nil {
+        
+        
+        if LocaleWalletManager.shared().currentWalletModel == nil {
             accountButton.setTitle("未登录".toMultilingualism(), for: .normal)
         } else {
             if let nickName = LocaleWalletManager.shared().userInfo?.data?.nickName, !nickName.isEmpty {

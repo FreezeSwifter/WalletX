@@ -125,14 +125,11 @@ extension WalletManagementController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WalletManagementCell", for: indexPath) as! WalletManagementCell
         let item = datasouce[indexPath.row]
-        cell.nameLabel.text = item.name
+        cell.nameLabel.text = item.nickName ?? item.walletId
         cell.button1.rx.tap.subscribe(onNext: {[weak self] in
             guard let this = self else { return }
-            
             let accountSettingVC = AccountSettingViewController()
             this.navigationController?.pushViewController(accountSettingVC, animated: true)
-
-            
         }).disposed(by: cell.rx.disposeBag)
         
         return cell
