@@ -48,6 +48,7 @@ enum NetworkService {
     case arbitrateAccept(assureId: String, key: String) // 同意仲裁
     case releaseInfo(assureId: String) // 申请解押查询
     case assureOrderReleaseReject(assureId: String) // 拒绝解押
+    case searchOrderList // 订单搜索接口
 
 }
 
@@ -130,6 +131,9 @@ extension NetworkService: TargetType {
             return "/api/assureOrder/release/info"
         case .assureOrderReleaseReject:
             return "/api/assureOrder/release/reject"
+        case .searchOrderList:
+            return "/api/assureOrder/pendingList"
+            
         }
     }
     

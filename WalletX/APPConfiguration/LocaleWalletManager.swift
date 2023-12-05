@@ -81,11 +81,6 @@ final class LocaleWalletManager {
         TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
         USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-            self.fetchUserData(mnemonic: self.currentWallet?.mnemonic, walletName: self.currentWalletModel?.name, isAdd: false)
-            self.fetchWalletBalanceData()
-//        })
-        
         if tronWeb.isGenerateTronWebInstanceSuccess != true {
             if let privateKeyData = currentWallet?.getKeyForCoin(coin: .tron) {
                 tronWeb.setup(privateKey: privateKeyData.data.toHexString(), node: TRONNileNet) { setupResult in
@@ -141,7 +136,6 @@ final class LocaleWalletManager {
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 AppArchiveder.shared().mmkv?.set(jsonString, forKey: ArchivedKey.walletList.rawValue)
                 walletDidChangedSubject.onNext(())
-                
                 if isNotActiveAccount {
                     activationAccount()
                 }
@@ -231,8 +225,7 @@ final class LocaleWalletManager {
             if isAdd {
                 wallets.append(WalletModel(name: walletName, mnemoic: mnemonic, nickName: obj?.data?.nickName, walletId: obj?.data?.walletId))
             }
-//            save()
-            walletDidChangedSubject.onNext(())
+            save()
         }).disposed(by: disposeBag)
     }
     
@@ -318,6 +311,7 @@ struct WalletModel: Codable {
     var mnemoic: String?
     var nickName: String?
     var walletId: String?
+    var isSelected: Bool = false
 }
 
 enum WalletToken: Equatable {

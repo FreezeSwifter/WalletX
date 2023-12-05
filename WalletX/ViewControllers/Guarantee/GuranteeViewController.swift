@@ -109,6 +109,9 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
         timer.subscribe(onNext: {[unowned self] i in
             refreshTotalCountData()
         }).disposed(by: rx.disposeBag)
+        
+        LocaleWalletManager.shared().fetchUserData(mnemonic: nil, walletName: nil, isAdd: false)
+        LocaleWalletManager.shared().fetchWalletBalanceData()
     }
     
     private func refreshTotalCountData() {

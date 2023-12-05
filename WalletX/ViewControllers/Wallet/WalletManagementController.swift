@@ -38,10 +38,13 @@ class WalletManagementController: UIViewController, HomeNavigationble {
     private func bind() {
         datasouce = LocaleWalletManager.shared().fetchLocalWalletList() ?? []
         
-        LocaleWalletManager.shared().walletDidChanged.subscribe(onNext: {[weak self] _ in
-            self?.datasouce = LocaleWalletManager.shared().fetchLocalWalletList() ?? []
-            self?.tableView.reloadData()
-        }).disposed(by: rx.disposeBag)
+        if let selectedIndex = datasouce.firstIndex(where: { m in
+            return m.mnemoic == LocaleWalletManager.shared().currentWalletModel?.mnemoic
+        }) {
+            var selectedItem = datasouce[selectedIndex]
+            selectedItem.isSelected = true
+            datasouce[selectedIndex] = selectedItem
+        }
     }
     
     private func setupView() {
@@ -125,7 +128,20 @@ extension WalletManagementController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WalletManagementCell", for: indexPath) as! WalletManagementCell
         let item = datasouce[indexPath.row]
-        cell.nameLabel.text = item.nickName ?? item.walletId
+        if item.nickName.isNotNilNotEmpty {
+            cell.nameLabel.text = item.nickName
+            
+        } else if item.walletId.isNotNilNotEmpty {
+            cell.nameLabel.text = item.walletId
+        }
+        if item.isSelected {
+            cell.nameLabel.textColor = ColorConfiguration.lightBlue.toColor()
+            cell.imageIcon.image = UIImage(named: "wallet_management_list_icon")?.qmui_image(withTintColor: ColorConfiguration.lightBlue.toColor())
+        } else {
+            cell.nameLabel.textColor = ColorConfiguration.blackText.toColor()
+            cell.imageIcon.image = UIImage(named: "wallet_management_list_icon")?.qmui_image(withTintColor: ColorConfiguration.blackText.toColor())
+        }
+        
         cell.button1.rx.tap.subscribe(onNext: {[weak self] in
             guard let this = self else { return }
             let accountSettingVC = AccountSettingViewController()
