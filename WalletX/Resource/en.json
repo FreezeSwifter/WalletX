@@ -264,4 +264,5 @@
     "首页弹窗1": "Uoobal uses your cryptocurrency wallet as a system account credential. Please create or import at least one cryptocurrency wallet first.",
     "需要先创建或导入钱包": "You need to create or import a wallet first",
     "付手续费": "Payment",
+    "当前账户没有待上押担保订单": "There are no pending collateral orders for the current account",
 }
