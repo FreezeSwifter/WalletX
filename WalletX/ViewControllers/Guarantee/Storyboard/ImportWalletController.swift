@@ -103,7 +103,7 @@ class ImportWalletController: UIViewController, HomeNavigationble {
             guard let res = this.textView.text else {
                 return
             }
-            let message = LocaleWalletManager.shared().importWallet(mnemonic: res, walletName: self?.textField.text ?? "Wallet 1")
+            let message = LocaleWalletManager.shared().importWallet(mnemonic: res, walletName: self?.textField.text ?? "")
             if message.isNilOrEmpty {
                 this.navigationController?.popToRootViewController(animated: true)
             } else {
