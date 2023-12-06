@@ -61,6 +61,8 @@ extension HomeNavigationble where Self: UIViewController {
         headerView?.shareButton.removeFromSuperview()
         headerView?.stackView.removeArrangedSubview(headerView!.serverButton)
         headerView?.serverButton.removeFromSuperview()
+        headerView?.stackView.removeArrangedSubview(headerView!.messageButton)
+        headerView?.messageButton.removeFromSuperview()
         headerView?.accountButton.setImage(UIImage(named: "navigation_back_button"), for: UIControl.State())
         headerView?.accountButton.tintColor = ColorConfiguration.blodText.toColor()
         headerView?.accountButton.rx.tap.subscribe(onNext: {[weak self] in

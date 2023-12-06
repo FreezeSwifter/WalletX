@@ -6,13 +6,7 @@
 //
 
 import UIKit
-import RxCocoa
-import RxSwift
-import QMUIKit
 import Then
-import NSObject_Rx
-import Action
-import SwiftData
 
 class SectionDesItem: UIView {
     private lazy var stackView: UIStackView = UIStackView().then { it in
@@ -112,9 +106,25 @@ class SearchOrderCell: UITableViewCell {
 }
 
 
-class SearchOrderViewController: UIViewController {
-
-    var list: [GuaranteeInfoModel.Meta] = []
+class SearchOrderViewController: UIViewController, HomeNavigationble {
+    private var filterList: [GuaranteeInfoModel.Meta] = []
+    var list: [GuaranteeInfoModel.Meta] = [] {
+        didSet {
+            filterList = list
+        }
+    }
+    
+    private lazy var searchBar: UISearchBar = UISearchBar().then { it in
+        it.searchTextField.backgroundColor = .white
+        it.searchTextField.font = UIFont.systemFont(ofSize: 14)
+        it.searchTextField.textColor = ColorConfiguration.descriptionText.toColor()
+        it.searchBarStyle = .minimal
+        it.layer.cornerRadius = 25
+        it.layer.masksToBounds = true
+        it.delegate = self
+        it.backgroundColor = ColorConfiguration.lightGray.toColor()
+        it.setSearchFieldBackgroundImage(UIImage(color: ColorConfiguration.lightGray.toColor(), size: CGSizeMake(1, 50)), for: .normal)
+    }
     
     private lazy var tableView: UITableView = UITableView(frame: .zero, style: .plain).then { it in
         it.rowHeight = 50
@@ -127,25 +137,43 @@ class SearchOrderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationbar()
+        setupChildVCStyle()
+        headerView?.backgroundColor = .white
+        headerView?.titleLabel.text = "待上押担保".toMultilingualism()
+        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }).disposed(by: rx.disposeBag)
         view.backgroundColor = .white
+        view.addSubview(searchBar)
         view.addSubview(tableView)
+        
+        searchBar.snp.makeConstraints { make in
+            if let headerView = headerView {
+                make.top.equalTo(headerView.snp.bottom)
+            }
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(50)
+        }
+        
         tableView.snp.makeConstraints { make in
-            make.top.leading.bottom.trailing.equalToSuperview()
+            make.top.equalTo(searchBar.snp.bottom)
+            make.leading.bottom.trailing.equalToSuperview()
         }
     }
     
     private func model(with indexPath: IndexPath) -> GuaranteeInfoModel.Meta? {
-        guard indexPath.row >= 0 && indexPath.row < list.count else {
+        guard indexPath.row >= 0 && indexPath.row < filterList.count else {
             return nil
         }
-        return list[indexPath.row]
+        return filterList[indexPath.row]
     }
 }
 
-
 extension SearchOrderViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
+        return filterList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -159,6 +187,24 @@ extension SearchOrderViewController: UITableViewDataSource {
 }
 
 extension SearchOrderViewController: UITableViewDelegate {
-    
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+}
+
+extension SearchOrderViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filterList = list
+        } else {
+            filterList = list.filter({ item in
+                if let assureId = item.assureId, !assureId.isEmpty {
+                    return assureId.hasPrefix(searchText)
+                } else {
+                    return false
+                }
+            })
+        }
+        tableView.reloadData()
+    }
 }
