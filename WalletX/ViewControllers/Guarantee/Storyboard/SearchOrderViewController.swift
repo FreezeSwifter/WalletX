@@ -12,17 +12,17 @@ class SectionDesItem: UIView {
     private lazy var stackView: UIStackView = UIStackView().then { it in
         it.axis = .vertical
         it.distribution = .fill
-        it.alignment = .leading
+        it.alignment = .fill
         it.spacing = 3
     }
     
     private lazy var titleLabel: UILabel = UILabel().then { it in
-        it.font = UIFont.systemFont(ofSize: 13)
+        it.font = UIFont.systemFont(ofSize: 15)
         it.textColor = ColorConfiguration.blackText.toColor()
     }
     
     private lazy var desLabel: UILabel = UILabel().then { it in
-        it.font = UIFont.systemFont(ofSize: 13)
+        it.font = UIFont.systemFont(ofSize: 12)
         it.textColor = ColorConfiguration.descriptionText.toColor()
     }
     
@@ -45,7 +45,7 @@ class SectionDesItem: UIView {
         }
     }
     
-    func updateItem(with title: String, desc: String, textAlignment:NSTextAlignment) {
+    func updateItem(with title: String, desc: String, textAlignment: NSTextAlignment) {
         titleLabel.text = title
         titleLabel.textAlignment = textAlignment
         desLabel.text = desc
@@ -57,6 +57,7 @@ class SearchOrderCell: UITableViewCell {
     
     private lazy var iconImageView: UIImageView = UIImageView().then { it in
         it.contentMode = .scaleAspectFill
+        it.image = UIImage(named: "app_logo_two")
     }
     
     private lazy var leftItem: SectionDesItem = SectionDesItem().then { it in
@@ -83,8 +84,8 @@ class SearchOrderCell: UITableViewCell {
         contentView.addSubview(rightItem)
         iconImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(8)
-            make.height.width.equalTo(32)
+            make.leading.equalToSuperview().offset(20)
+            make.height.width.equalTo(36)
         }
         
         leftItem.snp.makeConstraints { make in
@@ -94,14 +95,18 @@ class SearchOrderCell: UITableViewCell {
         }
         
         rightItem.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-10)
+            make.trailing.equalToSuperview().offset(-20)
             make.centerY.equalToSuperview()
         }
     }
     
     func updateCell(with model: GuaranteeInfoModel.Meta) {
         leftItem.updateItem(with: model.assureId ?? "", desc: model.assureTypeToString(), textAlignment: .left)
-        rightItem.updateItem(with: "\(String(describing: model.amount))", desc: "USDT", textAlignment: .right)
+        if let amount = model.amount {
+            rightItem.updateItem(with: "\(Int(amount))", desc: "USDT", textAlignment: .right)
+        } else {
+            rightItem.updateItem(with: "", desc: "USDT", textAlignment: .right)
+        }
     }
 }
 
@@ -115,19 +120,20 @@ class SearchOrderViewController: UIViewController, HomeNavigationble {
     }
     
     private lazy var searchBar: UISearchBar = UISearchBar().then { it in
-        it.searchTextField.backgroundColor = .white
         it.searchTextField.font = UIFont.systemFont(ofSize: 14)
-        it.searchTextField.textColor = ColorConfiguration.descriptionText.toColor()
+        it.searchTextField.textColor = ColorConfiguration.blackText.toColor().withAlphaComponent(0.9)
+        it.searchTextField.setPlaceHolderTextColor(ColorConfiguration.garyLine.toColor().withAlphaComponent(0.4))
+        it.searchTextField.placeholder = "担保ID".toMultilingualism()
         it.searchBarStyle = .minimal
-        it.layer.cornerRadius = 25
+        it.layer.cornerRadius = 18
         it.layer.masksToBounds = true
         it.delegate = self
-        it.backgroundColor = ColorConfiguration.lightGray.toColor()
-        it.setSearchFieldBackgroundImage(UIImage(color: ColorConfiguration.lightGray.toColor(), size: CGSizeMake(1, 50)), for: .normal)
+        it.backgroundColor = ColorConfiguration.garyLine.toColor()
+        it.setSearchFieldBackgroundImage(UIImage(color: ColorConfiguration.garyLine.toColor().withAlphaComponent(0.9), size: CGSizeMake(1, 36)), for: .normal)
     }
     
     private lazy var tableView: UITableView = UITableView(frame: .zero, style: .plain).then { it in
-        it.rowHeight = 50
+        it.rowHeight = 90
         it.backgroundColor = .white
         it.separatorStyle = .none
         it.register(SearchOrderCell.self, forCellReuseIdentifier: "SearchOrderCell")
@@ -152,14 +158,15 @@ class SearchOrderViewController: UIViewController, HomeNavigationble {
             if let headerView = headerView {
                 make.top.equalTo(headerView.snp.bottom)
             }
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(50)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(36)
         }
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom)
-            make.leading.bottom.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
     }
     
@@ -199,7 +206,7 @@ extension SearchOrderViewController: UISearchBarDelegate {
         } else {
             filterList = list.filter({ item in
                 if let assureId = item.assureId, !assureId.isEmpty {
-                    return assureId.hasPrefix(searchText)
+                    return assureId.contains(searchText)
                 } else {
                     return false
                 }
