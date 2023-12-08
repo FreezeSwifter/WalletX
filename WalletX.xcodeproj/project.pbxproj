@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		418463332B1C590D00EBB376 /* AccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418463322B1C590D00EBB376 /* AccountSettingViewController.swift */; };
 		41D3D98D2B1F73F5000E8F07 /* SearchOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D3D98C2B1F73F5000E8F07 /* SearchOrderViewController.swift */; };
+		41D5F9A72B221F15000FAC2D /* PayHandlingFeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D5F9A62B221F15000FAC2D /* PayHandlingFeeViewController.swift */; };
 		7A000D3C2AA8469D00FA1817 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D3B2AA8469D00FA1817 /* NetworkConfig.swift */; };
 		7A000DB72AA84F4500FA1817 /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D3E2AA84F4500FA1817 /* AES.swift */; };
 		7A000DB82AA84F4500FA1817 /* ASN1Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000D402AA84F4500FA1817 /* ASN1Scanner.swift */; };
@@ -326,6 +327,7 @@
 		044529E4FB5778B72BDB39C3 /* libPods-WalletX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WalletX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		418463322B1C590D00EBB376 /* AccountSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingViewController.swift; sourceTree = "<group>"; };
 		41D3D98C2B1F73F5000E8F07 /* SearchOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOrderViewController.swift; sourceTree = "<group>"; };
+		41D5F9A62B221F15000FAC2D /* PayHandlingFeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayHandlingFeeViewController.swift; sourceTree = "<group>"; };
 		4E1FF6B9D44BF6B90AA7FD3B /* Pods-WalletX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalletX.release.xcconfig"; path = "Target Support Files/Pods-WalletX/Pods-WalletX.release.xcconfig"; sourceTree = "<group>"; };
 		7A000D3B2AA8469D00FA1817 /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		7A000D3E2AA84F4500FA1817 /* AES.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AES.swift; sourceTree = "<group>"; };
@@ -1707,6 +1709,7 @@
 				7AFB57A92A95D73F003451CB /* ShareViewController.swift */,
 				7AFB57AA2A95D73F003451CB /* ShareViewController.xib */,
 				418463322B1C590D00EBB376 /* AccountSettingViewController.swift */,
+				41D5F9A62B221F15000FAC2D /* PayHandlingFeeViewController.swift */,
 			);
 			path = Guarantee;
 			sourceTree = "<group>";
@@ -2148,6 +2151,7 @@
 				7A000DF82AA84F4600FA1817 /* Utils.swift in Sources */,
 				7AD08BD52A8A083B000B247E /* ReusableFormatters.swift in Sources */,
 				7AD08BE22A8A083B000B247E /* DataExtension.swift in Sources */,
+				41D5F9A72B221F15000FAC2D /* PayHandlingFeeViewController.swift in Sources */,
 				7A000E162AA84F4600FA1817 /* Bitwise Ops.swift in Sources */,
 				7AF8F23E2AA0531E00852F5B /* TokenDetailController.swift in Sources */,
 				7AD08BD12A8A083B000B247E /* DateExtension.swift in Sources */,
