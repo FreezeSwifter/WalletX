@@ -12,8 +12,23 @@ import RxSwift
 import RxCocoa
 
 class SectionInputWithDescText: UIView {
+    var hideLine: Bool = false {
+        didSet {
+            verticalLineView.isHidden = hideLine
+        }
+    }
     
-    var callback: (String) -> Void = { _ in }
+    var hideRightItem: Bool = false {
+        didSet {
+            rightStackView.isHidden = hideRightItem
+        }
+    }
+    
+    var enableInput: Bool = true {
+        didSet {
+            textField.isEnabled = enableInput
+        }
+    }
     
     private lazy var sectionTitleLabel: UILabel = UILabel().then { it in
         it.font = UIFont.systemFont(ofSize: 16, weight: .medium)
@@ -102,16 +117,10 @@ class SectionInputWithDescText: UIView {
             make.width.equalTo(1)
             make.height.equalTo(18)
         }
-        
-        textField.addTarget(self, action: #selector(didValueChanged(_:)), for: .valueChanged)
     }
     
     func setup(with title: String) {
         sectionTitleLabel.text = title
-    }
-    
-    @objc private func didValueChanged(_ textField: UITextField) {
-        callback(textField.text ?? "")
     }
 }
 

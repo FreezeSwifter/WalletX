@@ -195,7 +195,12 @@ extension SearchOrderViewController: UITableViewDataSource {
 
 extension SearchOrderViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if let model = model(with: indexPath) {
+            let vc = TransferOnsiteWalletController()
+            vc.model = model
+            vc.hidesBottomBarWhenPushed = true
+            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
