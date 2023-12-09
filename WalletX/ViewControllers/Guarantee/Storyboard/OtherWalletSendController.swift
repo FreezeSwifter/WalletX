@@ -162,7 +162,11 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
             }
             
         case .deposited(let isInitiator):
-            break
+            if isInitiator {
+                
+            } else {
+                
+            }
         }
     }
     
