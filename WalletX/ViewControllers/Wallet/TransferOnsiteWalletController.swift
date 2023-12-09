@@ -44,13 +44,13 @@ class TransferOnsiteWalletController: UIViewController, HomeNavigationble {
     }
     
     private lazy var guaranteeTypeItem: SectionInputWithDescText = SectionInputWithDescText().then { it in
-        it.setup(with: "担保类型".toMultilingualism())
+        it.setup(with: "担保类型没有3".toMultilingualism())
         it.hideRightItem = true
         it.enableInput = false
     }
     
     private lazy var guaranteeAmountItem: SectionInputWithDescText = SectionInputWithDescText().then { it in
-        it.setup(with: "担保金额".toMultilingualism())
+        it.setup(with: "担保金额没有1".toMultilingualism())
         it.enableInput = false
     }
     
