@@ -272,4 +272,6 @@
     "我已完成转账": "Completed",
     "其他钱包转入提示语": "When transferring funds, please enter the full 6 digits after the decimal point. This is the key voucher to confirm whether your transfer has been received.",
     "转账验证码": "Transfer verification code",
+    "提醒对方付手续费": "Remind other pay fee",
+    "我来付手续费": "Pay fee",
 }
