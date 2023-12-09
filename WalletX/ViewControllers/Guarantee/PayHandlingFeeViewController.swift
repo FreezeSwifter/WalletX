@@ -34,7 +34,7 @@ class SectionInputWithDescText: UIView {
         it.spacing = 20
     }
     
-    private lazy var textField: UITextField = UITextField().then { it in
+    lazy var textField: UITextField = UITextField().then { it in
         it.font = UIFont.systemFont(ofSize: 14)
         it.textColor = ColorConfiguration.blackText.toColor()
     }
@@ -116,8 +116,9 @@ class SectionInputWithDescText: UIView {
 }
 
 class PayHandlingFeeViewController: UIViewController, HomeNavigationble {
-    /// 手续费金额
-    var assureFee: Double?
+    /// 订单model
+    var model: GuaranteeInfoModel.Meta?
+    
     private lazy var feeInputItem: SectionInputWithDescText = SectionInputWithDescText().then { it in
         it.setup(with: "多签手续费".toMultilingualism())
     }
@@ -208,10 +209,13 @@ class PayHandlingFeeViewController: UIViewController, HomeNavigationble {
         otherWalletBtn.snp.makeConstraints { make in
             make.height.equalTo(44)
         }
+        
+        feeInputItem.textField.isUserInteractionEnabled = false
+        feeInputItem.textField.text = "\(model?.hc ?? "--")"
     }
     
     private func setupUI()  {
-        let fee = String(assureFee ?? 0)
+        let fee = String(model?.hc ?? "--")
         let attr = NSMutableAttributedString(string: "您选择了多签担保以保障资金安全，需要先转\(fee)U手续费给我们该手续费并不是我们收取，而是用于TRON官方创建多签钱包的gas费用。")
         attr.addAttribute(.foregroundColor, value: ColorConfiguration.lightBlue.toColor().withAlphaComponent(0.9), range: NSRange(location: 0, length: attr.length))
         let content = NSMutableAttributedString()
@@ -232,6 +236,10 @@ class PayHandlingFeeViewController: UIViewController, HomeNavigationble {
     }
     
     @objc private func didOtherWalletBtnClick(button: UIButton) {
-        
+        let vc: OtherWalletSendController = ViewLoader.Storyboard.controller(from: "Wallet")
+        vc.model = model
+        vc.payType = .fee
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

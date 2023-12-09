@@ -476,15 +476,13 @@ class MeTobeAddedCell: UITableViewCell {
                 vc.hidesBottomBarWhenPushed = true
                 UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
             }
-            
         }).disposed(by: rx.disposeBag)
-        
     }
     
     /// 付多钱手续费
     private func payAssureFee() {
         let vc = PayHandlingFeeViewController()
-        vc.assureFee = model?.assureFee
+        vc.model = model
         vc.hidesBottomBarWhenPushed = true
         UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
     }
