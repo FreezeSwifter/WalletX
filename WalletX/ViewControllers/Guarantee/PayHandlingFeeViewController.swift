@@ -140,22 +140,22 @@ class PayHandlingFeeViewController: UIViewController, HomeNavigationble {
     }
     
     private lazy var innerWalletBtn: UIButton = UIButton(type: .custom).then { it in
-        it.setTitle("站内钱包转入", for: .normal)
+        it.setTitle("站内钱包转入".toMultilingualism(), for: .normal)
         it.setTitleColor(.white, for: .normal)
         it.layer.cornerRadius = 4
         it.clipsToBounds = true
         it.backgroundColor = ColorConfiguration.lightBlue.toColor()
-        it.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        it.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         it.addTarget(self, action: #selector(didInnerWalletBtnClick(button:)), for: .touchUpInside)
     }
     
     private lazy var otherWalletBtn: UIButton = UIButton(type: .custom).then { it in
-        it.setTitle("其他钱包转入", for: .normal)
+        it.setTitle("其他钱包转入".toMultilingualism(), for: .normal)
         it.setTitleColor(.white, for: .normal)
         it.layer.cornerRadius = 4
         it.clipsToBounds = true
         it.backgroundColor = ColorConfiguration.primary.toColor()
-        it.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        it.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         it.addTarget(self, action: #selector(didOtherWalletBtnClick(button:)), for: .touchUpInside)
     }
     

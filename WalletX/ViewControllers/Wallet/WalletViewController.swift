@@ -111,7 +111,7 @@ class WalletViewController: UIViewController, HomeNavigationble {
             let req: Observable<[GuaranteeInfoModel.Meta]> = APIProvider.rx.request(.searchOrderList).mapModelArray()
             req.subscribe(onNext: { list in
                 if list.isEmpty {
-                    NotiAlterView.show(title: "当前账户没有待上押担保订单".toMultilingualism(), content: nil, leftButtonTitle: nil, rightButtonTitle: "我知道啦".toMultilingualism()).subscribe().disposed(by: this.rx.disposeBag)
+                    NotiAlterView.show(title: nil, content: "当前账户没有待上押担保订单".toMultilingualism(), leftButtonTitle: nil, rightButtonTitle: "我知道啦".toMultilingualism()).subscribe().disposed(by: this.rx.disposeBag)
                 } else {
                     let vc = SearchOrderViewController()
                     vc.list = list
