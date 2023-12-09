@@ -116,7 +116,8 @@ class SectionInputWithDescText: UIView {
 }
 
 class PayHandlingFeeViewController: UIViewController, HomeNavigationble {
-
+    /// 手续费金额
+    var assureFee: Double?
     private lazy var feeInputItem: SectionInputWithDescText = SectionInputWithDescText().then { it in
         it.setup(with: "多签手续费".toMultilingualism())
     }
@@ -210,7 +211,8 @@ class PayHandlingFeeViewController: UIViewController, HomeNavigationble {
     }
     
     private func setupUI()  {
-        let attr = NSMutableAttributedString(string: "您选择了多签担保以保障资金安全，需要先转15U手续费给我们该手续费并不是我们收取，而是用于TRON官方创建多签钱包的gas费用。")
+        let fee = String(assureFee ?? 0)
+        let attr = NSMutableAttributedString(string: "您选择了多签担保以保障资金安全，需要先转\(fee)U手续费给我们该手续费并不是我们收取，而是用于TRON官方创建多签钱包的gas费用。")
         attr.addAttribute(.foregroundColor, value: ColorConfiguration.lightBlue.toColor().withAlphaComponent(0.9), range: NSRange(location: 0, length: attr.length))
         let content = NSMutableAttributedString()
         if let tipImage = UIImage(named: "wallet_noti") {

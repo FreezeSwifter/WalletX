@@ -254,6 +254,8 @@ class MeTobeAddedCell: UITableViewCell {
                 
             } else if modifyButton.titleLabel?.text == "我来上押".toMultilingualism() {
                 self.depositTap()
+            } else if modifyButton.titleLabel?.text == "付手续费".toMultilingualism() {
+                self.payAssureFee()
             }
         }).disposed(by: rx.disposeBag)
         
@@ -477,6 +479,14 @@ class MeTobeAddedCell: UITableViewCell {
             
         }).disposed(by: rx.disposeBag)
         
+    }
+    
+    /// 付多钱手续费
+    private func payAssureFee() {
+        let vc = PayHandlingFeeViewController()
+        vc.assureFee = model?.assureFee
+        vc.hidesBottomBarWhenPushed = true
+        UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
