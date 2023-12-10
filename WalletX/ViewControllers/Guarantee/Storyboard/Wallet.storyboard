@@ -1191,6 +1191,7 @@
                         <outlet property="desLabel4" destination="uaK-v6-WdQ" id="BtY-TV-BDO"/>
                         <outlet property="stackBg1" destination="i3z-hu-H2I" id="RBq-S0-Ltb"/>
                         <outlet property="stackBg2" destination="zjp-Fp-isv" id="vDu-U9-fsO"/>
+                        <outlet property="successImageView" destination="E8M-EE-l1Y" id="Jx6-Bc-NIn"/>
                         <outlet property="topLabel" destination="WRw-Zg-CRc" id="jmU-5S-DTo"/>
                         <outlet property="unitLabel" destination="eSn-t3-4Nn" id="KOD-he-J50"/>
                         <outlet property="valueLabel1" destination="Anl-qx-zbv" id="Cfi-p2-rDw"/>

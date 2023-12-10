@@ -199,7 +199,24 @@ class TransferOnsiteWalletController: UIViewController, HomeNavigationble {
     }
     
     @objc private func pay() {
+        let amount = String(model?.amount ?? 0)
+        if inputItem.textField.text ~> amount {
+            APPHUD.flash(text: "输入金额不能大于上押金额".toMultilingualism())
+            return
+        }
         
+        if !(inputItem.textField.text ~> "0") {
+            APPHUD.flash(text: "请输入上押金额".toMultilingualism())
+            return
+        }
+        
+        let vc: SendTokenPageTwoController = ViewLoader.Storyboard.controller(from: "Wallet")
+        vc.model = LocaleWalletManager.shared().USDT
+        vc.toAddress = model?.multisigAddress
+        vc.sendCount = inputItem.textField.text
+        vc.defaultMaxTotal = "20"
+        vc.defaultNetworkFee = "10"
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc

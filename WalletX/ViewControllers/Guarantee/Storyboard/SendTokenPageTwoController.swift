@@ -12,12 +12,23 @@ import QMUIKit
 import Then
 import NSObject_Rx
 
+extension SendTokenPageTwoController {
+    
+    enum SendType {
+        case normal
+        case business(from: Int, assureId: String)
+    }
+}
+
+
 class SendTokenPageTwoController: UIViewController, HomeNavigationble {
 
+    var sendType: SendType = .normal
     var model: WalletToken?
     var toAddress: String?
     var sendCount: String?
-    var txid: String?
+    var defaultNetworkFee: String?
+    var defaultMaxTotal: String?
     
     @IBOutlet weak var topLabel: UILabel! {
         didSet {
@@ -28,6 +39,7 @@ class SendTokenPageTwoController: UIViewController, HomeNavigationble {
     @IBOutlet weak var topSubLabel: UILabel! {
         didSet {
             topSubLabel.text = "--"
+            topSubLabel.isHidden = true
         }
     }
     
@@ -129,6 +141,8 @@ class SendTokenPageTwoController: UIViewController, HomeNavigationble {
     @IBOutlet weak var valueLabel4: UILabel! {
         didSet {
             valueLabel4.text = "--"
+            valueLabel4.adjustsFontSizeToFitWidth = true
+            valueLabel4.minimumScaleFactor = 0.8
         }
     }
     
@@ -156,17 +170,19 @@ class SendTokenPageTwoController: UIViewController, HomeNavigationble {
         valueLabel1.text = model?.companyName
         valueLabel2.text = LocaleWalletManager.shared().TRON?.address
         valueLabel3.text = toAddress
-        valueLabel5.text = "\(sendCount ?? "--") USDT"
-        
-        APIProvider.rx.request(.getTXInfo(txId: txid ?? "")).mapStringValue()
-            .delaySubscription(.seconds(3), scheduler: MainScheduler.instance)
-            .subscribe(onNext: {[weak self] str in
-            self?.valueLabel4.text = "\(str ?? "--") TRX"
+        topLabel.text = "\(sendCount ?? "--") \(model?.tokenName ?? "")"
+
+        bottomButton.rx.tap.subscribe(onNext: {[unowned self] _ in
+            sendTokenWithFaceId()
         }).disposed(by: rx.disposeBag)
         
-        bottomButton.rx.tap.subscribe(onNext: {[weak self] _ in
-            self?.navigationController?.popToRootViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
+        
+        if let fee = defaultNetworkFee {
+            valueLabel4.text = "\(fee) TRX"
+        }
+        if let maxTotal = defaultMaxTotal {
+            valueLabel5.text = "\(maxTotal) TRX"
+        }
     }
     
     private func setupView() {
@@ -174,5 +190,83 @@ class SendTokenPageTwoController: UIViewController, HomeNavigationble {
         setupNavigationbar()
         setupChildVCStyle()
         headerView?.backgroundColor = .white
+    }
+    
+    private func sendTokenWithFaceId() {
+        
+        guard let toAddress = toAddress else {
+            return
+        }
+        
+        guard let sendAmount = sendCount else {
+            return
+        }
+        
+        guard let coinType = model else {
+            return
+        }
+
+        let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
+        faceIdVC.modalPresentationStyle = .fullScreen
+        present(faceIdVC, animated: true)
+        
+        faceIdVC.resultBlock = {[unowned self] isPass in
+            if isPass {
+                APPHUD.showLoading(text: "处理中".toMultilingualism())
+                let addressValidateReq = APIProvider.rx.request(.addressValidate(address: toAddress)).mapJSON()
+                addressValidateReq.subscribe { [unowned self] obj in
+                    guard let dict = obj as? [String: Any], let data = dict["data"] as? Bool else {
+                        APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
+                        return
+                    }
+                    if data {
+                        LocaleWalletManager.shared().sendToken(toAddress: toAddress, amount: Double(sendAmount) ?? 0.0, coinType: coinType).subscribe(onNext: {[weak self] tuple in
+                            APPHUD.hide()
+                            if tuple.0 {
+                                switch self?.sendType {
+                                case .normal:
+                                    let vc: TokenTransferDetailController = ViewLoader.Storyboard.controller(from: "Wallet")
+                                    vc.txid = tuple.1
+                                    vc.item = self?.model
+                                    vc.toAddress = toAddress
+                                    vc.sendAmount = sendAmount
+                                    self?.navigationController?.pushViewController(vc, animated: true)
+                                case .business(let from, let assureId):
+                                    self?.uploadBusinessConfirm(assureId: assureId, from: from, txId: tuple.1, amount: sendAmount, toAddress: toAddress)
+                                case .none:
+                                    break
+                                }
+                            } else {
+                                APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
+                            }
+                        }).disposed(by: self.rx.disposeBag)
+                        
+                    } else {
+                        APPHUD.showLoading(text: "处理中".toMultilingualism())
+                    }
+                } onFailure: { error in
+                    APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
+                }.disposed(by: rx.disposeBag)
+            }
+        }
+    }
+    
+    
+    private func uploadBusinessConfirm(assureId: String, from: Int, txId: String, amount: String, toAddress: String) {
+        APIProvider.rx.request(.seendTokenConfirm(assureId: assureId, function: from, txId: txId, amount: amount))
+            .mapJSON().subscribe(onSuccess: { [unowned self] obj in
+                let dict = obj as? [String: Any]
+                if let code = dict?["code"] as? Int, code == 0 {
+                    let vc: TokenTransferDetailController = ViewLoader.Storyboard.controller(from: "Wallet")
+                    vc.txid = txId
+                    vc.item = model
+                    vc.toAddress = toAddress
+                    vc.sendAmount = amount
+                    navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    let msg = dict?["message"] as? String
+                    APPHUD.flash(text: msg)
+                }
+            }).disposed(by: rx.disposeBag)
     }
 }

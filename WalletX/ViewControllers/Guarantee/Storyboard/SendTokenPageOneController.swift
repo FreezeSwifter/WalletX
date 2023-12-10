@@ -132,44 +132,13 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
             return
         }
         
-        let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
-        faceIdVC.modalPresentationStyle = .fullScreen
-        present(faceIdVC, animated: true)
-        
-        
-        
-        faceIdVC.resultBlock = {[unowned self] isPass in
-            if isPass {
-                APPHUD.showLoading(text: "处理中".toMultilingualism())
-                let addressValidateReq = APIProvider.rx.request(.addressValidate(address: toAddress)).mapJSON()
-                addressValidateReq.subscribe { [unowned self] obj in
-                    guard let dict = obj as? [String: Any], let data = dict["data"] as? Bool else {
-                        APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
-                        return
-                    }
-                    if data {
-                        LocaleWalletManager.shared().sendToken(toAddress: toAddress, amount: Double(sendAmount) ?? 0.0, coinType: m).subscribe(onNext: {[weak self] tuple in
-                            APPHUD.hide()
-                            if tuple.0 {
-                                let vc: SendTokenPageTwoController = ViewLoader.Storyboard.controller(from: "Wallet")
-                                vc.model = self?.model
-                                vc.toAddress = toAddress
-                                vc.txid = tuple.1
-                                vc.sendCount = sendAmount
-                                self?.navigationController?.pushViewController(vc, animated: true)
-                            } else {
-                                APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
-                            }
-                        }).disposed(by: self.rx.disposeBag)
-                        
-                    } else {
-                        APPHUD.showLoading(text: "处理中".toMultilingualism())
-                    }
-                } onFailure: { error in
-                    APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
-                }.disposed(by: rx.disposeBag)
-            }
-        }
+        let vc: SendTokenPageTwoController = ViewLoader.Storyboard.controller(from: "Wallet")
+        vc.model = model
+        vc.toAddress = toAddress
+        vc.sendCount = sendAmount
+        vc.defaultMaxTotal = "20"
+        vc.defaultNetworkFee = "10"
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setupView() {

@@ -186,17 +186,6 @@ func ~<= (lhs: String?, rhs: String?) -> Bool {
 }
 
 extension String {
-    
-    // 获取颜色
-    func fetchColor() -> UIColor {
-        let res = StringCalculator.compareNumericStrings(self, "0", comparisonType: .greater)
-        if res  {
-            return UIColor.upColor
-        } else {
-            return UIColor.downColor
-        }
-    }
-    
     // 保留2位小数
     func decimalPlaces(decimal: Int, roundingMethod: StringCalculator.RoundingMethod = .floor) -> String? {
         return StringCalculator.decimalPlaces(targetString: self, decimal: decimal, roundingMethod: roundingMethod) ?? self

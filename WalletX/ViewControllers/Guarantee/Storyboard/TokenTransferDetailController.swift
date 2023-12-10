@@ -11,11 +11,16 @@ import RxSwift
 import QMUIKit
 import Then
 import NSObject_Rx
+import SwiftDate
 
 class TokenTransferDetailController: UIViewController, HomeNavigationble {
     
+    var isFrmoTransferListPage: Bool = false
     var item: WalletToken?
     var model: TokenTecordTransferModel?
+    var txid: String?
+    var toAddress: String?
+    var sendAmount: String?
     
     @IBOutlet weak var topLabel: UILabel!
     
@@ -84,11 +89,24 @@ class TokenTransferDetailController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var valueLabel1: UILabel!
+    @IBOutlet weak var valueLabel1: UILabel! {
+        didSet {
+            valueLabel1.text = Date().toRelative(style: RelativeFormatter.twitterStyle())
+        }
+    }
     
-    @IBOutlet weak var valueLabel2: UILabel!
+    @IBOutlet weak var valueLabel2: UILabel! {
+        didSet {
+            valueLabel2.text = "完成".toMultilingualism()
+        }
+    }
     
-    @IBOutlet weak var valueLabel3: UILabel!
+    @IBOutlet weak var valueLabel3: UILabel! {
+        didSet {
+            valueLabel3.adjustsFontSizeToFitWidth = true
+            valueLabel3.minimumScaleFactor = 0.7
+        }
+    }
     
     @IBOutlet weak var valueLabel4: UILabel!
     
@@ -98,7 +116,22 @@ class TokenTransferDetailController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var unitLabel: UILabel!
+    @IBOutlet weak var unitLabel: UILabel! {
+        didSet {
+            unitLabel.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var successImageView: UIImageView! {
+        didSet {
+            successImageView.isHidden = true
+        }
+    }
+    
+    private lazy var indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .large).then { it in
+        it.hidesWhenStopped = true
+        it.startAnimating()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,23 +141,41 @@ class TokenTransferDetailController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
-        topLabel.text = "\(model?.amount ?? 0)"
-        valueLabel1.text = model?.assetName
-        valueLabel2.text = model?.from
-        valueLabel3.text = model?.to
-        valueLabel4.text = "--"
+        if isFrmoTransferListPage {
+            if model?.from == LocaleWalletManager.shared().TRON?.address {
+                topLabel.text = "-\(model?.amount ?? 0) \(item?.tokenName ?? "--")"
+                
+            } else if model?.to == LocaleWalletManager.shared().TRON?.address {
+                topLabel.text = "+\(model?.amount ?? 0) \(item?.tokenName ?? "--")"
+            }
+            valueLabel4.text = model?.fee
+            successImageView.isHidden = false
+            indicator.stopAnimating()
+            valueLabel3.text = model?.to
+            
+        } else {
+            topLabel.text = "-\(sendAmount ?? "--") \(item?.tokenName ?? "--")"
+            valueLabel3.text = toAddress
+            valueLabel4.text = "--"
+        }
         
-        desLabel1.text = "资产".toMultilingualism()
-        desLabel2.text = "From"
-        desLabel3.text = "To"
-        desLabel3.text = "网络费用".toMultilingualism()
         
-        unitLabel.text = model?.assetName
-        
-        APIProvider.rx.request(.getTXInfo(txId: model?.txid ?? "")).mapStringValue()
+        APIProvider.rx.request(.getTXInfo(txId: txid ?? "")).mapStringValue()
             .delaySubscription(.seconds(3), scheduler: MainScheduler.instance)
             .subscribe(onNext: {[weak self] str in
-            self?.valueLabel4.text = str
+                
+                self?.valueLabel4.text = str
+                self?.successImageView.isHidden = false
+                self?.indicator.stopAnimating()
+            }).disposed(by: rx.disposeBag)
+        
+        checkButton.rx.tap.subscribe(onNext: { _ in
+            //        https://tronscan.org/#/transaction/xxx
+            //        https://nile.tronscan.org/#/transaction/xxx
+            if let url = URL(string: "https://tronscan.org/#/transaction/xxx") {
+                UIApplication.shared.open(url)
+            }
+            
         }).disposed(by: rx.disposeBag)
     }
     
@@ -134,5 +185,8 @@ class TokenTransferDetailController: UIViewController, HomeNavigationble {
         setupNavigationbar()
         setupChildVCStyle()
         headerView?.titleLabel.text = "转账".toMultilingualism()
+        
+        view.addSubview(indicator)
+        indicator.center = successImageView.center
     }
 }

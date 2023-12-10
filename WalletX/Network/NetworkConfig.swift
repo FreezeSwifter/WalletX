@@ -49,6 +49,7 @@ enum NetworkService {
     case releaseInfo(assureId: String) // 申请解押查询
     case assureOrderReleaseReject(assureId: String) // 拒绝解押
     case searchOrderList // 订单搜索接口
+    case seendTokenConfirm(assureId: String, function: Int, txId: String, amount: String) // 转账确认订单
 
 }
 
@@ -133,6 +134,8 @@ extension NetworkService: TargetType {
             return "/api/assureOrder/release/reject"
         case .searchOrderList:
             return "/api/assureOrder/pendingList"
+        case .seendTokenConfirm:
+            return "/api/assureOrder/transfer/confirm"
             
         }
     }
@@ -268,6 +271,9 @@ extension NetworkService: TargetType {
         case let .assureOrderReleaseReject(assureId):
             let key = LocaleWalletManager.shared().currentWallet?.getKeyForCoin(coin: .tron).data.hexString ?? ""
             return ["assureId": assureId, "pass": key]
+            
+        case let .seendTokenConfirm(assureId, function, txId, amount):
+            return ["assureId": assureId, "function": function, "txId": txId, "amount": amount]
             
         default:
             return nil
