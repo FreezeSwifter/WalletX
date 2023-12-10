@@ -22,8 +22,8 @@ class GuaranteeingCell: UITableViewCell {
             concact.isLayoutMarginsRelativeArrangement = true
             concact.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
             concact.applyCornerRadius(concact.height / 2, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
-//            let ges = UITapGestureRecognizer(target: self, action: #selector(MeTobeAddedCell.protocolTap))
-//            concact.addGestureRecognizer(ges)
+            let ges = UITapGestureRecognizer(target: self, action: #selector(GuaranteeingCell.contactTap))
+            concact.addGestureRecognizer(ges)
         }
     }
     @IBOutlet weak var desLabel1: UILabel! {
@@ -406,5 +406,11 @@ class GuaranteeingCell: UITableViewCell {
         NotiAlterView.show(title: "协议".toMultilingualism(), content: model?.agreement, leftButtonTitle: nil, rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { _ in
             
         }).disposed(by: rx.disposeBag)
+    }
+    
+    @objc private func contactTap() {
+        UIPasteboard.general.string = "担保ID".toMultilingualism() + ": " + (model?.assureId ?? "")
+        let app = UIApplication.shared.delegate as? AppDelegate
+        app?.openTg()
     }
 }

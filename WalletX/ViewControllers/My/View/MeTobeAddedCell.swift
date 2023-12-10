@@ -21,8 +21,8 @@ class MeTobeAddedCell: UITableViewCell {
             concat.isLayoutMarginsRelativeArrangement = true
             concat.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
             concat.applyCornerRadius(concat.height / 2, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
-//            let ges = UITapGestureRecognizer(target: self, action: #selector(MeTobeAddedCell.protocolTap))
-//            concat.addGestureRecognizer(ges)
+            let ges = UITapGestureRecognizer(target: self, action: #selector(MeTobeAddedCell.contactTap))
+            concat.addGestureRecognizer(ges)
         }
     }
     @IBOutlet weak var guaranteeIdDesLabel: UILabel! {
@@ -454,6 +454,12 @@ class MeTobeAddedCell: UITableViewCell {
         NotiAlterView.show(title: "协议".toMultilingualism(), content: model?.agreement, leftButtonTitle: nil, rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { _ in
             
         }).disposed(by: rx.disposeBag)
+    }
+    
+    @objc private func contactTap() {
+        UIPasteboard.general.string = "担保ID".toMultilingualism() + ": " + (model?.assureId ?? "")
+        let app = UIApplication.shared.delegate as? AppDelegate
+        app?.openTg()
     }
     
     private func depositTap() {
