@@ -138,46 +138,30 @@ class DepositingDetailController: UIViewController {
     
     @IBOutlet weak var notiLabel: UILabel! {
         didSet {
-            notiLabel.text = "上押小喇叭提示".toMultilingualism()
+            notiLabel.text = "--"
         }
     }
     
-    @IBOutlet weak var explainButton: UIButton!
-    
     @IBOutlet weak var addressLabel: UILabel! {
         didSet {
-            addressLabel.text = "钱包地址".toMultilingualism()
+            addressLabel.text = "本次上押".toMultilingualism()
         }
     }
     
     @IBOutlet weak var addrtessField: UITextField! {
         didSet {
             addrtessField.placeholder = nil
-            addrtessField.isUserInteractionEnabled = false
         }
     }
     
     @IBOutlet weak var addressCopyButton: UIButton! {
         didSet {
-            addressCopyButton.setTitle("share_Copy".toMultilingualism(), for: .normal)
+            addressCopyButton.setTitle("全部".toMultilingualism(), for: .normal)
             addressCopyButton.titleLabel?.adjustsFontSizeToFitWidth = true
             addressCopyButton.titleLabel?.minimumScaleFactor = 0.5
         }
     }
     
-    @IBOutlet weak var qeDesLabel: UILabel! {
-        didSet {
-            qeDesLabel.text = "二维码".toMultilingualism()
-        }
-    }
-    
-    @IBOutlet weak var qrImageView: UIImageView!
-    
-    @IBOutlet weak var downloadButton: UIButton! {
-        didSet {
-            downloadButton.setTitle("share_Download".toMultilingualism(), for: .normal)
-        }
-    }
     
     @IBOutlet weak var bottomLeftButton: UIButton! {
         didSet {
@@ -190,7 +174,7 @@ class DepositingDetailController: UIViewController {
     
     @IBOutlet weak var bottomRIghtButton: UIButton! {
         didSet {
-            bottomRIghtButton.setTitle("我已完成上押".toMultilingualism(), for: .normal)
+            bottomRIghtButton.setTitle("其他钱包转入".toMultilingualism(), for: .normal)
             bottomRIghtButton.setTitleColor(ColorConfiguration.wihteText.toColor(), for: .normal)
             bottomRIghtButton.layer.cornerRadius = 10
             bottomRIghtButton.backgroundColor = ColorConfiguration.primary.toColor()
@@ -207,6 +191,15 @@ class DepositingDetailController: UIViewController {
         }
     }
     
+    @IBOutlet weak var serverBg: UIStackView! {
+        didSet {
+            serverBg.isLayoutMarginsRelativeArrangement = true
+            serverBg.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+            serverBg.applyCornerRadius(serverBg.height / 2, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+            let ges = UITapGestureRecognizer(target: self, action: #selector(DepositingDetailController.serverTap))
+            serverBg.addGestureRecognizer(ges)
+        }
+    }
     
     @IBOutlet weak var desLabel6: UILabel! {
         didSet {
@@ -238,10 +231,13 @@ class DepositingDetailController: UIViewController {
         didSet {
             valueLabel8.minimumScaleFactor = 0.5
             valueLabel8.adjustsFontSizeToFitWidth = true
-            valueLabel8.text = "--"
             valueLabel8.textColor = ColorConfiguration.lightBlue.toColor()
         }
     }
+    
+    @IBOutlet weak var pushWaitAmountDesLabel: UILabel!
+    
+    @IBOutlet weak var valueLabel2Status: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -263,10 +259,15 @@ class DepositingDetailController: UIViewController {
         custodyAmount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
         valueLabel6.attributedText = custodyAmount
         
-        let pushAmount = NSMutableAttributedString(string: "\(model?.pushAmount ?? 0) USDT")
+        let sponsorAmount = NSMutableAttributedString(string: "\(model?.sponsorAmount ?? 0) USDT")
         valueLabel7.textColor = ColorConfiguration.primary.toColor()
-        pushAmount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
-        valueLabel7.attributedText = pushAmount
+        sponsorAmount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
+        valueLabel7.attributedText = sponsorAmount
+        
+        let partnerAmount = NSMutableAttributedString(string: "\(model?.partnerAmount ?? 0) USDT")
+        valueLabel8.textColor = ColorConfiguration.primary.toColor()
+        partnerAmount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
+        valueLabel8.attributedText = partnerAmount
         
         valueLabel4.text = model?.sponsorUserName ?? "--"
         valueLabel5.text = model?.partnerUserName ?? "--"
@@ -278,22 +279,17 @@ class DepositingDetailController: UIViewController {
         } else {
             desLabel4Me.isHidden = true
             desLabel5Me.isHidden = false
-            valueLabel8.text = model?.pushDecimalPartner
         }
-        
-        if model?.assureType == 0 { // 普通担保
-            addrtessField.text = model?.pushAddress
-            Task {
-                let img = await ScanViewController.generateQRCode(text: model?.pushAddress ?? "", size: 141)
-                qrImageView.image = img
-            }
-        } else { // 多签担保
-            addrtessField.text = model?.multisigAddress
-            Task {
-                let img = await ScanViewController.generateQRCode(text: model?.multisigAddress ?? "", size: 141)
-                qrImageView.image = img
-            }
+        if model?.assureType == 0 { // 普通
+            valueLabel1Status.text = "普通担保".toMultilingualism()
+            notiLabel.text = "上押小喇叭普通".toMultilingualism()
+        } else {
+            valueLabel1Status.text = "多签担保".toMultilingualism()
+            notiLabel.text = "上押小喇叭多签".toMultilingualism()
         }
+        valueLabel2Status.text = "待上押".toMultilingualism()
+        pushWaitAmountDesLabel.text = "\(model?.pushWaitAmount ?? 0)"
+        addrtessField.text = "\(model?.pushWaitAmount ?? 0)"
     }
     
     private func bind() {
@@ -302,70 +298,40 @@ class DepositingDetailController: UIViewController {
         req.subscribe(onNext: {[weak self] obj in
             self?.model = obj?.data
         }).disposed(by: rx.disposeBag)
-     
-        explainButton.rx.tap.subscribe(onNext: {[unowned self] _ in
-            
-            NotiAlterView.show(title: "什么是2-3钱包".toMultilingualism(), content: "什么是2-3钱包内容".toMultilingualism(), leftButtonTitle: "联系客服".toMultilingualism(), rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { index in
-                if index == 0 {
-                    let app = UIApplication.shared.delegate as? AppDelegate
-                    app?.openTg()
-                }
-                
-            }).disposed(by: self.rx.disposeBag)
-            
-        }).disposed(by: rx.disposeBag)
         
         bottomRIghtButton.rx.tap.subscribe(onNext: {[unowned self] _ in
             
-            GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_yes_no"), title: "您已经完成押金上传了吗".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "您已经完成押金上传了吗内容".toMultilingualism(), leftButton: "未完成".toMultilingualism(), rightButton: "已完成".toMultilingualism()).subscribe(onNext: {[weak self] index in
-                
-                if index == 1 {
-                    guard let id = self?.model?.assureId, let this = self else { return }
-                    APIProvider.rx.request(.finiedOrder(assureId: id)).mapJSON().subscribe().disposed(by: this.rx.disposeBag)
-                    this.navigationController?.popViewController(animated: true)
-                }
-            }).disposed(by: self.rx.disposeBag)
+            let vc: OtherWalletSendController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.model = model
+            var isInitiator: Bool
+            if model?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+                isInitiator = true
+            } else {
+                isInitiator = false
+            }
+            vc.payType = .deposited(isInitiator: isInitiator)
+            navigationController?.pushViewController(vc, animated: true)
             
         }).disposed(by: rx.disposeBag)
         
-        bottomLeftButton.rx.tap.subscribe(onNext: {[weak self] _ in
-            let vc: DepositViewController = ViewLoader.Storyboard.controller(from: "Wallet")
-            vc.currentItem = self?.model
-            self?.navigationController?.pushViewController(vc, animated: true)
+        bottomLeftButton.rx.tap.subscribe(onNext: {[unowned self] _ in
+            let vc: SendTokenPageTwoController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.model = LocaleWalletManager.shared().USDT
+            vc.toAddress = model?.pushAddress
+            vc.toAddress = model?.multisigAddress
+            vc.sendCount = addrtessField.text
+            vc.defaultMaxTotal = "20"
+            vc.defaultNetworkFee = "10"
+            vc.sendType = .business(from: 1, assureId: model?.assureId ?? "")
+            navigationController?.pushViewController(vc, animated: true)
             
-        }).disposed(by: rx.disposeBag)
-        
-        downloadButton.rx.tap.subscribe(onNext: {[weak self] _ in
-            self?.captureScreenshot()
         }).disposed(by: rx.disposeBag)
         
         addressCopyButton.rx.tap.subscribe(onNext: {[weak self] _ in
-            UIPasteboard.general.string = self?.addrtessField.text
-            APPHUD.flash(text: "成功".toMultilingualism())
+            self?.addrtessField.text = "\(self?.model?.pushWaitAmount ?? 0)"
         }).disposed(by: rx.disposeBag)
     }
-    
-    private func captureScreenshot() {
-        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0.0)
-        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
-        guard let screenshotImage = UIGraphicsGetImageFromCurrentImageContext() else {
-            return
-        }
-        UIGraphicsEndImageContext()
-
-        // 保存截图到相册
-        UIImageWriteToSavedPhotosAlbum(screenshotImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
-    }
-    
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
-            print("保存到相册出错: \(error.localizedDescription)")
-        } else {
-            APPHUD.flash(text: "成功".toMultilingualism())
-            print("成功保存到相册")
-        }
-    }
-    
+ 
     private func setupView() {
         view.layoutIfNeeded()
         view.backgroundColor = .white
@@ -387,5 +353,11 @@ class DepositingDetailController: UIViewController {
         NotiAlterView.show(title: "协议".toMultilingualism(), content: model?.agreement, leftButtonTitle: nil, rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { _ in
             
         }).disposed(by: rx.disposeBag)
+    }
+    
+    @objc
+    private func serverTap() {
+        let app = UIApplication.shared.delegate as? AppDelegate
+        app?.openTg()
     }
 }

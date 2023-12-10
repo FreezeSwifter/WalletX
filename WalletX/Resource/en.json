@@ -278,4 +278,11 @@
     "请输入上押金额": "Please enter the deposit amount",
     "输入金额不能大于上押金额": "The input amount cannot be greater than the deposit amount",
     "付手续费提示语": "You have chosen multi-signature guarantee to ensure the safety of funds. You need to transfer %@U handling fee to us first. This handling fee is not collected by us, but is the gas fee used for TRON's official multi-signature wallet creation.",
+    "您确认已经完成转账了吗": "Have you confirmed that the transfer has been completed?",
+    "您确认已经完成转账了吗内容": "If the transfer is not completed but you click Complete, it will affect your account's credit score. \nUnder normal circumstances, the system can confirm your transfer within 5 minutes.",
+    "激活": "Activating",
+    "激活成功": "Activation successful",
+    "本次上押": "This bet",
+    "上押小喇叭普通": "This guarantee is a general guarantee\nThe deposit is kept on the platform, and the safety of the funds is guaranteed.",
+    "上押小喇叭多签": "This guarantee is a multi-signature guarantee\nBlockchain 2/3 multi-signature wallet support, 100% guarantee of the safety of your funds",
 }

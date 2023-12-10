@@ -133,22 +133,47 @@ extension MeListChildViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-    
-        let deleteAction = UIContextualAction(style: .normal, title: "删除".toMultilingualism()) { [weak self] (action, view, resultClosure) in
-            guard let this = self, let id = this.datasource[indexPath.row].assureId else {
-                return
-            }
-            APIProvider.rx.request(.deleteGuarantee(assureId: id)).mapJSON().subscribe().disposed(by: this.rx.disposeBag)
-            this.datasource.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
        
-        deleteAction.backgroundColor = UIColor(hex: "#FF5966")
-        let actions = UISwipeActionsConfiguration(actions: [deleteAction])
-        actions.performsFirstActionWithFullSwipe = false;
-        return actions
+        let item = datasource[indexPath.row]
+        switch item.assureStatus {
+        case 5, 6, 7:
+            let activeAction = UIContextualAction(style: .normal, title: "激活".toMultilingualism()) { [weak self] (action, view, resultClosure) in
+                guard let this = self, let id = this.datasource[indexPath.row].assureId else {
+                    return
+                }
+
+                APIProvider.rx.request(.activeAssureOrder(assureId: id)).mapJSON().subscribe(onSuccess: {[weak self] obj in
+                    let dict = obj as? [String: Any]
+                    if let code = dict?["code"] as? Int, code == 0 {
+                        self?.fetchData()
+                        APPHUD.flash(text: "激活成功".toMultilingualism())
+                    } else {
+                        let msg = dict?["message"] as? String
+                        APPHUD.flash(text: msg)
+                    }
+                }).disposed(by: this.rx.disposeBag)
+            }
+            activeAction.backgroundColor = ColorConfiguration.primary.toColor()
+            
+            let deleteAction = UIContextualAction(style: .normal, title: "删除".toMultilingualism()) { [weak self] (action, view, resultClosure) in
+                guard let this = self, let id = this.datasource[indexPath.row].assureId else {
+                    return
+                }
+                APIProvider.rx.request(.deleteGuarantee(assureId: id)).mapJSON().subscribe().disposed(by: this.rx.disposeBag)
+                this.datasource.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            deleteAction.backgroundColor = UIColor(hex: "#FF5966")
+            
+            let actions = UISwipeActionsConfiguration(actions: [deleteAction, activeAction])
+            actions.performsFirstActionWithFullSwipe = false;
+            return actions
+            
+        default:
+            return nil
+        }
+        
     }
 }
 

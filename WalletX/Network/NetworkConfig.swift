@@ -50,6 +50,8 @@ enum NetworkService {
     case assureOrderReleaseReject(assureId: String) // 拒绝解押
     case searchOrderList // 订单搜索接口
     case seendTokenConfirm(assureId: String, function: Int, txId: String, amount: String) // 转账确认订单
+    case activeAssureOrder(assureId: String) // 激活订单
+
 
 }
 
@@ -136,6 +138,8 @@ extension NetworkService: TargetType {
             return "/api/assureOrder/pendingList"
         case .seendTokenConfirm:
             return "/api/assureOrder/transfer/confirm"
+        case .activeAssureOrder:
+            return "/api/assureOrder/active"
             
         }
     }
@@ -274,6 +278,9 @@ extension NetworkService: TargetType {
             
         case let .seendTokenConfirm(assureId, function, txId, amount):
             return ["assureId": assureId, "function": function, "txId": txId, "amount": amount]
+            
+        case let .activeAssureOrder(assureId):
+            return ["assureId": assureId]
             
         default:
             return nil

@@ -31,6 +31,13 @@ class FaceIDViewController: UIViewController {
         
         let context = LAContext()
         var error: NSError?
+       
+        // TestCode
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+//            
+//            self.resultBlock?(true)
+//            self.dismiss(animated: true)
+//        })
         
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "home_setting_ScreenLock".toMultilingualism()

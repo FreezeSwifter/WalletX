@@ -193,6 +193,7 @@ class TransferOnsiteWalletController: UIViewController, HomeNavigationble {
         startTimeItem.textField.text = Date(timeIntervalSince1970: (model?.createTime ?? 0) / 1000).toFormat("yyyy-MM-dd HH:mm:ss")
         guaranteeTypeItem.textField.text = model?.assureTypeToString()
         guaranteeAmountItem.textField.text = String(model?.amount ?? 0)
+        inputItem.textField.text = "\(model?.amount ?? 0)"
         LocaleWalletManager.shared().walletBalance.subscribe(onNext: {[weak self] obj in
             self?.walletBalanceItem.textField.text = "\(obj?.data?.USDT ?? "")"
         }).disposed(by: rx.disposeBag)
@@ -209,13 +210,14 @@ class TransferOnsiteWalletController: UIViewController, HomeNavigationble {
             APPHUD.flash(text: "请输入上押金额".toMultilingualism())
             return
         }
-        
+       
         let vc: SendTokenPageTwoController = ViewLoader.Storyboard.controller(from: "Wallet")
         vc.model = LocaleWalletManager.shared().USDT
         vc.toAddress = model?.multisigAddress
         vc.sendCount = inputItem.textField.text
         vc.defaultMaxTotal = "20"
         vc.defaultNetworkFee = "10"
+        vc.sendType = .business(from: 1, assureId: model?.assureId ?? "")
         navigationController?.pushViewController(vc, animated: true)
     }
     
