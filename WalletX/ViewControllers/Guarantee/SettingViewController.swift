@@ -114,9 +114,6 @@ class SettingViewController: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         headerView?.backgroundColor = .white
         headerView?.titleLabel.text = "home_setting".toMultilingualism()
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
         
         topPadding.constant = headerView!.height + UIApplication.shared.statusBarFrame.size.height
     }

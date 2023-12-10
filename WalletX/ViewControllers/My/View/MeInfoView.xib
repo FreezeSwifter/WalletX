@@ -35,7 +35,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXJ-As-DyY">
-                    <rect key="frame" x="92" y="98" width="35.333333333333343" height="17"/>
+                    <rect key="frame" x="92" y="81.666666666666671" width="35.333333333333343" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -60,12 +60,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4NU-Od-Jwq" customClass="QMUILabel">
-                    <rect key="frame" x="92" y="81.666666666666671" width="31" height="14.333333333333329"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -75,14 +69,12 @@
                 <constraint firstItem="llA-Qf-BaA" firstAttribute="leading" secondItem="kFT-BL-vRy" secondAttribute="leading" id="ERG-OH-c0y"/>
                 <constraint firstItem="eKH-VD-8Er" firstAttribute="centerY" secondItem="DZ3-p1-fJy" secondAttribute="centerY" id="EjS-1N-YkK"/>
                 <constraint firstItem="kFT-BL-vRy" firstAttribute="top" secondItem="DZ3-p1-fJy" secondAttribute="bottom" constant="2" id="Hkl-UP-mO9"/>
+                <constraint firstItem="GXJ-As-DyY" firstAttribute="top" secondItem="llA-Qf-BaA" secondAttribute="bottom" constant="2" id="LjY-jV-rRG"/>
                 <constraint firstItem="DZ3-p1-fJy" firstAttribute="leading" secondItem="mHy-gB-Kg0" secondAttribute="trailing" constant="16" id="OtB-Hx-2qh"/>
                 <constraint firstItem="mHy-gB-Kg0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="Pgh-hL-fvN"/>
                 <constraint firstItem="eKH-VD-8Er" firstAttribute="leading" secondItem="DZ3-p1-fJy" secondAttribute="trailing" constant="6" id="QTH-sh-a1l"/>
-                <constraint firstItem="GXJ-As-DyY" firstAttribute="top" secondItem="4NU-Od-Jwq" secondAttribute="bottom" constant="2" id="QiG-5Q-OBZ"/>
-                <constraint firstItem="4NU-Od-Jwq" firstAttribute="top" secondItem="llA-Qf-BaA" secondAttribute="bottom" constant="2" id="Vhs-jo-btV"/>
                 <constraint firstItem="llA-Qf-BaA" firstAttribute="top" secondItem="kFT-BL-vRy" secondAttribute="bottom" constant="2" id="ZUz-HT-Nek"/>
                 <constraint firstItem="mHy-gB-Kg0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="doM-Uf-cCE"/>
-                <constraint firstItem="4NU-Od-Jwq" firstAttribute="leading" secondItem="llA-Qf-BaA" secondAttribute="leading" id="fTg-1r-pLw"/>
                 <constraint firstItem="DZ3-p1-fJy" firstAttribute="top" secondItem="mHy-gB-Kg0" secondAttribute="top" id="rM9-HY-PUZ"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
@@ -95,7 +87,6 @@
                 <outlet property="nameLabel" destination="DZ3-p1-fJy" id="uBX-16-DQ1"/>
                 <outlet property="telegramLabel" destination="GXJ-As-DyY" id="Otw-JF-hNO"/>
                 <outlet property="walletAddressDes" destination="llA-Qf-BaA" id="8cB-fr-LBo"/>
-                <outlet property="walletAddressValue" destination="4NU-Od-Jwq" id="YKH-96-eNx"/>
                 <outlet property="walletLabel" destination="kFT-BL-vRy" id="CYh-lE-XEl"/>
             </connections>
             <point key="canvasLocation" x="81.679389312977094" y="19.718309859154932"/>

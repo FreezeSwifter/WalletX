@@ -84,9 +84,6 @@ class SelectedTokenController: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         headerView?.titleLabel.text = "选择币种".toMultilingualism()
         headerView?.backgroundColor = .white
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
         
     }
 }

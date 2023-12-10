@@ -37,7 +37,7 @@ enum NetworkService {
     case finiedOrder(assureId: String) // 完成上押
     case assureReleaseApply(assureId: String, reason: Int, sponsorReleasedAmount: String, partnerReleasedAmount: String) // 申请解押
     case revokeAssureApply(assureId: String) //撤销申请
-    case releaseAgree(assureId: String) // 同意解押
+    case releaseAgree(assureId: String, privateKey: String) // 同意解押
     case getTXInfo(txId: String) // 获取TX信息
     case messageList // 消息列表
     case readMessage(id: String) // 消息已读
@@ -47,6 +47,8 @@ enum NetworkService {
     case addressValidate(address: String) // 验证收款地址是否正确
     case arbitrateAccept(assureId: String, key: String) // 同意仲裁
     case releaseInfo(assureId: String) // 申请解押查询
+    case assureOrderReleaseReject(assureId: String) // 拒绝解押
+    case searchOrderList // 订单搜索接口
 
 }
 
@@ -127,6 +129,11 @@ extension NetworkService: TargetType {
             return "/api/assureOrder/arbitrate/accept"
         case .releaseInfo:
             return "/api/assureOrder/release/info"
+        case .assureOrderReleaseReject:
+            return "/api/assureOrder/release/reject"
+        case .searchOrderList:
+            return "/api/assureOrder/pendingList"
+            
         }
     }
     
@@ -234,8 +241,8 @@ extension NetworkService: TargetType {
         case let .revokeAssureApply(assureId):
             return ["assureId": assureId]
             
-        case let .releaseAgree(assureId):
-            return ["assureId": assureId]
+        case let .releaseAgree(assureId, privateKey):
+            return ["assureId": assureId, "pass": privateKey]
             
         case let .getTokenTecordTransfer(pageNumber, symbolId):
             return ["pageNum": pageNumber, "pageSize": 10, "coin": symbolId]
@@ -257,6 +264,10 @@ extension NetworkService: TargetType {
             
         case let .releaseInfo(assureId):
             return ["assureId": assureId]
+            
+        case let .assureOrderReleaseReject(assureId):
+            let key = LocaleWalletManager.shared().currentWallet?.getKeyForCoin(coin: .tron).data.hexString ?? ""
+            return ["assureId": assureId, "pass": key]
             
         default:
             return nil

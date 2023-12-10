@@ -16,7 +16,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
 
     var model: GuaranteeInfoModel? {
         didSet {
-            fetchData(walletId: model?.data?.walletId ?? "")
+            fetchData(walletId: model?.data?.sponsorUser ?? "")
         }
     }
     var userModel: UserInfoModel?
@@ -170,13 +170,13 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         headerView?.titleLabel.text = "home_joinGuaranty".toMultilingualism()
         headerView?.backgroundColor = .white
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
     }
     
     private func openTg() {
-        guard let id = userModel?.data?.tg else { return }
+        guard let id = userModel?.data?.tg else {
+            APPHUD.flash(text: "No Telegram ID")
+            return
+        }
         let appURL = URL(string: "telegram://")!
         if UIApplication.shared.canOpenURL(appURL) {
             let appUrl = URL(string: "tg://resolve?domain=\(id)")
@@ -197,42 +197,56 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         
         if !agreeButton.isSelected {
             APPHUD.flash(text: "请勾选条款".toMultilingualism())
+            return
         }
         
         APIProvider.rx.request(.assureOrderJoin(assureId: id, agreeFlag: agreeButton.isSelected)).mapJSON().subscribe(onSuccess: {[weak self] obj in
-            guard let dict = obj as? [String: Any], let message = dict["message"] as? String, let this = self else { return }
-            
+            guard let dict = obj as? [String: Any], let message = dict["message"] as? String, let this = self else {
+                return
+            }
             if message == "Success" {
                 let notiTitle = LanguageManager.shared().replaceBraces(inString: "成功加入担保弹窗标题".toMultilingualism(), with: self?.valueTextField1.text ?? "")
-                
-                GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: notiTitle, titleIcon: nil, content: "成功加入担保弹窗内容".toMultilingualism(), leftButton: "提醒对方上押".toMultilingualism(), rightButton: "我来上押".toMultilingualism()).subscribe(onNext: {[weak self] index in
-               
-                    if index == 1 {
-                        self?.navigationController?.popToRootViewController(animated: false)
-                        let vc: DepositingDetailController = ViewLoader.Storyboard.controller(from: "Me")
-                        vc.hidesBottomBarWhenPushed = true
-                        var m = GuaranteeInfoModel.Meta()
-                        m.assureId = self?.model?.data?.assureId
-                        vc.model = m
-                        UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
-                        
-                    } else if index == 0 {
-                        
-                        let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
-                        
-                        if self?.model?.data?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
-                            vc.walletId = self?.model?.data?.sponsorUser
-                        } else {
-                            vc.walletId = self?.model?.data?.sponsorUser
+                if self?.model?.data?.assureType == 1 { // 多签担保
+                    GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: notiTitle, titleIcon: nil, content: "成功加入担保弹窗内容".toMultilingualism(), leftButton: "提醒对方付手续费".toMultilingualism(), rightButton: "我来付手续费".toMultilingualism()).subscribe(onNext: {[weak self] index in
+                        if index == 1 {
+                            self?.navigationController?.popToRootViewController(animated: false)
+                            let vc = PayHandlingFeeViewController()
+                            vc.model = self?.model?.data
+                            vc.hidesBottomBarWhenPushed = true
+                            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+                        } else if index == 0 {
+                            self?.contact()
                         }
-                        
-                        self?.navigationController?.pushViewController(vc, animated: true)
-                    }
-                }).disposed(by: this.rx.disposeBag)
+                    }).disposed(by: this.rx.disposeBag)
+                } else if self?.model?.data?.assureType == 0 { // 普通担保
+                    GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: notiTitle, titleIcon: nil, content: "成功加入担保弹窗内容".toMultilingualism(), leftButton: "提醒对方上押".toMultilingualism(), rightButton: "我来上押".toMultilingualism()).subscribe(onNext: {[weak self] index in
+                        if index == 1 {
+                            self?.navigationController?.popToRootViewController(animated: false)
+                            let vc: DepositingDetailController = ViewLoader.Storyboard.controller(from: "Me")
+                            vc.hidesBottomBarWhenPushed = true
+                            var m = GuaranteeInfoModel.Meta()
+                            m.assureId = self?.model?.data?.assureId
+                            vc.model = m
+                            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+                        } else if index == 0 {
+                            self?.contact()
+                        }
+                    }).disposed(by: this.rx.disposeBag)
+                }
             } else {
                 APPHUD.flash(text: message)
             }
-            
         }).disposed(by: rx.disposeBag)
+    }
+    
+    /// 联系对方
+    private func contact() {
+        let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+        if model?.data?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+            vc.walletId = model?.data?.sponsorUser
+        } else {
+            vc.walletId = model?.data?.sponsorUser
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

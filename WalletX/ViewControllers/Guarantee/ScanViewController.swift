@@ -110,10 +110,7 @@ class ScanViewController: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         headerView?.titleLabel.text = "scan_title".toMultilingualism()
         headerView?.backgroundColor = .white
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
-        
+
         let config = SGScanViewConfigure()
         config.autoreverses = true
         config.isFromTop = true

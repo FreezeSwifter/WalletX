@@ -26,9 +26,9 @@ struct LoginModel: APPBaseModel {
     
 }
 
-struct UserInfoModel: APPBaseModel {
+struct UserInfoModel: APPBaseModel, Codable {
     
-    struct Meta: HandyJSON {
+    struct Meta: HandyJSON, Codable {
         var id: Int64?
         var nickName: String?
         var headImage: String?

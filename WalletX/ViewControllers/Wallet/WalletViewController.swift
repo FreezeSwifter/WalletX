@@ -69,19 +69,14 @@ class WalletViewController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            let settingVC: SettingViewController = ViewLoader.Xib.controller()
-            settingVC.hidesBottomBarWhenPushed = true
-            self?.navigationController?.pushViewController(settingVC, animated: true)
-            
+        headerView?.accountButton.rx.tap.subscribe(onNext: { _ in
+            LocaleWalletManager.checkLogin {
+                let vc: WalletManagementController = WalletManagementController()
+                vc.hidesBottomBarWhenPushed = true
+                UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+            }
         }).disposed(by: rx.disposeBag)
-        
-        headerView?.scanButton.rx.tap.subscribe(onNext: {[weak self] in
-            let sancVC: ScanViewController = ViewLoader.Xib.controller()
-            sancVC.hidesBottomBarWhenPushed = true
-            self?.navigationController?.pushViewController(sancVC, animated: true)
-        }).disposed(by: rx.disposeBag)
-        
+
         headerView?.shareButton.rx.tap.subscribe(onNext: {[weak self] in
             let shareVC: ShareViewController = ViewLoader.Xib.controller()
             shareVC.hidesBottomBarWhenPushed = true
@@ -109,18 +104,21 @@ class WalletViewController: UIViewController, HomeNavigationble {
             
         }).disposed(by: rx.disposeBag)
         
-        topOperatedView.walletButton.rx.tap.subscribe(onNext: { _ in
-            let vc: DepositViewController = ViewLoader.Storyboard.controller(from: "Wallet")
-            vc.hidesBottomBarWhenPushed = true
-            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
-            
-        }).disposed(by: rx.disposeBag)
-        
-        
-        topOperatedView.topButton2.rx.tap.subscribe(onNext: { _ in
-            let vc: WalletManagementController = WalletManagementController()
-            vc.hidesBottomBarWhenPushed = true
-            UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+        topOperatedView.walletButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            guard let this = self else {
+                return
+            }
+            let req: Observable<[GuaranteeInfoModel.Meta]> = APIProvider.rx.request(.searchOrderList).mapModelArray()
+            req.subscribe(onNext: { list in
+                if list.isEmpty {
+                    NotiAlterView.show(title: nil, content: "当前账户没有待上押担保订单".toMultilingualism(), leftButtonTitle: nil, rightButtonTitle: "我知道啦".toMultilingualism()).subscribe().disposed(by: this.rx.disposeBag)
+                } else {
+                    let vc = SearchOrderViewController()
+                    vc.list = list
+                    vc.hidesBottomBarWhenPushed = true
+                    UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+                }
+            }).disposed(by: this.rx.disposeBag)
         }).disposed(by: rx.disposeBag)
         
         LanguageManager.shared().languageDidChanged.subscribe(onNext: {[weak self] _ in
@@ -137,7 +135,7 @@ class WalletViewController: UIViewController, HomeNavigationble {
                 this.view.bringSubviewToFront(this.noWalletView)
                 this.noWalletView.alpha = 1
             }
-            this.topOperatedView.topButton2.setTitle(LocaleWalletManager.shared().currentWalletModel?.name ?? "Wallet", for: .normal)
+            
             this.updateBalance()
             
         }).disposed(by: rx.disposeBag)
@@ -147,11 +145,12 @@ class WalletViewController: UIViewController, HomeNavigationble {
     private func setupView() {
         view.backgroundColor = ColorConfiguration.homeItemBg.toColor()
         setupNavigationbar()
+        
         view.addSubview(topOperatedView)
         topOperatedView.snp.makeConstraints { make in
             make.top.equalTo(headerView!.snp.bottom).offset(10)
             make.trailing.leading.equalToSuperview().inset(42)
-            make.height.equalTo(220)
+            make.height.equalTo(176)
         }
         
         topOperatedView.topButton1.setTitle("$0.00", for: UIControl.State())
@@ -159,14 +158,6 @@ class WalletViewController: UIViewController, HomeNavigationble {
         topOperatedView.topButton1.titleLabel?.minimumScaleFactor = 0.5
         topOperatedView.topButton1.titleLabel?.adjustsFontSizeToFitWidth = true
         topOperatedView.topButton1.setTitleColor(ColorConfiguration.blodText.toColor(), for: UIControl.State())
-        
-        topOperatedView.topButton2.setTitle("Wallet Name", for: UIControl.State())
-        topOperatedView.topButton2.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        topOperatedView.topButton2.setTitleColor(ColorConfiguration.descriptionText.toColor(), for: UIControl.State())
-        topOperatedView.topButton2.setImage(UIImage(named: "wallet_down_arrow"), for: UIControl.State())
-        topOperatedView.topButton2.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        topOperatedView.topButton2.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        topOperatedView.topButton2.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         
         segmentedView.dataSource = segmentedDataSource
         segmentedView.delegate = self

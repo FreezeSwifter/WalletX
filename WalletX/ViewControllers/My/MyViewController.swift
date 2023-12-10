@@ -98,6 +98,12 @@ class MyViewController: UIViewController, HomeNavigationble {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        infoView.walletAddressDes.text = "\("Gmail邮箱".toMultilingualism()): \(LocaleWalletManager.shared().userInfo?.data?.email ?? "--")"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -106,17 +112,13 @@ class MyViewController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            let settingVC: SettingViewController = ViewLoader.Xib.controller()
-            settingVC.hidesBottomBarWhenPushed = true
-            self?.navigationController?.pushViewController(settingVC, animated: true)
-            
-        }).disposed(by: rx.disposeBag)
-        
-        headerView?.scanButton.rx.tap.subscribe(onNext: {[weak self] in
-            let sancVC: ScanViewController = ViewLoader.Xib.controller()
-            sancVC.hidesBottomBarWhenPushed = true
-            self?.navigationController?.pushViewController(sancVC, animated: true)
+        headerView?.accountButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+            LocaleWalletManager.checkLogin {
+                self.toWalletManagementVC()
+            }
         }).disposed(by: rx.disposeBag)
         
         headerView?.shareButton.rx.tap.subscribe(onNext: {[weak self] in
@@ -132,21 +134,18 @@ class MyViewController: UIViewController, HomeNavigationble {
         
         fetchData()
         
-        LocaleWalletManager.shared().walletDidChanged
-            .delay(.seconds(1), scheduler: MainScheduler.instance)
-            .subscribe(onNext: {[weak self] _ in
-            self?.fetchData()
-            self?.infoView.walletAddressValue.text = LocaleWalletManager.shared().TRON?.address
-        }).disposed(by: rx.disposeBag)
-        
         NotificationCenter.default.rx.notification(.userInfoDidChangeed)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: {[weak self] _ in
                 self?.fetchData()
         }).disposed(by: rx.disposeBag)
-        
-        infoView.walletAddressValue.text = LocaleWalletManager.shared().TRON?.address
-        
+
+    }
+    
+    private func toWalletManagementVC() {
+        let vc: WalletManagementController = WalletManagementController()
+        vc.hidesBottomBarWhenPushed = true
+        UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func fetchData() {

@@ -163,7 +163,6 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
             tradeCancelButton.setImage(UIImage(named: "me_checkbox2"), for: .selected)
             tradeCancelButton.setTitle("交易取消".toMultilingualism(), for: .normal)
             tradeCancelButton.spacingBetweenImageAndTitle = 10
-            
         }
     }
     
@@ -306,6 +305,9 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
             tradeCancelButton.isUserInteractionEnabled = false
             tradeCompletedButton.isUserInteractionEnabled = false
             bottomRightButton.setupAPPUISolidStyle(title: "同意解押".toMultilingualism())
+            buttonLeftButton.setupAPPUIHollowStyle(title: "拒绝解押".toMultilingualism())
+            accountButton2.isUserInteractionEnabled = false
+            accountButton1.isUserInteractionEnabled = false
             
         case .revoke:
             textField1.isUserInteractionEnabled = false
@@ -359,10 +361,38 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 self?.valueLabel4Sub.text = "\(obj?.data?.sponsorAmount ?? 0)"
                 self?.valueLabel5Sub.text = "\(obj?.data?.partnerAmount ?? 0)"
     
-                self?.tradeCompletedButton.isSelected = true
+                if obj?.data?.reason == 0 { // 交易结束
+                    if self?.state == .handling || self?.state == .revoke {
+                        self?.tradeCompletedButton.isEnabled = false
+                        self?.tradeCompletedButton.setImage(UIImage(named: "解压原因选中不可点击"), for: .normal)
+                        self?.tradeCancelButton.isEnabled = false
+                        self?.tradeCancelButton.setImage(UIImage(named: "解压原因未选中不可点击"), for: .normal)
+                    }
+                    self?.tradeCompletedButton.isSelected = true
+                } else { // 交易取消
+                    if self?.state == .handling || self?.state == .revoke {
+                        self?.tradeCancelButton.isEnabled = false
+                        self?.tradeCancelButton.setImage(UIImage(named: "解压原因选中不可点击"), for: .normal)
+                        self?.tradeCompletedButton.isEnabled = false
+                        self?.tradeCompletedButton.setImage(UIImage(named: "解压原因未选中不可点击"), for: .normal)
+                    }
+                    self?.tradeCancelButton.isSelected = true
+                }
                 
-                self?.accountButton1.setTitle(obj?.data?.sponsorUserName, for: .normal)
-                self?.accountButton2.setTitle(obj?.data?.partnerUserName, for: .normal)
+                if obj?.data?.sponsorReleasedAmount ?? 0 > 0 && (self?.state == .handling || self?.state == .revoke) {
+                    self?.accountButton1.setImage(UIImage(named: "收款账户选中不可点击"), for: .normal)
+                } else {
+                    self?.accountButton1.setImage(UIImage(named: "收款账户未选中不可点击"), for: .normal)
+                }
+              
+                if obj?.data?.partnerReleasedAmount ?? 0 > 0 && (self?.state == .handling || self?.state == .revoke) {
+                    self?.accountButton2.setImage(UIImage(named: "收款账户选中不可点击"), for: .normal)
+                } else {
+                    self?.accountButton2.setImage(UIImage(named: "收款账户未选中不可点击"), for: .normal)
+                }
+                
+                self?.accountButton1.setTitle("\("发起人".toMultilingualism())-\(obj?.data?.sponsorUserName ?? "--")", for: .normal)
+                self?.accountButton2.setTitle("\("参与人".toMultilingualism())-\(obj?.data?.partnerUserName ?? "--")", for: .normal)
     
                 if !(self?.state == .applyRelease) {
                     self?.textField1.text = "\(obj?.data?.sponsorReleasedAmount ?? 0.0)"
@@ -464,7 +494,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                     let code = dict["code"] as? Int
                     if code == 0 {
                         
-                        let titleIcon = UIImage(named: "me_revoke_img")?.qmui_image(withTintColor: ColorConfiguration.primary.toColor())
+                        let titleIcon = UIImage(named: "guarantee_bulb")?.qmui_image(withTintColor: ColorConfiguration.primary.toColor())
                         GuaranteeYesNoView.showFromBottom(image: UIImage(named: "me_revoke_img"), title: "您已成功取消解押申请".toMultilingualism(), titleIcon: titleIcon, content: "您已成功取消解押申请内容".toMultilingualism(), leftButton: "通知对方".toMultilingualism(), rightButton: "完成".toMultilingualism()).subscribe(onNext: { index in
                             
                             if index == 0 {
@@ -504,16 +534,29 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         }).disposed(by: rx.disposeBag)
         
         buttonLeftButton.rx.tap.subscribe(onNext: {[weak self] _ in
-           
-            let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
-            vc.orderInfoModel = self?.model?.data
-            if self?.model?.data?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
-                vc.walletId = self?.model?.data?.partnerUser
-            } else {
-                vc.walletId = self?.model?.data?.sponsorUser
+            guard let this = self else { return }
+            if self?.buttonLeftButton.titleLabel?.text == "拒绝解押".toMultilingualism() {
+                guard let id = self?.model?.data?.assureId else { return }
+                APIProvider.rx.request(.assureOrderReleaseReject(assureId: id)).mapJSON().subscribe(onSuccess: { obj in
+                    
+                    guard let dict = obj as? [String: Any], let code = dict["code"] as? Int else { return }
+                    if code != 0 {
+                        APPHUD.flash(text: dict["message"] as? String)
+                    } else {
+                        APPHUD.flash(text: "成功".toMultilingualism())
+                    }
+                }).disposed(by: this.rx.disposeBag)
+                
+            } else if self?.buttonLeftButton.titleLabel?.text == "联系对方".toMultilingualism() {
+                let vc: ContactOtherController = ViewLoader.Storyboard.controller(from: "Me")
+                vc.orderInfoModel = self?.model?.data
+                if self?.model?.data?.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
+                    vc.walletId = self?.model?.data?.partnerUser
+                } else {
+                    vc.walletId = self?.model?.data?.sponsorUser
+                }
+                self?.navigationController?.pushViewController(vc, animated: true)
             }
-            self?.navigationController?.pushViewController(vc, animated: true)
-            
         }).disposed(by: rx.disposeBag)
         
         accountButton1.rx.tap.subscribe(onNext: {[unowned self] _ in
@@ -553,9 +596,6 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         headerView?.titleLabel.text = state.title
         headerView?.backgroundColor = .white
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
         
         desLabel5Me.snp.remakeConstraints { make in
             make.width.height.equalTo(26)
@@ -579,7 +619,8 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
     
     private func agreeRelease() {
         guard let id = model?.data?.assureId else { return }
-        APIProvider.rx.request(.releaseAgree(assureId: id)).mapJSON().subscribe(onSuccess: {[weak self] obj in
+        let key = LocaleWalletManager.shared().currentWallet?.getKeyForCoin(coin: .tron).data.hexString ?? ""
+        APIProvider.rx.request(.releaseAgree(assureId: id, privateKey: key)).mapJSON().subscribe(onSuccess: {[weak self] obj in
             
             guard let dict = obj as? [String: Any], let this = self else { return }
             let message = dict["message"] as? String

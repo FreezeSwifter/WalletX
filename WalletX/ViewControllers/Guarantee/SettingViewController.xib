@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -77,7 +77,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eCe-6n-v5e">
-                    <rect key="frame" x="0.0" y="182.66666666666663" width="393" height="156"/>
+                    <rect key="frame" x="0.0" y="182.66666666666666" width="393" height="52"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12L-Z5-pTX" customClass="UIControl">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="52"/>
@@ -130,8 +130,8 @@
                                 <action selector="languageTap:" destination="-1" eventType="touchUpInside" id="w3k-Gb-M5c"/>
                             </connections>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-jD-lbh" customClass="UIControl">
-                            <rect key="frame" x="0.0" y="52" width="393" height="52"/>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-jD-lbh" customClass="UIControl">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="52"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5US-os-IqH">
                                     <rect key="frame" x="16.000000000000004" y="16" width="62.333333333333343" height="20"/>
@@ -157,7 +157,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="swl-Ev-RzK">
-                                    <rect key="frame" x="16" y="51.000000000000028" width="361" height="1"/>
+                                    <rect key="frame" x="16" y="51" width="361" height="1"/>
                                     <color key="backgroundColor" red="0.50196078430000002" green="0.54117647059999996" blue="0.61568627450000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="pF8-mx-p7Y"/>
@@ -181,8 +181,8 @@
                                 <action selector="contactTap:" destination="-1" eventType="touchUpInside" id="4rO-qc-CrF"/>
                             </connections>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehw-dG-PwW" customClass="UIControl">
-                            <rect key="frame" x="0.0" y="104.00000000000003" width="393" height="52"/>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehw-dG-PwW" customClass="UIControl">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="52"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Pce-fV-zuo">
                                     <rect key="frame" x="16.000000000000004" y="16" width="62.333333333333343" height="20"/>
@@ -199,7 +199,7 @@
                                     </subviews>
                                 </stackView>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="global_list_right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="vFJ-q9-cd2">
-                                    <rect key="frame" x="371" y="20.666666666666629" width="6" height="11"/>
+                                    <rect key="frame" x="371" y="20.666666666666686" width="6" height="11"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lji-hT-mfb">
                                     <rect key="frame" x="323.66666666666669" y="17" width="37.333333333333314" height="18"/>
@@ -249,7 +249,7 @@
         <image name="guarantee_setting_lock" width="20" height="20"/>
         <image name="guarantee_setting_nickname" width="20" height="20"/>
         <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

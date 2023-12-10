@@ -15,11 +15,13 @@ import RxSwift
 import NSObject_Rx
 
 class GuranteeViewController: UIViewController, HomeNavigationble {
-
+    
     private var adapter: ListAdapter!
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     private var dataSource: [ListDiffable] = [HomeBannerSection.Model(), HomeQuickAccessSecion.Model(), HomeServiceProviderSecion.Model()]
+    
+    private let timer: Observable<Int> = Observable.timer(.seconds(1), period: .seconds(60), scheduler: MainScheduler.instance)
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -34,7 +36,7 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .white
         setupView()
         bind()
@@ -57,17 +59,12 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            let settingVC: SettingViewController = ViewLoader.Xib.controller()
-            settingVC.hidesBottomBarWhenPushed = true
-            self?.navigationController?.pushViewController(settingVC, animated: true)
-            
-        }).disposed(by: rx.disposeBag)
-        
-        headerView?.scanButton.rx.tap.subscribe(onNext: {[weak self] in
-            let sancVC: ScanViewController = ViewLoader.Xib.controller()
-            sancVC.hidesBottomBarWhenPushed = true
-            self?.navigationController?.pushViewController(sancVC, animated: true)
+        headerView?.accountButton.rx.tap.subscribe(onNext: { _ in
+            LocaleWalletManager.checkLogin {
+                let vc: WalletManagementController = WalletManagementController()
+                vc.hidesBottomBarWhenPushed = true
+                UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+            }
         }).disposed(by: rx.disposeBag)
         
         headerView?.shareButton.rx.tap.subscribe(onNext: {[weak self] in
@@ -108,7 +105,26 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
             self?.dataSource[2] = model
             self?.adapter.performUpdates(animated: true)
         }).disposed(by: rx.disposeBag)
-                
+        
+        timer.subscribe(onNext: {[unowned self] i in
+            refreshTotalCountData()
+        }).disposed(by: rx.disposeBag)
+        
+        LocaleWalletManager.shared().fetchUserData(mnemonic: nil, walletName: nil, isAdd: false)
+        LocaleWalletManager.shared().fetchWalletBalanceData()
+    }
+    
+    private func refreshTotalCountData() {
+        let totalCountReq = APIProvider.rx.request(.guaranteeDisplayData).mapJSON()
+        totalCountReq.subscribe(onSuccess: {[weak self] obj in
+            let json = obj as? [String: Any]
+            let data = json?["data"] as? [String: Any]
+            let model = HomeQuickAccessSecion.Model()
+            model.assureAmount = data?["assureAmount"] as? Int64
+            model.assureNum = data?["assureNum"] as? Int64
+            self?.dataSource[1] = model
+            self?.adapter.performUpdates(animated: true)
+        }).disposed(by: rx.disposeBag)
     }
 }
 

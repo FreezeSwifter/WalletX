@@ -45,16 +45,12 @@ class ChangeNameController: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         headerView?.titleLabel.text = "tab_wallet".toMultilingualism()
         headerView?.backgroundColor = .white
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
-        
-        
-        headerView?.stackView.addArrangedSubview(headerView!.linkButton)
-        headerView?.linkButton.setImage(nil, for: .normal)
-        headerView?.linkButton.setTitle("保存".toMultilingualism(), for: .normal)
-        headerView?.linkButton.setTitleColor(ColorConfiguration.blackText.toColor(), for: .normal)
-        headerView?.linkButton.rx.tap.subscribe(onNext: {[weak self] _ in
+
+        headerView?.stackView.addArrangedSubview(headerView!.shareButton)
+        headerView?.shareButton.setImage(nil, for: .normal)
+        headerView?.shareButton.setTitle("保存".toMultilingualism(), for: .normal)
+        headerView?.shareButton.setTitleColor(ColorConfiguration.blackText.toColor(), for: .normal)
+        headerView?.shareButton.rx.tap.subscribe(onNext: {[weak self] _ in
             if let str = self?.textField.text {
                 self?.changeWalletModel?.name = str
                 self?.didSaveBlock?(self?.changeWalletModel)

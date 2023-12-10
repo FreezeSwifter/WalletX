@@ -44,7 +44,7 @@ final class LocaleWalletManager {
         }
     }
     
-    private static let instance = LocaleWalletManager()
+    static let instance = LocaleWalletManager()
     private(set) var currentWallet: HDWallet? {
         didSet {
             if let key = currentWallet?.getKeyForCoin(coin: .tron) {
@@ -73,18 +73,13 @@ final class LocaleWalletManager {
         if let walletList = fetchLocalWalletList() {
             let currentIndex = AppArchiveder.shared().mmkv?.int32(forKey: ArchivedKey.currentWalletIndex.rawValue) ?? 0
             let tempCurrentWalletModel = walletList[Int(currentIndex)]
-            currentWallet = HDWallet(mnemonic: tempCurrentWalletModel.mnemoic, passphrase: "")
+            currentWallet = HDWallet(mnemonic: tempCurrentWalletModel.mnemoic ?? "", passphrase: "")
             walletDidChangedSubject.onNext(())
             wallets = walletList
         }
         
         TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
         USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-            self.fetchUserData()
-            self.fetchWalletBalanceData()
-        })
         
         if tronWeb.isGenerateTronWebInstanceSuccess != true {
             if let privateKeyData = currentWallet?.getKeyForCoin(coin: .tron) {
@@ -106,10 +101,8 @@ final class LocaleWalletManager {
             currentWallet = HDWallet(mnemonic: mnemonic, passphrase: "")
             TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
             USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
-            wallets.append(WalletModel(name: walletName, mnemoic: mnemonic))
-            save()
-            walletDidChangedSubject.onNext(())
-    
+            fetchUserData(mnemonic: mnemonic, walletName: walletName)
+      
             return nil
         } else {
             return "助记词输入有误".toMultilingualism()
@@ -126,7 +119,7 @@ final class LocaleWalletManager {
             wallets = originalArray
             
         } else {
-            let array = [WalletModel(name: "Wallet", mnemoic: newMnemoic)]
+            let array = [WalletModel(name: "Wallet", mnemoic: newMnemoic, nickName: nil, walletId: nil)]
             wallets = array
         }
         
@@ -143,7 +136,6 @@ final class LocaleWalletManager {
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 AppArchiveder.shared().mmkv?.set(jsonString, forKey: ArchivedKey.walletList.rawValue)
                 walletDidChangedSubject.onNext(())
-                
                 if isNotActiveAccount {
                     activationAccount()
                 }
@@ -164,14 +156,12 @@ final class LocaleWalletManager {
         AppArchiveder.shared().mmkv?.set(Int32(index), forKey: ArchivedKey.currentWalletIndex.rawValue)
         guard let list = fetchLocalWalletList(), list.count != 0 else { return }
         let currentModel = list[index]
-        currentWallet = HDWallet(mnemonic: currentModel.mnemoic, passphrase: "")
+        currentWallet = HDWallet(mnemonic: currentModel.mnemoic ?? "", passphrase: "")
         TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
         USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
-        walletDidChangedSubject.onNext(())
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-            self.fetchUserData()
-            self.fetchWalletBalanceData()
-        })
+        
+        fetchUserData(mnemonic: nil, walletName: nil, isAdd: false)
+        fetchWalletBalanceData()
     }
     
     func deleteWalletModel(by model: WalletModel) {
@@ -199,6 +189,7 @@ final class LocaleWalletManager {
             }
         }
         wallets = list
+        fetchUserData(mnemonic: nil, walletName: nil, isAdd: false)
     }
     
     func cleanNotFinishedProcess() {
@@ -227,10 +218,14 @@ final class LocaleWalletManager {
     }
     
     // 获取用户数据
-    func fetchUserData() {
+    func fetchUserData(mnemonic: String?, walletName: String?, isAdd: Bool = true) {
         let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
-        getUserInfoReq.subscribe(onNext: {[weak self] obj in
-            self?.userInfo = obj
+        getUserInfoReq.subscribe(onNext: {[unowned self] obj in
+            userInfo = obj
+            if isAdd {
+                wallets.append(WalletModel(name: walletName, mnemoic: mnemonic, nickName: obj?.data?.nickName, walletId: obj?.data?.walletId))
+            }
+            save()
         }).disposed(by: disposeBag)
     }
     
@@ -312,8 +307,11 @@ final class LocaleWalletManager {
 
 
 struct WalletModel: Codable {
-    var name: String
-    let mnemoic: String
+    var name: String?
+    var mnemoic: String?
+    var nickName: String?
+    var walletId: String?
+    var isSelected: Bool = false
 }
 
 enum WalletToken: Equatable {
@@ -364,6 +362,21 @@ enum WalletToken: Equatable {
             return true
         default:
             return false
+        }
+    }
+}
+
+extension LocaleWalletManager {
+    static func checkLogin(callback: @escaping () -> Void) {
+        if LocaleWalletManager.shared().currentWallet != nil {
+            callback()
+        } else {
+            GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_yes_no"), title: "需要先创建或导入钱包".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "首页弹窗1".toMultilingualism(), leftButton: "home_after_button".toMultilingualism(), rightButton: "home_gonow_button".toMultilingualism()).subscribe { index in
+                if index == 1 {
+                    let app = UIApplication.shared.delegate as? AppDelegate
+                    app?.tabBarSelecte(index: 1)
+                }
+            }.disposed(by: LocaleWalletManager.shared().disposeBag)
         }
     }
 }

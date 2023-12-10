@@ -7,6 +7,8 @@
 
 import UIKit
 import QMUIKit
+import RxSwift
+import RxCocoa
 
 extension UIViewController {
     
@@ -35,28 +37,75 @@ extension HomeNavigationble where Self: UIViewController {
             make.top.equalToSuperview()
             make.height.equalTo((navigationController?.navigationBar.bounds.height ?? 88) + UIApplication.shared.statusBarFrame.size.height)
         }
-        // 暂时不用显示这个按钮
-        headerView?.stackView.removeArrangedSubview(headerView!.linkButton)
-        headerView?.linkButton.removeFromSuperview()
         headerView?.backgroundColor = .clear
         
-        headerView?.stackView.removeArrangedSubview(headerView!.scanButton)
-        headerView?.scanButton.removeFromSuperview()
+        LocaleWalletManager.shared().walletDidChanged.observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
+            guard let this = self else { return }
+            this.updateAccountInfo()
+        }).disposed(by: rx.disposeBag)
+        
+        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
+            let settingVC: SettingViewController = ViewLoader.Xib.controller()
+            settingVC.hidesBottomBarWhenPushed = true
+            self?.navigationController?.pushViewController(settingVC, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
+        
+        updateAccountInfo()
     }
     
     func setupChildVCStyle() {
-        headerView?.stackView.removeArrangedSubview(headerView!.scanButton)
-        headerView?.scanButton.removeFromSuperview()
+        headerView?.stackView.removeArrangedSubview(headerView!.settingButton)
+        headerView?.settingButton.removeFromSuperview()
         headerView?.stackView.removeArrangedSubview(headerView!.shareButton)
         headerView?.shareButton.removeFromSuperview()
         headerView?.stackView.removeArrangedSubview(headerView!.serverButton)
         headerView?.serverButton.removeFromSuperview()
-        headerView?.settingButton.setImage(UIImage(named: "navigation_back_button"), for: UIControl.State())
-        headerView?.settingButton.tintColor = ColorConfiguration.blodText.toColor()
+        headerView?.stackView.removeArrangedSubview(headerView!.messageButton)
+        headerView?.messageButton.removeFromSuperview()
+        headerView?.accountButton.setImage(UIImage(named: "navigation_back_button"), for: UIControl.State())
+        headerView?.accountButton.tintColor = ColorConfiguration.blodText.toColor()
+        headerView?.accountButton.rx.tap.subscribe(onNext: {[weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }).disposed(by: rx.disposeBag)
+        headerView?.accountButton.setTitle(nil, for: .normal)
+        headerView?.accountButton.layer.borderColor = UIColor.clear.cgColor
+    }
+    
+    private func updateAccountInfo() {
+        
+        guard let accountButton = headerView?.accountButton else {
+            return
+        }
+        
+        
+        if LocaleWalletManager.shared().currentWalletModel == nil {
+            accountButton.setTitle("未登录".toMultilingualism(), for: .normal)
+        } else {
+            if let nickName = LocaleWalletManager.shared().userInfo?.data?.nickName, !nickName.isEmpty {
+                accountButton.setTitle(nickName, for: .normal)
+            } else {
+                accountButton.setTitle(LocaleWalletManager.shared().userInfo?.data?.walletId, for: .normal)
+            }
+        }
     }
 }
 
 class HomeNavigationBarView: UIView {
+    
+    @IBOutlet weak var messageButton: UIButton!
+    @IBOutlet weak var accountButton: QMUIButton! {
+        didSet {
+            accountButton.setImage(UIImage(named: "导航栏下箭头"), for: .normal)
+            accountButton.imagePosition = .right
+            accountButton.spacingBetweenImageAndTitle = 6
+            accountButton.setTitleColor(ColorConfiguration.lightGray.toColor(), for: .normal)
+            accountButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+            accountButton.cornerRadius = 4
+            accountButton.layer.borderWidth = 1
+            accountButton.layer.borderColor = ColorConfiguration.lightGray.toColor().cgColor
+        }
+    }
     
     @IBOutlet weak var stackView: UIStackView!
     
@@ -64,11 +113,7 @@ class HomeNavigationBarView: UIView {
     
     @IBOutlet weak var shareButton: UIButton!
     
-    @IBOutlet weak var linkButton: UIButton!
-    
     @IBOutlet weak var serverButton: UIButton!
-    
-    @IBOutlet weak var scanButton: UIButton!
     
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {

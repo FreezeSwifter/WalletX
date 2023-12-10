@@ -67,10 +67,6 @@ class SettingChildViewController: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         headerView?.backgroundColor = .white
         headerView?.titleLabel.text = "home_setting_Language".toMultilingualism()
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
-        
     }
     
     @IBAction func cnTap(_ sender: UIControl) {

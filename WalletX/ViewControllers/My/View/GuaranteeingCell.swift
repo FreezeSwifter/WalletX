@@ -16,6 +16,16 @@ import SwiftDate
 
 class GuaranteeingCell: UITableViewCell {
     
+    @IBOutlet weak var tagLabel: UILabel!
+    @IBOutlet weak var concact: UIStackView! {
+        didSet {
+            concact.isLayoutMarginsRelativeArrangement = true
+            concact.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+            concact.applyCornerRadius(concact.height / 2, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+            let ges = UITapGestureRecognizer(target: self, action: #selector(GuaranteeingCell.contactTap))
+            concact.addGestureRecognizer(ges)
+        }
+    }
     @IBOutlet weak var desLabel1: UILabel! {
         didSet {
             desLabel1.text = "担保ID".toMultilingualism()
@@ -87,7 +97,6 @@ class GuaranteeingCell: UITableViewCell {
             valueLabel1Status.applyCornerRadius(8)
             valueLabel1Status.backgroundColor = UIColor(hex: "#28C445").withAlphaComponent(0.1)
             valueLabel1Status.textColor = UIColor(hex: "#28C445")
-            valueLabel1Status.text = "me_guaranteeing".toMultilingualism()
         }
     }
 
@@ -174,6 +183,7 @@ class GuaranteeingCell: UITableViewCell {
     private lazy var button2: UIButton = {
         let v = UIButton(type: .custom)
         v.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        v.setTitleColor(.white, for: .normal)
         return v
     }()
     
@@ -313,7 +323,7 @@ class GuaranteeingCell: UITableViewCell {
             desLabel4Me.isHidden = true
             desLabel5Me.isHidden = false
         }
-        
+        tagLabel.text = data.assureTypeToString()
         var address: String = ""
         if let str = data.pushAddress {
             address = str
@@ -344,6 +354,7 @@ class GuaranteeingCell: UITableViewCell {
             buttonStackView.addArrangedSubview(button2)
             button1.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
             button2.setupAPPUISolidStyle(title: "申请解押".toMultilingualism())
+            valueLabel1Status.text = "担保中".toMultilingualism()
             
         } else if data.assureStatus == 9 { // 退押中
             buttonStackView.isHidden = false
@@ -352,7 +363,10 @@ class GuaranteeingCell: UITableViewCell {
             }
             buttonStackView.addArrangedSubview(button2)
             button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
-        
+            valueLabel1Status.text = "退押中".toMultilingualism()
+            valueLabel1Status.textColor = UIColor(hex: "#F0A158")
+            valueLabel1Status.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
+            
             if data.releaseSponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
                 buttonStackView.addArrangedSubview(button3)
                 button3.setupAPPUISolidStyle(title: "撤销申请".toMultilingualism())
@@ -372,12 +386,18 @@ class GuaranteeingCell: UITableViewCell {
             buttonStackView.addArrangedSubview(button2)
             button1.setupAPPUIHollowStyle(title: "联系客服".toMultilingualism())
             button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
+            valueLabel1Status.text = "已退押".toMultilingualism()
+            valueLabel1Status.textColor = UIColor(hex: "#FF5966")
+            valueLabel1Status.backgroundColor = UIColor(hex: "#FF5966").withAlphaComponent(0.1)
             
         } else if data.assureStatus == 8 { // 已删除, 已取消
             buttonStackView.isHidden = true
             buttonStackView.arrangedSubviews.forEach { v in
                 v.removeFromSuperview()
             }
+            valueLabel1Status.textColor = UIColor(hex: "#FF5966")
+            valueLabel1Status.backgroundColor = UIColor(hex: "#FF5966").withAlphaComponent(0.1)
+            valueLabel1Status.text = "已取消".toMultilingualism()
         }
     }
     
@@ -386,5 +406,11 @@ class GuaranteeingCell: UITableViewCell {
         NotiAlterView.show(title: "协议".toMultilingualism(), content: model?.agreement, leftButtonTitle: nil, rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { _ in
             
         }).disposed(by: rx.disposeBag)
+    }
+    
+    @objc private func contactTap() {
+        UIPasteboard.general.string = "担保ID".toMultilingualism() + ": " + (model?.assureId ?? "")
+        let app = UIApplication.shared.delegate as? AppDelegate
+        app?.openTg()
     }
 }

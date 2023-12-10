@@ -134,8 +134,5 @@ class TokenTransferDetailController: UIViewController, HomeNavigationble {
         setupNavigationbar()
         setupChildVCStyle()
         headerView?.titleLabel.text = "转账".toMultilingualism()
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
     }
 }

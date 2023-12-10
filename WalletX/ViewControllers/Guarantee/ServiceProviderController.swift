@@ -87,9 +87,6 @@ class ServiceProviderController: UIViewController, HomeNavigationble {
         setupNavigationbar()
         setupChildVCStyle()
         headerView?.titleLabel.text = "home_topService".toMultilingualism()
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
         
         view.addSubview(notiView)
         notiView.snp.makeConstraints { make in

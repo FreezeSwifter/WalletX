@@ -103,7 +103,7 @@ final class HomeQuickAccessSecion: ListSectionController {
     
     func checkHasWalletPopAlter() {
         
-        GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_yes_no"), title: "home_create_wallet_noti_title".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "home_create_wallet_noti_content".toMultilingualism(), leftButton: "home_after_button".toMultilingualism(), rightButton: "home_gonow_button".toMultilingualism()).subscribe(onNext: { index in
+        GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_yes_no"), title: "需要先创建或导入钱包".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "首页弹窗1".toMultilingualism(), leftButton: "home_after_button".toMultilingualism(), rightButton: "home_gonow_button".toMultilingualism()).subscribe(onNext: { index in
             
             if index == 1 {
                 let app = UIApplication.shared.delegate as? AppDelegate

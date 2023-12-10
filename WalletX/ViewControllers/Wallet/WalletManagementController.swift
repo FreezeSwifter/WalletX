@@ -38,10 +38,13 @@ class WalletManagementController: UIViewController, HomeNavigationble {
     private func bind() {
         datasouce = LocaleWalletManager.shared().fetchLocalWalletList() ?? []
         
-        LocaleWalletManager.shared().walletDidChanged.subscribe(onNext: {[weak self] _ in
-            self?.datasouce = LocaleWalletManager.shared().fetchLocalWalletList() ?? []
-            self?.tableView.reloadData()
-        }).disposed(by: rx.disposeBag)
+        if let selectedIndex = datasouce.firstIndex(where: { m in
+            return m.mnemoic == LocaleWalletManager.shared().currentWalletModel?.mnemoic
+        }) {
+            var selectedItem = datasouce[selectedIndex]
+            selectedItem.isSelected = true
+            datasouce[selectedIndex] = selectedItem
+        }
     }
     
     private func setupView() {
@@ -51,9 +54,6 @@ class WalletManagementController: UIViewController, HomeNavigationble {
         setupChildVCStyle()
         headerView?.titleLabel.text = "钱包管理".toMultilingualism()
         headerView?.backgroundColor = .white
-        headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
@@ -61,9 +61,9 @@ class WalletManagementController: UIViewController, HomeNavigationble {
             make.leading.trailing.bottom.equalToSuperview()
         }
         
-        headerView?.stackView.addArrangedSubview(headerView!.linkButton)
-        headerView?.linkButton.setImage(UIImage(named: "wallet_add_new"), for: .normal)
-        headerView?.linkButton.rx.tap.subscribe(onNext: { _ in
+        headerView?.stackView.addArrangedSubview(headerView!.shareButton)
+        headerView?.shareButton.setImage(UIImage(named: "wallet_add_new"), for: .normal)
+        headerView?.shareButton.rx.tap.subscribe(onNext: { _ in
       
             guard let topVc = AppDelegate.topViewController() else {
                 return
@@ -128,20 +128,24 @@ extension WalletManagementController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WalletManagementCell", for: indexPath) as! WalletManagementCell
         let item = datasouce[indexPath.row]
-        cell.nameLabel.text = item.name
+        if item.nickName.isNotNilNotEmpty {
+            cell.nameLabel.text = item.nickName
+            
+        } else if item.walletId.isNotNilNotEmpty {
+            cell.nameLabel.text = item.walletId
+        }
+        if item.isSelected {
+            cell.nameLabel.textColor = ColorConfiguration.lightBlue.toColor()
+            cell.imageIcon.image = UIImage(named: "wallet_management_list_icon")?.qmui_image(withTintColor: ColorConfiguration.lightBlue.toColor())
+        } else {
+            cell.nameLabel.textColor = ColorConfiguration.blackText.toColor()
+            cell.imageIcon.image = UIImage(named: "wallet_management_list_icon")?.qmui_image(withTintColor: ColorConfiguration.blackText.toColor())
+        }
+        
         cell.button1.rx.tap.subscribe(onNext: {[weak self] in
             guard let this = self else { return }
-            
-            let item = this.datasouce[indexPath.row]
-            let vc: ChangeNameController = ViewLoader.Storyboard.controller(from: "Wallet")
-            vc.changeWalletModel = item
-            vc.didSaveBlock = { m in
-                if let m1 = m {
-                    LocaleWalletManager.shared().updateWalletModel(model: m1)
-                }
-            }
-            this.navigationController?.pushViewController(vc, animated: true)
-            
+            let accountSettingVC = AccountSettingViewController()
+            this.navigationController?.pushViewController(accountSettingVC, animated: true)
         }).disposed(by: cell.rx.disposeBag)
         
         return cell
