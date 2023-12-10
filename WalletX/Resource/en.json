@@ -277,4 +277,5 @@
     "立即转入": "Transfer now",
     "请输入上押金额": "Please enter the deposit amount",
     "输入金额不能大于上押金额": "The input amount cannot be greater than the deposit amount",
+    "付手续费提示语": "You have chosen multi-signature guarantee to ensure the safety of funds. You need to transfer %@U handling fee to us first. This handling fee is not collected by us, but is the gas fee used for TRON's official multi-signature wallet creation."
 }

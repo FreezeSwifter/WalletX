@@ -225,7 +225,8 @@ class PayHandlingFeeViewController: UIViewController, HomeNavigationble {
     
     private func setupUI()  {
         let fee = String(model?.hc ?? "--")
-        let attr = NSMutableAttributedString(string: "您选择了多签担保以保障资金安全，需要先转\(fee)U手续费给我们该手续费并不是我们收取，而是用于TRON官方创建多签钱包的gas费用。")
+        let tipString = String(format: "付手续费提示语".toMultilingualism(), fee)
+        let attr = NSMutableAttributedString(string: tipString)
         attr.addAttribute(.foregroundColor, value: ColorConfiguration.lightBlue.toColor().withAlphaComponent(0.9), range: NSRange(location: 0, length: attr.length))
         let content = NSMutableAttributedString()
         if let tipImage = UIImage(named: "wallet_noti") {
