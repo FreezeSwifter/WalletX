@@ -25,6 +25,29 @@ class TransferOnsiteWalletController: UIViewController, HomeNavigationble {
         it.backgroundColor = .white
     }
     
+    private lazy var proStackView: UIStackView = UIStackView().then { it in
+        it.axis = .horizontal
+        it.distribution = .fill
+        it.alignment = .fill
+        it.spacing = 3
+        it.backgroundColor = ColorConfiguration.lightBlue.toColor().withAlphaComponent(0.1)
+        it.isLayoutMarginsRelativeArrangement = true
+        it.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+        it.applyCornerRadius(15, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+        let tap = UITapGestureRecognizer(target: self, action: #selector(protocolTap))
+        it.addGestureRecognizer(tap)
+    }
+    
+    private lazy var iconImageView: UIImageView = UIImageView().then { it in
+        it.image = UIImage(named: "me_contract")
+        it.contentMode = .scaleAspectFit
+    }
+    private lazy var titleLabel: UILabel = UILabel().then { it in
+        it.font = UIFont.systemFont(ofSize: 12)
+        it.textColor = ColorConfiguration.primary.toColor()
+        it.text = "协议".toMultilingualism()
+    }
+    
     private lazy var guaranteeIDItem: SectionInputWithDescText = SectionInputWithDescText().then { it in
         it.setup(with: "担保ID".toMultilingualism())
         it.hideRightItem = true
@@ -92,6 +115,9 @@ class TransferOnsiteWalletController: UIViewController, HomeNavigationble {
         contentView.addSubview(guaranteeAmountItem)
         contentView.addSubview(inputItem)
         contentView.addSubview(walletBalanceItem)
+        contentView.addSubview(proStackView)
+        proStackView.addArrangedSubview(iconImageView)
+        proStackView.addArrangedSubview(titleLabel)
         view.addSubview(payBtn)
         scrollView.snp.makeConstraints { make in
             if let headerView = headerView {
@@ -106,6 +132,13 @@ class TransferOnsiteWalletController: UIViewController, HomeNavigationble {
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
+        
+        proStackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(15)
+            make.trailing.equalToSuperview()
+            make.height.equalTo(30)
+        }
+        
         sponsorItem.snp.makeConstraints { make in
             make.top.equalTo(guaranteeIDItem.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(20)
@@ -167,5 +200,11 @@ class TransferOnsiteWalletController: UIViewController, HomeNavigationble {
     
     @objc private func pay() {
         
+    }
+    
+    @objc
+    private func protocolTap() {
+        NotiAlterView.show(title: "协议".toMultilingualism(), content: model?.agreement, leftButtonTitle: nil, rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { _ in
+        }).disposed(by: rx.disposeBag)
     }
 }
