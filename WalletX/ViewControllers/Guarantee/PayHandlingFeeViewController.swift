@@ -242,7 +242,14 @@ class PayHandlingFeeViewController: UIViewController, HomeNavigationble {
     }
     
     @objc private func didInnerWalletBtnClick(button: UIButton) {
-        
+        let vc: SendTokenPageTwoController = ViewLoader.Storyboard.controller(from: "Wallet")
+        vc.model = LocaleWalletManager.shared().USDT
+        vc.toAddress = model?.multisigAddress
+        vc.sendType = .business(from: 0, assureId: model?.assureId ?? "")
+        vc.sendCount = feeInputItem.textField.text
+        vc.defaultMaxTotal = "20"
+        vc.defaultNetworkFee = "10"
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func didOtherWalletBtnClick(button: UIButton) {
