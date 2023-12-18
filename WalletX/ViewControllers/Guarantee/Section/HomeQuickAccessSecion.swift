@@ -76,20 +76,24 @@ final class HomeQuickAccessSecion: ListSectionController {
         cell.sendBgView.rx.controlEvent(.touchUpInside)
             .take(until: cell.rx.sentMessage(#selector(HomeQuickAccessCell.prepareForReuse)))
             .subscribe(onNext: {[weak self] in
-            
-            if !(AppArchiveder.shared().mmkv?.bool(forKey: ArchivedKey.ratePopup.rawValue) ?? false) {
-                GuaranteeFeesView.show().subscribe(onNext: { tuple in
-                    if tuple.1 {
-                        AppArchiveder.shared().mmkv?.set(true, forKey: ArchivedKey.ratePopup.rawValue)
-                    }
-                }).disposed(by: cell.rx.disposeBag)
-                return
-            }
-            
-            let vc: StartGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
-            vc.hidesBottomBarWhenPushed = true
-            self?.viewController?.navigationController?.pushViewController(vc, animated: true)
-            
+                if !LocaleWalletManager.shared().hasWallet {
+                    self?.checkHasWalletPopAlter()
+                    return
+                }
+                if !(AppArchiveder.shared().mmkv?.bool(forKey: ArchivedKey.ratePopup.rawValue) ?? false) {
+                    GuaranteeFeesView.show().subscribe(onNext: { tuple in
+                        if tuple.1 {
+                            AppArchiveder.shared().mmkv?.set(true, forKey: ArchivedKey.ratePopup.rawValue)
+                        }
+                        if tuple.0 == 0 { // 联系客服
+                            (UIApplication.shared.delegate as? AppDelegate)?.openTg()
+                        } else {
+                            self?.startGuaranteeVC()
+                        }
+                    }).disposed(by: cell.rx.disposeBag)
+                    return
+                }
+                self?.startGuaranteeVC()
         }).disposed(by: cell.rx.disposeBag)
         
         
@@ -100,6 +104,11 @@ final class HomeQuickAccessSecion: ListSectionController {
         self.data = object as? Model
     }
     
+    private func startGuaranteeVC() {
+        let vc: StartGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
+        vc.hidesBottomBarWhenPushed = true
+        viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
     
     func checkHasWalletPopAlter() {
         

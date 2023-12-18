@@ -241,18 +241,7 @@ class MeTobeAddedCell: UITableViewCell {
         
         
         modifyButton.rx.tap.subscribe(onNext: {[unowned self] in
-            
-            if modifyButton.titleLabel?.text == "修改信息".toMultilingualism() {
-                SettingModifyAlterView.show(title: "担保协议".toMultilingualism(), text: self.model?.agreement, placeholder: "请输入担保协议".toMultilingualism(), leftButtonTitle: "返回".toMultilingualism(), rightButtonTitle: "保存".toMultilingualism()).subscribe(onNext: {[weak self] str in
-                    
-                    guard let this = self, let updateText = str, let id = this.model?.assureId else { return }
-                    APIProvider.rx.request(.updateGuarantee(assureId: id, agreement: updateText)).mapJSON().subscribe(onSuccess: { _ in
-                        APPHUD.flash(text: "成功".toMultilingualism())
-                        NotificationCenter.default.post(name: .orderDidChangeed, object: nil)
-                    }).disposed(by: this.rx.disposeBag)
-                }).disposed(by: self.rx.disposeBag)
-                
-            } else if modifyButton.titleLabel?.text == "我来上押".toMultilingualism() {
+            if modifyButton.titleLabel?.text == "我来上押".toMultilingualism() {
                 self.depositTap()
             } else if modifyButton.titleLabel?.text == "付手续费".toMultilingualism() {
                 self.payAssureFee()
@@ -343,10 +332,8 @@ class MeTobeAddedCell: UITableViewCell {
                     v.removeFromSuperview()
                 }
                 buttonStackView.addArrangedSubview(cancelButton)
-                buttonStackView.addArrangedSubview(modifyButton)
                 buttonStackView.addArrangedSubview(inviteButton)
                 cancelButton.setupAPPUIHollowStyle(title: "取消担保".toMultilingualism())
-                modifyButton.setupAPPUISolidStyle(title: "修改信息".toMultilingualism())
                 inviteButton.setupAPPUISolidStyle(title: "邀请对方".toMultilingualism())
             }
             
@@ -447,6 +434,8 @@ class MeTobeAddedCell: UITableViewCell {
             }
             timerLabel?.removeFromSuperview()
         }
+        // 待加入和待上押超时不显示已超时状态
+        stateLabel.isHidden = (data.assureStatus == 5 || data.assureStatus == 7)
     }
     
     @objc
