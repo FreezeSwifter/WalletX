@@ -128,12 +128,14 @@ extension WalletManagementController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WalletManagementCell", for: indexPath) as! WalletManagementCell
         let item = datasouce[indexPath.row]
-        if item.nickName.isNotNilNotEmpty {
-            cell.nameLabel.text = item.nickName
-            
-        } else if item.walletId.isNotNilNotEmpty {
+        
+        if item.walletId.isNotNilNotEmpty {
             cell.nameLabel.text = item.walletId
         }
+        if item.nickName.isNotNilNotEmpty {
+            cell.nameLabel.text = item.nickName
+        }
+        
         if item.isSelected {
             cell.nameLabel.textColor = ColorConfiguration.lightBlue.toColor()
             cell.imageIcon.image = UIImage(named: "wallet_management_list_icon")?.qmui_image(withTintColor: ColorConfiguration.lightBlue.toColor())
@@ -166,11 +168,16 @@ extension WalletManagementController: UITableViewDataSource, UITableViewDelegate
             guard let this = self else {
                 return
             }
-            
             let deleteItem = this.datasouce[indexPath.row]
-            this.datasouce.remove(at: indexPath.row)
-            this.tableView.reloadData()
             LocaleWalletManager.shared().deleteWalletModel(by: deleteItem)
+            this.datasouce.remove(at: indexPath.row)
+            
+            if let i = this.datasouce.firstIndex(where: { m in
+                return m.mnemoic == this.datasouce.first?.mnemoic
+            }) {
+                LocaleWalletManager.shared().didSelectedWallet(index: i)
+            }
+            this.navigationController?.popViewController(animated: true)
         }
         deleteAction.backgroundColor = UIColor(hex: "#FF5966")
         let actions = UISwipeActionsConfiguration(actions: [deleteAction])

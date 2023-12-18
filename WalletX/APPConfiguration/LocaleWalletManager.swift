@@ -159,12 +159,11 @@ final class LocaleWalletManager {
     func didSelectedWallet(index: Int) {
         AppArchiveder.shared().mmkv?.set(Int32(index), forKey: ArchivedKey.currentWalletIndex.rawValue)
         guard let list = fetchLocalWalletList(), list.count != 0 else { return }
-        let currentModel = list[index]
+        var currentModel = list[index]
         currentWallet = HDWallet(mnemonic: currentModel.mnemoic ?? "", passphrase: "")
         TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
         USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
-        
-        fetchUserData(mnemonic: nil, walletName: nil, isAdd: false)
+        fetchUserData(mnemonic: nil, walletName: nil, isAdd: false, isSelected: true)
         fetchWalletBalanceData()
     }
     
@@ -200,7 +199,6 @@ final class LocaleWalletManager {
         }
         
         fetchUserData(mnemonic: nil, walletName: nil, isAdd: false)
-        walletDidChangedSubject.onNext(())
     }
     
     func cleanNotFinishedProcess() {
@@ -229,14 +227,34 @@ final class LocaleWalletManager {
     }
     
     // 获取用户数据
-    func fetchUserData(mnemonic: String?, walletName: String?, isAdd: Bool = true) {
+    func fetchUserData(mnemonic: String?, walletName: String?, isAdd: Bool = true, isSelected: Bool = false) {
         let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
         getUserInfoReq.subscribe(onNext: {[unowned self] obj in
             userInfo = obj
             if isAdd {
-                let importOne = WalletModel(name: walletName, mnemoic: mnemonic, nickName: obj?.data?.nickName, walletId: obj?.data?.walletId)
+                var importOne = WalletModel(name: walletName, mnemoic: mnemonic, nickName: obj?.data?.nickName, walletId: obj?.data?.walletId)
+                wallets = wallets.map { m in
+                    var nm = WalletModel(name: m.name, mnemoic: m.mnemoic, nickName: m.nickName, walletId: m.walletId)
+                    nm.isSelected = false
+                    return nm
+                }
+                importOne.isSelected = true
                 wallets.insert(importOne, at: 0)
                 AppArchiveder.shared().mmkv?.set(Int32(0), forKey: ArchivedKey.currentWalletIndex.rawValue)
+                
+            } else {
+                if let currentIndex = AppArchiveder.shared().mmkv?.int32(forKey: ArchivedKey.currentWalletIndex.rawValue), currentIndex >= 0 {
+                    wallets = wallets.map { m in
+                        var nm = WalletModel(name: m.name, mnemoic: m.mnemoic, nickName: m.nickName, walletId: m.walletId)
+                        nm.isSelected = false
+                        return nm
+                    }
+                    var one = wallets[Int(currentIndex)]
+                    one.walletId = obj?.data?.walletId
+                    one.name = obj?.data?.nickName
+                    one.isSelected = isSelected
+                    wallets[Int(currentIndex)] = one
+                }
             }
             save()
         }).disposed(by: disposeBag)

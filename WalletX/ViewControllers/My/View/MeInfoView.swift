@@ -87,10 +87,10 @@ class MeInfoView: UIView {
     
     private func setupData() {
 
-        nameLabel.text = userInfo?.data?.nickName ?? "--"
+        nameLabel.text = userInfo?.data?.nickName ?? LocaleWalletManager.shared().userInfo?.data?.walletId
         let walletString = userInfo?.data?.walletId ?? "me_noCreate".toMultilingualism()
         walletLabel.text = "\("me_walletId".toMultilingualism()): \(walletString)"
-        let telegramString = userInfo?.data?.tg ?? "--"
+        let telegramString = userInfo?.data?.tg ?? "未设置".toMultilingualism()
         telegramLabel.text = "Telegram: \(telegramString)"
         avatarImageView.kf.setImage(with: URL(string: userInfo?.data?.headImage ?? ""))
         let levelString = "Lv\(userInfo?.data?.creditLevel ?? 1)"

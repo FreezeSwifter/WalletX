@@ -101,7 +101,7 @@ class MyViewController: UIViewController, HomeNavigationble {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        infoView.walletAddressDes.text = "\("Gmail邮箱".toMultilingualism()): \(LocaleWalletManager.shared().userInfo?.data?.email ?? "--")"
+        infoView.walletAddressDes.text = "\("Gmail邮箱".toMultilingualism()): \(LocaleWalletManager.shared().userInfo?.data?.email ?? "未绑定".toMultilingualism())"
     }
     
     override func viewDidLoad() {

@@ -77,6 +77,9 @@ extension HomeNavigationble where Self: UIViewController {
         guard let accountButton = headerView?.accountButton else {
             return
         }
+        if UIApplication.topViewController() is WalletManagementController {
+            return
+        }
         
         if LocaleWalletManager.shared().currentWalletModel == nil {
             accountButton.setTitle("未登录".toMultilingualism(), for: .normal)
