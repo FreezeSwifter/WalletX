@@ -36,11 +36,15 @@ final class LocaleWalletManager {
     }
     
     var currentWalletModel: WalletModel? {
-        let currentIndex = AppArchiveder.shared().mmkv?.int32(forKey: ArchivedKey.currentWalletIndex.rawValue) ?? 0
-        if wallets.isEmpty {
-            return nil
+        
+        if let currentIndex = AppArchiveder.shared().mmkv?.int32(forKey: ArchivedKey.currentWalletIndex.rawValue), currentIndex >= 0 {
+            if wallets.isEmpty {
+                return nil
+            } else {
+                return wallets[Int(currentIndex)]
+            }
         } else {
-            return wallets[Int(currentIndex)]
+            return nil
         }
     }
     
@@ -70,8 +74,7 @@ final class LocaleWalletManager {
     
     private init() {
         
-        if let walletList = fetchLocalWalletList() {
-            let currentIndex = AppArchiveder.shared().mmkv?.int32(forKey: ArchivedKey.currentWalletIndex.rawValue) ?? 0
+        if let walletList = fetchLocalWalletList(), let currentIndex = AppArchiveder.shared().mmkv?.int32(forKey: ArchivedKey.currentWalletIndex.rawValue), currentIndex >= 0 {
             let tempCurrentWalletModel = walletList[Int(currentIndex)]
             currentWallet = HDWallet(mnemonic: tempCurrentWalletModel.mnemoic ?? "", passphrase: "")
             walletDidChangedSubject.onNext(())
@@ -90,20 +93,21 @@ final class LocaleWalletManager {
         }
     }
     
+    @discardableResult
     func importWallet(mnemonic: String, walletName: String) -> String? {
         let res = HDWallet.isValid(mnemonic: mnemonic)
         if res {
-            
             if fetchLocalWalletList()?.contains(where: { $0.mnemoic == mnemonic }) ?? false {
                 return "钱包已存在本地".toMultilingualism()
+            } else {
+                currentWallet = HDWallet(mnemonic: mnemonic, passphrase: "")
+                TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
+                USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
+                fetchUserData(mnemonic: mnemonic, walletName: walletName)
+                
+                return nil
             }
             
-            currentWallet = HDWallet(mnemonic: mnemonic, passphrase: "")
-            TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
-            USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
-            fetchUserData(mnemonic: mnemonic, walletName: walletName)
-      
-            return nil
         } else {
             return "助记词输入有误".toMultilingualism()
         }
@@ -177,9 +181,9 @@ final class LocaleWalletManager {
         
         if list.isEmpty {
             AppArchiveder.shared().mmkv?.removeValue(forKey: ArchivedKey.walletList.rawValue)
-            AppArchiveder.shared().mmkv?.removeValue(forKey: ArchivedKey.currentWalletIndex.rawValue)
+            AppArchiveder.shared().mmkv?.set(Int32(-1), forKey: ArchivedKey.currentWalletIndex.rawValue)
             cleanNotFinishedProcess()
-            walletDidChangedSubject.onNext(())
+            UIApplication.topViewController()?.navigationController?.popToRootViewController(animated: true)
         } else {
             
             if let jsonData = try? JSONEncoder().encode(list) {
@@ -189,7 +193,14 @@ final class LocaleWalletManager {
             }
         }
         wallets = list
+        if let index = wallets.firstIndex(where: { m in
+            return wallets.first?.mnemoic == m.mnemoic
+        }) {
+            AppArchiveder.shared().mmkv?.set(Int32(index), forKey: ArchivedKey.currentWalletIndex.rawValue)
+        }
+        
         fetchUserData(mnemonic: nil, walletName: nil, isAdd: false)
+        walletDidChangedSubject.onNext(())
     }
     
     func cleanNotFinishedProcess() {
@@ -223,7 +234,9 @@ final class LocaleWalletManager {
         getUserInfoReq.subscribe(onNext: {[unowned self] obj in
             userInfo = obj
             if isAdd {
-                wallets.append(WalletModel(name: walletName, mnemoic: mnemonic, nickName: obj?.data?.nickName, walletId: obj?.data?.walletId))
+                let importOne = WalletModel(name: walletName, mnemoic: mnemonic, nickName: obj?.data?.nickName, walletId: obj?.data?.walletId)
+                wallets.insert(importOne, at: 0)
+                AppArchiveder.shared().mmkv?.set(Int32(0), forKey: ArchivedKey.currentWalletIndex.rawValue)
             }
             save()
         }).disposed(by: disposeBag)

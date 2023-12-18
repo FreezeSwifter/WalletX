@@ -153,6 +153,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
     @IBOutlet weak var tradeCompletedButton: QMUIButton! {
         didSet {
             tradeCompletedButton.setImage(UIImage(named: "me_checkbox2"), for: .selected)
+            tradeCompletedButton.setImage(UIImage(named: "me_checkbox1"), for: .normal)
             tradeCompletedButton.setTitle("交易结束".toMultilingualism(), for: .normal)
             tradeCompletedButton.spacingBetweenImageAndTitle = 10
         }
@@ -161,6 +162,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
     @IBOutlet weak var tradeCancelButton: QMUIButton! {
         didSet {
             tradeCancelButton.setImage(UIImage(named: "me_checkbox2"), for: .selected)
+            tradeCancelButton.setImage(UIImage(named: "me_checkbox1"), for: .normal)
             tradeCancelButton.setTitle("交易取消".toMultilingualism(), for: .normal)
             tradeCancelButton.spacingBetweenImageAndTitle = 10
         }
@@ -298,6 +300,10 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
             bottomRightButton.setupAPPUISolidStyle(title: "立即申请".toMultilingualism())
             textField1.text = nil
             textField2.text = nil
+            tradeCompletedButton.isSelected = true
+            tradeCancelButton.isSelected = false
+            tradeCancelButton.isEnabled = true
+            tradeCompletedButton.isEnabled = true
             
         case .handling:
             textField1.isUserInteractionEnabled = false
@@ -361,34 +367,36 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 self?.valueLabel4Sub.text = "\(obj?.data?.sponsorAmount ?? 0)"
                 self?.valueLabel5Sub.text = "\(obj?.data?.partnerAmount ?? 0)"
     
-                if obj?.data?.reason == 0 { // 交易结束
-                    if self?.state == .handling || self?.state == .revoke {
-                        self?.tradeCompletedButton.isEnabled = false
-                        self?.tradeCompletedButton.setImage(UIImage(named: "解压原因选中不可点击"), for: .normal)
-                        self?.tradeCancelButton.isEnabled = false
-                        self?.tradeCancelButton.setImage(UIImage(named: "解压原因未选中不可点击"), for: .normal)
+                if self?.state != .applyRelease {
+                    if obj?.data?.reason == 0 { // 交易结束
+                        if self?.state == .handling || self?.state == .revoke {
+                            self?.tradeCompletedButton.isEnabled = false
+                            self?.tradeCompletedButton.setImage(UIImage(named: "解压原因选中不可点击"), for: .normal)
+                            self?.tradeCancelButton.isEnabled = false
+                            self?.tradeCancelButton.setImage(UIImage(named: "解压原因未选中不可点击"), for: .normal)
+                        }
+                        self?.tradeCompletedButton.isSelected = true
+                    } else { // 交易取消
+                        if self?.state == .handling || self?.state == .revoke {
+                            self?.tradeCancelButton.isEnabled = false
+                            self?.tradeCancelButton.setImage(UIImage(named: "解压原因选中不可点击"), for: .normal)
+                            self?.tradeCompletedButton.isEnabled = false
+                            self?.tradeCompletedButton.setImage(UIImage(named: "解压原因未选中不可点击"), for: .normal)
+                        }
+                        self?.tradeCancelButton.isSelected = true
                     }
-                    self?.tradeCompletedButton.isSelected = true
-                } else { // 交易取消
-                    if self?.state == .handling || self?.state == .revoke {
-                        self?.tradeCancelButton.isEnabled = false
-                        self?.tradeCancelButton.setImage(UIImage(named: "解压原因选中不可点击"), for: .normal)
-                        self?.tradeCompletedButton.isEnabled = false
-                        self?.tradeCompletedButton.setImage(UIImage(named: "解压原因未选中不可点击"), for: .normal)
+                    
+                    if obj?.data?.sponsorReleasedAmount ?? 0 > 0 && (self?.state == .handling || self?.state == .revoke) {
+                        self?.accountButton1.setImage(UIImage(named: "收款账户选中不可点击"), for: .normal)
+                    } else {
+                        self?.accountButton1.setImage(UIImage(named: "收款账户未选中不可点击"), for: .normal)
                     }
-                    self?.tradeCancelButton.isSelected = true
-                }
-                
-                if obj?.data?.sponsorReleasedAmount ?? 0 > 0 && (self?.state == .handling || self?.state == .revoke) {
-                    self?.accountButton1.setImage(UIImage(named: "收款账户选中不可点击"), for: .normal)
-                } else {
-                    self?.accountButton1.setImage(UIImage(named: "收款账户未选中不可点击"), for: .normal)
-                }
-              
-                if obj?.data?.partnerReleasedAmount ?? 0 > 0 && (self?.state == .handling || self?.state == .revoke) {
-                    self?.accountButton2.setImage(UIImage(named: "收款账户选中不可点击"), for: .normal)
-                } else {
-                    self?.accountButton2.setImage(UIImage(named: "收款账户未选中不可点击"), for: .normal)
+                  
+                    if obj?.data?.partnerReleasedAmount ?? 0 > 0 && (self?.state == .handling || self?.state == .revoke) {
+                        self?.accountButton2.setImage(UIImage(named: "收款账户选中不可点击"), for: .normal)
+                    } else {
+                        self?.accountButton2.setImage(UIImage(named: "收款账户未选中不可点击"), for: .normal)
+                    }
                 }
                 
                 self?.accountButton1.setTitle("\("发起人".toMultilingualism())-\(obj?.data?.sponsorUserName ?? "--")", for: .normal)

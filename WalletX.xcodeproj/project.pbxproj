@@ -158,6 +158,7 @@
 		7A3B7DA12A9CAD180036199F /* ContactOtherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3B7DA02A9CAD180036199F /* ContactOtherController.swift */; };
 		7A3B7DA32A9CDC980036199F /* DepositingAlterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3B7DA22A9CDC980036199F /* DepositingAlterView.swift */; };
 		7A3B7DA52A9CDCC10036199F /* DepositingAlterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A3B7DA42A9CDCC10036199F /* DepositingAlterView.xib */; };
+		7A480FF52B30A5DC002F0D6E /* UITextFieldHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A480FF42B30A5DC002F0D6E /* UITextFieldHook.swift */; };
 		7A5866BD2A9F82C100925EEC /* ChangeNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5866BC2A9F82C100925EEC /* ChangeNameController.swift */; };
 		7A5866BF2A9FA3CA00925EEC /* SendTokenPageOneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5866BE2A9FA3CA00925EEC /* SendTokenPageOneController.swift */; };
 		7A5866C12A9FACDA00925EEC /* ReceiveTokenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5866C02A9FACDA00925EEC /* ReceiveTokenController.swift */; };
@@ -483,6 +484,7 @@
 		7A3B7DA02A9CAD180036199F /* ContactOtherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactOtherController.swift; sourceTree = "<group>"; };
 		7A3B7DA22A9CDC980036199F /* DepositingAlterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositingAlterView.swift; sourceTree = "<group>"; };
 		7A3B7DA42A9CDCC10036199F /* DepositingAlterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DepositingAlterView.xib; sourceTree = "<group>"; };
+		7A480FF42B30A5DC002F0D6E /* UITextFieldHook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldHook.swift; sourceTree = "<group>"; };
 		7A5866BC2A9F82C100925EEC /* ChangeNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNameController.swift; sourceTree = "<group>"; };
 		7A5866BE2A9FA3CA00925EEC /* SendTokenPageOneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTokenPageOneController.swift; sourceTree = "<group>"; };
 		7A5866C02A9FACDA00925EEC /* ReceiveTokenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveTokenController.swift; sourceTree = "<group>"; };
@@ -1001,6 +1003,7 @@
 				7AFB57A72A95D53A003451CB /* UIViewController+Rx.swift */,
 				7AC555202A949EB90082A070 /* ArchivedKey.swift */,
 				7AA505AF2AA143C400BCE403 /* LocaleWalletManager.swift */,
+				7A480FF42B30A5DC002F0D6E /* UITextFieldHook.swift */,
 			);
 			path = APPConfiguration;
 			sourceTree = "<group>";
@@ -2033,6 +2036,7 @@
 				7AD08BDD2A8A083B000B247E /* DictionaryExtension.swift in Sources */,
 				7AD08BC52A8A083B000B247E /* UITextViewExtension.swift in Sources */,
 				7AD08BBB2A8A083B000B247E /* UIImageExtension.swift in Sources */,
+				7A480FF52B30A5DC002F0D6E /* UITextFieldHook.swift in Sources */,
 				7AB377572A862E2B005BD1CB /* FSPagerViewLayoutAttributes.swift in Sources */,
 				7A000E122AA84F4600FA1817 /* Hashable.swift in Sources */,
 				7A000DDE2AA84F4600FA1817 /* ChaCha20+Foundation.swift in Sources */,
@@ -2379,7 +2383,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.j.creator.WalletX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AdHocTesting-4";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AdHocTesting-6";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "WalletX/APPConfiguration/WalletX-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2423,7 +2427,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.j.creator.WalletX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AdHocTesting-4";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AdHocTesting-6";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "WalletX/APPConfiguration/WalletX-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

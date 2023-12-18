@@ -14,6 +14,15 @@ import SwiftDate
 import NSObject_Rx
 
 @main
+struct MyAPP {
+    static func main() {
+        UITextField.swizzleMethod
+        UIApplicationMain(CommandLine.argc, CommandLine.unsafeArgv, nil, NSStringFromClass(AppDelegate.self))
+    }
+    
+}
+
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?

@@ -239,6 +239,15 @@ class DepositingDetailController: UIViewController {
     
     @IBOutlet weak var valueLabel2Status: UILabel!
     
+    @IBOutlet weak var customerServiceLabel: UILabel! {
+        didSet {
+            customerServiceLabel.text = "客服".toMultilingualism()
+            customerServiceLabel.minimumScaleFactor = 0.5
+            customerServiceLabel.adjustsFontSizeToFitWidth = true
+            customerServiceLabel.textColor = ColorConfiguration.blackText.toColor()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -318,7 +327,6 @@ class DepositingDetailController: UIViewController {
             let vc: SendTokenPageTwoController = ViewLoader.Storyboard.controller(from: "Wallet")
             vc.model = LocaleWalletManager.shared().USDT
             vc.toAddress = model?.pushAddress
-            vc.toAddress = model?.multisigAddress
             vc.sendCount = addrtessField.text
             vc.defaultMaxTotal = "20"
             vc.defaultNetworkFee = "10"

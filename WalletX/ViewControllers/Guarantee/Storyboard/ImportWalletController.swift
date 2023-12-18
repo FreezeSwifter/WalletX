@@ -16,25 +16,6 @@ import Action
 
 class ImportWalletController: UIViewController, HomeNavigationble {
     
-    @IBOutlet weak var nameLabel: UILabel! {
-        didSet {
-            nameLabel.text = "名称".toMultilingualism()
-        }
-    }
-    
-    @IBOutlet weak var textFieldBg: UIView! {
-        didSet {
-            textFieldBg.applyCornerRadius(7)
-        }
-    }
-    
-    @IBOutlet weak var textField: UITextField! {
-        didSet {
-            textField.placeholder = "钱包名称".toMultilingualism()
-            textField.keyboardType = .default
-        }
-    }
-    
     @IBOutlet weak var mnemonicLabel: UILabel! {
         didSet {
             mnemonicLabel.text = "助记词".toMultilingualism()
@@ -103,13 +84,19 @@ class ImportWalletController: UIViewController, HomeNavigationble {
             guard let res = this.textView.text else {
                 return
             }
-            let message = LocaleWalletManager.shared().importWallet(mnemonic: res, walletName: self?.textField.text ?? "")
-            if message.isNilOrEmpty {
-                this.navigationController?.popToRootViewController(animated: true)
-            } else {
-                NotiAlterView.show(title: message, content: nil, leftButtonTitle: nil, rightButtonTitle: "知道啦".toMultilingualism()).subscribe(onNext: { _ in
-                }).disposed(by: this.rx.disposeBag)
+            let msg = LocaleWalletManager.shared().importWallet(mnemonic: res, walletName: "")
+            if msg.isNotNilNotEmpty {
+                APPHUD.flash(text: msg)
+                return
             }
+            
+            GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: "恭喜添加账户".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "现在您可以探索优宝钱包啦".toMultilingualism(), leftButton: nil, rightButton: "立即体验".toMultilingualism()).subscribe { index in
+                if index == 1 {
+                    self?.navigationController?.popToRootViewController(animated: true)
+                }
+            }.disposed(by: this.rx.disposeBag)
+            
+            
         }).disposed(by: rx.disposeBag)
     }
     

@@ -304,6 +304,7 @@ class GuaranteeingCell: UITableViewCell {
     
     
     func setupData(data: GuaranteeInfoModel.Meta) {
+        
         model = data
         valueLabel1.text = data.assureId
         valueLabel2.text = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 ).toFormat("yyyy-MM-dd HH:mm:ss")
@@ -353,7 +354,7 @@ class GuaranteeingCell: UITableViewCell {
             buttonStackView.addArrangedSubview(button1)
             buttonStackView.addArrangedSubview(button2)
             button1.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
-            button2.setupAPPUISolidStyle(title: "申请解押".toMultilingualism())
+            button2.setupAPPUIHollowStyle(title: "申请解押".toMultilingualism())
             valueLabel1Status.text = "担保中".toMultilingualism()
             
         } else if data.assureStatus == 9 { // 退押中
