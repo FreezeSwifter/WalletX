@@ -92,7 +92,7 @@ class MeInfoView: UIView {
         walletLabel.text = "\("me_walletId".toMultilingualism()): \(walletString)"
         let telegramString = userInfo?.data?.tg ?? "未设置".toMultilingualism()
         telegramLabel.text = "Telegram: \(telegramString)"
-        avatarImageView.kf.setImage(with: URL(string: userInfo?.data?.headImage ?? ""))
+        avatarImageView.kf.setImage(with: URL(string: userInfo?.data?.headImage ?? ""), placeholder: UIImage(named: "logo"))
         let levelString = "Lv\(userInfo?.data?.creditLevel ?? 1)"
         levelLabel.text = levelString
     }
