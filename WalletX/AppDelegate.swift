@@ -23,12 +23,15 @@ struct MyAPP {
 }
 
 
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
     
     var window: UIWindow?
     private var serviceInfo: String?
     
-    private let tabBarViewController = QMUITabBarViewController()
+    private var tabBarViewController: QMUITabBarViewController = {
+        let tabbarVC = QMUITabBarViewController()
+        return tabbarVC
+    }()
     private let messageDataSubject = BehaviorRelay<[MessageListModel]?>(value: nil)
     
     var messageData: Observable<[MessageListModel]?> {
@@ -125,6 +128,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = .white
         window?.makeKeyAndVisible()
     }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if tabBarController.selectedIndex == 2 || tabBarController.selectedIndex == 3 {
+            if !LocaleWalletManager.shared().hasWallet {
+                tabBarController.selectedIndex = 0
+                GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_yes_no"), title: "需要先创建或导入钱包".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "首页弹窗1".toMultilingualism(), leftButton: "home_after_button".toMultilingualism(), rightButton: "home_gonow_button".toMultilingualism()).subscribe(onNext: { index in                    if index == 1 {
+                        tabBarController.selectedIndex = 1
+                    }
+                }).disposed(by: rx.disposeBag)
+            }
+        }
+    }
 }
 
 private
@@ -147,6 +162,7 @@ extension AppDelegate {
         IQKeyboardManager.shared().shouldResignOnTouchOutside = true
         IQKeyboardManager.shared().shouldShowToolbarPlaceholder = false
         
+        tabBarViewController.delegate = self
         setupWindow()
         
         LocaleWalletManager.shared()
@@ -179,15 +195,7 @@ extension AppDelegate {
     }
     
     func autoLogin() {
-        let req: Observable<LoginModel?> = APIProvider.rx.request(.login(walletAddr: LocaleWalletManager.shared().TRON?.address ?? "")).mapModel()
-        req.subscribe(onNext: {[weak self] model in
-            
-            guard let addressKey = LocaleWalletManager.shared().TRON?.address?.md5() else { return }
-            guard let jsonString = model?.toJSONString() else { return }
-            AppArchiveder.shared().mmkv?.set(jsonString, forKey: addressKey)
-            self?.fetchMessage()
-            NotificationCenter.default.post(name: .loginSuccessful, object: nil)
-        }).disposed(by: rx.disposeBag)
+        LocaleWalletManager.shared().autoLogin()
     }
     
     func checkFaceId() {

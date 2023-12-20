@@ -118,18 +118,19 @@ final class LocaleWalletManager {
         let newMnemoic = wallet.mnemonic
         
         if var originalArray = fetchLocalWalletList() {
-            let walletModel = WalletModel(name: "Wallet\(originalArray.count - 1)", mnemoic: newMnemoic)
-            originalArray.append(walletModel)
+            let walletModel = WalletModel(name: nil, mnemoic: newMnemoic)
+            originalArray.insert(walletModel, at: 0)
             wallets = originalArray
             
         } else {
-            let array = [WalletModel(name: "Wallet", mnemoic: newMnemoic, nickName: nil, walletId: nil)]
+            let array = [WalletModel(name: nil, mnemoic: newMnemoic, nickName: nil, walletId: nil)]
             wallets = array
         }
         
         currentWallet = wallet
         TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
         USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
+        fetchUserData(mnemonic: newMnemoic, walletName: nil, isAdd: false, isSelected: true)
         
         return newMnemoic
     }
@@ -159,7 +160,7 @@ final class LocaleWalletManager {
     func didSelectedWallet(index: Int) {
         AppArchiveder.shared().mmkv?.set(Int32(index), forKey: ArchivedKey.currentWalletIndex.rawValue)
         guard let list = fetchLocalWalletList(), list.count != 0 else { return }
-        var currentModel = list[index]
+        let currentModel = list[index]
         currentWallet = HDWallet(mnemonic: currentModel.mnemoic ?? "", passphrase: "")
         TRON = .tron(currentWallet?.getAddressForCoin(coin: .tron))
         USDT = .usdt(currentWallet?.getAddressForCoin(coin: .tron))
@@ -228,35 +229,50 @@ final class LocaleWalletManager {
     
     // 获取用户数据
     func fetchUserData(mnemonic: String?, walletName: String?, isAdd: Bool = true, isSelected: Bool = false) {
-        let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
-        getUserInfoReq.subscribe(onNext: {[unowned self] obj in
-            userInfo = obj
-            if isAdd {
-                var importOne = WalletModel(name: walletName, mnemoic: mnemonic, nickName: obj?.data?.nickName, walletId: obj?.data?.walletId)
-                wallets = wallets.map { m in
-                    var nm = WalletModel(name: m.name, mnemoic: m.mnemoic, nickName: m.nickName, walletId: m.walletId)
-                    nm.isSelected = false
-                    return nm
-                }
-                importOne.isSelected = true
-                wallets.insert(importOne, at: 0)
-                AppArchiveder.shared().mmkv?.set(Int32(0), forKey: ArchivedKey.currentWalletIndex.rawValue)
-                
-            } else {
-                if let currentIndex = AppArchiveder.shared().mmkv?.int32(forKey: ArchivedKey.currentWalletIndex.rawValue), currentIndex >= 0 {
+        
+        func fetUserInfo() {
+            let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
+            getUserInfoReq.subscribe(onNext: {[unowned self] obj in
+                userInfo = obj
+                if isAdd {
+                    var importOne = WalletModel(name: walletName, mnemoic: mnemonic, nickName: obj?.data?.nickName, walletId: obj?.data?.walletId)
                     wallets = wallets.map { m in
-                        var nm = WalletModel(name: m.name, mnemoic: m.mnemoic, nickName: m.nickName, walletId: m.walletId)
+                        var nm = WalletModel(name: m.nickName, mnemoic: m.mnemoic, nickName: m.nickName, walletId: m.walletId)
                         nm.isSelected = false
                         return nm
                     }
-                    var one = wallets[Int(currentIndex)]
-                    one.walletId = obj?.data?.walletId
-                    one.name = obj?.data?.nickName
-                    one.isSelected = isSelected
-                    wallets[Int(currentIndex)] = one
+                    importOne.isSelected = true
+                    wallets.insert(importOne, at: 0)
+                    AppArchiveder.shared().mmkv?.set(Int32(0), forKey: ArchivedKey.currentWalletIndex.rawValue)
+                    
+                } else {
+                    if let currentIndex = AppArchiveder.shared().mmkv?.int32(forKey: ArchivedKey.currentWalletIndex.rawValue), currentIndex >= 0 {
+                        wallets = wallets.map { m in
+                            var nm = WalletModel(name: m.name, mnemoic: m.mnemoic, nickName: m.nickName, walletId: m.walletId)
+                            nm.isSelected = false
+                            return nm
+                        }
+                        if wallets.isNotEmpty {
+                            var one = wallets[Int(currentIndex)]
+                            one.walletId = obj?.data?.walletId
+                            one.name = obj?.data?.nickName
+                            one.isSelected = isSelected
+                            wallets[Int(currentIndex)] = one
+                        }
+                    }
                 }
-            }
-            save()
+                save()
+            }).disposed(by: disposeBag)
+        }
+        
+        let loginReq: Observable<LoginModel?> = APIProvider.rx.request(.login(walletAddr: LocaleWalletManager.shared().TRON?.address ?? "")).mapModel()
+        
+        loginReq.subscribe(onNext: { model in
+            guard let addressKey = LocaleWalletManager.shared().TRON?.address?.md5() else { return }
+            guard let jsonString = model?.toJSONString() else { return }
+            AppArchiveder.shared().mmkv?.set(jsonString, forKey: addressKey)
+            NotificationCenter.default.post(name: .loginSuccessful, object: nil)
+            fetUserInfo()
         }).disposed(by: disposeBag)
     }
     
@@ -331,8 +347,16 @@ final class LocaleWalletManager {
             
             return Disposables.create {}
         }
-        
-      
+    }
+    
+    func autoLogin() {
+        let req: Observable<LoginModel?> = APIProvider.rx.request(.login(walletAddr: LocaleWalletManager.shared().TRON?.address ?? "")).mapModel()
+        req.subscribe(onNext: { model in
+            guard let addressKey = LocaleWalletManager.shared().TRON?.address?.md5() else { return }
+            guard let jsonString = model?.toJSONString() else { return }
+            AppArchiveder.shared().mmkv?.set(jsonString, forKey: addressKey)
+            NotificationCenter.default.post(name: .loginSuccessful, object: nil)
+        }).disposed(by: disposeBag)
     }
 }
 

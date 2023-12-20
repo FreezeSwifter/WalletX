@@ -95,7 +95,11 @@ extension HomeNavigationble where Self: UIViewController {
 
 class HomeNavigationBarView: UIView {
     
-    @IBOutlet weak var messageButton: UIButton!
+    @IBOutlet weak var messageButton: UIButton! {
+        didSet {
+            messageButton.removeFromSuperview()
+        }
+    }
     @IBOutlet weak var accountButton: QMUIButton! {
         didSet {
             accountButton.setImage(UIImage(named: "导航栏下箭头"), for: .normal)

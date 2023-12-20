@@ -132,6 +132,9 @@ extension WalletManagementController: UITableViewDataSource, UITableViewDelegate
         if item.walletId.isNotNilNotEmpty {
             cell.nameLabel.text = item.walletId
         }
+        if item.name.isNotNilNotEmpty {
+            cell.nameLabel.text = item.name
+        }
         if item.nickName.isNotNilNotEmpty {
             cell.nameLabel.text = item.nickName
         }
