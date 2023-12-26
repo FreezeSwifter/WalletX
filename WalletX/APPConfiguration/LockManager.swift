@@ -48,11 +48,11 @@ class LockManager: NSObject {
     }
     
     private(set) var data: [Item] = [
-        Item(name: "立即", value: 0),
-        Item(name: "1分钟", value: 1),
-        Item(name: "5分钟", value: 5),
-        Item(name: "1小时", value: 60),
-        Item(name: "5小时", value: 300),
+        Item(name: "立即".toMultilingualism(), value: 0),
+        Item(name: "1分钟".toMultilingualism(), value: 1),
+        Item(name: "5分钟".toMultilingualism(), value: 5),
+        Item(name: "1小时".toMultilingualism(), value: 60),
+        Item(name: "5小时".toMultilingualism(), value: 300),
     ]
     
     private override init() {

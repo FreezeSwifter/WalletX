@@ -293,4 +293,9 @@
     "自动锁定": "Auto Lock",
     "锁定方法": "Locking Way",
     "Face ID": "Face ID",
+    "立即": "Immediately",
+    "1分钟": "1 minute",
+    "5分钟": "5 minutes",
+    "1小时": "1 hour",
+    "5小时": "5 hour",
 }
