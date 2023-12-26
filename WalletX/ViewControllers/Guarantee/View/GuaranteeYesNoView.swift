@@ -68,7 +68,7 @@ class GuaranteeYesNoView: UIView {
     }
     
     
-    public static func showFromBottom(image: UIImage?, title: String?, titleIcon: UIImage?, content: String?, leftButton: String?, rightButton: String?) -> Observable<Int> {
+    public static func showFromBottom(image: UIImage?, title: String?, titleIcon: UIImage?, content: String?, leftButton: String?, rightButton: String?, textAlignment: NSTextAlignment = .left) -> Observable<Int> {
         
         return Observable.create { o in
             
@@ -108,6 +108,7 @@ class GuaranteeYesNoView: UIView {
                 it.applyCornerRadius(10, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
                 it.notiLabel.text = title
                 it.contentLabel.text = content
+                it.contentLabel.textAlignment = textAlignment
                 it.imageView.image = image
                 it.titleIcon.image = titleIcon
                 

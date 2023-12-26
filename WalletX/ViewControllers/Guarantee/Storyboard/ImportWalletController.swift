@@ -90,7 +90,7 @@ class ImportWalletController: UIViewController, HomeNavigationble {
                 return
             }
             
-            GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: "恭喜添加账户".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "现在您可以探索优宝钱包啦".toMultilingualism(), leftButton: nil, rightButton: "立即体验".toMultilingualism()).subscribe { index in
+            GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: "恭喜添加账户".toMultilingualism(), titleIcon: UIImage(named: "guarantee_bulb"), content: "现在您可以探索优宝钱包啦".toMultilingualism(), leftButton: nil, rightButton: "立即体验".toMultilingualism(), textAlignment: .center).subscribe { index in
                 if index == 1 {
                     self?.navigationController?.popToRootViewController(animated: true)
                 }

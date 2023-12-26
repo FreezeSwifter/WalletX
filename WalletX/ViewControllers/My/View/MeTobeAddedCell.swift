@@ -297,12 +297,11 @@ class MeTobeAddedCell: UITableViewCell {
         }
         tagLabel.text = data.assureTypeToString()
         if data.assureStatus == 0 || data.assureStatus == 5 { // 待加入
-            
+            stateLabel.backgroundColor = UIColor(hex: "#40BCFC").withAlphaComponent(0.1)
+            stateLabel.textColor = UIColor(hex: "#40BCFC")
+            stateLabel.text = "me_pending".toMultilingualism()
             if data.assureStatus == 5 { // 待加入超时
                 buttonStackView.isHidden = true
-                stateLabel.backgroundColor = UIColor(hex: "#FF5966").withAlphaComponent(0.1)
-                stateLabel.textColor = UIColor(hex: "#FF5966")
-                stateLabel.text = "已超时".toMultilingualism()
                 timeIcon.image = UIImage(named: "me_overtime")
                 time.textColor = UIColor(hex: "#FF5966")
                 time.text = "已超时".toMultilingualism()
@@ -311,14 +310,10 @@ class MeTobeAddedCell: UITableViewCell {
                     v.removeFromSuperview()
                 }
                 timerLabel?.removeFromSuperview()
-                
             } else {
-                stateLabel.backgroundColor = UIColor(hex: "#40BCFC").withAlphaComponent(0.1)
-                stateLabel.textColor = UIColor(hex: "#40BCFC")
-                stateLabel.text = "me_pending".toMultilingualism()
                 timeIcon.image = UIImage(named: "me_time")
                 time.textColor = ColorConfiguration.descriptionText.toColor()
-                time.text = "待加入".toMultilingualism()
+                time.text = "me_pending".toMultilingualism()
                 waitingDesLabel.text = "等待加入中".toMultilingualism()
                 buttonStackView.isHidden = false
                 let createTime = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 )
@@ -343,7 +338,7 @@ class MeTobeAddedCell: UITableViewCell {
                 buttonStackView.isHidden = true
                 stateLabel.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
                 stateLabel.textColor = UIColor(hex: "#F0A158")
-                stateLabel.text = "已超时".toMultilingualism()
+                stateLabel.text = "me_depositing".toMultilingualism()
                 timeIcon.image = UIImage(named: "me_overtime")
                 time.textColor = UIColor(hex: "#FF5966")
                 time.text = "已超时".toMultilingualism()
@@ -357,7 +352,7 @@ class MeTobeAddedCell: UITableViewCell {
                 buttonStackView.isHidden = true
                 stateLabel.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
                 stateLabel.textColor = UIColor(hex: "#F0A158")
-                stateLabel.text = "已超时".toMultilingualism()
+                stateLabel.text = "me_depositing".toMultilingualism()
                 timeIcon.image = UIImage(named: "me_overtime")
                 time.textColor = UIColor(hex: "#FF5966")
                 time.text = "已超时".toMultilingualism()
@@ -434,8 +429,6 @@ class MeTobeAddedCell: UITableViewCell {
             }
             timerLabel?.removeFromSuperview()
         }
-        // 待加入和待上押超时不显示已超时状态
-        stateLabel.isHidden = (data.assureStatus == 5 || data.assureStatus == 7)
     }
     
     @objc
