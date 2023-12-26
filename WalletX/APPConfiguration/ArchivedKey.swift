@@ -16,6 +16,8 @@ enum ArchivedKey: String {
     case walletList
     case ratePopup
     case appconfigs
+    case autolock
+    case lastLockTime
 }
 
 final class AppArchiveder {

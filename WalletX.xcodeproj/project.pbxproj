@@ -167,6 +167,9 @@
 		7A647F402A8C85A800A4A56F /* MessageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A647F3E2A8C85A800A4A56F /* MessageListCell.xib */; };
 		7A647F432A8C91BE00A4A56F /* MeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A647F422A8C91BE00A4A56F /* MeInfoView.swift */; };
 		7A647F452A8C91F700A4A56F /* MeInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A647F442A8C91F700A4A56F /* MeInfoView.xib */; };
+		7A6E584F2B3B15B1008ED114 /* SelectedLockTimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E584D2B3B15B1008ED114 /* SelectedLockTimeController.swift */; };
+		7A6E58502B3B15B1008ED114 /* SelectedLockTimeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A6E584E2B3B15B1008ED114 /* SelectedLockTimeController.xib */; };
+		7A6E58522B3B1774008ED114 /* LockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E58512B3B1774008ED114 /* LockManager.swift */; };
 		7A7D4DB22A84A19B0098262F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7D4DB12A84A19B0098262F /* AppDelegate.swift */; };
 		7A7D4DB92A84A19B0098262F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A7D4DB72A84A19B0098262F /* Main.storyboard */; };
 		7A7D4DBB2A84A19D0098262F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A7D4DBA2A84A19D0098262F /* Assets.xcassets */; };
@@ -493,6 +496,9 @@
 		7A647F3E2A8C85A800A4A56F /* MessageListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageListCell.xib; sourceTree = "<group>"; };
 		7A647F422A8C91BE00A4A56F /* MeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeInfoView.swift; sourceTree = "<group>"; };
 		7A647F442A8C91F700A4A56F /* MeInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeInfoView.xib; sourceTree = "<group>"; };
+		7A6E584D2B3B15B1008ED114 /* SelectedLockTimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedLockTimeController.swift; sourceTree = "<group>"; };
+		7A6E584E2B3B15B1008ED114 /* SelectedLockTimeController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedLockTimeController.xib; sourceTree = "<group>"; };
+		7A6E58512B3B1774008ED114 /* LockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockManager.swift; sourceTree = "<group>"; };
 		7A7D4DAE2A84A19B0098262F /* WalletX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A7D4DB12A84A19B0098262F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A7D4DB82A84A19B0098262F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -1004,6 +1010,7 @@
 				7AC555202A949EB90082A070 /* ArchivedKey.swift */,
 				7AA505AF2AA143C400BCE403 /* LocaleWalletManager.swift */,
 				7A480FF42B30A5DC002F0D6E /* UITextFieldHook.swift */,
+				7A6E58512B3B1774008ED114 /* LockManager.swift */,
 			);
 			path = APPConfiguration;
 			sourceTree = "<group>";
@@ -1721,6 +1728,8 @@
 				7AFB57AA2A95D73F003451CB /* ShareViewController.xib */,
 				418463322B1C590D00EBB376 /* AccountSettingViewController.swift */,
 				41D5F9A62B221F15000FAC2D /* PayHandlingFeeViewController.swift */,
+				7A6E584D2B3B15B1008ED114 /* SelectedLockTimeController.swift */,
+				7A6E584E2B3B15B1008ED114 /* SelectedLockTimeController.xib */,
 			);
 			path = Guarantee;
 			sourceTree = "<group>";
@@ -1839,6 +1848,7 @@
 				7A3AB1632AAB4B0D001C0D5B /* ServiceProviderHeaderView.xib in Resources */,
 				7A3B7D9D2A9CA3AA0036199F /* ChangeMoneyAlterVIew.xib in Resources */,
 				7AFB57AC2A95D73F003451CB /* ShareViewController.xib in Resources */,
+				7A6E58502B3B15B1008ED114 /* SelectedLockTimeController.xib in Resources */,
 				7A647F452A8C91F700A4A56F /* MeInfoView.xib in Resources */,
 				7AC555252A94B2270082A070 /* FaceIDViewController.xib in Resources */,
 				7A26EE832AA9B4BF005BF1AF /* SettingModifyAlterView.xib in Resources */,
@@ -2014,6 +2024,7 @@
 				7A000E2B2AA8537800FA1817 /* NetworkManager.swift in Sources */,
 				7A000DD32AA84F4500FA1817 /* RSA.swift in Sources */,
 				7A000DBA2AA84F4500FA1817 /* ASN1Decoder.swift in Sources */,
+				7A6E58522B3B1774008ED114 /* LockManager.swift in Sources */,
 				7A3AB1622AAB4B0D001C0D5B /* ServiceProviderHeaderView.swift in Sources */,
 				7A000E1F2AA84F4600FA1817 /* CS.swift in Sources */,
 				7AF2BCED2A9DB32C0067C8A2 /* DepositingDetailController.swift in Sources */,
@@ -2028,6 +2039,7 @@
 				7AF15A152A85023300C48F39 /* MessageViewController.swift in Sources */,
 				7AD08BD42A8A083B000B247E /* URLExtension.swift in Sources */,
 				7AD08A822A89FAE8000B247E /* ColorConfiguration.swift in Sources */,
+				7A6E584F2B3B15B1008ED114 /* SelectedLockTimeController.swift in Sources */,
 				7AFB57A62A95D512003451CB /* UIApplication+Rx.swift in Sources */,
 				7A000E1A2AA84F4600FA1817 /* Division.swift in Sources */,
 				7A831C632A9F6B1D0086B540 /* WalletSignatureCell.swift in Sources */,
@@ -2427,7 +2439,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.j.creator.WalletX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AdHocTesting-7";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AdHocTesting-6";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "WalletX/APPConfiguration/WalletX-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

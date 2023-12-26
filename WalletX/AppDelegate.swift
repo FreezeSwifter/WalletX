@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }()
     private let messageDataSubject = BehaviorRelay<[MessageListModel]?>(value: nil)
     
+    
     var messageData: Observable<[MessageListModel]?> {
         return messageDataSubject.asObservable()
     }
@@ -140,6 +141,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             }
         }
     }
+    
+    func checkFaceId() {
+        
+        if let isOpenLock = AppArchiveder.shared().mmkv?.bool(forKey: ArchivedKey.screenLock.rawValue), isOpenLock {
+            if let timeStr = UserDefaults.standard.string(forKey: ArchivedKey.lastLockTime.rawValue), let lastTime = timeStr.toDate(style: .custom("yyyy-MM-dd HH:mm:ss")) {
+                let endTime = lastTime + LockManager.shareInstance.currentItem.value.minutes
+                if endTime.isInPast && !(AppDelegate.topViewController() is ScanViewController) {
+                    let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
+                    faceIdVC.modalPresentationStyle = .fullScreen
+                    AppDelegate.topViewController()?.present(faceIdVC, animated: true)
+                    let time = Date().string(format: "yyyy-MM-dd HH:mm:ss")
+                    UserDefaults.standard.setValue(time, forKeyPath: ArchivedKey.lastLockTime.rawValue)
+                    UserDefaults.standard.synchronize()
+                }
+            }
+        }
+    }
+    
 }
 
 private
@@ -166,10 +185,9 @@ extension AppDelegate {
         setupWindow()
         
         LocaleWalletManager.shared()
-        
+        checkFaceId()
         setupObserver()
         autoLogin()
-        checkFaceId()
         fetchAPPConfig()
         fetchContactServiceInfo()
     }
@@ -192,18 +210,17 @@ extension AppDelegate {
             this.autoLogin()
         }).disposed(by: rx.disposeBag)
         
+        UIApplication.shared.rx.applicationWillResignActive.subscribe(onNext: { _ in
+            
+            let time = Date().string(format: "yyyy-MM-dd HH:mm:ss")
+            UserDefaults.standard.setValue(time, forKeyPath: ArchivedKey.lastLockTime.rawValue)
+            UserDefaults.standard.synchronize()
+            
+        }).disposed(by: rx.disposeBag)
     }
     
     func autoLogin() {
         LocaleWalletManager.shared().autoLogin()
-    }
-    
-    func checkFaceId() {
-        if let isOpenLock = AppArchiveder.shared().mmkv?.bool(forKey: ArchivedKey.screenLock.rawValue), isOpenLock {
-            let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
-            faceIdVC.modalPresentationStyle = .fullScreen
-            AppDelegate.topViewController()?.present(faceIdVC, animated: true)
-        }
     }
     
     func fetchAPPConfig() {

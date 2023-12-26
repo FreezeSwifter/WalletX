@@ -290,4 +290,7 @@
     "客服": "Customer Service",
     "未绑定": "Unbound",
     "未设置": "NotSet",
+    "自动锁定": "Auto Lock",
+    "锁定方法": "Locking Way",
+    "Face ID": "Face ID",
 }

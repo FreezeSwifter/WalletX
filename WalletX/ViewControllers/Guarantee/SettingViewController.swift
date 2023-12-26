@@ -46,7 +46,7 @@ class SettingViewController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var languageValueLabel: UILabel! {
         didSet {
-            languageValueLabel.textColor = ColorConfiguration.descriptionText.toColor()
+            languageValueLabel.textColor = ColorConfiguration.blackText.toColor()
             languageValueLabel.text = LanguageManager.shared().currentCode.toDisplayText()
         }
     }
@@ -54,31 +54,18 @@ class SettingViewController: UIViewController, HomeNavigationble {
     @IBOutlet weak var contactDesLabel: UILabel! {
         didSet {
             contactDesLabel.textColor = ColorConfiguration.blackText.toColor()
-            contactDesLabel.text = "home_setting_Contact".toMultilingualism()
+            contactDesLabel.text = "自动锁定".toMultilingualism()
         }
     }
     
     @IBOutlet weak var contactValueLabel: UILabel! {
         didSet {
-            contactValueLabel.textColor = ColorConfiguration.descriptionText.toColor()
+            contactValueLabel.textColor = ColorConfiguration.blackText.toColor()
             contactValueLabel.text = nil
         }
     }
     
-    @IBOutlet weak var nicknameDesLabel: UILabel! {
-        didSet {
-            nicknameDesLabel.textColor = ColorConfiguration.blackText.toColor()
-            nicknameDesLabel.text = "home_setting_Nickname".toMultilingualism()
-        }
-    }
-    
-    @IBOutlet weak var nicknameValueLabel: UILabel! {
-        didSet {
-            nicknameValueLabel.textColor = ColorConfiguration.descriptionText.toColor()
-            nicknameValueLabel.text = nil
-        }
-    }
-    
+
     @IBOutlet weak var lockSwitch: UISwitch! {
         didSet {
             if let isOpen = AppArchiveder.shared().mmkv?.bool(forKey: ArchivedKey.screenLock.rawValue) {
@@ -87,12 +74,27 @@ class SettingViewController: UIViewController, HomeNavigationble {
         }
     }
     
+    @IBOutlet weak var lockWayDesLabel: UILabel! {
+        didSet {
+            lockWayDesLabel.text = "锁定方法".toMultilingualism()
+        }
+    }
+    
+    @IBOutlet weak var lockWayValue: UILabel! {
+        didSet {
+            lockWayValue.text = "Face ID".toMultilingualism()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         bind()
-        fetchUserInfo()
+        
+        LockManager.shareInstance.rx.observeWeakly(Int.self, "currentIndex").subscribe(onNext: {[unowned self] _ in
+            contactValueLabel.text = LockManager.shareInstance.currentItem.name
+        }).disposed(by: rx.disposeBag)
     }
     
     private func bind() {
@@ -104,7 +106,6 @@ class SettingViewController: UIViewController, HomeNavigationble {
             self?.headerView?.titleLabel.text = "home_setting".toMultilingualism()
             self?.languageDesLabel.text = "home_setting_Language".toMultilingualism()
             self?.contactDesLabel.text = "home_setting_Contact".toMultilingualism()
-            self?.nicknameDesLabel.text = "home_setting_Nickname".toMultilingualism()
         }).disposed(by: rx.disposeBag)
     }
     
@@ -117,14 +118,7 @@ class SettingViewController: UIViewController, HomeNavigationble {
         
         topPadding.constant = headerView!.height + UIApplication.shared.statusBarFrame.size.height
     }
-    
-    private func fetchUserInfo() {
-        let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
-        getUserInfoReq.subscribe(onNext: {[weak self] obj in
-            self?.nicknameValueLabel.text = obj?.data?.nickName
-        }).disposed(by: rx.disposeBag)
-    }
-    
+
     @IBAction func switchTap(_ sender: UISwitch) {
         let context = LAContext()
         var error: NSError?
@@ -152,40 +146,8 @@ class SettingViewController: UIViewController, HomeNavigationble {
     }
     
     @IBAction func contactTap(_ sender: UIControl) {
-        let contactVC: SettingChildViewController2 = ViewLoader.Xib.controller()
+        let contactVC: SelectedLockTimeController = ViewLoader.Xib.controller()
         navigationController?.pushViewController(contactVC, animated: true)
-    }
-    
-    @IBAction func changeNickNameTap(_ sender: UIControl) {
-        
-        func filterSpecialCharactersAndEmojis(from string: String) -> String {
-            do {
-                let regex = try NSRegularExpression(pattern: "[^a-zA-Z0-9\\s]", options: .caseInsensitive)
-                let range = NSMakeRange(0, string.count)
-                let filteredString = regex.stringByReplacingMatches(in: string, options: [], range: range, withTemplate: "")
-                return filteredString
-            } catch {
-                print("Error creating regular expression: \(error)")
-                return string
-            }
-        }
-        
-        SettingModifyAlterView.show(title: "home_setting_Nickname".toMultilingualism(), text: nil, placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
-            
-            guard let text = str, text.isNotEmpty else {
-                return Observable<Any>.empty()
-            }
-            let filteredString = filterSpecialCharactersAndEmojis(from: text)
-            
-            let dict: [String: Any] = ["nickName": filteredString]
-            return APIProvider.rx.request(.userInfoSetting(info: dict)).mapJSON().asObservable()
-            
-        }.subscribe(onNext: {[weak self] _ in
-            APPHUD.flash(text: "成功".toMultilingualism())
-            self?.fetchUserInfo()
-            NotificationCenter.default.post(name: .userInfoDidChangeed, object: nil)
-        }).disposed(by: rx.disposeBag)
-        
     }
     
 }
