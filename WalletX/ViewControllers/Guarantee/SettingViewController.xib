@@ -178,9 +178,6 @@
                                 <constraint firstAttribute="trailing" secondItem="gKA-Tu-6Gm" secondAttribute="trailing" constant="16" id="vXg-ID-7EX"/>
                                 <constraint firstItem="jBO-Zv-zTk" firstAttribute="leading" secondItem="SeS-cS-5Vc" secondAttribute="leading" constant="16" id="x9f-oI-gRm"/>
                             </constraints>
-                            <connections>
-                                <action selector="contactTap:" destination="-1" eventType="touchUpInside" id="NRH-S3-84L"/>
-                            </connections>
                         </view>
                     </subviews>
                 </stackView>
@@ -268,7 +265,7 @@
         <image name="ic_setting_auto_lock" width="20" height="20"/>
         <image name="ic_setting_lock_type" width="20" height="20"/>
         <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
