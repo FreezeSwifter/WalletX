@@ -86,6 +86,8 @@ class SettingViewController: UIViewController, HomeNavigationble {
         }
     }
     
+    @IBOutlet weak var lockStackView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -107,6 +109,10 @@ class SettingViewController: UIViewController, HomeNavigationble {
             self?.languageDesLabel.text = "home_setting_Language".toMultilingualism()
             self?.contactDesLabel.text = "home_setting_Contact".toMultilingualism()
         }).disposed(by: rx.disposeBag)
+        
+        if !lockSwitch.isOn {
+            lockStackView.arrangedSubviews.forEach { $0.isHidden = true }
+        }
     }
     
     private func setupView() {
@@ -123,6 +129,8 @@ class SettingViewController: UIViewController, HomeNavigationble {
         let context = LAContext()
         var error: NSError?
         let isOn = sender.isOn
+        lockStackView.arrangedSubviews.forEach { $0.isHidden = !isOn }
+        
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "home_setting_ScreenLock".toMultilingualism()
             
