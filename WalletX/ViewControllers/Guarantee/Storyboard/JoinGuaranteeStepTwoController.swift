@@ -36,7 +36,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var desLabel2: UILabel! {
         didSet {
-            desLabel2.text = "担保类型".toMultilingualism()
+            desLabel2.text = "担保类型没有3".toMultilingualism()
         }
     }
     
@@ -62,7 +62,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var desLabel4: UILabel! {
         didSet {
-            desLabel4.text = "担保协议".toMultilingualism()
+            desLabel4.text = "担保协议没有2".toMultilingualism()
         }
     }
     
@@ -168,6 +168,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         view.backgroundColor = .white
         setupNavigationbar()
         setupChildVCStyle()
+        setupRightAccountInfoBtn()
         headerView?.titleLabel.text = "home_joinGuaranty".toMultilingualism()
         headerView?.backgroundColor = .white
     }
