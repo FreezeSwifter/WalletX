@@ -9,6 +9,7 @@ import UIKit
 import QMUIKit
 import RxSwift
 import RxCocoa
+import SnapKit
 
 extension UIViewController {
     
@@ -41,7 +42,11 @@ extension HomeNavigationble where Self: UIViewController {
         
         LocaleWalletManager.shared().walletDidChanged.observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
             guard let this = self else { return }
-            this.updateAccountInfo()
+            if let headerView = this.headerView, headerView.hasRightAccountBtn {
+                this.updateRightAccountInfo()
+            } else {
+                this.updateAccountInfo()
+            }
         }).disposed(by: rx.disposeBag)
         
         headerView?.settingButton.rx.tap.subscribe(onNext: {[weak self] in
@@ -73,7 +78,6 @@ extension HomeNavigationble where Self: UIViewController {
     }
     
     private func updateAccountInfo() {
-        
         guard let accountButton = headerView?.accountButton else {
             return
         }
@@ -81,19 +85,55 @@ extension HomeNavigationble where Self: UIViewController {
             return
         }
         
+        updateAccountButtonUI(accountButton)
+    }
+    
+    private func updateAccountButtonUI(_ button: UIButton) {
         if LocaleWalletManager.shared().currentWalletModel == nil {
-            accountButton.setTitle("未登录".toMultilingualism(), for: .normal)
+            button.setTitle("未登录".toMultilingualism(), for: .normal)
         } else {
             if let nickName = LocaleWalletManager.shared().userInfo?.data?.nickName, !nickName.isEmpty {
-                accountButton.setTitle(nickName, for: .normal)
+                button.setTitle(nickName, for: .normal)
             } else {
-                accountButton.setTitle(LocaleWalletManager.shared().userInfo?.data?.walletId, for: .normal)
+                button.setTitle(LocaleWalletManager.shared().userInfo?.data?.walletId, for: .normal)
             }
+        }
+    }
+    
+    /// 导航栏右侧 显示账号按钮
+    func setupRightAccountInfoBtn() {
+        headerView?.addRightAccountInfoBtn()
+        updateRightAccountInfo()
+    }
+    
+    private func updateRightAccountInfo() {
+        if let rightAccountInfoBtn = headerView?.rightAccountInfoBtn {
+            updateAccountButtonUI(rightAccountInfoBtn)
+            rightAccountInfoBtn.rx.tap.subscribe(onNext: { _ in
+                LocaleWalletManager.checkLogin {
+                    let vc: WalletManagementController = WalletManagementController()
+                    vc.hidesBottomBarWhenPushed = true
+                    UIApplication.topViewController()?.navigationController?.pushViewController(vc, animated: true)
+                }
+            }).disposed(by: rx.disposeBag)
         }
     }
 }
 
 class HomeNavigationBarView: UIView {
+    var hasRightAccountBtn: Bool {
+        return rightAccountInfoBtn.superview != nil
+    }
+    
+    lazy var rightAccountInfoBtn: QMUIButton = {
+        let rightAccountInfoBtn = QMUIButton(type: .custom)
+        rightAccountInfoBtn.setImage(UIImage(named: "导航栏下箭头"), for: .normal)
+        rightAccountInfoBtn.imagePosition = .right
+        rightAccountInfoBtn.spacingBetweenImageAndTitle = 6
+        rightAccountInfoBtn.setTitleColor(ColorConfiguration.lightGray.toColor(), for: .normal)
+        rightAccountInfoBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        return rightAccountInfoBtn
+    }()
     
     @IBOutlet weak var messageButton: UIButton! {
         didSet {
@@ -135,5 +175,14 @@ class HomeNavigationBarView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    func addRightAccountInfoBtn() {
+        addSubview(rightAccountInfoBtn)
+        rightAccountInfoBtn.snp.makeConstraints { make in
+            make.centerY.equalTo(titleLabel.snp.centerY)
+            make.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-8)
+            make.height.equalTo(32)
+        }
     }
 }

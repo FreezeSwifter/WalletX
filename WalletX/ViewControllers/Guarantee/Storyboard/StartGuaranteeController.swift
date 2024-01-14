@@ -82,7 +82,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
     @IBOutlet weak var normalButton: UIButton! {
         didSet {
             normalButton.setTitle("普通担保".toMultilingualism(), for: .normal)
-            normalButton.setImage(UIImage(named: "guarantee_check_box2"), for: .selected)
+            normalButton.setImage(UIImage(named: "me_checkbox2"), for: .selected)
             normalButton.isSelected = true
         }
     }
@@ -109,7 +109,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
     @IBOutlet weak var multipleButton: UIButton! {
         didSet {
             multipleButton.setTitle("多签担保".toMultilingualism(), for: .normal)
-            multipleButton.setImage(UIImage(named: "guarantee_check_box2"), for: .selected)
+            multipleButton.setImage(UIImage(named: "me_checkbox2"), for: .selected)
         }
     }
     
@@ -121,7 +121,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var multipleLabel2: UILabel! {
         didSet {
-            multipleLabel2.text = "多签担保tag1".toMultilingualism()
+            multipleLabel2.text = "多签担保tag2".toMultilingualism()
         }
     }
     
@@ -172,9 +172,9 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var tagBg4: UIStackView! {
         didSet {
-            tagBg4.layer.cornerRadius = 10
-            tagBg4.isLayoutMarginsRelativeArrangement = true
-            tagBg4.layoutMargins = UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 10)
+//            tagBg4.layer.cornerRadius = 10
+//            tagBg4.isLayoutMarginsRelativeArrangement = true
+//            tagBg4.layoutMargins = UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 10)
         }
     }
     
@@ -185,6 +185,12 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
         bind()
     }
     
+    @IBOutlet weak var help: UIView! {
+        didSet {
+            help.layer.cornerRadius = 10
+            help.layoutMargins = UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 10)
+        }
+    }
     private func bind() {
 //        TXhcz9yLurPQ4fqEfzS3zCycfzJSdZkZwC
         textViewPlaceholderLabel.text = "担保协议占位".toMultilingualism()
@@ -281,6 +287,7 @@ class StartGuaranteeController: UIViewController, HomeNavigationble {
         view.backgroundColor = .white
         setupNavigationbar()
         setupChildVCStyle()
+        setupRightAccountInfoBtn()
         headerView?.titleLabel.text = "home_newGuaranty".toMultilingualism()
         headerView?.backgroundColor = .white
     
