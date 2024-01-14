@@ -2,16 +2,14 @@
 //  StringCalculator.swift
 //  aibit
 //
-//  Created by W.H.Y on 2023/11/9.
+//  Created by Ian on 2023/11/9.
 //
 
 import Foundation
 
 
 struct StringCalculator {
-    
-    private static let formatter = NumberFormatter()
-    
+
     enum ComparisonType {
         case less               // 小于
         case lessOrEqual        // 小于等于
@@ -24,16 +22,21 @@ struct StringCalculator {
         case round  // 四舍五入
         case ceil   // 向上取整
         case floor  // 向下取整
+        case none   // 不处理
     }
     
     // 字符串计算加减乘除
     static func calculateWithRounding(decimalPlaces: Int, roundingMethod: RoundingMethod, operation: String, _ num1: String?, _ num2: String?) -> String? {
-        guard let num1 = num1, let num2 = num2 else {
-            return nil
+        
+        let num1 = NSDecimalNumber(string: num1)
+        let num2 = NSDecimalNumber(string: num2)
+        
+        if num1.isEqual(NSDecimalNumber.notANumber) || num2.isEqual(NSDecimalNumber.notANumber)  {
+            return "NaN"
         }
-        guard let number1 = Double(num1), let number2 = Double(num2) else {
-            return nil
-        }
+        
+        let number1 = num1.doubleValue
+        let number2 = num2.doubleValue
         
         var result: Double = 0.0
         switch operation {
@@ -49,15 +52,18 @@ struct StringCalculator {
             return nil
         }
         
+        let formatter = NumberFormatter()
         formatter.minimumFractionDigits = decimalPlaces
         formatter.maximumFractionDigits = decimalPlaces
-        formatter.roundingMode = .down
+        
         switch roundingMethod {
         case .round:
             formatter.roundingMode = .halfUp
         case .ceil:
             formatter.roundingMode = .up
         case .floor:
+            formatter.roundingMode = .floor
+        case .none:
             formatter.roundingMode = .down
         }
         
@@ -69,38 +75,29 @@ struct StringCalculator {
     
     // 比较两个数大小
     static func compareNumericStrings(_ str1: String?, _ str2: String?, comparisonType: ComparisonType) -> Bool {
-        guard let str1 = str1, let str2 = str2 else {
+     
+        let number1 = NSDecimalNumber(string: str1)
+        let number2 = NSDecimalNumber(string: str2)
+        
+        if number1.isEqual(NSDecimalNumber.notANumber) || number2.isEqual(NSDecimalNumber.notANumber)  {
             return false
         }
         
-        if let num1 = Double(str1), let num2 = Double(str2) {
-            switch comparisonType {
-            case .less:
-                return num1 < num2
-            case .lessOrEqual:
-                return num1 <= num2
-            case .equal:
-                return num1 == num2
-            case .greater:
-                return num1 > num2
-            case .greaterOrEqual:
-                return num1 >= num2
-            }
-        } else if let int1 = Int(str1), let int2 = Int(str2) {
-            switch comparisonType {
-            case .less:
-                return int1 < int2
-            case .lessOrEqual:
-                return int1 <= int2
-            case .equal:
-                return int1 == int2
-            case .greater:
-                return int1 > int2
-            case .greaterOrEqual:
-                return int1 >= int2
-            }
+        let num1 = number1.doubleValue
+        let num2 = number2.doubleValue
+        
+        switch comparisonType {
+        case .less:
+            return num1 < num2
+        case .lessOrEqual:
+            return num1 <= num2
+        case .equal:
+            return num1 == num2
+        case .greater:
+            return num1 > num2
+        case .greaterOrEqual:
+            return num1 >= num2
         }
-        return false
     }
     
     static func decimalPlaces(targetString: String?, decimal: Int, roundingMethod: RoundingMethod) -> String? {
@@ -111,15 +108,19 @@ struct StringCalculator {
         guard let result: Double = Double(string) else {
             return targetString
         }
+        
+        let formatter = NumberFormatter()
         formatter.minimumFractionDigits = decimal
         formatter.maximumFractionDigits = decimal
-        formatter.roundingMode = .down
+        
         switch roundingMethod {
         case .round:
             formatter.roundingMode = .halfUp
         case .ceil:
             formatter.roundingMode = .up
         case .floor:
+            formatter.roundingMode = .floor
+        case .none:
             formatter.roundingMode = .down
         }
         guard let roundedResult = formatter.string(from: NSNumber(value: result)) else {
@@ -186,8 +187,31 @@ func ~<= (lhs: String?, rhs: String?) -> Bool {
 }
 
 extension String {
+    
     // 保留2位小数
-    func decimalPlaces(decimal: Int, roundingMethod: StringCalculator.RoundingMethod = .floor) -> String? {
+    func decimalPlaces(decimal: Int = 12, roundingMethod: StringCalculator.RoundingMethod = .none) -> String? {
+
         return StringCalculator.decimalPlaces(targetString: self, decimal: decimal, roundingMethod: roundingMethod) ?? self
+    }
+    
+    // 分割风格的数字显示
+    func separatorStyleNumber(decimal: Int) -> String? {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        guard let doubleValue = Double(self) else {
+            return self
+        }
+        formatter.minimumFractionDigits = decimal
+        formatter.maximumFractionDigits = decimal
+        formatter.usesGroupingSeparator = true
+        let text = formatter.string(from: NSNumber(value: doubleValue)) ?? self
+        return text
+    }
+    
+    func absValue() -> String? {
+        guard let doubleValue = Double(self) else {
+            return self
+        }
+        return abs(doubleValue).description
     }
 }

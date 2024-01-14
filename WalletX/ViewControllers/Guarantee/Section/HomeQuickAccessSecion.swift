@@ -56,8 +56,10 @@ final class HomeQuickAccessSecion: ListSectionController {
         guard let cell = collectionContext?.dequeueReusableCell(withNibName: "HomeQuickAccessCell", bundle: nil, for: self, at: index) as? HomeQuickAccessCell else {
             return UICollectionViewCell()
         }
+        
         cell.guranteeValueLabel.text = "\(data?.assureNum ?? 0)"
-        cell.marginValueLabel.text = "\(data?.assureAmount ?? 0)"
+        
+        cell.marginValueLabel.text = String(data?.assureAmount ?? 0).separatorStyleNumber(decimal: 2) ?? "NaN"
         
         cell.joinBgView.rx.controlEvent(.touchUpInside).take(until: cell.rx.sentMessage(#selector(HomeQuickAccessCell.prepareForReuse)))
             .subscribe(onNext: {[weak self] in

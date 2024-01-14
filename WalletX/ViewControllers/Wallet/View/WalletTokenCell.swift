@@ -42,5 +42,7 @@ class WalletTokenCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+        backgroundColor = .white
+        contentView.backgroundColor = .white
     }
 }

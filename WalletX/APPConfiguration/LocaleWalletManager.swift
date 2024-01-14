@@ -409,6 +409,15 @@ enum WalletToken: Equatable {
         }
     }
     
+    var contractName: String {
+        switch self {
+        case .tron:
+            return "TRX(Tron)"
+        case .usdt:
+            return "USDT(Tron|TRC20)"
+        }
+    }
+    
     static func ==(lhs: WalletToken, rhs: WalletToken) -> Bool {
         
         switch (lhs, rhs) {

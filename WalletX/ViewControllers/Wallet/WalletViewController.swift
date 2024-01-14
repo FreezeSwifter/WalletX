@@ -38,6 +38,7 @@ class WalletViewController: UIViewController, HomeNavigationble {
     
     private lazy var listContainerView: JXSegmentedListContainerView! = {
         let segContainerView = JXSegmentedListContainerView(dataSource: self, type: .scrollView)
+        segContainerView.backgroundColor = .clear
         return segContainerView
     }()
     
@@ -146,6 +147,16 @@ class WalletViewController: UIViewController, HomeNavigationble {
         view.backgroundColor = ColorConfiguration.homeItemBg.toColor()
         setupNavigationbar()
         
+        let bg = UIImageView(image: UIImage(named: "me_background"))
+        bg.contentMode = .scaleAspectFill
+        view.addSubview(bg)
+        bg.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(500)
+        }
+        
+        view.bringSubviewToFront(self.headerView!)
+        
         view.addSubview(topOperatedView)
         topOperatedView.snp.makeConstraints { make in
             make.top.equalTo(headerView!.snp.bottom).offset(10)
@@ -178,7 +189,8 @@ class WalletViewController: UIViewController, HomeNavigationble {
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(segmentedView.snp.bottom)
         }
-        segmentedView.backgroundColor = .white
+        segmentedView.backgroundColor = .clear
+        segmentedView.isHidden = true
         
         view.addSubview(noWalletView)
         noWalletView.snp.makeConstraints { make in
@@ -198,7 +210,7 @@ class WalletViewController: UIViewController, HomeNavigationble {
     private func updateBalance() {
         
         LocaleWalletManager.shared().walletBalance.subscribe(onNext: {[weak self] obj in
-            self?.topOperatedView.topButton1.setTitle("$\(obj?.data?.USDT ?? "")", for: .normal)
+            self?.topOperatedView.topButton1.setTitle("$\(obj?.data?.USDT?.separatorStyleNumber(decimal: 2) ?? "0.00")", for: .normal)
         }).disposed(by: rx.disposeBag)
     }
 }

@@ -19,6 +19,10 @@ class TokenDetailController: UIViewController, HomeNavigationble {
     
     private let topOperatedView: WalletHeaderView = ViewLoader.Xib.view()
     
+    private let listEmptyView: MeListEmptyView = MeListEmptyView(frame: .zero).then { it in
+        it.label.text = "没有数据".toMultilingualism()
+    }
+    
     private lazy var tableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .plain)
         tv.rowHeight = 86
@@ -34,6 +38,11 @@ class TokenDetailController: UIViewController, HomeNavigationble {
     
     private var datasource: [TokenTecordTransferModel] = []
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        listEmptyView.frame = tableView.frame
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,15 +55,15 @@ class TokenDetailController: UIViewController, HomeNavigationble {
        LocaleWalletManager.shared().walletBalance.share().map {[weak self] m in
             switch self?.item {
             case .usdt:
-                return "\(m?.data?.USDT ?? "0") USDT"
+                return "\(m?.data?.USDT?.separatorStyleNumber(decimal: 2) ?? "NaN") USDT"
             case .tron:
-                return "\(m?.data?.TRX ?? "0") TRX"
+                return "\(m?.data?.TRX?.separatorStyleNumber(decimal: 2) ?? "NaN") TRX"
             default:
-                return "\(m?.data?.USDT ?? "0") USDT"
+                return "\(m?.data?.USDT?.separatorStyleNumber(decimal: 2) ?? "NaN") USDT"
             }
        }.subscribe(onNext: {[weak self] token in
-           
-           self?.topOperatedView.topButton2.setTitle(token, for: .normal)
+                      
+           self?.topOperatedView.topButton1.setTitle(token, for: .normal)
         
        }).disposed(by: rx.disposeBag)
         
@@ -93,7 +102,7 @@ class TokenDetailController: UIViewController, HomeNavigationble {
             self?.pageNum += 1
             self?.fetchData(isHeaderRefresh: false)
         }
-        footer.setTitle("没有更多".toMultilingualism(), for: .noMoreData)
+        footer.setTitle("".toMultilingualism(), for: .noMoreData)
         footer.setTitle("".toMultilingualism(), for: .idle)
         footer.setTitle("加载中…".toMultilingualism(), for: .pulling)
         tableView.mj_footer = footer
@@ -147,8 +156,12 @@ class TokenDetailController: UIViewController, HomeNavigationble {
             make.leading.trailing.bottom.equalToSuperview()
         }
         topOperatedView.topButton1.setImage(item?.iconImage, for: .normal)
-        topOperatedView.topButton2.titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .medium)
-        topOperatedView.topButton2.setTitleColor(ColorConfiguration.blodText.toColor(), for: .normal)
+        topOperatedView.topButton1.titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .medium)
+        topOperatedView.topButton1.setTitleColor(ColorConfiguration.blodText.toColor(), for: .normal)
+        
+        if item == .tron(nil) {
+            topOperatedView.bottomStack.arrangedSubviews[topOperatedView.bottomStack.arrangedSubviews.count - 1].removeFromSuperview()
+        }
     }
 }
 
@@ -168,6 +181,13 @@ extension TokenDetailController: UITableViewDelegate {
 extension TokenDetailController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if datasource.count == 0 {
+            tableView.backgroundView = listEmptyView
+        } else {
+            tableView.backgroundView = nil
+        }
+        
         return datasource.count
     }
     

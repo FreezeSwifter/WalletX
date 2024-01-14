@@ -24,6 +24,7 @@ class HomeBannerSectionCellCollectionViewCell: UICollectionViewCell, FSPagerView
         let item = list[index]
         let url = URL(string: item.imageUrl ?? "")
         cell.imageView?.kf.setImage(with: url)
+        cell.imageView?.contentMode = .scaleAspectFill
         cell.applyCornerRadius(7)
         return cell
     }

@@ -16,6 +16,7 @@ struct MessageListModel: HandyJSON {
     var content: String?
     var status: Int? // 消息状态，0:未读，1:已读
     var createTime: Int64?
+    var notReadNum: String?
     
     func displayType() -> String? {
         switch type {

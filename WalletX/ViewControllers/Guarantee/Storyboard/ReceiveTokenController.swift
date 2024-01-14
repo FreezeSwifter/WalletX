@@ -46,11 +46,7 @@ class ReceiveTokenController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var notiLabel: UILabel! {
-        didSet {
-            notiLabel.text = "接收Token警告".toMultilingualism()
-        }
-    }
+    @IBOutlet weak var notiLabel: UILabel!
     
     @IBOutlet weak var button1: QMUIButton! {
         didSet {
@@ -136,8 +132,9 @@ class ReceiveTokenController: UIViewController, HomeNavigationble {
         view.layoutIfNeeded()
         setupNavigationbar()
         setupChildVCStyle()
-        headerView?.titleLabel.text = model?.tokenName
+        headerView?.titleLabel.text = "\("wallet_receive".toMultilingualism())\(model?.contractName ?? "")"
         headerView?.backgroundColor = .white
+        notiLabel.text = LanguageManager.shared().replaceBraces(inString: "接收Token警告".toMultilingualism(), with: model?.contractName ?? "")
     }
     
     private func saveImageToAlbum(image: UIImage) {

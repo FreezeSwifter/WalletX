@@ -6,22 +6,20 @@
 //
 
 import UIKit
+import QMUIKit
 
 class WalletHeaderView: UIView {
     
+    @IBOutlet weak var bottomStack: UIStackView!
+    
     @IBOutlet weak var topStackBg: UIStackView!
     
-    @IBOutlet weak var topButton1: UIButton! {
+    @IBOutlet weak var topButton1: QMUIButton! {
         didSet {
             topButton1.titleLabel?.minimumScaleFactor = 0.5
             topButton1.titleLabel?.adjustsFontSizeToFitWidth = true
-        }
-    }
-    
-    @IBOutlet weak var topButton2: UIButton! {
-        didSet {
-            topButton2.titleLabel?.minimumScaleFactor = 0.5
-            topButton2.titleLabel?.adjustsFontSizeToFitWidth = true
+            topButton1.imagePosition = .top
+            topButton1.spacingBetweenImageAndTitle = 8
         }
     }
     

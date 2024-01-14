@@ -38,6 +38,8 @@ class HomeQuickAccessCell: UICollectionViewCell {
         didSet {
             marginValueLabel.textColor = ColorConfiguration.blodText.toColor()
             marginValueLabel.text = "--"
+            marginValueLabel.adjustsFontSizeToFitWidth = true
+            marginValueLabel.minimumScaleFactor = 0.5
         }
     }
     
@@ -66,6 +68,24 @@ class HomeQuickAccessCell: UICollectionViewCell {
         didSet {
             joinLabel.textColor = ColorConfiguration.wihteText.toColor()
             joinLabel.text = "home_joinGuaranty".toMultilingualism()
+        }
+    }
+    
+    @IBOutlet weak var des1Label: UILabel! {
+        didSet {
+            des1Label.textColor = UIColor.white.withAlphaComponent(0.8)
+            des1Label.adjustsFontSizeToFitWidth = true
+            des1Label.minimumScaleFactor = 0.5
+            des1Label.text = "我要创建一个担保申请".toMultilingualism()
+        }
+    }
+    
+    @IBOutlet weak var des2Label: UILabel! {
+        didSet {
+            des2Label.textColor = UIColor.white.withAlphaComponent(0.8)
+            des2Label.adjustsFontSizeToFitWidth = true
+            des2Label.minimumScaleFactor = 0.5
+            des2Label.text = "我要参与一个担保申请".toMultilingualism()
         }
     }
     

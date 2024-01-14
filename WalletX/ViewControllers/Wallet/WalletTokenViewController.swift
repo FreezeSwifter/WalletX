@@ -18,7 +18,7 @@ class WalletTokenViewController: UIViewController, JXSegmentedListContainerViewL
         tv.rowHeight = 90
         tv.delegate = self
         tv.dataSource = self
-        tv.backgroundColor = .white
+        tv.backgroundColor = .clear
         tv.register(UINib(nibName: "WalletTokenCell", bundle: nil), forCellReuseIdentifier: "WalletTokenCell")
         tv.separatorStyle = .none
         return tv
@@ -37,7 +37,7 @@ class WalletTokenViewController: UIViewController, JXSegmentedListContainerViewL
     }
     
     private func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -88,9 +88,9 @@ extension WalletTokenViewController: UITableViewDataSource {
         let token = LocaleWalletManager.shared().walletBalance.share().map { m in
             switch item {
             case .usdt:
-                return m?.data?.USDT
+                return m?.data?.USDT?.decimalPlaces(decimal: 2) ?? "NaN"
             case .tron:
-                return m?.data?.TRX
+                return m?.data?.TRX?.decimalPlaces(decimal: 2) ?? "NaN"
             }
         }
         token.bind(to: cell.countLabel.rx.text).disposed(by: cell.rx.disposeBag)

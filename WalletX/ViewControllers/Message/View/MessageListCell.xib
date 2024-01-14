@@ -48,13 +48,21 @@
                         <color key="textColor" systemColor="systemGray2Color"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDw-bE-JFS" customClass="QMUILabel">
+                        <rect key="frame" x="365" y="66.666666666666671" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="NDw-bE-JFS" secondAttribute="trailing" constant="16" id="5m0-91-9B8"/>
                     <constraint firstItem="UIx-Wg-7LI" firstAttribute="top" secondItem="aw2-HR-IqN" secondAttribute="top" id="CCj-4P-Mh4"/>
                     <constraint firstItem="UIx-Wg-7LI" firstAttribute="leading" secondItem="aw2-HR-IqN" secondAttribute="trailing" constant="16" id="Nst-sY-amt"/>
                     <constraint firstItem="vk7-yQ-Ql6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VgM-dY-5pc"/>
                     <constraint firstItem="vk7-yQ-Ql6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="YlZ-Fi-zXk"/>
+                    <constraint firstItem="NDw-bE-JFS" firstAttribute="top" secondItem="UIx-Wg-7LI" secondAttribute="bottom" constant="8" id="aem-wS-lnM"/>
                     <constraint firstItem="aw2-HR-IqN" firstAttribute="leading" secondItem="vk7-yQ-Ql6" secondAttribute="trailing" constant="15" id="ebY-iy-kSR"/>
                     <constraint firstAttribute="trailing" secondItem="UIx-Wg-7LI" secondAttribute="trailing" constant="15" id="ou6-oM-V3t"/>
                     <constraint firstItem="aw2-HR-IqN" firstAttribute="centerY" secondItem="vk7-yQ-Ql6" secondAttribute="centerY" id="yL2-6h-Bnd"/>
@@ -64,6 +72,7 @@
             <connections>
                 <outlet property="bottomContentLabel" destination="qGk-7V-QHF" id="vPt-Sb-e6Z"/>
                 <outlet property="icon" destination="vk7-yQ-Ql6" id="Pw4-hm-M4O"/>
+                <outlet property="numLabel" destination="NDw-bE-JFS" id="aPg-D9-ID9"/>
                 <outlet property="timeLabel" destination="UIx-Wg-7LI" id="MII-Mk-HRA"/>
                 <outlet property="topTitleLabel" destination="1tW-bW-H4R" id="68j-xV-cg6"/>
             </connections>

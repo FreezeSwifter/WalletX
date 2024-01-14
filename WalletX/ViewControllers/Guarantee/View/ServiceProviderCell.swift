@@ -96,6 +96,9 @@ class ServiceProviderCell: UICollectionViewCell {
             btn.imagePosition = .left
             btn.spacingBetweenImageAndTitle = 4
             btn.setTitle(item.mertName, for: .normal)
+            
+            
+            
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
             btn.setTitleColor(ColorConfiguration.descriptionText.toColor(), for: .normal)
             btn.titleLabel?.minimumScaleFactor = 0.5

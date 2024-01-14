@@ -21,7 +21,7 @@ class MessageViewController: UIViewController, HomeNavigationble {
         tv.rowHeight = 80
         tv.delegate = self
         tv.dataSource = self
-        tv.backgroundColor = .white
+        tv.backgroundColor = .clear
         return tv
     }()
     
@@ -100,11 +100,20 @@ class MessageViewController: UIViewController, HomeNavigationble {
     
     private func setupView() {
         setupNavigationbar()
-        headerView?.titleLabel.text = "message_noti".toMultilingualism()
         
+        let bg = UIImageView(image: UIImage(named: "me_background"))
+        bg.contentMode = .scaleAspectFill
+        view.addSubview(bg)
+        bg.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(500)
+        }
+        
+        view.bringSubviewToFront(self.headerView!)
+    
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(headerView!.snp.bottom)
+            make.top.equalTo(headerView!.snp.bottom).offset(20)
             make.trailing.leading.bottom.equalToSuperview()
         }
         
@@ -114,6 +123,7 @@ class MessageViewController: UIViewController, HomeNavigationble {
             make.centerY.equalToSuperview().offset(-20)
             make.centerX.equalToSuperview()
         }
+        listEmptyView.backgroundColor = .clear
     }
 }
 
@@ -146,10 +156,21 @@ extension MessageViewController: UITableViewDataSource {
         if item.status == 0 {
             cell.icon.qmui_shouldShowUpdatesIndicator = true
             cell.icon.qmui_badgeInteger = 0
+            cell.numLabel.isHidden = false
         } else {
             cell.icon.qmui_shouldShowUpdatesIndicator = false
             cell.icon.qmui_badgeInteger = 0
+            cell.numLabel.isHidden = true
         }
+        
+        if item.notReadNum ~> "0" {
+            cell.numLabel.text = item.notReadNum
+            cell.numLabel.isHidden = false
+        } else {
+            cell.numLabel.text = nil
+            cell.numLabel.isHidden = true
+        }
+
         return cell
     }
 }

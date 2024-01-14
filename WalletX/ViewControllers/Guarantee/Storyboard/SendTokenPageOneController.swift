@@ -28,11 +28,7 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var textField: UITextField! {
-        didSet {
-            textField.placeholder = "钱包地址".toMultilingualism()
-        }
-    }
+    @IBOutlet weak var textField: UITextField!
     
     @IBOutlet weak var pasteButton: UIButton! {
         didSet {
@@ -53,7 +49,11 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var tokenLabel: UILabel!
+    @IBOutlet weak var tokenLabel: UILabel! {
+        didSet {
+            tokenLabel.textColor = ColorConfiguration.descriptionText.toColor()
+        }
+    }
     
     @IBOutlet weak var textField2: UITextField! {
         didSet {
@@ -76,7 +76,7 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var nextButton: UIButton! {
         didSet {
-            nextButton.setupAPPUISolidStyle(title: "确定".toMultilingualism())
+            nextButton.setupAPPUISolidStyle(title: "下一步".toMultilingualism())
         }
     }
     
@@ -90,7 +90,9 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
     private func bind() {
     
         tokenLabel.text = model?.tokenName
-        headerView?.titleLabel.text = model?.companyName
+        headerView?.titleLabel.text = "\("wallet_send".toMultilingualism())\(model?.contractName ?? "")"
+        
+        textField.placeholder = "\(model?.contractName ?? "")\("地址".toMultilingualism())"
         
         pasteButton.rx.tap.subscribe(onNext: {[weak self] _ in
             self?.textField.text = UIPasteboard.general.string
@@ -118,7 +120,7 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
     }
     
     private func sendTokenAction() {
-        guard let m = model else { return }
+        guard let _ = model else { return }
         let toAddress = textField.text ?? ""
         let sendAmount = textField2.text ?? ""
         

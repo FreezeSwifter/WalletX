@@ -10,6 +10,14 @@ import QMUIKit
 
 class MessageListCell: UITableViewCell {
 
+    @IBOutlet weak var numLabel: QMUILabel! {
+        didSet {
+            numLabel.contentEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
+            numLabel.isHidden = true
+            numLabel.backgroundColor = .red
+            numLabel.clipsToBounds = true
+        }
+    }
     
     @IBOutlet weak var icon: UIImageView!
     
@@ -38,6 +46,11 @@ class MessageListCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        numLabel.layer.cornerRadius = 4
     }
     
 }
