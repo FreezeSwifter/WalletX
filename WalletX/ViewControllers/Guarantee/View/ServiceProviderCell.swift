@@ -96,8 +96,7 @@ class ServiceProviderCell: UICollectionViewCell {
             btn.imagePosition = .left
             btn.spacingBetweenImageAndTitle = 4
             btn.setTitle(item.mertName, for: .normal)
-            
-            
+            btn.kf.setImage(with: URL(string: item.logo ?? ""), for: .normal, placeholder: UIImage(named: "服务商图标"))
             
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
             btn.setTitleColor(ColorConfiguration.descriptionText.toColor(), for: .normal)

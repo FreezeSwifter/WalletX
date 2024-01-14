@@ -16,6 +16,8 @@ class ServiceProviderChildCell: UICollectionViewCell {
         }
     }
     
+    @IBOutlet weak var icon: UIImageView!
+    
     @IBOutlet weak var bgView: UIView! {
         didSet {
             bgView.applyCornerRadius(4)

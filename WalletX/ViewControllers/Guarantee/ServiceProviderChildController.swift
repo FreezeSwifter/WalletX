@@ -11,6 +11,7 @@ import SnapKit
 import RxCocoa
 import RxSwift
 import NSObject_Rx
+import Kingfisher
 
 class ServiceProviderChildController: UIViewController, JXSegmentedListContainerViewListDelegate {
     
@@ -118,9 +119,11 @@ extension ServiceProviderChildController: UICollectionViewDataSource, UICollecti
         if index == 0 {
             let item = datasourceAll[indexPath.section].merchantList?[indexPath.item]
             cell?.label.text = item?.mertName
+            cell?.icon.kf.setImage(with: URL(string: item?.logo ?? ""), placeholder:UIImage(named: "服务商图标"))
         } else {
             let item = datasourceOther[indexPath.item]
             cell?.label.text = item.mertName
+            cell?.icon.kf.setImage(with: URL(string: item.logo ?? ""), placeholder:UIImage(named: "服务商图标"))
         }
         
         return cell ?? UICollectionViewCell()
