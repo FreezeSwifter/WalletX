@@ -63,6 +63,14 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
         }
     }
     
+    @IBOutlet weak var copyButton0: UIButton! {
+        didSet {
+            copyButton0.setTitle("share_Copy".toMultilingualism(), for: .normal)
+            copyButton0.titleLabel?.adjustsFontSizeToFitWidth = true
+            copyButton0.titleLabel?.minimumScaleFactor = 0.5
+        }
+    }
+    
     @IBOutlet weak var qrCodeLabel: UILabel! {
         didSet {
             qrCodeLabel.text = "二维码".toMultilingualism()
@@ -74,6 +82,8 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
             shareButton.setTitleColor(ColorConfiguration.primary.toColor(), for: .normal)
             shareButton.setTitle("share_Share".toMultilingualism(), for: .normal)
             shareButton.layer.borderWidth = 1
+            shareButton.layer.cornerRadius = 15
+            shareButton.clipsToBounds = true
             shareButton.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
             shareButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 6, bottom: 2, right: 6)
         }
@@ -84,6 +94,8 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
             downloadButton.setTitleColor(ColorConfiguration.primary.toColor(), for: .normal)
             downloadButton.setTitle("share_Download".toMultilingualism(), for: .normal)
             downloadButton.layer.borderWidth = 1
+            downloadButton.layer.cornerRadius = 15
+            downloadButton.clipsToBounds = true
             downloadButton.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
             downloadButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 6, bottom: 2, right: 6)
         }
@@ -125,6 +137,11 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
         }).disposed(by: rx.disposeBag)
         view.backgroundColor = .white
         fetchData()
+        
+        copyButton0.rx.tap.subscribe(onNext: {[weak self] in
+            UIPasteboard.general.string = self?.transferAmountValue.text
+            APPHUD.flash(text: "成功".toMultilingualism())
+        }).disposed(by: rx.disposeBag)
         
         copyButton.rx.tap.subscribe(onNext: {[weak self] in
             UIPasteboard.general.string = self?.networkModel?.data?.hcAddr

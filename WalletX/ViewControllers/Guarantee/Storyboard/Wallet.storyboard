@@ -550,7 +550,7 @@
                                                 </subviews>
                                             </stackView>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入担保ID" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cIW-Ta-ZfE">
-                                                <rect key="frame" x="20" y="15.666666666666659" width="85.333333333333329" height="18.666666666666679"/>
+                                                <rect key="frame" x="20" y="15.666666666666659" width="87" height="18.666666666666679"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -1249,13 +1249,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通常为12个单词（有时是18、24个）由单个空格分隔" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ub9-1P-fEG">
-                                <rect key="frame" x="20" y="344" width="353" height="36"/>
+                                <rect key="frame" x="20" y="344" width="353" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.50196078431372548" green="0.54117647058823526" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BYy-dQ-FNg">
-                                <rect key="frame" x="16" y="410" width="361" height="40"/>
+                                <rect key="frame" x="16" y="392" width="361" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="fVJ-YW-msI"/>
                                 </constraints>
@@ -1545,10 +1545,10 @@
                                                                         <rect key="frame" x="30" y="27" width="333" height="22"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guarantee_noti" translatesAutoresizingMaskIntoConstraints="NO" id="8U0-ez-gHh">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="20" height="22"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="18.333333333333332" height="22"/>
                                                                             </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2q1-E7-Os4">
-                                                                                <rect key="frame" x="30" y="0.0" width="303" height="22"/>
+                                                                                <rect key="frame" x="28.333333333333343" y="0.0" width="304.66666666666663" height="22"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                 <color key="textColor" red="0.94117647059999998" green="0.63137254899999995" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -1871,22 +1871,30 @@
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                             </textField>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="I6f-OT-gHh">
-                                                                <rect key="frame" x="298" y="16" width="48" height="18"/>
+                                                                <rect key="frame" x="255" y="16" width="91" height="18"/>
                                                                 <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USDT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zkf-pI-4sR">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="35" height="18"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dG1-xg-4dF">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="1" height="18"/>
+                                                                        <rect key="frame" x="47" y="0.0" width="1" height="18"/>
                                                                         <color key="backgroundColor" red="0.50196078430000002" green="0.54117647059999996" blue="0.61568627450000002" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="1" id="bkU-eL-GqO"/>
                                                                             <constraint firstAttribute="height" constant="18" id="sA9-zg-w39"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USDT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zkf-pI-4sR">
-                                                                        <rect key="frame" x="13" y="0.0" width="35" height="18"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNQ-MH-hL0" userLabel="Copy Button0">
+                                                                        <rect key="frame" x="60" y="0.0" width="31" height="18"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <state key="normal" title="复制">
+                                                                            <color key="titleColor" red="0.25490196079999999" green="0.38431372549999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </state>
+                                                                    </button>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
@@ -1915,7 +1923,7 @@
                                                 <rect key="frame" x="0.0" y="178.66666666666669" width="393" height="600"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="担保ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E6X-YR-gdj">
-                                                        <rect key="frame" x="15.999999999999996" y="0.0" width="48.666666666666657" height="19.333333333333332"/>
+                                                        <rect key="frame" x="15.999999999999996" y="0.0" width="50.666666666666657" height="19.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1945,7 +1953,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入担保ID" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sKw-6O-jE0">
-                                                                <rect key="frame" x="20" y="15.666666666666687" width="85.333333333333329" height="18.666666666666679"/>
+                                                                <rect key="frame" x="20" y="15.666666666666687" width="87" height="18.666666666666679"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
@@ -2103,6 +2111,7 @@
                         <outlet property="acceptLabel" destination="E6X-YR-gdj" id="y9i-89-Ggu"/>
                         <outlet property="acceptValue" destination="sKw-6O-jE0" id="gby-Nl-Ddl"/>
                         <outlet property="copyButton" destination="j6B-GZ-TIK" id="g4e-iQ-Yse"/>
+                        <outlet property="copyButton0" destination="MNQ-MH-hL0" id="SDq-ai-WXe"/>
                         <outlet property="doneButton" destination="s4Y-Ga-8w3" id="i8g-Og-V9s"/>
                         <outlet property="downloadButton" destination="MTf-NJ-fwO" id="IDJ-5l-rWe"/>
                         <outlet property="qrCodeLabel" destination="WSx-wm-bYF" id="sod-bc-tTi"/>
