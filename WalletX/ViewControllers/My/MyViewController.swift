@@ -149,7 +149,7 @@ class MyViewController: UIViewController, HomeNavigationble {
     @objc private func editEmail() {
         if let email = LocaleWalletManager.shared().userInfo?.data?.email, !email.isEmpty {
         } else {
-            SettingModifyAlterView.show(title: "home_setting_email".toMultilingualism(), text: nil, placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
+            SettingModifyAlterView.show(title: "修改邮箱账号".toMultilingualism(), text: nil, placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
                 
                 guard let text = str, text.isNotEmpty else {
                     return Observable<Any>.empty()
