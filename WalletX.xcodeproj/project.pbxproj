@@ -134,6 +134,8 @@
 		7A000E432AA8CD7F00FA1817 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A000E422AA8CD7F00FA1817 /* CategoryModel.swift */; };
 		7A10CA092B246936009F21C8 /* OtherWalletSendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A10CA082B246936009F21C8 /* OtherWalletSendController.swift */; };
 		7A10CA0B2B25AA3B009F21C8 /* StringCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A10CA0A2B25AA3A009F21C8 /* StringCalculator.swift */; };
+		7A10D08B2B557202002EAA97 /* LaunchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A10D0892B557201002EAA97 /* LaunchScreenController.swift */; };
+		7A10D08C2B557202002EAA97 /* LaunchScreenController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A10D08A2B557202002EAA97 /* LaunchScreenController.xib */; };
 		7A2123232ABF67750088ACB2 /* DepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2123222ABF67750088ACB2 /* DepositViewController.swift */; };
 		7A26EE812AA9B491005BF1AF /* SettingModifyAlterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A26EE802AA9B491005BF1AF /* SettingModifyAlterView.swift */; };
 		7A26EE832AA9B4BF005BF1AF /* SettingModifyAlterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A26EE822AA9B4BF005BF1AF /* SettingModifyAlterView.xib */; };
@@ -463,6 +465,8 @@
 		7A000E422AA8CD7F00FA1817 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		7A10CA082B246936009F21C8 /* OtherWalletSendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherWalletSendController.swift; sourceTree = "<group>"; };
 		7A10CA0A2B25AA3A009F21C8 /* StringCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringCalculator.swift; sourceTree = "<group>"; };
+		7A10D0892B557201002EAA97 /* LaunchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenController.swift; sourceTree = "<group>"; };
+		7A10D08A2B557202002EAA97 /* LaunchScreenController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreenController.xib; sourceTree = "<group>"; };
 		7A2123222ABF67750088ACB2 /* DepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositViewController.swift; sourceTree = "<group>"; };
 		7A26EE802AA9B491005BF1AF /* SettingModifyAlterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModifyAlterView.swift; sourceTree = "<group>"; };
 		7A26EE822AA9B4BF005BF1AF /* SettingModifyAlterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingModifyAlterView.xib; sourceTree = "<group>"; };
@@ -892,6 +896,15 @@
 				7A5EA82A2AEE768A0037E482 /* MessageModels.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		7A10D0832B5570CD002EAA97 /* 启动屏 */ = {
+			isa = PBXGroup;
+			children = (
+				7A10D0892B557201002EAA97 /* LaunchScreenController.swift */,
+				7A10D08A2B557202002EAA97 /* LaunchScreenController.xib */,
+			);
+			path = "启动屏";
 			sourceTree = "<group>";
 		};
 		7A2BE0842A8B7721001B2970 /* View */ = {
@@ -1662,6 +1675,7 @@
 		7AF15A0D2A85018F00C48F39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7A10D0832B5570CD002EAA97 /* 启动屏 */,
 				7AF15A112A85020B00C48F39 /* Guarantee */,
 				7AF15A0F2A85020B00C48F39 /* Message */,
 				7AF15A0E2A85020B00C48F39 /* My */,
@@ -1858,6 +1872,7 @@
 				7A831C562A9F498E0086B540 /* Wallet.storyboard in Resources */,
 				7A2BE0942A8B91E0001B2970 /* WalletWithoutWalletView.xib in Resources */,
 				7A831C542A9F38DB0086B540 /* MessageDetailCell.xib in Resources */,
+				7A10D08C2B557202002EAA97 /* LaunchScreenController.xib in Resources */,
 				7A2BE0882A8B774A001B2970 /* WalletHeaderView.xib in Resources */,
 				7A3B7D962A9C70C50036199F /* MeTobeAddedCell.xib in Resources */,
 				7A7D4DBE2A84A19D0098262F /* LaunchScreen.storyboard in Resources */,
@@ -2162,6 +2177,7 @@
 				7A000E1E2AA84F4600FA1817 /* Multiplication.swift in Sources */,
 				7AD08BB72A8A083B000B247E /* CGFloatLiteral.swift in Sources */,
 				7AD08BDF2A8A083B000B247E /* DoubleExtension.swift in Sources */,
+				7A10D08B2B557202002EAA97 /* LaunchScreenController.swift in Sources */,
 				7A000DDD2AA84F4600FA1817 /* Data+Extension.swift in Sources */,
 				7A000DEB2AA84F4600FA1817 /* String+Extension.swift in Sources */,
 				7A000E232AA84F4600FA1817 /* Subtraction.swift in Sources */,

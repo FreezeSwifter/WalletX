@@ -51,6 +51,7 @@ enum NetworkService {
     case searchOrderList // 订单搜索接口
     case seendTokenConfirm(assureId: String, function: Int, txId: String, amount: String) // 转账确认订单
     case activeAssureOrder(assureId: String) // 激活订单
+    case userTerminal // 查询设备是否禁用
 
 
 }
@@ -140,7 +141,8 @@ extension NetworkService: TargetType {
             return "/api/assureOrder/transfer/confirm"
         case .activeAssureOrder:
             return "/api/assureOrder/active"
-            
+        case .userTerminal:
+            return "/api/user/terminal"
         }
     }
     
@@ -281,6 +283,9 @@ extension NetworkService: TargetType {
             
         case let .activeAssureOrder(assureId):
             return ["assureId": assureId]
+            
+        case .userTerminal:
+            return ["deviceId": UIDevice.current.identifierForVendor?.uuidString ?? ""]
             
         default:
             return nil

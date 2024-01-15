@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     var window: UIWindow?
     private var serviceInfo: String?
+    private var childVCs: [UIViewController] = []
+    private let launch: LaunchScreenController = ViewLoader.Xib.controller()
     
     private var tabBarViewController: QMUITabBarViewController = {
         let tabbarVC = QMUITabBarViewController()
@@ -123,11 +125,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         let myNavi = APPNavigationController(rootViewController: myVC)
         myVC.tabBarItem = createTabBarItem(title: "tab_me".toMultilingualism(), image: UIImage(named: "tabbar_my_item")!, selecteColor: ColorConfiguration.primary.toColor(), tag: 3)
         
-        let childs = [guranteeNavi, walletNavi, messageNavi, myNavi]
-        tabBarViewController.viewControllers = childs
-        window?.rootViewController = tabBarViewController
+        childVCs = [guranteeNavi, walletNavi, messageNavi, myNavi]
+        tabBarViewController.viewControllers = childVCs
+        
+        window?.rootViewController = launch
         window?.backgroundColor = .white
         window?.makeKeyAndVisible()
+        
+        launch.setupDismissBlock {[weak self] in
+            guard let this = self else { return }
+            this.window?.rootViewController = this.tabBarViewController
+        }
     }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
