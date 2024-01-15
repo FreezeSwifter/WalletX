@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -60,6 +60,7 @@
                 <constraint firstAttribute="bottom" secondItem="Qi4-3o-ptW" secondAttribute="bottom" constant="25" id="G1K-SW-7nf"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Qi4-3o-ptW" secondAttribute="trailing" constant="15" id="GOn-Zg-Tv5"/>
                 <constraint firstItem="Qi4-3o-ptW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="Pnm-Rr-aNP"/>
+                <constraint firstItem="Qi4-3o-ptW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="2ca-ve-E0f" secondAttribute="bottom" constant="16" id="ZcB-JI-Vsa"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2ca-ve-E0f" secondAttribute="trailing" constant="16" id="e6p-4w-8AF"/>
                 <constraint firstItem="xD8-yL-ExJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="n17-9y-VsG"/>
                 <constraint firstItem="xD8-yL-ExJ" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="ul0-M9-fQJ"/>

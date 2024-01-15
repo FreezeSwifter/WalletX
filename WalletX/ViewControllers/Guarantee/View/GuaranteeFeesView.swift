@@ -82,7 +82,7 @@ class GuaranteeFeesView: UIView {
             contentView.frame = CGRect(x: 0, y: 0, width: topVc.view.bounds.width, height: 615)
             contentView.applyCornerRadius(10, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
             let ovc = OverlayController(view: contentView)
-            ovc.isDismissOnMaskTouched = false
+            ovc.isDismissOnMaskTouched = true
             ovc.layoutPosition = .bottom
             ovc.presentationStyle = .fromToBottom
             ovc.maskStyle = .black(opacity: 0.5)

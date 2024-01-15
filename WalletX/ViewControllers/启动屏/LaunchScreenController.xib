@@ -20,6 +20,7 @@
                 <outlet property="logo" destination="LkV-9X-qag" id="YVc-4B-otF"/>
                 <outlet property="serverDesLabel" destination="83B-Vc-jGA" id="Y51-gF-53T"/>
                 <outlet property="stack1" destination="PWJ-TV-FHb" id="neN-EI-HhC"/>
+                <outlet property="stack2" destination="40c-Tf-kh5" id="Hpg-Qb-fRS"/>
                 <outlet property="tgButton" destination="3G1-PG-1dI" id="y7J-Y3-76f"/>
                 <outlet property="tgLabel" destination="Fat-MB-N3p" id="zDa-JK-EvU"/>
                 <outlet property="versionLabel" destination="kxu-xT-Efr" id="K7i-EL-7I5"/>

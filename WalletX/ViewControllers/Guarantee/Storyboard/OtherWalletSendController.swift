@@ -85,7 +85,7 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
             shareButton.layer.cornerRadius = 15
             shareButton.clipsToBounds = true
             shareButton.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
-            shareButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 6, bottom: 2, right: 6)
+            shareButton.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         }
     }
     
@@ -97,7 +97,7 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
             downloadButton.layer.cornerRadius = 15
             downloadButton.clipsToBounds = true
             downloadButton.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
-            downloadButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 6, bottom: 2, right: 6)
+            downloadButton.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         }
     }
     
@@ -124,6 +124,10 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
     }
     
     @IBOutlet weak var qrImageView: UIImageView!
+    
+    @IBOutlet weak var tipLabel2: UILabel!
+    
+    @IBOutlet weak var helpButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -167,6 +171,19 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
             doneButtonTap()
         }).disposed(by: rx.disposeBag)
         
+        helpButton.rx.tap.subscribe(onNext: {[unowned self] in
+            helpButtonTap()
+        }).disposed(by: rx.disposeBag)
+        
+    }
+    
+    private func helpButtonTap() {
+        NotiAlterView.show(title: "什么是转账验证码?".toMultilingualism(), content: "什么是转账验证码内容".toMultilingualism(), leftButtonTitle: "联系客服".toMultilingualism(), rightButtonTitle: "我知道啦".toMultilingualism()).subscribe(onNext: { index in
+            if index == 0 {
+                let app = UIApplication.shared.delegate as? AppDelegate
+                app?.openTg()
+            }
+        }).disposed(by: rx.disposeBag)
     }
     
     private func doneButtonTap() {
@@ -183,9 +200,10 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
         switch payType {
         case .fee:
             let code = networkModel?.data?.hc?.components(separatedBy: ".").last
-            tipLabel.text = "\("转账验证码".toMultilingualism()): \(code ?? "--")\n\("其他钱包转入提示语".toMultilingualism())"
+            tipLabel.text = "\("转账验证码".toMultilingualism()): \(code ?? "--")"
             transferAmountValue.text = "\(networkModel?.data?.hc ?? "")"
             acceptValue.text = networkModel?.data?.hcAddr ?? "--"
+            tipLabel2.text = "其他钱包转入提示语".toMultilingualism()
             
             Task {
                 let img = await ScanViewController.generateQRCode(text: networkModel?.data?.hcAddr ?? "", size: qrImageView.width)

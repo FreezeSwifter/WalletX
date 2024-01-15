@@ -76,7 +76,7 @@ class WalletManagementController: UIViewController, HomeNavigationble {
             
             let ovc = OverlayController(view: contentView)
             contentView.ovc = ovc
-            ovc.isDismissOnMaskTouched = false
+            ovc.isDismissOnMaskTouched = true
             ovc.layoutPosition = .bottom
             ovc.presentationStyle = .fromToBottom
             ovc.maskStyle = .black(opacity: 0.5)

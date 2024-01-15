@@ -86,7 +86,7 @@ class SettingModifyAlterView: UIView {
             }
             
             let ovc = OverlayController(view: contentView)
-            ovc.isDismissOnMaskTouched = false
+            ovc.isDismissOnMaskTouched = true
             ovc.layoutPosition = .center
             ovc.presentationStyle = .transform(scale: 1.5)
             ovc.dismissonStyle = .transform(scale: 0.5)

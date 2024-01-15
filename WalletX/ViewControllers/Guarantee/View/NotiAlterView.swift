@@ -26,8 +26,6 @@ class NotiAlterView: UIView {
     @IBOutlet weak var contentLabel: UILabel! {
         didSet {
             contentLabel.textColor = ColorConfiguration.blackText.toColor()
-            contentLabel.minimumScaleFactor = 0.5
-            contentLabel.adjustsFontSizeToFitWidth = true
             contentLabel.font = UIFont.systemFont(ofSize: 15)
         }
     }
@@ -70,21 +68,12 @@ class NotiAlterView: UIView {
             guard let topVc = AppDelegate.topViewController() else {
                 return Disposables.create {}
             }
-            var baseHeight: CGFloat = 165
+            
             let width = topVc.view.bounds.width - 80
-            
-            let calculateHeightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width - 30, height: .greatestFiniteMagnitude))
-            calculateHeightLabel.numberOfLines = 0
-            calculateHeightLabel.lineBreakMode = .byWordWrapping
-            calculateHeightLabel.font = UIFont.systemFont(ofSize: 15)
-            calculateHeightLabel.text = content
-            calculateHeightLabel.sizeToFit()
-            baseHeight += calculateHeightLabel.frame.height
-            
             let contentView: NotiAlterView = ViewLoader.Xib.view()
     
             contentView.do { it in
-                it.frame = CGRect(x: 0, y: 0, width: width, height: baseHeight)
+                it.frame.size.width = width
                 it.layer.cornerRadius = 10
                 if let leftBtn = leftButtonTitle {
                     it.leftButton.setTitle(leftBtn, for: .normal)
@@ -99,6 +88,7 @@ class NotiAlterView: UIView {
                 }
                 it.topLabel.text = title
                 it.contentLabel.text = content
+                it.contentLabel.qmui_lineHeight = 24
                 
                 it.leftButton.rx.tap.subscribe(onNext: {[weak it] _ in
                     o.onNext(0)
@@ -114,9 +104,10 @@ class NotiAlterView: UIView {
                     }
                 }).disposed(by: it.rx.disposeBag)
             }
-            
+        
             let ovc = OverlayController(view: contentView)
-            ovc.isDismissOnMaskTouched = false
+            contentView.layoutIfNeeded()
+            ovc.isDismissOnMaskTouched = true
             ovc.layoutPosition = .center
             ovc.presentationStyle = .transform(scale: 1.5)
             ovc.dismissonStyle = .transform(scale: 0.5)

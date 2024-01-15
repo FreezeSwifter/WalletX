@@ -98,7 +98,7 @@ class GuaranteeYesNoView: UIView {
             
             let ovc = OverlayController(view: contentView)
             contentView.ovc = ovc
-            ovc.isDismissOnMaskTouched = false
+            ovc.isDismissOnMaskTouched = true
             ovc.layoutPosition = .bottom
             ovc.presentationStyle = .fromToBottom
             ovc.maskStyle = .black(opacity: 0.5)
@@ -176,7 +176,7 @@ class GuaranteeYesNoView: UIView {
             
             let ovc = OverlayController(view: contentView)
             contentView.ovc = ovc
-            ovc.isDismissOnMaskTouched = false
+            ovc.isDismissOnMaskTouched = true
             ovc.layoutPosition = .center
             ovc.presentationStyle = .transform(scale: 1.5)
             ovc.dismissonStyle = .transform(scale: 0.5)

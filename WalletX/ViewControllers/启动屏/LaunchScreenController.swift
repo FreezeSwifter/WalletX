@@ -51,6 +51,7 @@ class LaunchScreenController: UIViewController {
         didSet {
             desLabel1.textColor = ColorConfiguration.blodText.toColor()
             desLabel1.text = "启动页文本".toMultilingualism()
+            desLabel1.qmui_lineHeight = 24
         }
     }
     
@@ -86,6 +87,14 @@ class LaunchScreenController: UIViewController {
     }
     
     @IBOutlet weak var deviceButton: UIButton!
+    
+    @IBOutlet weak var stack2: UIStackView! {
+        didSet {
+            stack2.layer.cornerRadius = 12
+            stack2.layer.borderWidth = 1
+            stack2.layer.borderColor = ColorConfiguration.garyLine.toColor().cgColor
+        }
+    }
     
     func setupDismissBlock(actionBlock: @escaping () -> Void) {
         dismissActionBlock = actionBlock
