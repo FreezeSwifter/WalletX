@@ -35,6 +35,12 @@ final class LocaleWalletManager {
         }
     }
     
+    var userInfoDidChanged: Observable<UserInfoModel?> {
+        return userInfoDidChangedSubject.asObservable().skip { entity in
+            return entity == nil
+        }
+    }
+    
     var currentWalletModel: WalletModel? {
         
         if let currentIndex = AppArchiveder.shared().mmkv?.int32(forKey: ArchivedKey.currentWalletIndex.rawValue), currentIndex >= 0 {
@@ -67,6 +73,7 @@ final class LocaleWalletManager {
     private let walletDidChangedSubject: BehaviorSubject<Void?> = BehaviorSubject(value: nil)
     private var wallets: [WalletModel] = []
     private(set) var userInfo: UserInfoModel?
+    private let userInfoDidChangedSubject: BehaviorSubject<UserInfoModel?> = BehaviorSubject(value: nil)
     private(set) var walletBalanceModel: TokenModel?
     private let walletBalanceSubject: BehaviorSubject<TokenModel?> = BehaviorSubject(value: nil)
     private let disposeBag = DisposeBag()
@@ -234,6 +241,7 @@ final class LocaleWalletManager {
             let getUserInfoReq: Observable<UserInfoModel?> = APIProvider.rx.request(.getUserInfo).mapModel()
             getUserInfoReq.subscribe(onNext: {[unowned self] obj in
                 userInfo = obj
+                userInfoDidChangedSubject.onNext(userInfo)
                 if isAdd {
                     var importOne = WalletModel(name: walletName, mnemoic: mnemonic, nickName: obj?.data?.nickName, walletId: obj?.data?.walletId)
                     wallets = wallets.map { m in

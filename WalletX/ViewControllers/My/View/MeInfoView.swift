@@ -89,6 +89,21 @@ class MeInfoView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         commonInit()
+        
+        LocaleWalletManager.shared().userInfoDidChanged.subscribe(onNext: {[weak self] userInfo in
+            guard let this = self else { return }
+            
+            this.nameLabel.text = userInfo?.data?.nickName ?? LocaleWalletManager.shared().userInfo?.data?.walletId
+            let walletString = userInfo?.data?.walletId ?? "me_noCreate".toMultilingualism()
+            this.walletLabel.text = "\("me_walletId".toMultilingualism()): \(walletString)"
+            let telegramString = userInfo?.data?.tg ?? "未设置".toMultilingualism()
+            this.telegramLabel.text = "Telegram: \(telegramString)"
+            this.avatarImageView.kf.setImage(with: URL(string: userInfo?.data?.headImage ?? ""), placeholder: UIImage(named: "logo"))
+            let levelString = "Lv\(userInfo?.data?.creditLevel ?? 1)"
+            this.levelLabel.text = levelString
+            this.walletAddressDes.text = "\("Gmail邮箱".toMultilingualism()): \(userInfo?.data?.email ?? "未绑定".toMultilingualism())"
+            
+        }).disposed(by: rx.disposeBag)
     }
     
     private func commonInit() {
