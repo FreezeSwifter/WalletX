@@ -47,12 +47,15 @@ class MyViewController: UIViewController, HomeNavigationble {
         ds.titleSelectedColor = ColorConfiguration.blackText.toColor()
         ds.itemSpacing = 16
         ds.isItemSpacingAverageEnabled = false
-        ds.titleNormalFont = UIFont.systemFont(ofSize: 15, weight: .medium)
+        ds.titleNormalFont = UIFont.systemFont(ofSize: 16, weight: .medium)
         ds.isTitleZoomEnabled = false
         ds.titleSelectedZoomScale = 1
         ds.titles = titleData
         return ds
     }()
+    
+    
+    private lazy var tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(editEmail))
     
     private let segmentedView = JXSegmentedView()
     
@@ -140,6 +143,35 @@ class MyViewController: UIViewController, HomeNavigationble {
                 self?.fetchData()
         }).disposed(by: rx.disposeBag)
 
+        infoView.walletAddressDes.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func editEmail() {
+        if let email = LocaleWalletManager.shared().userInfo?.data?.email, !email.isEmpty {
+        } else {
+            SettingModifyAlterView.show(title: "home_setting_email".toMultilingualism(), text: nil, placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
+                
+                guard let text = str, text.isNotEmpty else {
+                    return Observable<Any>.empty()
+                }
+                func isValidEmail(email: String) -> Bool {
+                    let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+                    let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+                    return emailPred.evaluate(with: email)
+                }
+                if !isValidEmail(email: text) {
+                    APPHUD.flash(text: "请填写有效邮箱".toMultilingualism())
+                    return Observable<Any>.empty()
+                }
+                
+                let dict: [String: Any] = ["email": text]
+                return APIProvider.rx.request(.userInfoSetting(info: dict)).mapJSON().asObservable()
+                
+            }.subscribe(onNext: { _ in
+                APPHUD.flash(text: "成功".toMultilingualism())
+                LocaleWalletManager.shared().fetchUserData(mnemonic: nil, walletName: nil, isAdd: false)
+            }).disposed(by: rx.disposeBag)
+        }
     }
     
     private func toWalletManagementVC() {

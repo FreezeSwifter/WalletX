@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import QMUIKit
+import RxSwift
 
 class MeInfoView: UIView {
     
@@ -68,6 +69,15 @@ class MeInfoView: UIView {
         }
     }
     
+    @IBOutlet weak var copyWalletBtn: UIButton! {
+        didSet {
+            copyWalletBtn.setTitle("", for: .normal)
+        }
+    }
+    
+    private lazy var tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(telegramEdit))
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -95,5 +105,29 @@ class MeInfoView: UIView {
         avatarImageView.kf.setImage(with: URL(string: userInfo?.data?.headImage ?? ""), placeholder: UIImage(named: "logo"))
         let levelString = "Lv\(userInfo?.data?.creditLevel ?? 1)"
         levelLabel.text = levelString
+        copyWalletBtn.rx.tap.subscribe(onNext: {[weak self] in
+            UIPasteboard.general.string = self?.userInfo?.data?.walletId
+            APPHUD.flash(text: "成功".toMultilingualism())
+        }).disposed(by: rx.disposeBag)
+        
+        telegramLabel.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func telegramEdit() {
+        if let tg = userInfo?.data?.tg, !tg.isEmpty {
+        } else {
+            SettingModifyAlterView.show(title: "home_setting_telegram".toMultilingualism(), text: nil, placeholder: "请输入".toMultilingualism(), leftButtonTitle: "取消".toMultilingualism(), rightButtonTitle: "确定".toMultilingualism()).flatMapLatest { str in
+                
+                guard let text = str, text.isNotEmpty else {
+                    return Observable<Any>.empty()
+                }
+                let dict: [String: Any] = ["tg": text]
+                return APIProvider.rx.request(.userInfoSetting(info: dict)).mapJSON().asObservable()
+                
+            }.subscribe(onNext: { _ in
+                APPHUD.flash(text: "成功".toMultilingualism())
+                NotificationCenter.default.post(name: .userInfoDidChangeed, object: nil)
+            }).disposed(by: rx.disposeBag)
+        }
     }
 }
