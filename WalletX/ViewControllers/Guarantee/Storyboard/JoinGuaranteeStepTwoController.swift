@@ -120,6 +120,19 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         }
     }
 
+    @IBOutlet weak var sponsorField: UITextField! {
+        didSet {
+            sponsorField.placeholder = "发起人".toMultilingualism()
+            sponsorField.isUserInteractionEnabled = false
+        }
+    }
+    
+    @IBOutlet weak var sponsorLab: UILabel! {
+        didSet {
+            sponsorLab.text = "发起人".toMultilingualism()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -151,6 +164,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         valueTextField2.text = model?.data?.assureTypeToString()
         valueTextField3.text = "\(model?.data?.amount ?? 0)"
         textView.text = model?.data?.agreement
+        sponsorField.text = model?.data?.sponsorUser ?? ""
         
         contactButton.rx.tap.subscribe(onNext: { [weak self] _ in
             self?.openTg()
