@@ -92,7 +92,7 @@ class SendTokenPageOneController: UIViewController, HomeNavigationble {
         tokenLabel.text = model?.tokenName
         headerView?.titleLabel.text = "\("wallet_send".toMultilingualism())\(model?.contractName ?? "")"
         
-        textField.placeholder = "\(model?.contractName ?? "")\("地址".toMultilingualism())"
+        textField.placeholder = "\("TRC20")\("地址".toMultilingualism())"
         
         pasteButton.rx.tap.subscribe(onNext: {[weak self] _ in
             self?.textField.text = UIPasteboard.general.string

@@ -242,14 +242,22 @@ class PayHandlingFeeViewController: UIViewController, HomeNavigationble {
     }
     
     @objc private func didInnerWalletBtnClick(button: UIButton) {
-        let vc: SendTokenPageTwoController = ViewLoader.Storyboard.controller(from: "Wallet")
-        vc.model = LocaleWalletManager.shared().USDT
-        vc.toAddress = model?.multisigAddress
-        vc.sendType = .business(from: 0, assureId: model?.assureId ?? "")
-        vc.sendCount = feeInputItem.textField.text
-        vc.defaultMaxTotal = "20"
-        vc.defaultNetworkFee = "10"
-        navigationController?.pushViewController(vc, animated: true)
+        
+        let req: Observable<GuaranteeInfoModel?> = APIProvider.rx.request(.getAssureOrderDetail(assureId: model?.assureId ?? "")).mapModel()
+        req.subscribe(onNext: {[weak self] obj in
+            guard let this = self else { return }
+            
+            let vc: SendTokenPageTwoController = ViewLoader.Storyboard.controller(from: "Wallet")
+            vc.model = LocaleWalletManager.shared().USDT
+            vc.toAddress = obj?.data?.hcAddr
+            vc.sendType = .business(from: 0, assureId: this.model?.assureId ?? "")
+            vc.sendCount = this.feeInputItem.textField.text
+            vc.defaultMaxTotal = "20"
+            vc.defaultNetworkFee = "10"
+            this.navigationController?.pushViewController(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
+        
     }
     
     @objc private func didOtherWalletBtnClick(button: UIButton) {

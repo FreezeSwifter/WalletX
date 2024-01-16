@@ -86,7 +86,11 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var countLabel: UILabel! {
+        didSet {
+            countLabel.isHidden = true
+        }
+    }
     
     @IBOutlet weak var agreeButton: UIButton! {
         didSet {
@@ -97,6 +101,9 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
             agreeButton.titleLabel?.minimumScaleFactor = 0.8
             agreeButton.titleLabel?.adjustsFontSizeToFitWidth = true
             agreeButton.centerTextAndImage(spacing: 8)
+            agreeButton.layer.cornerRadius = 8
+            agreeButton.layer.borderWidth = 1
+            agreeButton.layer.borderColor = UIColor.qmui_color(withHexString: "#808A9D")?.cgColor ?? UIColor.clear.cgColor
         }
     }
     
@@ -164,7 +171,7 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
         valueTextField2.text = model?.data?.assureTypeToString()
         valueTextField3.text = "\(model?.data?.amount ?? 0)"
         textView.text = model?.data?.agreement
-        sponsorField.text = model?.data?.sponsorUser ?? ""
+        sponsorField.text = (model?.data?.sponsorUserName.isNotNilNotEmpty ?? false) ? model?.data?.sponsorUserName : model?.data?.sponsorUser
         
         contactButton.rx.tap.subscribe(onNext: { [weak self] _ in
             self?.openTg()

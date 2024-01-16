@@ -326,7 +326,7 @@ class DepositingDetailController: UIViewController {
         bottomLeftButton.rx.tap.subscribe(onNext: {[unowned self] _ in
             let vc: SendTokenPageTwoController = ViewLoader.Storyboard.controller(from: "Wallet")
             vc.model = LocaleWalletManager.shared().USDT
-            vc.toAddress = model?.multisigAddress
+            vc.toAddress = model?.pushAddress
             vc.sendCount = addrtessField.text
             vc.defaultMaxTotal = "20"
             vc.defaultNetworkFee = "10"

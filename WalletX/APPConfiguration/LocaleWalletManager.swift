@@ -425,7 +425,7 @@ enum WalletToken: Equatable {
             return "USDT(Tron|TRC20)"
         }
     }
-    
+
     static func ==(lhs: WalletToken, rhs: WalletToken) -> Bool {
         
         switch (lhs, rhs) {

@@ -96,6 +96,12 @@ class LaunchScreenController: UIViewController {
         }
     }
     
+    @IBOutlet weak var redLabel: UILabel! {
+        didSet {
+            redLabel.text = "您的设备已被禁用".toMultilingualism()
+        }
+    }
+    
     func setupDismissBlock(actionBlock: @escaping () -> Void) {
         dismissActionBlock = actionBlock
     }

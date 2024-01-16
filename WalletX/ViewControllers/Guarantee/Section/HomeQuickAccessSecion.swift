@@ -63,17 +63,31 @@ final class HomeQuickAccessSecion: ListSectionController {
         
         cell.joinBgView.rx.controlEvent(.touchUpInside).take(until: cell.rx.sentMessage(#selector(HomeQuickAccessCell.prepareForReuse)))
             .subscribe(onNext: {[weak self] in
-            
-            if !LocaleWalletManager.shared().hasWallet {
-                self?.checkHasWalletPopAlter()
-                return
-            }
-            
-            let vc: JoinGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
-            vc.hidesBottomBarWhenPushed = true
-            self?.viewController?.navigationController?.pushViewController(vc, animated: true)
-            
-        }).disposed(by: cell.rx.disposeBag)
+                
+                if !LocaleWalletManager.shared().hasWallet {
+                    self?.checkHasWalletPopAlter()
+                    return
+                }
+                
+                if !(AppArchiveder.shared().mmkv?.bool(forKey: ArchivedKey.ratePopup.rawValue) ?? false) {
+                    GuaranteeFeesView.show().subscribe(onNext: { tuple in
+                        if tuple.1 {
+                            AppArchiveder.shared().mmkv?.set(true, forKey: ArchivedKey.ratePopup.rawValue)
+                        }
+                        if tuple.0 == 0 { // 联系客服
+                            (UIApplication.shared.delegate as? AppDelegate)?.openTg()
+                        } else {
+                            self?.startGuaranteeVC()
+                        }
+                    }).disposed(by: cell.rx.disposeBag)
+                    return
+                }
+                
+                let vc: JoinGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
+                vc.hidesBottomBarWhenPushed = true
+                self?.viewController?.navigationController?.pushViewController(vc, animated: true)
+                
+            }).disposed(by: cell.rx.disposeBag)
         
         cell.sendBgView.rx.controlEvent(.touchUpInside)
             .take(until: cell.rx.sentMessage(#selector(HomeQuickAccessCell.prepareForReuse)))
@@ -96,8 +110,7 @@ final class HomeQuickAccessSecion: ListSectionController {
                     return
                 }
                 self?.startGuaranteeVC()
-        }).disposed(by: cell.rx.disposeBag)
-        
+            }).disposed(by: cell.rx.disposeBag)
         
         return cell
     }

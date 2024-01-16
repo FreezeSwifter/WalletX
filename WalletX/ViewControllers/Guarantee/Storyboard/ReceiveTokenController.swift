@@ -132,9 +132,9 @@ class ReceiveTokenController: UIViewController, HomeNavigationble {
         view.layoutIfNeeded()
         setupNavigationbar()
         setupChildVCStyle()
-        headerView?.titleLabel.text = "\("wallet_receive".toMultilingualism())\(model?.contractName ?? "")"
+        headerView?.titleLabel.text = "\("wallet_receive".toMultilingualism())\("TRC20")"
         headerView?.backgroundColor = .white
-        notiLabel.text = LanguageManager.shared().replaceBraces(inString: "接收Token警告".toMultilingualism(), with: model?.contractName ?? "")
+        notiLabel.text = LanguageManager.shared().replaceBraces(inString: "接收Token警告".toMultilingualism(), with: "Tether(TRC20)")
     }
     
     private func saveImageToAlbum(image: UIImage) {

@@ -123,18 +123,24 @@ class SendTokenPageTwoController: UIViewController, HomeNavigationble {
     @IBOutlet weak var valueLabel1: UILabel! {
         didSet {
             valueLabel1.text = "--"
+            valueLabel1.adjustsFontSizeToFitWidth = true
+            valueLabel1.minimumScaleFactor = 0.5
         }
     }
     
     @IBOutlet weak var valueLabel2: UILabel! {
         didSet {
             valueLabel2.text = "--"
+            valueLabel2.adjustsFontSizeToFitWidth = true
+            valueLabel2.minimumScaleFactor = 0.5
         }
     }
     
     @IBOutlet weak var valueLabel3: UILabel! {
         didSet {
             valueLabel3.text = "--"
+            valueLabel3.adjustsFontSizeToFitWidth = true
+            valueLabel3.minimumScaleFactor = 0.5
         }
     }
     
@@ -142,7 +148,7 @@ class SendTokenPageTwoController: UIViewController, HomeNavigationble {
         didSet {
             valueLabel4.text = "--"
             valueLabel4.adjustsFontSizeToFitWidth = true
-            valueLabel4.minimumScaleFactor = 0.8
+            valueLabel4.minimumScaleFactor = 0.5
         }
     }
     

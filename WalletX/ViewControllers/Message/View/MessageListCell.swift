@@ -16,6 +16,7 @@ class MessageListCell: UITableViewCell {
             numLabel.isHidden = true
             numLabel.backgroundColor = .red
             numLabel.clipsToBounds = true
+            numLabel.font = UIFont.systemFont(ofSize: 12)
         }
     }
     
@@ -50,7 +51,7 @@ class MessageListCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        numLabel.layer.cornerRadius = 4
+        numLabel.layer.cornerRadius = 10
     }
     
 }

@@ -1907,6 +1907,11 @@
                                                             <constraint firstAttribute="height" constant="50" id="tyD-xf-qZK"/>
                                                             <constraint firstItem="I6f-OT-gHh" firstAttribute="centerY" secondItem="lfJ-2b-XaC" secondAttribute="centerY" id="ubq-LB-mha"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="qmui_borderWidth">
+                                                                <real key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1967,6 +1972,11 @@
                                                             <constraint firstItem="al8-da-MLy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sKw-6O-jE0" secondAttribute="trailing" constant="20" id="s9o-IO-AgE"/>
                                                             <constraint firstItem="sKw-6O-jE0" firstAttribute="centerY" secondItem="6wP-BS-rot" secondAttribute="centerY" id="yKG-Am-3hl"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="qmui_borderWidth">
+                                                                <real key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="二维码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WSx-wm-bYF">
                                                         <rect key="frame" x="173.66666666666666" y="100.33333333333331" width="46" height="18"/>
@@ -1979,7 +1989,7 @@
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iQj-Qa-law">
                                                                 <rect key="frame" x="110" y="16" width="141" height="141"/>
-                                                                <color key="backgroundColor" red="1" green="0.34901960780000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="141" id="4YY-aC-sFu"/>
                                                                     <constraint firstAttribute="width" constant="141" id="ZcZ-hF-01j"/>
@@ -2021,6 +2031,11 @@
                                                             <constraint firstAttribute="height" constant="220" id="iql-mZ-K9O"/>
                                                             <constraint firstItem="iQj-Qa-law" firstAttribute="top" secondItem="Iyn-mV-eeO" secondAttribute="top" constant="16" id="rGP-9x-ccv"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="qmui_borderWidth">
+                                                                <real key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Yvm-eg-J3v">
                                                         <rect key="frame" x="16" y="384.33333333333337" width="361" height="40"/>
@@ -2102,11 +2117,17 @@
                                                             <constraint firstItem="ufu-0m-Qpb" firstAttribute="leading" secondItem="oGE-PT-seN" secondAttribute="trailing" constant="4" id="iQC-ta-kYH"/>
                                                             <constraint firstItem="8I5-kz-ogS" firstAttribute="top" secondItem="oGE-PT-seN" secondAttribute="bottom" constant="8" id="qDK-1P-zhk"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="qmui_borderWidth">
+                                                                <real key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                 </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="xjY-yN-jiv" firstAttribute="top" secondItem="pIU-Na-pZP" secondAttribute="bottom" constant="16" id="7yd-Uu-HFq"/>
                                             <constraint firstAttribute="trailing" secondItem="xjY-yN-jiv" secondAttribute="trailing" constant="16" id="Edc-S1-wnt"/>
@@ -2152,8 +2173,8 @@
                         <outlet property="qrCodeLabel" destination="WSx-wm-bYF" id="sod-bc-tTi"/>
                         <outlet property="qrImageView" destination="iQj-Qa-law" id="iIW-lK-epc"/>
                         <outlet property="shareButton" destination="sS3-5V-MTf" id="HbN-FG-Mtg"/>
-                        <outlet property="tipLabel" destination="oGE-PT-seN" id="wOJ-eB-P8U"/>
-                        <outlet property="tipLabel2" destination="8I5-kz-ogS" id="gWt-2G-dwg"/>
+                        <outlet property="tipLabel1" destination="oGE-PT-seN" id="fsZ-Ra-PjK"/>
+                        <outlet property="tipLabel2" destination="8I5-kz-ogS" id="DeT-U2-1mn"/>
                         <outlet property="tipStackView" destination="xjY-yN-jiv" id="IOc-v6-0Z3"/>
                         <outlet property="transferAmountLabel" destination="mxN-fF-tQ7" id="4Bv-sY-5th"/>
                         <outlet property="transferAmountValue" destination="nHj-rG-scS" id="Y8q-Dh-vRO"/>

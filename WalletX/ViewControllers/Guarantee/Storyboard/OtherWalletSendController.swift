@@ -42,12 +42,6 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
         }
     }
     
-    @IBOutlet weak var tipLabel: UILabel! {
-        didSet {
-            tipLabel.text = nil
-        }
-    }
-    
     @IBOutlet weak var acceptLabel: UILabel! {
         didSet {
             acceptLabel.text = "收款地址".toMultilingualism()
@@ -110,8 +104,6 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
     @IBOutlet weak var tipStackView: UIStackView! {
         didSet {
             tipStackView.layer.cornerRadius = 10
-            tipStackView.isLayoutMarginsRelativeArrangement = true
-            tipStackView.layoutMargins = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
         }
     }
     
@@ -125,9 +117,11 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var qrImageView: UIImageView!
     
-    @IBOutlet weak var tipLabel2: UILabel!
-    
     @IBOutlet weak var helpButton: UIButton!
+    
+    @IBOutlet weak var tipLabel1: UILabel!
+    
+    @IBOutlet weak var tipLabel2: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -200,7 +194,7 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
         switch payType {
         case .fee:
             let code = networkModel?.data?.hc?.components(separatedBy: ".").last
-            tipLabel.text = "\("转账验证码".toMultilingualism()): \(code ?? "--")"
+            tipLabel1.text = "\("转账验证码".toMultilingualism()): \(code ?? "--")"
             transferAmountValue.text = "\(networkModel?.data?.hc ?? "")"
             acceptValue.text = networkModel?.data?.hcAddr ?? "--"
             tipLabel2.text = "其他钱包转入提示语".toMultilingualism()
@@ -217,13 +211,15 @@ class OtherWalletSendController: UIViewController, HomeNavigationble {
                 let pushDecimalSponsor = model?.pushDecimalSponsor ?? ""
                 pushWaitAmount += "."
                 pushWaitAmount += pushDecimalSponsor
-                tipLabel.text = "\("转账验证码".toMultilingualism()): \(pushDecimalSponsor)\n\("其他钱包转入提示语".toMultilingualism())"
+                tipLabel1.text = "\("转账验证码".toMultilingualism()): \(pushDecimalSponsor)"
+                tipLabel2.text = "其他钱包转入提示语".toMultilingualism()
                 
             } else {
                 let pushDecimalPartner = model?.pushDecimalPartner ?? ""
                 pushWaitAmount += "."
                 pushWaitAmount += pushDecimalPartner
-                tipLabel.text = "\("转账验证码".toMultilingualism()): \(pushDecimalPartner)\n\("其他钱包转入提示语".toMultilingualism())"
+                tipLabel1.text = "\("转账验证码".toMultilingualism()): \(pushDecimalPartner)"
+                tipLabel2.text = "其他钱包转入提示语".toMultilingualism()
             }
             transferAmountValue.text = pushWaitAmount
             acceptValue.text = model?.pushAddr
