@@ -550,7 +550,7 @@
                                                 </subviews>
                                             </stackView>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入担保ID" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cIW-Ta-ZfE">
-                                                <rect key="frame" x="20" y="15.666666666666659" width="85.333333333333329" height="18.666666666666679"/>
+                                                <rect key="frame" x="20" y="15.666666666666659" width="87" height="18.666666666666679"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -1249,13 +1249,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通常为12个单词（有时是18、24个）由单个空格分隔" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ub9-1P-fEG">
-                                <rect key="frame" x="20" y="344" width="353" height="36"/>
+                                <rect key="frame" x="20" y="344" width="353" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.50196078431372548" green="0.54117647058823526" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BYy-dQ-FNg">
-                                <rect key="frame" x="16" y="410" width="361" height="40"/>
+                                <rect key="frame" x="16" y="392" width="361" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="fVJ-YW-msI"/>
                                 </constraints>
@@ -1928,7 +1928,7 @@
                                                 <rect key="frame" x="0.0" y="290" width="393" height="600"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="担保ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E6X-YR-gdj">
-                                                        <rect key="frame" x="15.999999999999996" y="0.0" width="48.666666666666657" height="19.333333333333332"/>
+                                                        <rect key="frame" x="15.999999999999996" y="0.0" width="50.666666666666657" height="19.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1958,7 +1958,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入担保ID" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sKw-6O-jE0">
-                                                                <rect key="frame" x="20" y="15.666666666666687" width="85.333333333333329" height="18.666666666666679"/>
+                                                                <rect key="frame" x="20" y="15.666666666666687" width="87" height="18.666666666666679"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
@@ -2000,6 +2000,7 @@
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MTf-NJ-fwO">
                                                                         <rect key="frame" x="0.0" y="0.0" width="41" height="30"/>
+                                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="30" id="ZzU-QQ-q0I"/>
                                                                         </constraints>

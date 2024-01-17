@@ -23,6 +23,8 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
     
     private let timer: Observable<Int> = Observable.timer(.seconds(1), period: .seconds(60), scheduler: MainScheduler.instance)
     
+    private let featchMessageTimer: Observable<Int> = Observable<Int>.interval(.seconds(20), scheduler: MainScheduler.instance)
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         NotificationCenter.default.rx.notification(.languageChanged).observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
@@ -112,6 +114,21 @@ class GuranteeViewController: UIViewController, HomeNavigationble {
         
         LocaleWalletManager.shared().fetchUserData(mnemonic: nil, walletName: nil, isAdd: false)
         LocaleWalletManager.shared().fetchWalletBalanceData()
+        // 获取消息
+        fetchMessageLoop20s()
+    }
+    
+    /// 先获取消息列表 之后每隔20秒获取一次数据
+    private func fetchMessageLoop20s() {
+        fetchMessage()
+        featchMessageTimer.subscribe(onNext: { [weak self] _ in
+            self?.fetchMessage()
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    private func fetchMessage() {
+        let app = UIApplication.shared.delegate as? AppDelegate
+        app?.fetchMessage()
     }
     
     private func refreshTotalCountData() {

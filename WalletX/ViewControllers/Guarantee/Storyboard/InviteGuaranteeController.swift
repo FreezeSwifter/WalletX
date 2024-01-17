@@ -30,7 +30,7 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var moneyDewLabel: UILabel! {
         didSet {
-            moneyDewLabel.text = "home_amount".toMultilingualism()
+            moneyDewLabel.text = "担保金额没有1".toMultilingualism()
         }
     }
     
@@ -68,7 +68,25 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
     
     @IBOutlet weak var downButton: UIButton! {
         didSet {
+            downButton.setTitleColor(ColorConfiguration.primary.toColor(), for: .normal)
             downButton.setTitle("share_Download".toMultilingualism(), for: .normal)
+            downButton.layer.borderWidth = 1
+            downButton.layer.cornerRadius = 15
+            downButton.clipsToBounds = true
+            downButton.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
+            downButton.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+        }
+    }
+    
+    @IBOutlet weak var shareButton: UIButton! {
+        didSet {
+            shareButton.setTitleColor(ColorConfiguration.primary.toColor(), for: .normal)
+            shareButton.setTitle("share_Share".toMultilingualism(), for: .normal)
+            shareButton.layer.borderWidth = 1
+            shareButton.layer.cornerRadius = 15
+            shareButton.clipsToBounds = true
+            shareButton.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
+            shareButton.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         }
     }
     
@@ -114,6 +132,17 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
         downButton.rx.tap.subscribe(onNext: {[weak self] _ in
             self?.captureScreenshot()
         }).disposed(by: rx.disposeBag)
+        
+        shareButton.rx.tap.subscribe(onNext: {[unowned self] _ in
+            UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, false, 0.0)
+            self.view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+            guard let screenshotImage = UIGraphicsGetImageFromCurrentImageContext() else {
+                return
+            }
+            UIGraphicsEndImageContext()
+            
+            self.shareImageToTelegram(image: screenshotImage)
+        }).disposed(by: rx.disposeBag)
     }
 
     private func captureScreenshot() {
@@ -126,6 +155,29 @@ class InviteGuaranteeController: UIViewController, HomeNavigationble {
 
         // 保存截图到相册
         UIImageWriteToSavedPhotosAlbum(screenshotImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    private func shareImageToTelegram(image: UIImage) {
+        let activityItems: [Any] = [image]
+        
+        let activityController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        activityController.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            } else if completed {
+                print("Image shared successfully")
+            }
+        }
+        
+        // Exclude all activities except Telegram
+        activityController.excludedActivityTypes = []
+        if let popoverPresentationController = activityController.popoverPresentationController {
+            popoverPresentationController.sourceView = UIApplication.topViewController()?.view
+            popoverPresentationController.sourceRect = CGRect(x: 0, y: 0, width: 1, height: 1)
+            popoverPresentationController.permittedArrowDirections = []
+        }
+        
+        UIApplication.topViewController()?.present(activityController, animated: true, completion: nil)
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
