@@ -26,6 +26,8 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
     }
     
     
+    @IBOutlet weak var valueLabel30: UILabel!
+    @IBOutlet weak var desLabel30: UILabel!
     @IBOutlet weak var desLabel1: UILabel! {
         didSet {
             desLabel1.text = "担保ID".toMultilingualism()
@@ -69,8 +71,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         didSet {
             valueLabel1State.minimumScaleFactor = 0.5
             valueLabel1State.adjustsFontSizeToFitWidth = true
-            valueLabel1State.contentEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
-            valueLabel1State.applyCornerRadius(4)
+            valueLabel1State.textColor = ColorConfiguration.primary.toColor()
         }
     }
     
@@ -172,9 +173,12 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         didSet {
             explainButton.contentEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
             explainButton.spacingBetweenImageAndTitle = 4
-            explainButton.backgroundColor = ColorConfiguration.primary.toColor().withAlphaComponent(0.1)
+            explainButton.backgroundColor = ColorConfiguration.lightBlue.toColor().withAlphaComponent(0.1)
             explainButton.setTitleColor(ColorConfiguration.primary.toColor(), for: .normal)
+            explainButton.setImage(UIImage(named: "guarantee_help")?.withTintColor(ColorConfiguration.primary.toColor(), renderingMode: .alwaysOriginal), for: .normal)
             explainButton.setTitle("说明".toMultilingualism(), for: .normal)
+            explainButton.layer.cornerRadius = 11
+            explainButton.clipsToBounds = true
         }
     }
 
@@ -200,6 +204,14 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         }
     }
     
+    @IBOutlet weak var valueLabel2State: QMUILabel! {
+        didSet {
+            valueLabel2State.minimumScaleFactor = 0.5
+            valueLabel2State.adjustsFontSizeToFitWidth = true
+            valueLabel2State.contentEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
+            valueLabel2State.applyCornerRadius(4)
+        }
+    }
     @IBOutlet weak var valueLabel7: UILabel! {
         didSet {
             valueLabel7.minimumScaleFactor = 0.5
@@ -218,6 +230,16 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         didSet {
             textFieldBg1.clipsToBounds = true
             textFieldBg1.layer.cornerRadius = 10
+        }
+    }
+    
+    @IBOutlet weak var Contact: UIStackView! {
+        didSet {
+            Contact.isLayoutMarginsRelativeArrangement = true
+            Contact.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+            Contact.applyCornerRadius(Contact.height / 2, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+            let ges = UITapGestureRecognizer(target: self, action: #selector(OrderOperationViewController.contactTap))
+            Contact.addGestureRecognizer(ges)
         }
     }
     
@@ -361,12 +383,14 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 self?.valueLabel5Sub.attributedText = partnerReleasedAmount
                 
                 self?.valueLabel6.text = obj?.data?.duration?.description
-                self?.valueLabel7.text = "\(obj?.data?.assureFee ?? 0)"
-                self?.valueLabel8.text = "\(obj?.data?.releaseAmountCan ?? 0)"
+                self?.valueLabel7.attributedText = self?.appendUSDT(str: "\(obj?.data?.assureFee ?? 0.00)")
+                self?.valueLabel8.attributedText = self?.appendUSDT(str: "\(obj?.data?.releaseAmountCan ?? 0.00)")
                 
-                self?.valueLabel4Sub.text = "\(obj?.data?.sponsorAmount ?? 0)"
-                self?.valueLabel5Sub.text = "\(obj?.data?.partnerAmount ?? 0)"
-    
+                self?.valueLabel4Sub.attributedText = self?.appendUSDT(str: "\(obj?.data?.sponsorAmount ?? 0.00)")
+                self?.valueLabel5Sub.attributedText = self?.appendUSDT(str: "\(obj?.data?.partnerAmount ?? 0.00)")
+                self?.valueLabel1State.text = self?.model?.data?.assureTypeToString()
+                // 已上押金额 待确认
+                self?.valueLabel30.attributedText = self?.appendUSDT(str: "\(obj?.data?.pushAmount ?? 0.00)")
                 if self?.state != .applyRelease {
                     if obj?.data?.reason == 0 { // 交易结束
                         if self?.state == .handling || self?.state == .revoke {
@@ -425,14 +449,14 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 }
                 
                 if obj?.data?.assureStatus == 2 {
-                    self?.valueLabel1State.backgroundColor = UIColor(hex: "#28C445").withAlphaComponent(0.1)
-                    self?.valueLabel1State.textColor = UIColor(hex: "#28C445")
-                    self?.valueLabel1State.text = "me_guaranteeing".toMultilingualism()
+                    self?.valueLabel2State.backgroundColor = UIColor(hex: "#28C445").withAlphaComponent(0.1)
+                    self?.valueLabel2State.textColor = UIColor(hex: "#28C445")
+                    self?.valueLabel2State.text = "me_guaranteeing".toMultilingualism()
                     
                 } else if obj?.data?.assureStatus == 9 {
-                    self?.valueLabel1State.backgroundColor = UIColor(hex: "#7241FF").withAlphaComponent(0.1)
-                    self?.valueLabel1State.textColor = UIColor(hex: "#7241FF")
-                    self?.valueLabel1State.text = "me_releasing".toMultilingualism()
+                    self?.valueLabel2State.backgroundColor = UIColor(hex: "#7241FF").withAlphaComponent(0.1)
+                    self?.valueLabel2State.textColor = UIColor(hex: "#7241FF")
+                    self?.valueLabel2State.text = "me_releasing".toMultilingualism()
                 }
                 
             }).disposed(by: rx.disposeBag)
@@ -616,6 +640,20 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
         }
         desLabel4Me.clipsToBounds = true
         desLabel4Me.layer.cornerRadius = 13
+        
+        valueLabel30.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            valueLabel30.centerYAnchor.constraint(equalTo: desLabel30.centerYAnchor)
+        ])
+        
+        valueLabel30.text = "fffffffff"
+    }
+    
+    private func appendUSDT(str: String) -> NSAttributedString {
+        let amountStr = NSMutableAttributedString(string: str, attributes: [.foregroundColor: ColorConfiguration.primary.toColor()])
+        let unitStr = NSAttributedString(string: " USDT", attributes: [.foregroundColor: ColorConfiguration.blackText.toColor()])
+        amountStr.append(unitStr)
+        return amountStr
     }
     
     @objc
@@ -648,5 +686,12 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
             }
             
         }).disposed(by: rx.disposeBag)
+    }
+    
+    @objc 
+    private func contactTap() {
+        UIPasteboard.general.string = "担保ID".toMultilingualism() + ": " + (model?.data?.assureId ?? "")
+        let app = UIApplication.shared.delegate as? AppDelegate
+        app?.openTg()
     }
 }
