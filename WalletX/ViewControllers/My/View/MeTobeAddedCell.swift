@@ -400,7 +400,7 @@ class MeTobeAddedCell: UITableViewCell {
                     }
                 }
                 
-                let endTime = createTime + timeout.minutes
+                let endTime = createTime + timeout.minutes + 3.seconds
                 let countTime = endTime - Date()
                 
                 if endTime.isInPast {
