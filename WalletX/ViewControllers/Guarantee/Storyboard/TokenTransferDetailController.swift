@@ -130,6 +130,7 @@ class TokenTransferDetailController: UIViewController, HomeNavigationble {
     
     private lazy var indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .large).then { it in
         it.hidesWhenStopped = true
+        it.translatesAutoresizingMaskIntoConstraints = false
         it.startAnimating()
     }
     
@@ -183,10 +184,17 @@ class TokenTransferDetailController: UIViewController, HomeNavigationble {
         view.layoutIfNeeded()
         view.backgroundColor = ColorConfiguration.listBg.toColor()
         setupNavigationbar()
-        setupChildVCStyle()
+        setupChildVCStyle {
+            self.headerView?.accountButton.rx.tap.subscribe(onNext: {[weak self] in
+                self?.navigationController?.popToRootViewController(animated: true)
+            }).disposed(by: self.rx.disposeBag)
+        }
+        fd_interactivePopDisabled = true // 禁用侧滑返回手势
         headerView?.titleLabel.text = "转账".toMultilingualism()
-        
         view.addSubview(indicator)
-        indicator.center = successImageView.center
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: successImageView.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: successImageView.centerYAnchor)
+        ])
     }
 }

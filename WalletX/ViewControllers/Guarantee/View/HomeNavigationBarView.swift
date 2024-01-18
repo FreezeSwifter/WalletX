@@ -59,7 +59,7 @@ extension HomeNavigationble where Self: UIViewController {
         updateAccountInfo()
     }
     
-    func setupChildVCStyle() {
+    func setupChildVCStyle(customBackClosure: (() -> Void)? = nil) {
         headerView?.stackView.removeArrangedSubview(headerView!.settingButton)
         headerView?.settingButton.removeFromSuperview()
         headerView?.stackView.removeArrangedSubview(headerView!.shareButton)
@@ -70,9 +70,13 @@ extension HomeNavigationble where Self: UIViewController {
         headerView?.messageButton.removeFromSuperview()
         headerView?.accountButton.setImage(UIImage(named: "navigation_back_button"), for: UIControl.State())
         headerView?.accountButton.tintColor = ColorConfiguration.blodText.toColor()
-        headerView?.accountButton.rx.tap.subscribe(onNext: {[weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }).disposed(by: rx.disposeBag)
+        if let customBackClosure = customBackClosure {
+            customBackClosure()
+        } else {
+            headerView?.accountButton.rx.tap.subscribe(onNext: {[weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }).disposed(by: rx.disposeBag)
+        }
         headerView?.accountButton.setTitle(nil, for: .normal)
         headerView?.accountButton.layer.borderColor = UIColor.clear.cgColor
     }
