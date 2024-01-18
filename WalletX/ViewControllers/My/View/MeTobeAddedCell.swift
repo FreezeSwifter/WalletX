@@ -318,7 +318,7 @@ class MeTobeAddedCell: UITableViewCell {
                 buttonStackView.isHidden = false
                 let createTime = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 )
                 let timeout = Int(AppArchiveder.shared().getAPPConfig(by: "joinTimeout") ?? "0") ?? 0
-                let endTime = createTime + timeout.minutes
+                let endTime = createTime + timeout.minutes + 3.seconds
                 let countTime = endTime - Date()
                 timerLabel?.setCountDownTime(countTime.timeInterval)
                 timerLabel?.start()
