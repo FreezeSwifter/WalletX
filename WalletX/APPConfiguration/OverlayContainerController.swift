@@ -137,6 +137,9 @@ public class OverlayController: NSObject {
     
     public var defaultDismissClosure: (OverlayController) -> ()
     
+    /// 点击mask关闭弹窗回调
+    public var didDismissOnMaskTouchedClosure: () -> Void = {}
+    
     public var willPresentClosure: ((OverlayController) -> ())?
     
     public var didPresentClosure: ((OverlayController) -> ())?
@@ -362,6 +365,7 @@ public class OverlayController: NSObject {
     @objc private func handleTap(_: UITapGestureRecognizer) {
         guard isPresenting, isDismissOnMaskTouched else { return }
         defaultDismissClosure(self)
+        didDismissOnMaskTouchedClosure()
     }
     
     private var _directionalVertical = false, _isDirectionLocked = false

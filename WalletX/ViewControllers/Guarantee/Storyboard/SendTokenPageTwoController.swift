@@ -211,50 +211,58 @@ class SendTokenPageTwoController: UIViewController, HomeNavigationble {
         guard let coinType = model else {
             return
         }
-
-        let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
-        faceIdVC.modalPresentationStyle = .fullScreen
-        present(faceIdVC, animated: true)
         
-        faceIdVC.resultBlock = {[unowned self] isPass in
-            if isPass {
-                APPHUD.showLoading(text: "处理中".toMultilingualism())
-                let addressValidateReq = APIProvider.rx.request(.addressValidate(address: toAddress)).mapJSON()
-                addressValidateReq.subscribe { [unowned self] obj in
-                    guard let dict = obj as? [String: Any], let data = dict["data"] as? Bool else {
-                        APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
-                        return
-                    }
-                    if data {
-                        LocaleWalletManager.shared().sendToken(toAddress: toAddress, amount: Double(sendAmount) ?? 0.0, coinType: coinType).subscribe(onNext: {[weak self] tuple in
-                            APPHUD.hide()
-                            if tuple.0 {
-                                switch self?.sendType {
-                                case .normal:
-                                    let vc: TokenTransferDetailController = ViewLoader.Storyboard.controller(from: "Wallet")
-                                    vc.txid = tuple.1
-                                    vc.item = self?.model
-                                    vc.toAddress = toAddress
-                                    vc.sendAmount = sendAmount
-                                    self?.navigationController?.pushViewController(vc, animated: true)
-                                case .business(let from, let assureId):
-                                    self?.uploadBusinessConfirm(assureId: assureId, from: from, txId: tuple.1, amount: sendAmount, toAddress: toAddress)
-                                case .none:
-                                    break
-                                }
-                            } else {
-                                APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
-                            }
-                        }).disposed(by: self.rx.disposeBag)
-                        
-                    } else {
-                        APPHUD.showLoading(text: "处理中".toMultilingualism())
-                    }
-                } onFailure: { error in
-                    APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
-                }.disposed(by: rx.disposeBag)
+        if let isLock = AppArchiveder.shared().mmkv?.bool(forKey: ArchivedKey.screenLock.rawValue), isLock {
+            let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
+            faceIdVC.modalPresentationStyle = .fullScreen
+            faceIdVC.resultBlock = { [unowned self] isPass in
+                if isPass {
+                    self.doTransferTo(coinType: coinType, toAddress: toAddress, sendAmount: sendAmount)
+                }
             }
+            present(faceIdVC, animated: true)
+        } else {
+            doTransferTo(coinType: coinType, toAddress: toAddress, sendAmount: sendAmount)
         }
+    }
+    
+    /// 链上转账
+    private func doTransferTo(coinType: WalletToken, toAddress: String, sendAmount: String) {
+        APPHUD.showLoading(text: "处理中".toMultilingualism())
+        let addressValidateReq = APIProvider.rx.request(.addressValidate(address: toAddress)).mapJSON()
+        addressValidateReq.subscribe { [unowned self] obj in
+            guard let dict = obj as? [String: Any], let data = dict["data"] as? Bool else {
+                APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
+                return
+            }
+            if data {
+                LocaleWalletManager.shared().sendToken(toAddress: toAddress, amount: Double(sendAmount) ?? 0.0, coinType: coinType).subscribe(onNext: {[weak self] tuple in
+                    APPHUD.hide()
+                    if tuple.0 {
+                        switch self?.sendType {
+                        case .normal:
+                            let vc: TokenTransferDetailController = ViewLoader.Storyboard.controller(from: "Wallet")
+                            vc.txid = tuple.1
+                            vc.item = self?.model
+                            vc.toAddress = toAddress
+                            vc.sendAmount = sendAmount
+                            self?.navigationController?.pushViewController(vc, animated: true)
+                        case .business(let from, let assureId):
+                            self?.uploadBusinessConfirm(assureId: assureId, from: from, txId: tuple.1, amount: sendAmount, toAddress: toAddress)
+                        case .none:
+                            break
+                        }
+                    } else {
+                        APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
+                    }
+                }).disposed(by: self.rx.disposeBag)
+                
+            } else {
+                APPHUD.showLoading(text: "处理中".toMultilingualism())
+            }
+        } onFailure: { error in
+            APPHUD.showLoading(text: "链上转账失败".toMultilingualism())
+        }.disposed(by: rx.disposeBag)
     }
     
     

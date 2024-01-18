@@ -390,7 +390,7 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
                 self?.valueLabel5Sub.attributedText = self?.appendUSDT(str: "\(obj?.data?.partnerAmount ?? 0.00)")
                 self?.valueLabel1State.text = self?.model?.data?.assureTypeToString()
                 // 已上押金额 待确认
-                self?.valueLabel30.attributedText = self?.appendUSDT(str: "\(obj?.data?.pushAmount ?? 0.00)")
+                self?.valueLabel30.attributedText = self?.appendUSDT(str: "\(obj?.data?.custodyAmount ?? 0.00)")
                 if self?.state != .applyRelease {
                     if obj?.data?.reason == 0 { // 交易结束
                         if self?.state == .handling || self?.state == .revoke {

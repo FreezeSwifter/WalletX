@@ -68,7 +68,7 @@ class GuaranteeYesNoView: UIView {
     }
     
     
-    public static func showFromBottom(image: UIImage?, title: String?, titleIcon: UIImage?, content: String?, leftButton: String?, rightButton: String?, textAlignment: NSTextAlignment = .left) -> Observable<Int> {
+    public static func showFromBottom(image: UIImage?, title: String?, titleIcon: UIImage?, content: String?, leftButton: String?, rightButton: String?, textAlignment: NSTextAlignment = .left, dismissOnMaskTouchedClosure: @escaping ()->Void = {}) -> Observable<Int> {
         
         return Observable.create { o in
             
@@ -99,6 +99,7 @@ class GuaranteeYesNoView: UIView {
             let ovc = OverlayController(view: contentView)
             contentView.ovc = ovc
             ovc.isDismissOnMaskTouched = true
+            ovc.didDismissOnMaskTouchedClosure = dismissOnMaskTouchedClosure
             ovc.layoutPosition = .bottom
             ovc.presentationStyle = .fromToBottom
             ovc.maskStyle = .black(opacity: 0.5)

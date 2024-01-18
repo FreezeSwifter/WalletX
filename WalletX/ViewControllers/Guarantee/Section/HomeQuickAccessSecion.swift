@@ -77,16 +77,12 @@ final class HomeQuickAccessSecion: ListSectionController {
                         if tuple.0 == 0 { // 联系客服
                             (UIApplication.shared.delegate as? AppDelegate)?.openTg()
                         } else {
-                            self?.startGuaranteeVC()
+                            self?.joinGuaranteeVC()
                         }
                     }).disposed(by: cell.rx.disposeBag)
                     return
                 }
-                
-                let vc: JoinGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
-                vc.hidesBottomBarWhenPushed = true
-                self?.viewController?.navigationController?.pushViewController(vc, animated: true)
-                
+                self?.joinGuaranteeVC()
             }).disposed(by: cell.rx.disposeBag)
         
         cell.sendBgView.rx.controlEvent(.touchUpInside)
@@ -121,6 +117,12 @@ final class HomeQuickAccessSecion: ListSectionController {
     
     private func startGuaranteeVC() {
         let vc: StartGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
+        vc.hidesBottomBarWhenPushed = true
+        viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func joinGuaranteeVC() {
+        let vc: JoinGuaranteeController = ViewLoader.Storyboard.controller(from: "Guarantee")
         vc.hidesBottomBarWhenPushed = true
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }

@@ -229,7 +229,12 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
             if message == "Success" {
                 let notiTitle = LanguageManager.shared().replaceBraces(inString: "成功加入担保弹窗标题".toMultilingualism(), with: self?.valueTextField1.text ?? "")
                 if self?.model?.data?.assureType == 1 { // 多签担保
-                    GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: notiTitle, titleIcon: nil, content: "成功加入担保弹窗内容".toMultilingualism(), leftButton: "提醒对方付手续费".toMultilingualism(), rightButton: "我来付手续费".toMultilingualism()).subscribe(onNext: {[weak self] index in
+                    GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: notiTitle, titleIcon: nil, content: "成功加入担保弹窗内容".toMultilingualism(), leftButton: "提醒对方付手续费".toMultilingualism(), rightButton: "我来付手续费".toMultilingualism(), dismissOnMaskTouchedClosure: {
+                        self?.navigationController?.popToRootViewController(animated: false)
+                        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                            appDelegate.tabBarSelecte(index: 3)
+                        }
+                    }).subscribe(onNext: {[weak self] index in
                         if index == 1 {
                             self?.navigationController?.popToRootViewController(animated: false)
                             let vc = PayHandlingFeeViewController()
@@ -241,7 +246,12 @@ class JoinGuaranteeStepTwoController: UIViewController, HomeNavigationble {
                         }
                     }).disposed(by: this.rx.disposeBag)
                 } else if self?.model?.data?.assureType == 0 { // 普通担保
-                    GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: notiTitle, titleIcon: nil, content: "成功加入担保弹窗内容".toMultilingualism(), leftButton: "提醒对方上押".toMultilingualism(), rightButton: "我来上押".toMultilingualism()).subscribe(onNext: {[weak self] index in
+                    GuaranteeYesNoView.showFromBottom(image: UIImage(named: "guarantee_celebration"), title: notiTitle, titleIcon: nil, content: "成功加入担保弹窗内容".toMultilingualism(), leftButton: "提醒对方上押".toMultilingualism(), rightButton: "我来上押".toMultilingualism(), dismissOnMaskTouchedClosure: {
+                        self?.navigationController?.popToRootViewController(animated: false)
+                        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                            appDelegate.tabBarSelecte(index: 3)
+                        }
+                    }).subscribe(onNext: {[weak self] index in
                         if index == 1 {
                             self?.navigationController?.popToRootViewController(animated: false)
                             let vc: DepositingDetailController = ViewLoader.Storyboard.controller(from: "Me")
