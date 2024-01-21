@@ -330,6 +330,8 @@
                 <outlet property="mutilAddressValueLabel" destination="vbk-m5-uwb" id="4br-WH-Swm"/>
                 <outlet property="protocolBg" destination="AyQ-gR-faA" id="PDJ-Ls-A75"/>
                 <outlet property="protocolLabel" destination="eTl-dx-om6" id="6qc-6C-HQH"/>
+                <outlet property="rightPadding1" destination="HrE-a4-uCi" id="Aqq-gJ-FqZ"/>
+                <outlet property="rightPadding2" destination="fH2-fk-Gds" id="Hnp-bH-RMt"/>
                 <outlet property="serviceLabel" destination="nmx-4G-j08" id="dNM-Ly-ceO"/>
                 <outlet property="superLinkLabel" destination="DsX-Um-MOD" id="idu-5g-ZL1"/>
                 <outlet property="superLinkValueLabel" destination="rea-DU-ePs" id="mCa-yn-BvK"/>

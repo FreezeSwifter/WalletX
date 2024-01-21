@@ -205,6 +205,7 @@ class MeTobeAddedCell: UITableViewCell {
         super.awakeFromNib()
         
         timerLabel = MZTimerLabel(label: time, andTimerType: MZTimerLabelType(rawValue: 1))!
+        timerLabel.timeFormat = "mm:ss"
         timerLabel.delegate = self
         
         meDesLabel.snp.remakeConstraints { make in

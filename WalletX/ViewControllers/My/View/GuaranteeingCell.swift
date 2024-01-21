@@ -250,12 +250,17 @@ class GuaranteeingCell: UITableViewCell {
     
     var timerLabel: MZTimerLabel!
     
+    @IBOutlet weak var rightPadding1: NSLayoutConstraint!
+    
+    @IBOutlet weak var rightPadding2: NSLayoutConstraint!
+    
     private(set) var model: GuaranteeInfoModel.Meta?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         timerLabel = MZTimerLabel(label: time, andTimerType: MZTimerLabelType(rawValue: 1))!
+        timerLabel.timeFormat = "mm:ss"
         timerLabel.delegate = self
         
         desLabel5Me.snp.remakeConstraints { make in
@@ -418,13 +423,18 @@ class GuaranteeingCell: UITableViewCell {
             button2.setupAPPUISolidStyle(title: "申请解押".toMultilingualism())
             valueLabel1Status.text = "me_guaranteeing".toMultilingualism()
             
+            timeBg.isHidden = true
+            timeBg.snp.updateConstraints { make in
+                make.height.width.equalTo(CGFloat.leastNonzeroMagnitude)
+            }
+
         } else if data.assureStatus == 9 { // 退押中
             buttonStackView.isHidden = false
             buttonStackView.arrangedSubviews.forEach { v in
                 v.removeFromSuperview()
             }
-            buttonStackView.addArrangedSubview(button2)
-            button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
+            buttonStackView.addArrangedSubview(button1)
+            button1.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
             valueLabel1Status.text = "me_releasing".toMultilingualism()
             valueLabel1Status.textColor = UIColor(hex: "#F0A158")
             valueLabel1Status.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
@@ -446,7 +456,7 @@ class GuaranteeingCell: UITableViewCell {
                 }
                 
                 let releaseTimeout = Int(AppArchiveder.shared().getAPPConfig(by: "releaseTimeout") ?? "0") ?? 0
-                var createTime = Date(timeIntervalSince1970: (data.multisigTime ?? 0) / 1000 )
+                let createTime = Date(timeIntervalSince1970: (data.multisigTime ?? 0) / 1000 )
                 
                 let endTime = createTime + releaseTimeout.minutes + 3.seconds
                 let countTime = endTime - Date()
@@ -474,7 +484,7 @@ class GuaranteeingCell: UITableViewCell {
                     make.height.width.equalTo(CGFloat.leastNonzeroMagnitude)
                 }
             }
-            
+        
         } else if data.assureStatus == 3 { // 已退押
             buttonStackView.isHidden = false
             buttonStackView.arrangedSubviews.forEach { v in
@@ -487,6 +497,13 @@ class GuaranteeingCell: UITableViewCell {
             valueLabel1Status.text = "me_released".toMultilingualism()
             valueLabel1Status.textColor = UIColor(hex: "#999999")
             valueLabel1Status.backgroundColor = UIColor(hex: "#999999").withAlphaComponent(0.1)
+            
+            timeBg.isHidden = true
+            timeBg.snp.updateConstraints { make in
+                make.height.width.equalTo(CGFloat.leastNonzeroMagnitude)
+            }
+
+            
         } else if data.assureStatus == 8 { // 已删除, 已取消
             buttonStackView.isHidden = true
             buttonStackView.arrangedSubviews.forEach { v in
@@ -495,6 +512,12 @@ class GuaranteeingCell: UITableViewCell {
             valueLabel1Status.textColor = UIColor(hex: "#FF5966")
             valueLabel1Status.backgroundColor = UIColor(hex: "#FF5966").withAlphaComponent(0.1)
             valueLabel1Status.text = "已取消".toMultilingualism()
+            
+            timeBg.isHidden = true
+            timeBg.snp.updateConstraints { make in
+                make.height.width.equalTo(CGFloat.leastNonzeroMagnitude)
+            }
+
         }
     }
     
