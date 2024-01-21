@@ -321,14 +321,14 @@ class GuaranteeingCell: UITableViewCell {
     }
     
     private func getSuperLink(pushAddress: String?) -> String {
-        if let pushAddress = pushAddress, pushAddress.isEmpty {
+        if let pushAddress = pushAddress, !pushAddress.isEmpty {
             if LocaleWalletManager.shared().isTronMainNet {
                 return "https://nile.tronscan.org/#/address/" + pushAddress
             } else {
                 return "https://tronscan.org/#/address/" + pushAddress
             }
         }
-        return ""
+        return "--"
     }
     
     func setupData(data: GuaranteeInfoModel.Meta) {
