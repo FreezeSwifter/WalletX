@@ -27,7 +27,11 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
     
     
     @IBOutlet weak var valueLabel30: UILabel!
-    @IBOutlet weak var desLabel30: UILabel!
+    @IBOutlet weak var desLabel30: UILabel! {
+        didSet {
+            desLabel30.text = "已上押".toMultilingualism()
+        }
+    }
     @IBOutlet weak var desLabel1: UILabel! {
         didSet {
             desLabel1.text = "担保ID".toMultilingualism()
@@ -240,6 +244,11 @@ class OrderOperationViewController: UIViewController, HomeNavigationble {
             Contact.applyCornerRadius(Contact.height / 2, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
             let ges = UITapGestureRecognizer(target: self, action: #selector(OrderOperationViewController.contactTap))
             Contact.addGestureRecognizer(ges)
+        }
+    }
+    @IBOutlet weak var serviceLabel: UILabel! {
+        didSet {
+            serviceLabel.text = "客服".toMultilingualism()
         }
     }
     
