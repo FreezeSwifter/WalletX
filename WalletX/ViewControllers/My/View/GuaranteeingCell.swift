@@ -13,10 +13,16 @@ import Then
 import NSObject_Rx
 import QMUIKit
 import SwiftDate
+import MZTimerLabel
 
 class GuaranteeingCell: UITableViewCell {
     
-    @IBOutlet weak var tagLabel: UILabel!
+    @IBOutlet weak var tagLabel: UILabel! {
+        didSet {
+            tagLabel.minimumScaleFactor = 0.5
+            tagLabel.adjustsFontSizeToFitWidth = true
+        }
+    }
     @IBOutlet weak var concact: UIStackView! {
         didSet {
             concact.isLayoutMarginsRelativeArrangement = true
@@ -29,6 +35,8 @@ class GuaranteeingCell: UITableViewCell {
     @IBOutlet weak var serviceLabel: UILabel! {
         didSet {
             serviceLabel.text = "客服".toMultilingualism()
+            serviceLabel.minimumScaleFactor = 0.5
+            serviceLabel.adjustsFontSizeToFitWidth = true
         }
     }
     @IBOutlet weak var desLabel1: UILabel! {
@@ -77,7 +85,7 @@ class GuaranteeingCell: UITableViewCell {
     
     @IBOutlet weak var valueLabel1: UILabel! {
         didSet {
-            valueLabel1.minimumScaleFactor = 0.5
+            valueLabel1.minimumScaleFactor = 0.9
             valueLabel1.adjustsFontSizeToFitWidth = true
         }
     }
@@ -90,6 +98,8 @@ class GuaranteeingCell: UITableViewCell {
             valueLabel1Status.applyCornerRadius(8)
             valueLabel1Status.backgroundColor = UIColor(hex: "#28C445").withAlphaComponent(0.1)
             valueLabel1Status.textColor = UIColor(hex: "#28C445")
+            valueLabel1Status.minimumScaleFactor = 0.5
+            valueLabel1Status.adjustsFontSizeToFitWidth = true
         }
     }
 
@@ -107,33 +117,35 @@ class GuaranteeingCell: UITableViewCell {
     @IBOutlet weak var protocolLabel: UILabel! {
         didSet {
             protocolLabel.text = "协议".toMultilingualism()
+            protocolLabel.adjustsFontSizeToFitWidth = true
+            protocolLabel.minimumScaleFactor = 0.5
         }
     }
     
     @IBOutlet weak var valueLabel2: UILabel! {
         didSet {
-            valueLabel2.minimumScaleFactor = 0.5
+            valueLabel2.minimumScaleFactor = 0.9
             valueLabel2.adjustsFontSizeToFitWidth = true
         }
     }
     
     @IBOutlet weak var valueLabel3: UILabel! {
         didSet {
-            valueLabel3.minimumScaleFactor = 0.5
+            valueLabel3.minimumScaleFactor = 0.9
             valueLabel3.adjustsFontSizeToFitWidth = true
         }
     }
     
     @IBOutlet weak var valueLabel4: UILabel! {
         didSet {
-            valueLabel4.minimumScaleFactor = 0.5
+            valueLabel4.minimumScaleFactor = 0.9
             valueLabel4.adjustsFontSizeToFitWidth = true
         }
     }
     
     @IBOutlet weak var valueLabel5: UILabel! {
         didSet {
-            valueLabel5.minimumScaleFactor = 0.5
+            valueLabel5.minimumScaleFactor = 0.9
             valueLabel5.adjustsFontSizeToFitWidth = true
         }
     }
@@ -213,12 +225,38 @@ class GuaranteeingCell: UITableViewCell {
             leftStackView.setContentHuggingPriority(.required, for: .horizontal)
         }
     }
+    
     @IBOutlet weak var buttonStackView: UIStackView!
+    
+    @IBOutlet weak var timeBg: UIView! {
+        didSet {
+            timeBg.layer.cornerRadius = timeBg.width / 2
+            timeBg.clipsToBounds = true
+            timeBg.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var time: UILabel!
+    
+    @IBOutlet weak var timeDesLabel: UILabel! {
+        didSet {
+            timeDesLabel.text = "等待处理".toMultilingualism()
+            timeDesLabel.minimumScaleFactor = 0.5
+            timeDesLabel.adjustsFontSizeToFitWidth = true
+        }
+    }
+    
+    @IBOutlet weak var timeIcon: UIImageView!
+    
+    var timerLabel: MZTimerLabel!
     
     private(set) var model: GuaranteeInfoModel.Meta?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        timerLabel = MZTimerLabel(label: time, andTimerType: MZTimerLabelType(rawValue: 1))!
+        timerLabel.delegate = self
         
         desLabel5Me.snp.remakeConstraints { make in
             make.width.height.equalTo(16)
@@ -400,6 +438,43 @@ class GuaranteeingCell: UITableViewCell {
                     button3.setupAPPUISolidStyle(title: "处理解押".toMultilingualism())
                 }
             }
+            
+            if data.releaseStatus == 1 || data.releaseStatus == 3 {
+                timeBg.isHidden = false
+                timeBg.snp.updateConstraints { make in
+                    make.height.width.equalTo(76)
+                }
+                
+                let releaseTimeout = Int(AppArchiveder.shared().getAPPConfig(by: "releaseTimeout") ?? "0") ?? 0
+                var createTime = Date(timeIntervalSince1970: (data.multisigTime ?? 0) / 1000 )
+                
+                let endTime = createTime + releaseTimeout.minutes + 3.seconds
+                let countTime = endTime - Date()
+                
+                if endTime.isInPast {
+                    time.text = "已超时".toMultilingualism()
+                    time.textColor = UIColor(hex: "#FF5966")
+                    buttonStackView.arrangedSubviews.forEach { v in
+                        v.removeFromSuperview()
+                    }
+                    timerLabel?.removeFromSuperview()
+                } else {
+                    timerLabel?.setCountDownTime(countTime.timeInterval)
+                    timerLabel?.start()
+                }
+                
+            } else if data.releaseStatus == 6 {
+                timeBg.isHidden = true
+                timeBg.snp.updateConstraints { make in
+                    make.height.width.equalTo(CGFloat.leastNonzeroMagnitude)
+                }
+            } else {
+                timeBg.isHidden = true
+                timeBg.snp.updateConstraints { make in
+                    make.height.width.equalTo(CGFloat.leastNonzeroMagnitude)
+                }
+            }
+            
         } else if data.assureStatus == 3 { // 已退押
             buttonStackView.isHidden = false
             buttonStackView.arrangedSubviews.forEach { v in
@@ -441,6 +516,19 @@ class GuaranteeingCell: UITableViewCell {
         let link = getSuperLink(pushAddress: model?.pushAddress)
         if !link.isEmpty, let url = URL(string: link) {
             UIApplication.shared.open(url)
+        }
+    }
+}
+
+
+extension GuaranteeingCell: MZTimerLabelDelegate {
+    
+    func timerLabel(_ timerLabel: MZTimerLabel!, finshedCountDownTimerWithTime countTime: TimeInterval) {
+        timerLabel?.removeFromSuperview()
+        time.text = "已超时".toMultilingualism()
+        time.textColor = UIColor(hex: "#FF5966")
+        buttonStackView.arrangedSubviews.forEach { v in
+            v.removeFromSuperview()
         }
     }
 }
