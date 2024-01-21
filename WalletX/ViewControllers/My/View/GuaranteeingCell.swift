@@ -53,9 +53,6 @@ class GuaranteeingCell: UITableViewCell {
     @IBOutlet weak var desLabel4Me: UILabel! {
         didSet {
             desLabel4Me.text = "我".toMultilingualism()
-            desLabel4Me.layoutMargins = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-            desLabel4Me.minimumScaleFactor = 0.5
-            desLabel4Me.adjustsFontSizeToFitWidth = true
             desLabel4Me.isHidden = true
         }
     }
@@ -63,9 +60,6 @@ class GuaranteeingCell: UITableViewCell {
     @IBOutlet weak var desLabel5Me: UILabel! {
         didSet {
             desLabel5Me.text = "我".toMultilingualism()
-            desLabel5Me.layoutMargins = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-            desLabel5Me.minimumScaleFactor = 0.5
-            desLabel5Me.adjustsFontSizeToFitWidth = true
             desLabel5Me.isHidden = true
         }
     }
@@ -208,16 +202,16 @@ class GuaranteeingCell: UITableViewCell {
         super.awakeFromNib()
         
         desLabel5Me.snp.remakeConstraints { make in
-            make.width.height.equalTo(26)
+            make.width.height.equalTo(16)
         }
         desLabel5Me.clipsToBounds = true
-        desLabel5Me.layer.cornerRadius = 13
+        desLabel5Me.layer.cornerRadius = 8
         
         desLabel4Me.snp.remakeConstraints { make in
-            make.width.height.equalTo(26)
+            make.width.height.equalTo(16)
         }
         desLabel4Me.clipsToBounds = true
-        desLabel4Me.layer.cornerRadius = 13
+        desLabel4Me.layer.cornerRadius = 8
         
         bind()
     }
@@ -388,9 +382,8 @@ class GuaranteeingCell: UITableViewCell {
             button1.setupAPPUIHollowStyle(title: "联系客服".toMultilingualism())
             button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
             valueLabel1Status.text = "已退押".toMultilingualism()
-            valueLabel1Status.textColor = UIColor(hex: "#FF5966")
-            valueLabel1Status.backgroundColor = UIColor(hex: "#FF5966").withAlphaComponent(0.1)
-            
+            valueLabel1Status.textColor = UIColor(hex: "#999999")
+            valueLabel1Status.backgroundColor = UIColor(hex: "#999999").withAlphaComponent(0.1)
         } else if data.assureStatus == 8 { // 已删除, 已取消
             buttonStackView.isHidden = true
             buttonStackView.arrangedSubviews.forEach { v in

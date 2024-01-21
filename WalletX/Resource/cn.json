@@ -29,6 +29,7 @@
     "me_all": "所有",
     "me_pending": "待加入",
     "me_depositing": "待上押",
+    "me_deposited": "已上押",
     "me_guaranteeing": "担保中",
     "me_releasing": "退押中",
     "me_released": "已退押",

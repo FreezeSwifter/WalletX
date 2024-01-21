@@ -51,9 +51,6 @@ class MeTobeAddedCell: UITableViewCell {
     
     @IBOutlet weak var meDes2Label: QMUILabel! {
         didSet {
-            meDes2Label.minimumScaleFactor = 0.5
-            meDes2Label.adjustsFontSizeToFitWidth = true
-            meDes2Label.contentEdgeInsets = UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
             meDes2Label.text = "我".toMultilingualism()
             meDes2Label.isHidden = true
         }
@@ -61,9 +58,6 @@ class MeTobeAddedCell: UITableViewCell {
     
     @IBOutlet weak var meDesLabel: QMUILabel! {
         didSet {
-            meDesLabel.minimumScaleFactor = 0.5
-            meDesLabel.adjustsFontSizeToFitWidth = true
-            meDesLabel.contentEdgeInsets = UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
             meDesLabel.text = "我".toMultilingualism()
             meDesLabel.isHidden = true
         }
@@ -186,6 +180,18 @@ class MeTobeAddedCell: UITableViewCell {
     
     @IBOutlet weak var buttonStackView: UIStackView!
     
+    @IBOutlet weak var pendedLabel: UILabel! {
+        didSet {
+            pendedLabel.text = "me_deposited".toMultilingualism()
+        }
+    }
+    @IBOutlet weak var pendingLabel: UILabel! {
+        didSet {
+            pendingLabel.text = "me_depositing".toMultilingualism()
+        }
+    }
+    @IBOutlet weak var pendedValueLabel: UILabel!
+    @IBOutlet weak var pendingValueLabel: UILabel!
     var timerLabel: MZTimerLabel!
     
     private(set) var model: GuaranteeInfoModel.Meta?
@@ -197,16 +203,26 @@ class MeTobeAddedCell: UITableViewCell {
         timerLabel.delegate = self
         
         meDesLabel.snp.remakeConstraints { make in
-            make.width.height.equalTo(26)
+            make.width.height.equalTo(16)
         }
-        meDesLabel.applyCornerRadius(13)
+        meDesLabel.applyCornerRadius(8)
         
         meDes2Label.snp.remakeConstraints { make in
-            make.width.height.equalTo(26)
+            make.width.height.equalTo(16)
         }
-        meDes2Label.applyCornerRadius(13)
+        meDes2Label.applyCornerRadius(8)
         
         bind()
+        
+        pendedValueLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            pendedValueLabel.centerYAnchor.constraint(equalTo: pendedLabel.centerYAnchor)
+        ])
+        
+        pendingValueLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            pendingValueLabel.centerYAnchor.constraint(equalTo: pendingLabel.centerYAnchor)
+        ])
     }
     
     
@@ -277,8 +293,23 @@ class MeTobeAddedCell: UITableViewCell {
         }).disposed(by: rx.disposeBag)
     }
     
+    private func appendUSDT(text: String) -> NSAttributedString {
+        let amountStr = NSMutableAttributedString(string: text, attributes: [.foregroundColor: ColorConfiguration.primary.toColor()])
+        let unitStr = NSAttributedString(string: " USDT", attributes: [.foregroundColor: ColorConfiguration.blackText.toColor()])
+        amountStr.append(unitStr)
+        return amountStr
+    }
+    
+    private func isDepositingStatus(isHidden: Bool) {
+        pendedLabel.isHidden = isHidden
+        pendingLabel.isHidden = isHidden
+        pendedValueLabel.isHidden = isHidden
+        pendingValueLabel.isHidden = isHidden
+    }
+    
     func setupData(data: GuaranteeInfoModel.Meta) {
         model = data
+        isDepositingStatus(isHidden: true)
         idValueLabel.text = data.assureId ?? "--"
         timeValueLabel.text = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 ).toFormat("yyyy-MM-dd HH:mm:ss")
         creatorValueLabel.text = data.sponsorUserName ?? "--"
@@ -287,7 +318,8 @@ class MeTobeAddedCell: UITableViewCell {
         amount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
         moneyValueLabel.attributedText = amount
         meValueLabel.text = data.partnerUserName ?? "--"
-        
+        pendedValueLabel.attributedText = appendUSDT(text: "\(data.custodyAmount ?? 0.00)")
+        pendingValueLabel.attributedText = appendUSDT(text: "\(data.pushWaitAmount ?? 0.00)")
         if data.sponsorUser == LocaleWalletManager.shared().userInfo?.data?.walletId {
             meDes2Label.isHidden = false
             meDesLabel.isHidden = true
@@ -333,7 +365,7 @@ class MeTobeAddedCell: UITableViewCell {
             }
             
         }  else if data.assureStatus == 1 || data.assureStatus == 6 || data.assureStatus == 7 { // 待上押
-            
+            isDepositingStatus(isHidden: false)
             if data.assureStatus == 6 { // 创建钱包已超时
                 buttonStackView.isHidden = true
                 stateLabel.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)

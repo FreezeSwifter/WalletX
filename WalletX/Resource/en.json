@@ -29,6 +29,7 @@
     "me_all": "All",
     "me_pending": "Pending",
     "me_depositing": "Depositing",
+    "me_deposited": "Deposited",
     "me_guaranteeing": "Guaranteeing",
     "me_releasing": "Releasing",
     "me_released": "Released",
