@@ -30,6 +30,8 @@
     "me_pending": "待加入",
     "me_depositing": "待上押",
     "me_deposited": "已上押",
+    "hyperlink": "超级链接",
+    "signature": "多签地址",
     "me_guaranteeing": "担保中",
     "me_releasing": "退押中",
     "me_released": "已退押",

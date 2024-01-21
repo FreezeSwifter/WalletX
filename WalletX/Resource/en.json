@@ -30,6 +30,8 @@
     "me_pending": "Pending",
     "me_depositing": "Depositing",
     "me_deposited": "Deposited",
+    "hyperlink": "hyperlink",
+    "signature": "Multi-signature address",
     "me_guaranteeing": "Guaranteeing",
     "me_releasing": "Releasing",
     "me_released": "Released",

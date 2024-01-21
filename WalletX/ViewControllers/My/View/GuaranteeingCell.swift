@@ -70,12 +70,6 @@ class GuaranteeingCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var desLabel6: UILabel! {
-        didSet {
-            desLabel6.text = "钱包地址".toMultilingualism()
-        }
-    }
-    
     @IBOutlet weak var valueLabel1: UILabel! {
         didSet {
             valueLabel1.minimumScaleFactor = 0.5
@@ -139,13 +133,6 @@ class GuaranteeingCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var valueLabel6: UILabel! {
-        didSet {
-            valueLabel6.minimumScaleFactor = 0.5
-            valueLabel6.adjustsFontSizeToFitWidth = true
-        }
-    }
-    
     @IBOutlet weak var valueLabel5sub: UILabel! {
         didSet {
             valueLabel5sub.minimumScaleFactor = 0.5
@@ -160,14 +147,35 @@ class GuaranteeingCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var valueLabel6Button: UIButton! {
+    @IBOutlet weak var superLinkLabel: UILabel! {
         didSet {
-            valueLabel6Button.setTitle("share_Copy".toMultilingualism(), for: .normal)
-            valueLabel6Button.titleLabel?.minimumScaleFactor = 0.5
-            valueLabel6Button.titleLabel?.adjustsFontSizeToFitWidth = true
+            superLinkLabel.text = "hyperlink".toMultilingualism()
         }
     }
     
+    @IBOutlet weak var superLinkValueLabel: UILabel! {
+        didSet {
+            superLinkValueLabel.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(openLink))
+            superLinkValueLabel.addGestureRecognizer(tap)
+        }
+    }
+    @IBOutlet weak var multiAddressLabel: UILabel! {
+        didSet {
+            multiAddressLabel.text = "signature".toMultilingualism()
+        }
+    }
+    @IBOutlet weak var multiAddressStatckView: UIStackView!
+    @IBOutlet weak var mutilAddressValueLabel: UILabel! {
+        didSet {
+            mutilAddressValueLabel.numberOfLines = 1
+        }
+    }
+    @IBOutlet weak var copyAddressButton: UIButton! {
+        didSet {
+            copyAddressButton.setTitle("", for: .normal)
+        }
+    }
     private lazy var button1: UIButton = {
         let v = UIButton(type: .custom)
         v.titleLabel?.font = UIFont.systemFont(ofSize: 13)
@@ -194,6 +202,12 @@ class GuaranteeingCell: UITableViewCell {
     }()
    
     
+    @IBOutlet weak var leftStackView: UIStackView! {
+        didSet {
+            leftStackView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+            leftStackView.setContentHuggingPriority(.required, for: .horizontal)
+        }
+    }
     @IBOutlet weak var buttonStackView: UIStackView!
     
     private(set) var model: GuaranteeInfoModel.Meta?
@@ -214,6 +228,20 @@ class GuaranteeingCell: UITableViewCell {
         desLabel4Me.layer.cornerRadius = 8
         
         bind()
+        
+        superLinkValueLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            superLinkValueLabel.leadingAnchor.constraint(equalTo: leftStackView.trailingAnchor, constant: 15),
+            superLinkValueLabel.centerYAnchor.constraint(equalTo: superLinkLabel.centerYAnchor),
+            superLinkValueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
+        ])
+        
+        multiAddressStatckView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            multiAddressStatckView.leadingAnchor.constraint(equalTo: leftStackView.trailingAnchor, constant: 15),
+            multiAddressStatckView.centerYAnchor.constraint(equalTo: multiAddressLabel.centerYAnchor),
+            multiAddressStatckView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
+        ])
     }
     
     private func bind() {
@@ -247,11 +275,8 @@ class GuaranteeingCell: UITableViewCell {
             
         }).disposed(by: rx.disposeBag)
         
-        valueLabel6Button.rx.tap.subscribe(onNext: {[weak self] _ in
+        copyAddressButton.rx.tap.subscribe(onNext: {[weak self] _ in
             var address: String = ""
-            if let str = self?.model?.pushAddress {
-                address = str
-            }
             if let str = self?.model?.multisigAddress {
                 address = str
             }
@@ -293,13 +318,36 @@ class GuaranteeingCell: UITableViewCell {
             }
             
         }).disposed(by: rx.disposeBag)
-        
     }
     
     
+    private func isMultiGuarantee(isHidden: Bool) {
+        superLinkLabel.isHidden = isHidden
+        superLinkValueLabel.isHidden = isHidden
+        multiAddressLabel.isHidden = isHidden
+        multiAddressStatckView.isHidden = isHidden
+    }
+    
+    private func getSuperLink(pushAddress: String?) -> String {
+        if let pushAddress = pushAddress, pushAddress.isEmpty {
+            if LocaleWalletManager.shared().isTronMainNet {
+                return "https://nile.tronscan.org/#/address/" + pushAddress
+            } else {
+                return "https://tronscan.org/#/address/" + pushAddress
+            }
+        }
+        return ""
+    }
+    
     func setupData(data: GuaranteeInfoModel.Meta) {
-        
         model = data
+        if data.assureType == 0 {
+            isMultiGuarantee(isHidden: true)
+        } else if data.assureType == 1 {
+            superLinkValueLabel.text = getSuperLink(pushAddress: data.pushAddress)
+            mutilAddressValueLabel.text = data.multisigAddress ?? ""
+            isMultiGuarantee(isHidden: false)
+        }
         valueLabel1.text = data.assureId
         valueLabel2.text = Date(timeIntervalSince1970: (data.createTime ?? 0) / 1000 ).toFormat("yyyy-MM-dd HH:mm:ss")
         let amount = NSMutableAttributedString(string: "\(data.amount ?? 0) USDT")
@@ -319,17 +367,6 @@ class GuaranteeingCell: UITableViewCell {
             desLabel5Me.isHidden = false
         }
         tagLabel.text = data.assureTypeToString()
-        var address: String = ""
-        if let str = data.pushAddress {
-            address = str
-        }
-        if let str = data.multisigAddress {
-            address = str
-        }
-        let attributedAddress = NSMutableAttributedString(string: address)
-        attributedAddress.underline(occurences: address)
-        valueLabel6.attributedText = attributedAddress
-        
         let sponsorReleasedAmount = NSMutableAttributedString(string: "\(data.sponsorAmount ?? 0) USDT")
         valueLabel4sub.textColor = ColorConfiguration.lightBlue.toColor()
         sponsorReleasedAmount.color(ColorConfiguration.blackText.toColor(), occurences: "USDT")
@@ -371,7 +408,6 @@ class GuaranteeingCell: UITableViewCell {
                     button3.setupAPPUISolidStyle(title: "处理解押".toMultilingualism())
                 }
             }
-            
         } else if data.assureStatus == 3 { // 已退押
             buttonStackView.isHidden = false
             buttonStackView.arrangedSubviews.forEach { v in
@@ -406,5 +442,13 @@ class GuaranteeingCell: UITableViewCell {
         UIPasteboard.general.string = "担保ID".toMultilingualism() + ": " + (model?.assureId ?? "")
         let app = UIApplication.shared.delegate as? AppDelegate
         app?.openTg()
+    }
+    
+    @objc
+    private func openLink() {
+        let link = getSuperLink(pushAddress: model?.pushAddress)
+        if !link.isEmpty, let url = URL(string: link) {
+            UIApplication.shared.open(url)
+        }
     }
 }
