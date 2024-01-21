@@ -166,26 +166,43 @@ extension WalletManagementController: UITableViewDataSource, UITableViewDelegate
     
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
         let deleteAction = UIContextualAction(style: .normal, title: "删除".toMultilingualism()) { [weak self] (action, view, resultClosure) in
             guard let this = self else {
                 return
             }
-            let deleteItem = this.datasouce[indexPath.row]
-            LocaleWalletManager.shared().deleteWalletModel(by: deleteItem)
-            this.datasouce.remove(at: indexPath.row)
-            
-            if let i = this.datasouce.firstIndex(where: { m in
-                return m.mnemoic == this.datasouce.first?.mnemoic
-            }) {
-                LocaleWalletManager.shared().didSelectedWallet(index: i)
+            this.checkIsOpenFaceID {
+                let deleteItem = this.datasouce[indexPath.row]
+                LocaleWalletManager.shared().deleteWalletModel(by: deleteItem)
+                this.datasouce.remove(at: indexPath.row)
+                
+                if let i = this.datasouce.firstIndex(where: { m in
+                    return m.mnemoic == this.datasouce.first?.mnemoic
+                }) {
+                    LocaleWalletManager.shared().didSelectedWallet(index: i)
+                }
+                this.navigationController?.popViewController(animated: true)
             }
-            this.navigationController?.popViewController(animated: true)
         }
         deleteAction.backgroundColor = UIColor(hex: "#FF5966")
         let actions = UISwipeActionsConfiguration(actions: [deleteAction])
         actions.performsFirstActionWithFullSwipe = false
         return actions
+    }
+    
+    /// 检查是否开启FaceID
+    private func checkIsOpenFaceID(callback: @escaping () -> Void) {
+        if let isOpenLock = AppArchiveder.shared().mmkv?.bool(forKey: ArchivedKey.screenLock.rawValue), isOpenLock {
+            let faceIdVC: FaceIDViewController = ViewLoader.Xib.controller()
+            faceIdVC.modalPresentationStyle = .fullScreen
+            faceIdVC.resultBlock = { isPass in
+                if isPass {
+                    callback()
+                }
+            }
+            AppDelegate.topViewController()?.present(faceIdVC, animated: true)
+        } else {
+            callback()
+        }
     }
 }
 
