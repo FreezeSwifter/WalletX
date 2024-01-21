@@ -288,6 +288,7 @@
                 <outlet property="mutilAddressValueLabel" destination="vbk-m5-uwb" id="4br-WH-Swm"/>
                 <outlet property="protocolBg" destination="AyQ-gR-faA" id="PDJ-Ls-A75"/>
                 <outlet property="protocolLabel" destination="eTl-dx-om6" id="6qc-6C-HQH"/>
+                <outlet property="serviceLabel" destination="nmx-4G-j08" id="dNM-Ly-ceO"/>
                 <outlet property="superLinkLabel" destination="DsX-Um-MOD" id="idu-5g-ZL1"/>
                 <outlet property="superLinkValueLabel" destination="rea-DU-ePs" id="mCa-yn-BvK"/>
                 <outlet property="tagLabel" destination="TZ9-Xc-D5r" id="9hQ-kY-Yo4"/>

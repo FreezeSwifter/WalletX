@@ -25,6 +25,11 @@ class MeTobeAddedCell: UITableViewCell {
             concat.addGestureRecognizer(ges)
         }
     }
+    @IBOutlet weak var serviceLabel: UILabel! {
+        didSet {
+            serviceLabel.text = "客服".toMultilingualism()
+        }
+    }
     @IBOutlet weak var guaranteeIdDesLabel: UILabel! {
         didSet {
             guaranteeIdDesLabel.text = "担保ID".toMultilingualism()

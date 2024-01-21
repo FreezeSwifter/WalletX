@@ -26,6 +26,11 @@ class GuaranteeingCell: UITableViewCell {
             concact.addGestureRecognizer(ges)
         }
     }
+    @IBOutlet weak var serviceLabel: UILabel! {
+        didSet {
+            serviceLabel.text = "客服".toMultilingualism()
+        }
+    }
     @IBOutlet weak var desLabel1: UILabel! {
         didSet {
             desLabel1.text = "担保ID".toMultilingualism()
@@ -386,7 +391,7 @@ class GuaranteeingCell: UITableViewCell {
             buttonStackView.addArrangedSubview(button2)
             button1.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
             button2.setupAPPUISolidStyle(title: "申请解押".toMultilingualism())
-            valueLabel1Status.text = "担保中".toMultilingualism()
+            valueLabel1Status.text = "me_guaranteeing".toMultilingualism()
             
         } else if data.assureStatus == 9 { // 退押中
             buttonStackView.isHidden = false
@@ -395,7 +400,7 @@ class GuaranteeingCell: UITableViewCell {
             }
             buttonStackView.addArrangedSubview(button2)
             button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
-            valueLabel1Status.text = "退押中".toMultilingualism()
+            valueLabel1Status.text = "me_releasing".toMultilingualism()
             valueLabel1Status.textColor = UIColor(hex: "#F0A158")
             valueLabel1Status.backgroundColor = UIColor(hex: "#F0A158").withAlphaComponent(0.1)
             
@@ -417,7 +422,7 @@ class GuaranteeingCell: UITableViewCell {
             buttonStackView.addArrangedSubview(button2)
             button1.setupAPPUIHollowStyle(title: "联系客服".toMultilingualism())
             button2.setupAPPUIHollowStyle(title: "联系对方".toMultilingualism())
-            valueLabel1Status.text = "已退押".toMultilingualism()
+            valueLabel1Status.text = "me_released".toMultilingualism()
             valueLabel1Status.textColor = UIColor(hex: "#999999")
             valueLabel1Status.backgroundColor = UIColor(hex: "#999999").withAlphaComponent(0.1)
         } else if data.assureStatus == 8 { // 已删除, 已取消

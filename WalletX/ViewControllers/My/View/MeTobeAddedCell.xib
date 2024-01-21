@@ -284,6 +284,7 @@
                 <outlet property="pendedValueLabel" destination="A6a-Ue-nmg" id="pJu-pK-4kX"/>
                 <outlet property="pendingLabel" destination="078-Wn-6Al" id="eYw-eq-Hqo"/>
                 <outlet property="pendingValueLabel" destination="Avh-Zw-C6l" id="8aY-DJ-mno"/>
+                <outlet property="serviceLabel" destination="LVS-CM-hYG" id="F7I-hO-AS9"/>
                 <outlet property="stateLabel" destination="Gle-fL-PcU" id="Uv4-5I-v6L"/>
                 <outlet property="tagLabel" destination="qej-We-UeM" id="u75-A8-oYY"/>
                 <outlet property="time" destination="LSy-dP-0B2" id="qjP-DO-cus"/>
