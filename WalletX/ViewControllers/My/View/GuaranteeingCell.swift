@@ -233,20 +233,7 @@ class GuaranteeingCell: UITableViewCell {
         desLabel4Me.layer.cornerRadius = 8
         
         bind()
-        
-        superLinkValueLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            superLinkValueLabel.leadingAnchor.constraint(equalTo: leftStackView.trailingAnchor, constant: 15),
-            superLinkValueLabel.centerYAnchor.constraint(equalTo: superLinkLabel.centerYAnchor),
-            superLinkValueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
-        ])
-        
-        multiAddressStatckView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            multiAddressStatckView.leadingAnchor.constraint(equalTo: leftStackView.trailingAnchor, constant: 15),
-            multiAddressStatckView.centerYAnchor.constraint(equalTo: multiAddressLabel.centerYAnchor),
-            multiAddressStatckView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
-        ])
+    
     }
     
     private func bind() {
