@@ -72,19 +72,19 @@ class MeListChildViewController: UIViewController, JXSegmentedListContainerViewL
         LocaleWalletManager.shared().walletDidChanged
             .delay(.seconds(1), scheduler: MainScheduler.instance)
             .subscribe(onNext: {[weak self] _ in
-            self?.fetchData()
-        }).disposed(by: rx.disposeBag)
+                self?.fetchData()
+            }).disposed(by: rx.disposeBag)
         
         NotificationCenter.default.rx.notification(.orderDidChangeed).observe(on: MainScheduler.instance)
             .subscribe(onNext: {[weak self] _ in
                 self?.fetchData()
-        }).disposed(by: rx.disposeBag)
+            }).disposed(by: rx.disposeBag)
         
         NotificationCenter.default.rx.notification(.languageChanged)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: {[weak self] _ in
                 self?.fetchData()
-        }).disposed(by: rx.disposeBag)
+            }).disposed(by: rx.disposeBag)
     }
     
     @objc
@@ -92,8 +92,9 @@ class MeListChildViewController: UIViewController, JXSegmentedListContainerViewL
         
         let parameter: Int? = (index == -1) ? nil : index
         let req: Observable<[GuaranteeInfoModel.Meta]> = APIProvider.rx.request(.queryAssureOrderList(assureStatus: parameter, pageNum: pageNum)).mapModelArray()
-        req.subscribe(onNext: {[weak self] list in
         
+        req.subscribe { [weak self] list in
+            
             self?.tableView.mj_header?.endRefreshing()
             self?.tableView.mj_footer?.endRefreshing()
             if self?.pageNum == 1 {
@@ -106,7 +107,16 @@ class MeListChildViewController: UIViewController, JXSegmentedListContainerViewL
                 self?.tableView.mj_footer?.endRefreshingWithNoMoreData()
             }
             self?.tableView.reloadData()
-        }).disposed(by: rx.disposeBag)
+            
+        } onError: {[weak self] e in
+            let error = e as NSError
+            if error.code == 11 {
+                self?.datasource.removeAll()
+                self?.tableView.reloadData()
+            }
+            
+        }.disposed(by: rx.disposeBag)
+        
     }
     
     private func setupView() {
@@ -134,7 +144,7 @@ extension MeListChildViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-       
+        
         let item = datasource[indexPath.row]
         switch item.assureStatus {
         case 5, 6, 7:
@@ -142,7 +152,7 @@ extension MeListChildViewController: UITableViewDelegate {
                 guard let this = self, let id = this.datasource[indexPath.row].assureId else {
                     return
                 }
-
+                
                 APIProvider.rx.request(.activeAssureOrder(assureId: id)).mapJSON().subscribe(onSuccess: {[weak self] obj in
                     let dict = obj as? [String: Any]
                     if let code = dict?["code"] as? Int, code == 0 {

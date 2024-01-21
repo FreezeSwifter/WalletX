@@ -46,10 +46,16 @@ class WalletViewController: UIViewController, HomeNavigationble {
     
     private let noWalletView: WalletWithoutWalletView = ViewLoader.Xib.view()
     
+    private var isDeviceDisabled = false
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         NotificationCenter.default.rx.notification(.languageChanged).observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
             self?.tabBarItem.title = "tab_wallet".toMultilingualism()
+        }).disposed(by: rx.disposeBag)
+        
+        NotificationCenter.default.rx.notification(.deviceDisabled).observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
+            self?.isDeviceDisabled = true
         }).disposed(by: rx.disposeBag)
     }
     
@@ -210,7 +216,13 @@ class WalletViewController: UIViewController, HomeNavigationble {
     private func updateBalance() {
         
         LocaleWalletManager.shared().walletBalance.subscribe(onNext: {[weak self] obj in
-            self?.topOperatedView.topButton1.setTitle("$\(obj?.data?.USDT?.separatorStyleNumber(decimal: 2) ?? "0.00")", for: .normal)
+            
+            if self?.isDeviceDisabled ?? false {
+                self?.topOperatedView.topButton1.setTitle("$0.00", for: .normal)
+                
+            } else {
+                self?.topOperatedView.topButton1.setTitle("$\(obj?.data?.USDT?.separatorStyleNumber(decimal: 2) ?? "0.00")", for: .normal)
+            }
         }).disposed(by: rx.disposeBag)
     }
 }

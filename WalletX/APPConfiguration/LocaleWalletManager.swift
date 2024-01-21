@@ -19,6 +19,10 @@ final class LocaleWalletManager {
         return LocaleWalletManager.instance
     }
     
+    var isTronMainNet: Bool {
+        return chainNetwork == TRONMainNet
+    }
+    
     var hasWallet: Bool {
         return currentWallet != nil
     }
@@ -66,10 +70,16 @@ final class LocaleWalletManager {
     }
     private(set) var TRON: WalletToken? = .tron(nil)
     private(set) var USDT: WalletToken? = .usdt(nil)
-//    TAwtf3SDKc3k4j5Pg6cs1cUngXuhzVbarT 测试网
-//    TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t 主网
+    // TAwtf3SDKc3k4j5Pg6cs1cUngXuhzVbarT 测试网
+    // TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t 主网
     // TEpkBH2Yb9NG3xgXUW6UbudakyuCHZ7ZVF n网合约地址
-    private let usdtContractAddress = "TEpkBH2Yb9NG3xgXUW6UbudakyuCHZ7ZVF"
+    private var usdtContractAddress: String {
+        if isTronMainNet {
+            return "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+        } else {
+            return "TEpkBH2Yb9NG3xgXUW6UbudakyuCHZ7ZVF"
+        }
+    }
     private let walletDidChangedSubject: BehaviorSubject<Void?> = BehaviorSubject(value: nil)
     private var wallets: [WalletModel] = []
     private(set) var userInfo: UserInfoModel?
@@ -78,6 +88,7 @@ final class LocaleWalletManager {
     private let walletBalanceSubject: BehaviorSubject<TokenModel?> = BehaviorSubject(value: nil)
     private let disposeBag = DisposeBag()
     private let tronWeb = TronWeb3()
+    private var chainNetwork: String = ""
     
     private init() {
         
@@ -93,7 +104,8 @@ final class LocaleWalletManager {
         
         if tronWeb.isGenerateTronWebInstanceSuccess != true {
             if let privateKeyData = currentWallet?.getKeyForCoin(coin: .tron) {
-                tronWeb.setup(privateKey: privateKeyData.data.toHexString(), node: TRONNileNet) { setupResult in
+                chainNetwork = TRONNileNet
+                tronWeb.setup(privateKey: privateKeyData.data.toHexString(), node: chainNetwork) { setupResult in
                     print(setupResult)
                 }
             }
@@ -231,6 +243,16 @@ final class LocaleWalletManager {
         getWalletBalance.subscribe(onNext: {[weak self] obj in
             self?.walletBalanceModel = obj
             self?.walletBalanceSubject.onNext(obj)
+            
+            if obj?.code == 11 {
+                var otherOne = obj
+                otherOne?.data?.USDT = "0.00"
+                otherOne?.data?.TRX = "0.00"
+                self?.walletBalanceModel = otherOne
+                self?.walletBalanceSubject.onNext(otherOne)
+                NotificationCenter.default.post(name: .deviceDisabled, object: nil)
+            }
+            
         }).disposed(by: disposeBag)
     }
     
@@ -281,6 +303,12 @@ final class LocaleWalletManager {
             AppArchiveder.shared().mmkv?.set(jsonString, forKey: addressKey)
             NotificationCenter.default.post(name: .loginSuccessful, object: nil)
             fetUserInfo()
+            
+            if model?.code == 11 {
+                APPHUD.flash(text: model?.message)
+                NotificationCenter.default.post(name: .deviceDisabled, object: nil)
+            }
+            
         }).disposed(by: disposeBag)
     }
     

@@ -26,6 +26,20 @@ class WalletTokenViewController: UIViewController, JXSegmentedListContainerViewL
     
     private var datasource: [WalletToken] = []
     
+    private var isDeviceDisabled = false
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        NotificationCenter.default.rx.notification(.deviceDisabled).observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
+            self?.isDeviceDisabled = true
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -85,15 +99,21 @@ extension WalletTokenViewController: UITableViewDataSource {
         cell.tokenLabel.text = item.tokenName
         cell.priceLabel.text = item.companyName
         
-        let token = LocaleWalletManager.shared().walletBalance.share().map { m in
-            switch item {
-            case .usdt:
-                return m?.data?.USDT?.decimalPlaces(decimal: 2) ?? "NaN"
-            case .tron:
-                return m?.data?.TRX?.decimalPlaces(decimal: 2) ?? "NaN"
+        if isDeviceDisabled {
+            cell.countLabel.text = "0.00"
+            
+        } else {
+            let token = LocaleWalletManager.shared().walletBalance.share().map { m in
+                switch item {
+                case .usdt:
+                    return m?.data?.USDT?.decimalPlaces(decimal: 2) ?? "NaN"
+                case .tron:
+                    return m?.data?.TRX?.decimalPlaces(decimal: 2) ?? "NaN"
+                }
             }
+            token.bind(to: cell.countLabel.rx.text).disposed(by: cell.rx.disposeBag)
         }
-        token.bind(to: cell.countLabel.rx.text).disposed(by: cell.rx.disposeBag)
+        
         cell.countPriceLabel.text = nil
         return cell
     }

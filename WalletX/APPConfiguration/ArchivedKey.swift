@@ -62,4 +62,5 @@ extension Notification.Name {
     static let orderDidChangeed = Notification.Name("orderDidChangeed")
     static let userInfoDidChangeed = Notification.Name("userInfoDidChangeed")
     static let loginSuccessful = Notification.Name("loginSuccessful")
+    static let deviceDisabled = Notification.Name("deviceDisabled")
 }

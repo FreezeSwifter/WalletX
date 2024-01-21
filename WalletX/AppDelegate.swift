@@ -19,9 +19,7 @@ struct MyAPP {
         UITextField.swizzleMethod
         UIApplicationMain(CommandLine.argc, CommandLine.unsafeArgv, nil, NSStringFromClass(AppDelegate.self))
     }
-    
 }
-
 
 class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
     
@@ -86,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     func fetchMessage() {
         let req: Observable<[MessageListModel]> = APIProvider.rx.request(.messageList).mapModelArray()
-        req.subscribe(onNext: {[weak self] list in
+        req.subscribe { [weak self] list in
             self?.messageDataSubject.accept(list)
             let unread = list.filter { $0.status == 0 }
             if unread.count > 0 {
@@ -95,7 +93,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             } else {
                 self?.tabBarViewController.children[2].tabBarItem.qmui_shouldShowUpdatesIndicator = false
             }
-        }).disposed(by: rx.disposeBag)
+            
+        } onError: {[weak self] e in
+            let error = e as NSError
+            if error.code == 11 {
+                self?.tabBarViewController.children[2].tabBarItem.qmui_shouldShowUpdatesIndicator = false
+                NotificationCenter.default.post(name: .deviceDisabled, object: nil)
+            }
+        }.disposed(by: rx.disposeBag)
+
     }
     
     func setupWindow() {

@@ -32,7 +32,7 @@ public extension PrimitiveSequence where Trait == SingleTrait, Element == Respon
             let code = dict?["code"] as? Int ?? 0
             let error = dict?["message"] as? String ?? "Error"
             if code != 0 {
-                throw NSError.init(domain: "https://appservice.usdtsure.com", code: code, userInfo: ["errorMsg": error])
+                throw NSError(domain: "https://appservice.usdtsure.com", code: code, userInfo: ["errorMsg": error])
             }
             
             if let nonEmpty = res {

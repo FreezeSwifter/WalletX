@@ -28,13 +28,19 @@ class MessageViewController: UIViewController, HomeNavigationble {
     private var datasource: [MessageListModel] = []
     
     private let listEmptyView: MeListEmptyView = MeListEmptyView(frame: .zero)
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         NotificationCenter.default.rx.notification(.languageChanged).observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
             self?.tabBarItem.title = "tab_message".toMultilingualism()
             self?.headerView?.titleLabel.text = "message_noti".toMultilingualism()
         }).disposed(by: rx.disposeBag)
+        
+        NotificationCenter.default.rx.notification(.deviceDisabled).observe(on: MainScheduler.instance).subscribe(onNext: {[weak self] _ in
+            self?.datasource.removeAll()
+            self?.tableView.reloadData()
+        }).disposed(by: rx.disposeBag)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -110,7 +116,7 @@ class MessageViewController: UIViewController, HomeNavigationble {
         }
         
         view.bringSubviewToFront(self.headerView!)
-    
+        
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(headerView!.snp.bottom).offset(20)
@@ -170,7 +176,7 @@ extension MessageViewController: UITableViewDataSource {
             cell.numLabel.text = nil
             cell.numLabel.isHidden = true
         }
-
+        
         return cell
     }
 }
