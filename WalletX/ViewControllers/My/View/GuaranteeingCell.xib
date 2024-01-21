@@ -72,31 +72,31 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="发起时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5Z-Kl-iQL">
-                                        <rect key="frame" x="7.6666666666666572" y="30" width="59.333333333333343" height="17"/>
+                                        <rect key="frame" x="9.6666666666666679" y="30" width="57.333333333333329" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="担保金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4m-a5-3V4">
-                                        <rect key="frame" x="7.6666666666666572" y="59" width="59.333333333333343" height="17"/>
+                                        <rect key="frame" x="9.6666666666666679" y="59" width="57.333333333333329" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="超级链接" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DsX-Um-MOD">
-                                        <rect key="frame" x="7.6666666666666572" y="88" width="59.333333333333343" height="17"/>
+                                        <rect key="frame" x="9.6666666666666679" y="88" width="57.333333333333329" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="多签地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8L-iS-jeS">
-                                        <rect key="frame" x="7.6666666666666572" y="117" width="59.333333333333343" height="17"/>
+                                        <rect key="frame" x="9.6666666666666679" y="117" width="57.333333333333329" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="St8-GL-bvM">
-                                        <rect key="frame" x="7.6666666666666572" y="146" width="59.333333333333343" height="17"/>
+                                        <rect key="frame" x="7.6666666666666679" y="146" width="59.333333333333329" height="17"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxT-tR-Fl6">
                                                 <rect key="frame" x="0.0" y="0.0" width="10.333333333333334" height="17"/>
@@ -114,7 +114,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="AJO-mt-Uf1">
-                                        <rect key="frame" x="7.6666666666666572" y="175" width="59.333333333333343" height="17"/>
+                                        <rect key="frame" x="7.6666666666666679" y="175" width="59.333333333333329" height="17"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMO-B1-JG7">
                                                 <rect key="frame" x="0.0" y="0.0" width="10.333333333333334" height="17"/>
@@ -133,9 +133,7 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="g8L-iS-jeS" firstAttribute="centerX" secondItem="St8-GL-bvM" secondAttribute="centerX" id="ATs-a7-Tnu"/>
                                     <constraint firstItem="DsX-Um-MOD" firstAttribute="leading" secondItem="g8L-iS-jeS" secondAttribute="leading" id="Fd2-jp-5eX"/>
-                                    <constraint firstItem="i4m-a5-3V4" firstAttribute="leading" secondItem="DsX-Um-MOD" secondAttribute="leading" id="o5u-OF-KBo"/>
                                     <constraint firstItem="d5Z-Kl-iQL" firstAttribute="leading" secondItem="i4m-a5-3V4" secondAttribute="leading" id="x4i-z5-6bg"/>
                                 </constraints>
                             </stackView>
@@ -302,7 +300,7 @@
                 <outlet property="valueLabel5" destination="gvx-RD-F8s" id="B6i-lp-4By"/>
                 <outlet property="valueLabel5sub" destination="NCV-EX-F1M" id="JAF-uI-A6s"/>
             </connections>
-            <point key="canvasLocation" x="-362" y="-37"/>
+            <point key="canvasLocation" x="-479" y="29"/>
         </tableViewCell>
     </objects>
     <resources>
