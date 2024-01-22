@@ -31,7 +31,7 @@ class CreateWalletStepOneController: UIViewController, HomeNavigationble {
     private let control1Subject: BehaviorSubject<Bool> = BehaviorSubject(value: false)
     @IBOutlet weak var selectedStack1: UIStackView! {
         didSet {
-            selectedStack1.layer.cornerRadius = 3
+            selectedStack1.layer.cornerRadius = 5
             selectedStack1.layer.borderWidth = 1
             selectedStack1.layer.borderColor = ColorConfiguration.blackText.toColor().withAlphaComponent(0.3).cgColor
             selectedStack1.isLayoutMarginsRelativeArrangement = true
@@ -48,7 +48,7 @@ class CreateWalletStepOneController: UIViewController, HomeNavigationble {
     private let control2Subject: BehaviorSubject<Bool> = BehaviorSubject(value: false)
     @IBOutlet weak var selectedStack2: UIStackView! {
         didSet {
-            selectedStack2.layer.cornerRadius = 3
+            selectedStack2.layer.cornerRadius = 5
             selectedStack2.layer.borderWidth = 1
             selectedStack2.layer.borderColor = ColorConfiguration.blackText.toColor().withAlphaComponent(0.3).cgColor
             selectedStack2.isLayoutMarginsRelativeArrangement = true
@@ -65,7 +65,7 @@ class CreateWalletStepOneController: UIViewController, HomeNavigationble {
     private let control3Subject: BehaviorSubject<Bool> = BehaviorSubject(value: false)
     @IBOutlet weak var selectedStack3: UIStackView! {
         didSet {
-            selectedStack3.layer.cornerRadius = 3
+            selectedStack3.layer.cornerRadius = 5
             selectedStack3.layer.borderWidth = 1
             selectedStack3.layer.borderColor = ColorConfiguration.blackText.toColor().withAlphaComponent(0.3).cgColor
             selectedStack3.isLayoutMarginsRelativeArrangement = true
@@ -148,15 +148,19 @@ class CreateWalletStepOneController: UIViewController, HomeNavigationble {
             sender.isSelected = !sender.isSelected
             if sender.isSelected {
                 selectedImage1.image = UIImage(named: "guarantee_check_box2")
+                selectedStack1.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
             } else {
                 selectedImage1.image = UIImage(named: "guarantee_check_box1")
+                selectedStack1.layer.borderColor = ColorConfiguration.blackText.toColor().withAlphaComponent(0.3).cgColor
             }
             control1Subject.onNext(sender.isSelected)
         case 2:
             sender.isSelected = !sender.isSelected
             if sender.isSelected {
                 selectedImage2.image = UIImage(named: "guarantee_check_box2")
+                selectedStack2.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
             } else {
+                selectedStack2.layer.borderColor = ColorConfiguration.blackText.toColor().withAlphaComponent(0.3).cgColor
                 selectedImage2.image = UIImage(named: "guarantee_check_box1")
             }
             control2Subject.onNext(sender.isSelected)
@@ -164,7 +168,9 @@ class CreateWalletStepOneController: UIViewController, HomeNavigationble {
             sender.isSelected = !sender.isSelected
             if sender.isSelected {
                 selectedImage3.image = UIImage(named: "guarantee_check_box2")
+                selectedStack3.layer.borderColor = ColorConfiguration.primary.toColor().cgColor
             } else {
+                selectedStack3.layer.borderColor = ColorConfiguration.blackText.toColor().withAlphaComponent(0.3).cgColor
                 selectedImage3.image = UIImage(named: "guarantee_check_box1")
             }
             control3Subject.onNext(sender.isSelected)

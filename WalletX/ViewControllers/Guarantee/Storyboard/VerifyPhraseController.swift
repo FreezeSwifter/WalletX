@@ -60,13 +60,14 @@ class VerifyPhraseController: UIViewController, HomeNavigationble {
         selectedList = mnemoicList
         selectedList.shuffled().enumerated().forEach { i, str in
             let btn = QMUIButton(type: .custom)
-            btn.backgroundColor = ColorConfiguration.homeItemBg.toColor()
             btn.setTitle(str, for: .normal)
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-            btn.setTitleColor(ColorConfiguration.descriptionText.toColor(), for: .normal)
+            btn.setTitleColor(ColorConfiguration.blackText.toColor(), for: .normal)
             btn.titleLabel?.minimumScaleFactor = 0.5
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
-            btn.applyCornerRadius(7)
+            btn.layer.borderWidth = 1
+            btn.layer.borderColor = ColorConfiguration.garyLine.toColor().withAlphaComponent(0.8).cgColor
+            btn.applyCornerRadius(4)
             btn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15)
             selectedLayoutView.addSubview(btn)
             btn.addTarget(self, action: #selector(VerifyPhraseController.selectedLayoutViewTap(sender:)), for: .touchUpInside)
@@ -105,13 +106,14 @@ class VerifyPhraseController: UIViewController, HomeNavigationble {
         
         selectedList.enumerated().forEach { i, str in
             let btn = QMUIButton(type: .custom)
-            btn.backgroundColor = ColorConfiguration.homeItemBg.toColor()
             btn.setTitle(str, for: .normal)
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-            btn.setTitleColor(ColorConfiguration.descriptionText.toColor(), for: .normal)
+            btn.setTitleColor(ColorConfiguration.blackText.toColor(), for: .normal)
             btn.titleLabel?.minimumScaleFactor = 0.5
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
-            btn.applyCornerRadius(7)
+            btn.layer.borderWidth = 1
+            btn.layer.borderColor = ColorConfiguration.garyLine.toColor().withAlphaComponent(0.8).cgColor
+            btn.applyCornerRadius(4)
             btn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15)
             selectedLayoutView.addSubview(btn)
             btn.tag = i
@@ -120,13 +122,14 @@ class VerifyPhraseController: UIViewController, HomeNavigationble {
         
         displayedList.enumerated().forEach { i, str in
             let btn = QMUIButton(type: .custom)
-            btn.backgroundColor = ColorConfiguration.homeItemBg.toColor()
-            btn.setTitle("\(i.description) \(str)", for: .normal)
+            btn.setTitle("\(i + 1) \(str)", for: .normal)
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
             btn.setTitleColor(ColorConfiguration.blackText.toColor(), for: .normal)
             btn.titleLabel?.minimumScaleFactor = 0.5
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
-            btn.applyCornerRadius(7)
+            btn.layer.borderWidth = 1
+            btn.layer.borderColor = ColorConfiguration.garyLine.toColor().withAlphaComponent(0.8).cgColor
+            btn.applyCornerRadius(4)
             btn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15)
             displayLayoutView.addSubview(btn)
             btn.tag = i
@@ -177,7 +180,6 @@ class VerifyPhraseController: UIViewController, HomeNavigationble {
         }) {
             displayedList.remove(at: deleteIndex)
             selectedList.append(handleStr)
-            
         }
         
         reloadLayoutView()

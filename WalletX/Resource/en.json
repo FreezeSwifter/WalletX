@@ -313,4 +313,10 @@
     "您的设备已被禁用": "Your device has been disabled. Please contact customer service.",
     "立即申请": "Apply Immediately",
     "等待处理": "Waiting",
+    "切勿与任何人分享您的助记词": "Never share your secret phrase with anyone.",
+    "listitem1": "Your 12-word secret phrase is the master key to your wallet. Anyone that has your secret phrase can access and take all your crypto.",
+    "listitem2": "Uoobal Wallet does not keep any copy of your secret phrase.",
+    "listitem3": "Unencrypted digital copies of your secret phrase are NOT recommended. Examples include saving copies on computer, in email, on online accounts, or by taking screenshots.",
+    "listitem4": "Write down your secret phrase, and store it in a secure offline location!",
+    "noteTip": "Your 12-word secret phrase is only way to recover your wallet. Please store it securely!",
 }
