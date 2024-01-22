@@ -46,8 +46,9 @@ class FaceIDViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     if success {
-                        self?.resultBlock?(true)
-                        self?.dismiss(animated: true)
+                        self?.dismiss(animated: true, completion: {
+                            self?.resultBlock?(true)
+                        })
                     }
                 }
             }
@@ -58,8 +59,9 @@ class FaceIDViewController: UIViewController {
     }
     
     @IBAction func closeTap(_ sender: UIButton) {
-        resultBlock?(false)
-        dismiss(animated: true)
+        dismiss(animated: true) {
+            self.resultBlock?(false)
+        }
     }
     
     @IBAction func lockButtonTap(_ sender: UIButton) {

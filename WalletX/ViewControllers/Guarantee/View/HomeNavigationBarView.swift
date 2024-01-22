@@ -85,6 +85,15 @@ extension HomeNavigationble where Self: UIViewController {
         guard let accountButton = headerView?.accountButton else {
             return
         }
+        
+        if UIApplication.topViewController() is CreateWalletStepOneController {
+            return
+        }
+        
+        if UIApplication.topViewController() is CreateWalletStepTwoController {
+            return
+        }
+        
         if UIApplication.topViewController() is WalletManagementController {
             return
         }
