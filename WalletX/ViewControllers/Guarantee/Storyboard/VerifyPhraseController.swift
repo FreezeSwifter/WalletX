@@ -57,8 +57,8 @@ class VerifyPhraseController: UIViewController, HomeNavigationble {
     }
     
     private func bind() {
-        selectedList = mnemoicList
-        selectedList.shuffled().enumerated().forEach { i, str in
+        selectedList = mnemoicList.shuffled()
+        selectedList.enumerated().forEach { i, str in
             let btn = QMUIButton(type: .custom)
             btn.setTitle(str, for: .normal)
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)

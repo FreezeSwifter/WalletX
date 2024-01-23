@@ -63,18 +63,19 @@ class CreateWalletStepTwoController: UIViewController, HomeNavigationble {
     private func bind() {
         mnemoic = LocaleWalletManager.shared().createWallet()
         let items = mnemoic?.components(separatedBy: " ")
-        
-        items?.enumerated().forEach { i, str in
-            let btn = QMUIButton(type: .custom)
-            btn.setTitle("\(i + 1)  \(str)", for: .normal)
-            btn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-            btn.setTitleColor(ColorConfiguration.blackText.toColor(), for: .normal)
-            btn.titleLabel?.minimumScaleFactor = 0.5
-            btn.layer.borderWidth = 1
-            btn.layer.borderColor = ColorConfiguration.garyLine.toColor().withAlphaComponent(0.8).cgColor
-            btn.titleLabel?.adjustsFontSizeToFitWidth = true
-            btn.applyCornerRadius(4)
-            layoutView.addSubview(btn)
+        spliceData(items: items ?? []) { datas in
+            datas.forEach { item in
+                let btn = QMUIButton(type: .custom)
+                btn.setTitle("\(item.index + 1)  \(item.value)", for: .normal)
+                btn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+                btn.setTitleColor(ColorConfiguration.blackText.toColor(), for: .normal)
+                btn.titleLabel?.minimumScaleFactor = 0.5
+                btn.layer.borderWidth = 1
+                btn.layer.borderColor = ColorConfiguration.garyLine.toColor().withAlphaComponent(0.8).cgColor
+                btn.titleLabel?.adjustsFontSizeToFitWidth = true
+                btn.applyCornerRadius(4)
+                layoutView.addSubview(btn)
+            }
         }
         
         bottomButton.rx.tap.subscribe(onNext: {[weak self] _ in
@@ -92,6 +93,27 @@ class CreateWalletStepTwoController: UIViewController, HomeNavigationble {
             }
         }).disposed(by: rx.disposeBag)
     }
+    
+    /// 重新排序拼接数据
+    private func spliceData(items: [String], completion: ([MnemoicItem]) -> Void) {
+        let halfCount = items.count / 2
+        var resultData: [MnemoicItem] = []
+        for index in 0..<halfCount {
+            let mnemoicItem = MnemoicItem(index: index, value: items[index])
+            resultData.append(mnemoicItem)
+        }
+        
+        var fixIndex = max(0, halfCount - 1)
+        for index in halfCount..<items.count {
+            let mnemoicItem = MnemoicItem(index: index, value: items[index])
+            let position = index - fixIndex
+            fixIndex -= 1
+            resultData.insert(mnemoicItem, at: position)
+        }
+        
+        completion(resultData)
+    }
+    
     
     private func setupView() {
         view.layoutIfNeeded()
@@ -131,7 +153,7 @@ class MnemonicAlertView: UIView {
     }
     
     private lazy var verticalStackView: UIStackView = UIStackView().then { it in
-        it.distribution = .fillEqually
+        it.distribution = .equalSpacing
         it.alignment = .fill
         it.spacing = 12
         it.axis = .vertical
@@ -275,4 +297,11 @@ extension MnemonicAlertView: UIGestureRecognizerDelegate {
         return !innerContainer.frame.contains(tapPoint)
     }
 }
+
+
+struct MnemoicItem {
+    var index: Int
+    var value: String
+}
+
 
