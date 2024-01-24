@@ -40,9 +40,7 @@ final class LocaleWalletManager {
     }
     
     var userInfoDidChanged: Observable<UserInfoModel?> {
-        return userInfoDidChangedSubject.asObservable().skip { entity in
-            return entity == nil
-        }
+        return userInfoDidChangedSubject.asObservable()
     }
     
     var currentWalletModel: WalletModel? {
@@ -226,6 +224,7 @@ final class LocaleWalletManager {
         TRON = nil
         USDT = nil
         wallets = []
+        userInfoDidChangedSubject.onNext(nil)
     }
     
     func updateWalletModel(model: WalletModel, isNotActiveAccount: Bool = false) {

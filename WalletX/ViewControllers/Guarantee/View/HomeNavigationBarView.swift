@@ -57,6 +57,14 @@ extension HomeNavigationble where Self: UIViewController {
         }).disposed(by: rx.disposeBag)
         
         updateAccountInfo()
+        
+        LocaleWalletManager.shared().userInfoDidChanged.subscribe(onNext: {[weak self] userInfo in
+            guard let this = self else { return }
+            if LocaleWalletManager.shared().currentWalletModel == nil {
+                this.headerView?.accountButton.setTitle("未登录".toMultilingualism(), for: .normal)
+            }
+        }).disposed(by: rx.disposeBag)
+        
     }
     
     func setupChildVCStyle(customBackClosure: (() -> Void)? = nil) {
