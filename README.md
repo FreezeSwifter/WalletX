@@ -1,8 +1,6 @@
 # wallet-ios
 
-+++>
-function a(b) {
++++>function a(b) {
     return b
 }
-a('xxxxxx');
-<+++
+a('xxxxxx');<+++
